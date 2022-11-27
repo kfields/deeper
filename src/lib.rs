@@ -4,11 +4,11 @@ use pyo3::prelude::*;
 mod shape;
 pub use shape::{Shape, Cuboid};
 
+mod body;
+pub use body::Body;
+
 mod space;
 pub use space::Space;
-
-mod model;
-pub use model::Model;
 
 /// Formats the sum of two numbers as string.
 #[pyfunction]
@@ -22,7 +22,7 @@ fn deeper(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_class::<Shape>()?;
     m.add_class::<Cuboid>()?;
+    m.add_class::<Body>()?;
     m.add_class::<Space>()?;
-    m.add_class::<Model>()?;
     Ok(())
 }
