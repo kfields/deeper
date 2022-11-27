@@ -12,3 +12,20 @@ poetry shell
 poetry install
 python main.py
 ```
+
+## Development
+
+:link:[PyO3](https://github.com/PyO3/pyo3)
+
+:link:[Maturin](https://github.com/PyO3/maturin)
+
+:link:[Maturin Action](https://github.com/messense/maturin-action)
+
+```bash
+git clone https://github.com/kfields/deeper.git
+cd deeper
+poetry shell
+poetry install
+maturin develop
+python -m deeper
+```
