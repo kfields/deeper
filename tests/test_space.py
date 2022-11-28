@@ -1,5 +1,6 @@
-from deeper import Space
+from deeper import Space, Body
 
-space = Space((0, 1, 2))
-center = space.get_center()
-print(center)
+body = Body((0, 1, 2))
+space = Space()
+space.add_body(body)
+print(space.bodies)

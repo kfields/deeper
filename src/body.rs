@@ -36,16 +36,22 @@ impl Body {
         Ok(self.get_center(py))
     }*/
 
+    /*#[getter]
+    fn center(&self) -> PyResult<&PyTuple> {
+        Python::with_gil(|py| -> PyResult<(&PyTuple)> {
+            Ok(PyTuple::new(py, [self.center.x, self.center.y, self.center.z]))
+        })    
+    }*/
+
+    /*#[getter]
+    fn center<'py>(&'py self) -> PyResult<&PyTuple> {
+        Python::with_gil(|py: Python<'py>| -> PyResult<&PyTuple> {
+            Ok(PyTuple::new(py, [self.center.x, self.center.y, self.center.z]))
+        })    
+    }*/
+
     fn get_center<'py>(&'py self, py: Python<'py>) -> PyResult<&PyTuple> {
-        let result: &PyTuple;
-        result = PyTuple::new(py, [self.center.x, self.center.y, self.center.z]);
+        let result: &PyTuple = PyTuple::new(py, [self.center.x, self.center.y, self.center.z]);
         Ok(result)
     }
-
-    /*fn f_ret_tuple(py: Python<'_>) -> PyResult<&PyTuple> {
-        let tuple: &PyTuple;
-        let elements: Vec<i32> = vec![0, 1, 2, 3, 4, 5];
-        tuple = PyTuple::new(py, elements);
-        Ok(tuple)
-    }*/
 }
