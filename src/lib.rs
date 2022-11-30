@@ -1,6 +1,9 @@
 
 use pyo3::prelude::*;
 
+mod isometry;
+pub use isometry::Isometry;
+
 mod shape;
 pub use shape::{Shape, HalfSpace, Cuboid};
 
@@ -23,6 +26,7 @@ fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
 #[pymodule]
 fn deeper(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
+    m.add_class::<Isometry>()?;
     m.add_class::<Shape>()?;
     m.add_class::<HalfSpace>()?;
     m.add_class::<Cuboid>()?;

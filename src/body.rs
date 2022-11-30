@@ -8,6 +8,8 @@ use pyo3::Python;
 use parry3d::bounding_volume::Aabb;
 use parry3d::math::{Point, Real};
 
+use crate::isometry::Isometry;
+
 #[pyclass]
 pub struct Body {
     center: Point<Real>,
