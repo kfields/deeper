@@ -75,7 +75,7 @@ impl HalfSpace {
         if let Some(intersection) = intersection {
             let point = ray.inner.origin + ray.inner.dir * intersection.toi;
             let result = PyTuple::new(py, [point.x, point.y, point.z]);
-            Ok(result.to_object(py))
+            Ok(result.into())
         } else {
             Ok(py.None())
         }
