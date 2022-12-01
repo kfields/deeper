@@ -10,7 +10,7 @@ use crate::isometry::Isometry;
 #[pyclass]
 pub struct Space {
     #[pyo3(get)]
-    position: Py<Isometry>,
+    isometry: Py<Isometry>,
     #[pyo3(get)]
     children: Py<PyList>,
 }
@@ -19,10 +19,10 @@ pub struct Space {
 impl Space {
     #[new]
     //#[args(position="Isometry()")]
-    fn new<'py>(position: Py<Isometry>, py: Python<'py>) -> Self {
+    fn new<'py>(isometry: Py<Isometry>, py: Python<'py>) -> Self {
         let list = PyList::empty(py).into_py(py);
         Space {
-            position,
+            isometry,
             children: list,
         }
     }

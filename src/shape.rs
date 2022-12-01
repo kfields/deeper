@@ -5,12 +5,12 @@ use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyTuple};
 
 use parry3d::math::{Real, Vector};
-use parry3d::shape;
 use parry3d::query::RayCast;
+use parry3d::shape;
 
 //use crate::shape_trait::ShapeTrait;
-use crate::query::Ray;
 use crate::isometry::Isometry;
+use crate::query::Ray;
 
 pub trait ShapeTrait {
     fn get_inner(&self) -> &dyn shape::Shape;
@@ -24,7 +24,7 @@ impl Shape {
     #[new]
     fn new() -> Self {
         Shape {}
-    }    
+    }
 }
 
 #[pyclass(extends=Shape, subclass)]
@@ -56,11 +56,29 @@ impl HalfSpace {
         let n = self.inner.normal;
         format!("HalfSpace(x={}, y={}, z={})", n.x, n.y, n.z)
     }
-    fn cast_ray<'py>(&'py self, position: &Isometry, ray: &Ray, py: Python<'py>) -> PyResult<&'py PyTuple> {
+    /*fn cast_ray<'py>(&'py self, position: &Isometry, ray: &Ray, py: Python<'py>) -> PyResult<&'py PyTuple> {
         let intersection = self.inner.cast_ray_and_get_normal(&position.inner, &ray.inner, std::f32::MAX, true);
         let point = ray.inner.origin + ray.inner.dir * intersection.unwrap().toi;
         let result: &PyTuple = PyTuple::new(py, [point.x, point.y, point.z]);
         Ok(result)
+    }*/
+    fn cast_ray(
+        & self,
+        position: &Isometry,
+        ray: &Ray,
+        py: Python,
+    ) -> PyResult<PyObject> {
+        let intersection =
+            self.inner
+                .cast_ray_and_get_normal(&position.inner, &ray.inner, std::f32::MAX, true);
+
+        if let Some(intersection) = intersection {
+            let point = ray.inner.origin + ray.inner.dir * intersection.toi;
+            let result = PyTuple::new(py, [point.x, point.y, point.z]);
+            Ok(result.to_object(py))
+        } else {
+            Ok(py.None())
+        }
     }
 }
 
