@@ -52,22 +52,13 @@ impl HalfSpace {
             Shape::new(),
         )
     }
+
     fn __repr__(&self) -> String {
         let n = self.inner.normal;
         format!("HalfSpace(x={}, y={}, z={})", n.x, n.y, n.z)
     }
-    /*fn cast_ray<'py>(&'py self, position: &Isometry, ray: &Ray, py: Python<'py>) -> PyResult<&'py PyTuple> {
-        let intersection = self.inner.cast_ray_and_get_normal(&position.inner, &ray.inner, std::f32::MAX, true);
-        let point = ray.inner.origin + ray.inner.dir * intersection.unwrap().toi;
-        let result: &PyTuple = PyTuple::new(py, [point.x, point.y, point.z]);
-        Ok(result)
-    }*/
-    fn cast_ray(
-        & self,
-        position: &Isometry,
-        ray: &Ray,
-        py: Python,
-    ) -> PyResult<PyObject> {
+
+    fn cast_ray(&self, position: &Isometry, ray: &Ray, py: Python) -> PyResult<PyObject> {
         let intersection =
             self.inner
                 .cast_ray_and_get_normal(&position.inner, &ray.inner, std::f32::MAX, true);
@@ -91,7 +82,7 @@ pub struct Cuboid {
 impl Cuboid {
     #[new]
     fn new(x: Real, y: Real, z: Real) -> (Self, Shape) {
-        let half_extents: Vector<Real> = Vector::new(x, y, z);
+        let half_extents: Vector<Real> = Vector::new(x*0.5, y*0.5, z*0.5);
         (
             Cuboid {
                 inner: shape::Cuboid { half_extents },
@@ -103,9 +94,18 @@ impl Cuboid {
         let hf = self.inner.half_extents;
         format!("Cuboid(x={}, y={}, z={})", hf.x, hf.y, hf.z)
     }
+    //TODO:  We're repeating ourselves
+    fn cast_ray(&self, position: &Isometry, ray: &Ray, py: Python) -> PyResult<PyObject> {
+        let intersection =
+            self.inner
+                .cast_ray_and_get_normal(&position.inner, &ray.inner, std::f32::MAX, true);
 
-    /*fn method2(self_: PyRef<'_, Self>) -> PyResult<usize> {
-        let super_ = self_.as_ref(); // Get &BaseClass
-        super_.method().map(|x| x * self_.val2)
-    }*/
+        if let Some(intersection) = intersection {
+            let point = ray.inner.origin + ray.inner.dir * intersection.toi;
+            let result = PyTuple::new(py, [point.x, point.y, point.z]);
+            Ok(result.into())
+        } else {
+            Ok(py.None())
+        }
+    }
 }

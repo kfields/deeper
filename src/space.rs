@@ -18,13 +18,15 @@ pub struct Space {
     #[pyo3(get)]
     isometry: Py<Isometry>,
     aabb: Aabb,
+    #[pyo3(get)]
+    shape: PyObject,
 }
 
 #[pymethods]
 impl Space {
     #[new]
-    //#[args(position="Isometry()")]
-    fn new<'py>(isometry: Py<Isometry>, py: Python<'py>) -> Self {
+    //#[args(isometry="Isometry::new()", shape="None")]
+    fn new(isometry: Py<Isometry>, py: Python) -> Self {
         let list = PyList::empty(py).into_py(py);
         Space {
             isometry,
@@ -33,6 +35,7 @@ impl Space {
                 mins: Point::origin(),
                 maxs: Point::origin(),
             },
+            shape: py.None(),
         }
     }
     /*#[args(parent="None")]
@@ -49,25 +52,10 @@ impl Space {
         }
     }*/
 
-    /*#[getter]
-    fn center(& self) -> PyResult<&PyTuple> {
-        Python::with_gil(|py| -> PyResult<&PyTuple> {
-            //let isometry: &Isometry = self.isometry.extract(py).unwrap();
-            //let isometry = &self.isometry.extract::<Isometry>(py).unwrap();
-            let isometry = self.isometry.as_ref(py).borrow().inner;
-            //let x: Real = _center[0].extract::<Real>().unwrap();
-            let center = isometry.translation; 
-            Ok(PyTuple::new(py, [center.x, center.y, center.z]))
-        })    
-    }*/
-
     #[getter]
     fn center(& self) -> Py<PyTuple> {
         Python::with_gil(|py| -> Py<PyTuple> {
-            //let isometry: &Isometry = self.isometry.extract(py).unwrap();
-            //let isometry = &self.isometry.extract::<Isometry>(py).unwrap();
             let isometry = self.isometry.as_ref(py).borrow().inner;
-            //let x: Real = _center[0].extract::<Real>().unwrap();
             let center = isometry.translation; 
             PyTuple::new(py, [center.x, center.y, center.z]).into_py(py)
         })    

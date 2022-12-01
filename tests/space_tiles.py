@@ -32,7 +32,7 @@ view = glm.rotate(view, -30 * degRads, glm.vec3(0, 1, 0))
 class Deeper(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
-        self.space = Space(Isometry())
+        self.space = Space()
         self.camera = arcade.Camera(zoom=1.5)
         self.tiles = arcade.SpriteList()
 
@@ -44,15 +44,14 @@ class Deeper(arcade.Window):
             y_distance = 252 * ty
             for tx in range(0, 8):
                 x_distance = 216 * tx
-                self.space.add_child(Space(Isometry(x_distance, 16, -y_distance)))
+                self.space.add_child(Space(glm.vec3(x_distance, 16, -y_distance)))
 
     def create_sprites(self):
-        sorted_spaces = sorted(self.space.children, key=lambda space: space.center[2])
+        sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
             sprite = arcade.Sprite("../resources/tiles/Floor8a.png")
-            center = space.center
             model = glm.mat4(1)
-            pos = proj * view * model * glm.vec4(center[0], center[1], center[2], 1)
+            pos = proj * view * model * space.position
             sprite.set_position(pos[0], pos[2])
             self.tiles.append(sprite)
 
@@ -61,8 +60,7 @@ class Deeper(arcade.Window):
         self.camera.use()
         self.tiles.draw()
 
-    def on_mouse_motion(self, x, y, dx, dy):
-        #print(x,y)
+    def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         pass
 
 def main():
