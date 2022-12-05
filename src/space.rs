@@ -1,5 +1,9 @@
 use std::fmt::Debug;
 
+/*
+Archived:  Better/easier to implement in Python!!!
+ */
+
 //use pyo3::exceptions::PyRuntimeError;
 use pyo3::prelude::*;
 use pyo3::types::{PyTuple, PyList};

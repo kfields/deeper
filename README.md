@@ -15,6 +15,8 @@ python main.py
 
 ## Development
 
+You need to have [Rust](https://www.rust-lang.org/tools/install) installed
+
 :link:[PyO3](https://github.com/PyO3/pyo3)
 
 :link:[Maturin](https://github.com/PyO3/maturin)

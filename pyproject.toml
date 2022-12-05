@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "deeper"
+name = "deeper-game"
 version = "0.1.0"
-description = "Game with Python Arcade and Rust"
+description = "Dungeon RPG with Python Arcade and Rust"
 authors = ["Kurtis Fields <kurtisfields@gmail.com>"]
 
 [tool.poetry.dependencies]
@@ -16,12 +16,13 @@ maturin = "^0.14.2"
 pytest = "^7.2.0"
 pytest-benchmark = "^3.4.1"
 
-#[build-system]
-#requires = ["poetry-core>=1.0.0"]
-#build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
 py = "^1.11.0"
+
+#[build-system]
+#requires = ["poetry-core>=1.0.0"]
+#build-backend = "poetry.core.masonry.api"
 
 [build-system]
 requires = ["maturin>=0.14,<0.15"]
