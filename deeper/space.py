@@ -9,6 +9,9 @@ class Space:
         self.rotation = rotation
         self.shape = shape
         self.isometry = Isometry(*position, *rotation)
+        if shape:
+            self.aabb = shape.aabb(self.isometry)
+
         #print(self.isometry)
         self.children = []
 

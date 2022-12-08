@@ -29,4 +29,35 @@ impl Aabb {
             mins.x, mins.y, mins.z, maxs.x, maxs.y, maxs.z
         )
     }
+
+    #[getter]
+    fn minx(&self) -> Real {
+        self.inner.mins.x
+    }
+
+    #[getter]
+    fn miny(&self) -> Real {
+        self.inner.mins.y
+    }
+
+    #[getter]
+    fn minz(&self) -> Real {
+        self.inner.mins.z
+    }
+
+    #[getter]
+    fn maxx(&self) -> Real {
+        self.inner.maxs.x
+    }
+
+    #[getter]
+    fn maxy(&self) -> Real {
+        self.inner.maxs.y
+    }
+
+    #[getter]
+    fn maxz(&self) -> Real {
+        self.inner.maxs.z
+    }
+
 }
