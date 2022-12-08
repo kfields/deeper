@@ -66,6 +66,31 @@ class WorldCamera:
         )
         print("focal_point: ", focal_point)
         self.camera.move(focal_point)
+    """
+    def mouse_to_ray(self, mouse_nds):
+        #ray_clip = glm.vec3(mouse_nds.xy, -1.0)
+        #ray_clip = glm.vec3(mouse_nds.x, -mouse_nds.y, -1.0)
+        ray_clip = glm.vec3(-mouse_nds.x, mouse_nds.y, -1.0)
+        #proj = glm.ortho(0.0, 800.0, 0.0, 600.0, 0.1, 100.0)
+        #inv_proj = glm.inverse(glm.mat4(*self.camera._projection_matrix))
+        #proj = glm.mat4(*self.camera._projection_matrix)
+        #proj = self.proj
+        #proj = glm.ortho(0.0, 800.0, 0.0, 600.0, 0.1, 100.0)
+        #proj = glm.ortho(0.0, 4.0, 0.0, 3.0, 0.1, 100.0)
+        #proj = glm.ortho(-64.0, 64.0, -48.0, 48.0, 0.1, 100.0)
+        proj = glm.perspective(45, 1, 0.1, 150.0)
+        inv_proj = glm.inverse(proj)
+        ray_eye = inv_proj * -ray_clip
+        #ray_eye = ray_clip
+        print("camera position: ", self.position)
+        print("camera direction: ", self.direction)
+        print("camera target: ", self.target)
+        print("ray_eye: ", ray_eye)
+        ray_world = glm.normalize(self.orientation * ray_eye)
+        print("ray_world: ", ray_world)
+        ray = Ray(*self.position, *ray_world)
+        return ray
+    """
 
     def mouse_to_ray(self, mouse_nds):
         mouse_nds = mouse_nds
@@ -88,11 +113,9 @@ class Selection:
 class Deeper(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
-        #self.set_mouse_visible(False)
-
-        #self.camera = WorldCamera(self, glm.vec3(0, 0, 0), 1.25)
-        self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1.25)
-        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
+        self.camera = WorldCamera(self, glm.vec3(0, 0, 0), 1.25)
+        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1.25)
+        # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
         self.tiles = arcade.SpriteList()
 
         self.space = Space()
@@ -118,7 +141,7 @@ class Deeper(arcade.Window):
         sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
             sprite = arcade.Sprite(
-                "resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
+                "../resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
             )
             position = self.camera.project(space.position)
             #print("position: ", pos)

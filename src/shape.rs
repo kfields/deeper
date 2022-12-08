@@ -8,9 +8,9 @@ use parry3d::math::{Real, Vector};
 use parry3d::query::RayCast;
 use parry3d::shape;
 
-//use crate::shape_trait::ShapeTrait;
 use crate::isometry::Isometry;
 use crate::query::Ray;
+use crate::bounding_volume::Aabb;
 
 pub trait ShapeTrait {
     fn get_inner(&self) -> &dyn shape::Shape;
@@ -93,6 +93,10 @@ impl Cuboid {
     fn __repr__(&self) -> String {
         let hf = self.inner.half_extents;
         format!("Cuboid(x={}, y={}, z={})", hf.x, hf.y, hf.z)
+    }
+    fn aabb(&self, pos: &Isometry) -> Aabb {
+        let aabb = self.inner.aabb(&pos.inner);
+        Aabb { inner: aabb }
     }
     //TODO:  We're repeating ourselves
     fn cast_ray(&self, position: &Isometry, ray: &Ray, py: Python) -> PyResult<PyObject> {

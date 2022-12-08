@@ -88,11 +88,9 @@ class Selection:
 class Deeper(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
-        #self.set_mouse_visible(False)
-
         #self.camera = WorldCamera(self, glm.vec3(0, 0, 0), 1.25)
         self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1.25)
-        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
+        # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
         self.tiles = arcade.SpriteList()
 
         self.space = Space()
@@ -118,7 +116,7 @@ class Deeper(arcade.Window):
         sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
             sprite = arcade.Sprite(
-                "resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
+                "../resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
             )
             position = self.camera.project(space.position)
             #print("position: ", pos)

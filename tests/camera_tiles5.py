@@ -27,7 +27,7 @@ class WorldCamera:
         
         self.camera = arcade.Camera(zoom=zoom)
         # self.camera = arcade.Camera()
-        self.position = glm.vec3(95, 295, 165) * 2
+        self.position = glm.vec3(95, 295, 165)
         self.zoom_unit = glm.length(self.position)
         self.distance = zoom * self.zoom_unit
         self.direction = glm.normalize(self.position * -1)
@@ -58,7 +58,6 @@ class WorldCamera:
     def look_at(self, target, distance):
         self.target = target
         self.position = target + (self.direction * -distance)
-        #self.position = glm.vec3(0,0,600)
         #self.position = target + (self.direction * -distance) + glm.vec3(CELL_WIDTH/2, 0, CELL_DEPTH/2)
 
         focal_point = self.project(target) - glm.vec2(
@@ -70,9 +69,14 @@ class WorldCamera:
     def mouse_to_ray(self, mouse_nds):
         mouse_nds = mouse_nds
         ray_clip = glm.vec4(mouse_nds.xy, -1.0, 1.0)
+        proj = glm.perspective(90, 800/600, 100, 150.0)
+        proj = self.proj
+        inv_proj = glm.inverse(proj)
+        ray_eye = inv_proj * ray_clip
+
         orientation = glm.quat(self.orientation)
-        orientation = glm.rotate(orientation, ray_clip[1] * (-45 * degRads), glm.vec3(1, 0, 0))
-        orientation = glm.rotate(orientation, ray_clip[0] * (-45 * degRads), glm.vec3(0, 1, 0))
+        orientation = glm.rotate(orientation, ray_eye[1] * (-45 * degRads), glm.vec3(1, 0, 0))
+        orientation = glm.rotate(orientation, ray_eye[0] * (-45 * degRads), glm.vec3(0, 1, 0))
         direction = glm.normalize(orientation * glm.vec3(0.0, 0.0, -1.0))
         print("camera position: ", self.position)
         print("direction: ", direction)
@@ -88,11 +92,9 @@ class Selection:
 class Deeper(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
-        #self.set_mouse_visible(False)
-
         #self.camera = WorldCamera(self, glm.vec3(0, 0, 0), 1.25)
         self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1.25)
-        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
+        # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
         self.tiles = arcade.SpriteList()
 
         self.space = Space()
@@ -118,7 +120,7 @@ class Deeper(arcade.Window):
         sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
             sprite = arcade.Sprite(
-                "resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
+                "../resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
             )
             position = self.camera.project(space.position)
             #print("position: ", pos)

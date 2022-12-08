@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "deeper-game"
+name = "deeper-rpg"
 version = "0.1.0"
 description = "Dungeon RPG with Python Arcade and Rust"
 authors = ["Kurtis Fields <kurtisfields@gmail.com>"]
@@ -29,7 +29,7 @@ requires = ["maturin>=0.14,<0.15"]
 build-backend = "maturin"
 
 [project]
-name = "deeper"
+name = "deeper-rpg"
 version = "0.1.0"
 description = "Game with Python Arcade and Rust"
 authors = [ {name = "kfields", email = "kurtisfields@gmail.com"} ]
