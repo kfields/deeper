@@ -1,0 +1,17 @@
+Floor:
+  _abstract: true
+  category: Floor
+  class: deeper.block.Block
+  extents: [252, 16, 216]
+
+Floor1:
+  extends: Floor
+  image: ":deeper:tiles/Floor1.png"
+
+Floor1e:
+  extends: Floor
+  image: ":deeper:tiles/Floor1e.png"
+
+Floor1f:
+  extends: Floor
+  image: ":deeper:tiles/Floor1f.png"

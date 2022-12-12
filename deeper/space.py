@@ -7,17 +7,25 @@ class Space:
     def __init__(self, position=glm.vec3(), rotation=glm.vec3(), shape=None) -> None:
         self.position = position
         self.rotation = rotation
-        self.shape = shape
         self.isometry = Isometry(*position, *rotation)
-        if shape:
-            self.aabb = shape.aabb(self.isometry)
-
         #print(self.isometry)
         self.children = []
+        self.shape = shape
+
+    @property
+    def shape(self):
+        return self._shape
+
+    @shape.setter
+    def shape(self, shape):
+        if shape:
+            self.aabb = shape.aabb(self.isometry)
+        self._shape = shape
 
     def add_child(self, child):
         self.children.append(child)
 
+    """
     def cast_ray(self, ray):
         if(self.shape):
             return self.shape.cast_ray(self.isometry, ray)
@@ -25,3 +33,14 @@ class Space:
             contact = child.cast_ray(ray)
             if contact:
                 return contact
+    """
+    def cast_ray(self, ray):
+        if(self.shape):
+            contact = self.shape.cast_ray(self.isometry, ray)
+            if contact:
+                return self, contact
+            return None
+        for child in self.children:
+            result = child.cast_ray(ray)
+            if result:
+                return result
