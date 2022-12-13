@@ -9,7 +9,7 @@ from deeper import Space, Block
 from deeper.constants import *
 from deeper.camera import WorldCamera
 
-from .catalog import Catalog
+from deeper.catalog import Catalog
 
 class Hover:
     def __init__(self, space, position):
@@ -23,7 +23,7 @@ class Deeper(arcade.Window):
         self.gui = Gui(self)
         self.camera = WorldCamera(self, glm.vec3(), 1)
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1.25)
-        # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
+        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
         self.tiles = arcade.SpriteList()
 
         self.space = Space()
@@ -64,8 +64,7 @@ class Deeper(arcade.Window):
         self.camera.use()
         self.tiles.draw()
 
-        for space in self.space.children:
-            self.draw_aabb(space)
+        self.draw_aabbs()
 
         pos = self.camera.project(self.camera.target).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
@@ -89,7 +88,6 @@ class Deeper(arcade.Window):
             "Category", self.current, self.catalog.category_names
         )
         for item in self.catalog.categories[self.current].items:
-            #_, item.selected = imgui.selectable(item.text, item.selected)
             _, selected = imgui.selectable(item.name, item.selected)
             if selected:
                 if self.selection:
@@ -99,6 +97,10 @@ class Deeper(arcade.Window):
             item.draw()
         imgui.end()
 
+    def draw_aabbs(self):
+        for space in self.space.children:
+            self.draw_aabb(space)
+
     def draw_aabb(self, space):
         aabb = space.aabb
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
@@ -106,9 +108,18 @@ class Deeper(arcade.Window):
         fbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz))
         fbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz))
 
+        btl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz))
+        btr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz))
+        ftl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz))
+        ftr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz))
+
         arcade.draw_line(bbl.x, bbl.y, bbr.x, bbr.y, arcade.color.YELLOW)
         #arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
         arcade.draw_line(bbl.x, bbl.y, fbl.x, fbl.y, arcade.color.YELLOW)
+
+        arcade.draw_line(btl.x, btl.y, btr.x, btr.y, arcade.color.YELLOW)
+        #arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
+        arcade.draw_line(btl.x, btl.y, ftl.x, ftl.y, arcade.color.YELLOW)
 
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
@@ -117,6 +128,7 @@ class Deeper(arcade.Window):
         #print(contact)
         if result:
             space, contact = result
+            print("contact: ", contact)
             self.hover = Hover(space, glm.vec3(contact))
         else:
             self.hover = None

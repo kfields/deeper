@@ -7,13 +7,14 @@ from deeper import Space, Cuboid, Ray
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-CELL_WIDTH = 252
-CELL_DEPTH = 216
+CELL_WIDTH = 222
+CELL_HEIGHT = 16
+CELL_DEPTH = 254
 
-ROT_X = 32
-ROT_Y = 60
+ROT_X = 33
+ROT_Y = -30
 
-WORLD_UP = glm.vec3(0.0, 0.0, 1.0)
+WORLD_UP = glm.vec3(0.0, 1.0, 0.0)
 WORLD_AXIS_X = glm.vec3(1.0, 0.0, 0.0)
 WORLD_AXIS_Y = glm.vec3(0.0, 1.0, 0.0)
 WORLD_AXIS_Z = glm.vec3(0.0, 0.0, 1.0)
@@ -21,7 +22,7 @@ WORLD_AXIS_Z = glm.vec3(0.0, 0.0, 1.0)
 class WorldCamera:
     def __init__(self, window, target, zoom=1.0):
         self.window = window
-        self.distance = zoom * 300
+        self.distance = zoom * 500
         self.target = target
         self.zoom = zoom
 
@@ -39,9 +40,9 @@ class WorldCamera:
         ty = self.target[1] + self.target[1] / 2
         self.view_matrix = glm.translate(glm.mat4(1), glm.vec3(tx, 0, ty))
         """
-        self.view_matrix = glm.rotate(glm.mat4(1), math.radians(-ROT_X), WORLD_AXIS_X)
+        self.view_matrix = glm.rotate(glm.mat4(1), math.radians(ROT_X), WORLD_AXIS_X)
         self.view_matrix = glm.rotate(
-            self.view_matrix, math.radians(-ROT_Y), WORLD_AXIS_Y
+            self.view_matrix, math.radians(ROT_Y), WORLD_AXIS_Y
         )
         scale = 1 / self.zoom
         self.view_matrix = glm.scale(self.view_matrix, glm.vec3(scale, scale, scale))
@@ -50,13 +51,13 @@ class WorldCamera:
         self.inv_view = glm.inverse(self.view_matrix)
 
         self.orientation = glm.rotate(
-            glm.quat(), math.radians(ROT_X), WORLD_AXIS_X
+            glm.quat(), math.radians(-ROT_X), WORLD_AXIS_X
         )
         self.orientation = glm.rotate(
-            self.orientation, math.radians(ROT_Y), WORLD_AXIS_Y
+            self.orientation, math.radians(-ROT_Y), WORLD_AXIS_Y
         )
-        #self.direction = glm.normalize(self.orientation * glm.vec3(0.0, 0.0, 1.0))
-        self.direction = glm.normalize(self.inv_view * glm.vec3(0.0, 0.0, 1.0))
+        #self.direction = glm.normalize(self.orientation * glm.vec3(0.0, 0.0, -1.0))
+        self.direction = glm.normalize(self.inv_view * glm.vec3(0.0, 0.0, -1.0))
 
     def use(self):
         self.camera.use()
@@ -70,11 +71,10 @@ class WorldCamera:
     def look_at(self, target, distance):
         self.target = target
         self.position = target + (self.direction * -distance)
-        #self.position = target + (self.direction * -distance) + glm.vec3(CELL_WIDTH/2, 0, CELL_DEPTH/2)
-
         focal_point = self.project(target).xy - glm.vec2(
             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2
         )
+        print("target: ", target)
         print("focal_point: ", focal_point)
         self.camera.move(focal_point)
         self.update_matrices()
@@ -85,12 +85,12 @@ class WorldCamera:
         glOrthoWidth = 800
         glOrthoHeight = 600
 
-        x = -(2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
-        y = -(2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
+        x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
+        y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
 
         camera_right = glm.normalize(glm.cross(self.direction, glm.vec3(0,1,0)))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
-        ray_origin = self.position + camera_right * x + camera_up * -y
+        ray_origin = self.position + camera_right * x + camera_up * y
         ray_direction = self.direction
 
         print("viewport: ", self.camera.viewport)
@@ -110,8 +110,8 @@ class Deeper(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
         self.camera = WorldCamera(self, glm.vec3(), 1)
-        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1.25)
-        # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
+        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1)
+        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
         self.tiles = arcade.SpriteList()
 
         self.space = Space()
@@ -122,13 +122,13 @@ class Deeper(arcade.Window):
 
     def create_boxes(self):
         rotation = glm.vec3()
-        shape = Cuboid(CELL_WIDTH, 16, CELL_DEPTH)
+        shape = Cuboid(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH)
         for ty in range(0, 8):
             y_distance = CELL_DEPTH * ty
             for tx in range(0, 8):
                 x_distance = CELL_WIDTH * tx
-                position = glm.vec3(x_distance, 16, y_distance)
-                print("position: ", position)
+                position = glm.vec3(x_distance, CELL_HEIGHT, y_distance)
+                #print("position: ", position)
                 self.space.add_child(
                     Space(position, rotation, shape)
                 )
@@ -149,8 +149,7 @@ class Deeper(arcade.Window):
         self.camera.use()
         self.tiles.draw()
 
-        for space in self.space.children:
-            self.draw_aabb(space)
+        #self.draw_aabbs()
 
         pos = self.camera.project(self.camera.target).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
@@ -163,6 +162,10 @@ class Deeper(arcade.Window):
             arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
         arcade.finish_render()
 
+    def draw_aabbs(self):
+        for space in self.space.children:
+            self.draw_aabb(space)
+
     def draw_aabb(self, space):
         aabb = space.aabb
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
@@ -170,16 +173,27 @@ class Deeper(arcade.Window):
         fbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz))
         fbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz))
 
+        btl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz))
+        btr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz))
+        ftl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz))
+        ftr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz))
+
         arcade.draw_line(bbl.x, bbl.y, bbr.x, bbr.y, arcade.color.YELLOW)
         #arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
         arcade.draw_line(bbl.x, bbl.y, fbl.x, fbl.y, arcade.color.YELLOW)
 
+        arcade.draw_line(btl.x, btl.y, btr.x, btr.y, arcade.color.YELLOW)
+        #arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
+        arcade.draw_line(btl.x, btl.y, ftl.x, ftl.y, arcade.color.YELLOW)
+
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
         ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
-        contact = self.space.cast_ray(ray)
-        print(contact)
-        if contact:
+        result = self.space.cast_ray(ray)
+        print(result)
+        if result:
+            space, contact = result
+            print("contact: ", contact)
             self.selection = Selection(glm.vec3(contact))
         else:
             self.selection = None

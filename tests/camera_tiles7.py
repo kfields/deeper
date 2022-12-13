@@ -100,8 +100,8 @@ class Selection:
 class Deeper(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
-        #self.camera = WorldCamera(self, glm.vec3(0, 0, 0), 1)
-        self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1)
+        self.camera = WorldCamera(self, glm.vec3(0, 0, 0), 1)
+        #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1)
         # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1.25)
         self.tiles = arcade.SpriteList()
 
@@ -128,7 +128,7 @@ class Deeper(arcade.Window):
         sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
             sprite = arcade.Sprite(
-                "../resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
+                ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
             )
             position = self.camera.projectxz(space.position)
             #print("position: ", pos)
@@ -154,9 +154,10 @@ class Deeper(arcade.Window):
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
         ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
-        contact = self.space.cast_ray(ray)
-        print(contact)
-        if contact:
+        result = self.space.cast_ray(ray)
+        if result:
+            space, contact = result
+            print(contact)
             self.selection = Selection(glm.vec3(contact))
         else:
             self.selection = None

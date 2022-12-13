@@ -3,7 +3,10 @@ Floor:
   category: Floor
   class: deeper.block.Block
   extents: [252, 16, 216]
-
+  components:
+    - class: deeper.vu.SpriteVu
+      extents: [252, 16, 216]
+      
 Floor1:
   extends: Floor
   image: ":deeper:tiles/Floor1.png"
