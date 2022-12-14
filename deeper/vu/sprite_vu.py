@@ -1,6 +1,8 @@
+import arcade
+
 from . import Vu
 
 class SpriteVu(Vu):
-    def __init__(self, space, sprite) -> None:
-        super().__init__(space)
+    sprite: arcade.Sprite = None
+    def __init__(self, sprite: arcade.Sprite) -> None:
         self.sprite = sprite

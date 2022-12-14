@@ -12,6 +12,7 @@ bbox = "^0.9.2"
 imgui = "^1.4.1"
 toml = "^0.10.2"
 pyyaml = "^6.0"
+esper = "^2.4.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"

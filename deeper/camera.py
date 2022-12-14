@@ -21,9 +21,9 @@ class WorldCamera:
         self.look_at(target, self.distance)
 
     def update_matrices(self):
-        self.view_matrix = glm.rotate(glm.mat4(1), math.radians(ROT_X), WORLD_AXIS_X)
+        self.view_matrix = glm.rotate(glm.mat4(1), WORLD_TILT, WORLD_AXIS_X)
         self.view_matrix = glm.rotate(
-            self.view_matrix, math.radians(ROT_Y), WORLD_AXIS_Y
+            self.view_matrix, WORLD_ROTATION, WORLD_AXIS_Y
         )
         scale = 1 / self.zoom
         self.view_matrix = glm.scale(self.view_matrix, glm.vec3(scale, scale, scale))
@@ -51,7 +51,7 @@ class WorldCamera:
         )
         print("focal_point: ", focal_point)
         self.camera.move(focal_point)
-        self.update_matrices()
+        #self.update_matrices()
 
     def mouse_to_ray(self, mx, my):
         viewportWidth = 800

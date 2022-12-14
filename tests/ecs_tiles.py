@@ -1,6 +1,7 @@
 import math
-import arcade
 import glm
+import arcade
+import esper
 
 from deeper import Space, Cuboid, Ray
 
@@ -35,18 +36,12 @@ class WorldCamera:
         self.look_at(target, self.distance)
 
     def update_matrices(self):
-        """
-        tx = self.target[0] + self.target[0] / 2
-        ty = self.target[1] + self.target[1] / 2
-        self.view_matrix = glm.translate(glm.mat4(1), glm.vec3(tx, 0, ty))
-        """
         self.view_matrix = glm.rotate(glm.mat4(1), WORLD_TILT, WORLD_AXIS_X)
         self.view_matrix = glm.rotate(
             self.view_matrix, WORLD_ROTATION, WORLD_AXIS_Y
         )
         scale = 1 / self.zoom
         self.view_matrix = glm.scale(self.view_matrix, glm.vec3(scale, scale, scale))
-        #self.view_matrix[2][1] = .00025 #m9 = z -> y offset
 
         self.inv_view = glm.inverse(self.view_matrix)
 
@@ -99,22 +94,52 @@ class Selection:
     def __init__(self, position):
         self.position = position
 
+class Processor(esper.Processor):
+    @property
+    def scene(self) -> "Scene":
+        return self.world
 
-class Deeper(arcade.Window):
-    def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
+class SpriteVu:
+    sprite: arcade.Sprite = None
+    position: glm.vec3 = glm.vec3()
+    def __init__(self, sprite: arcade.Sprite) -> None:
+        self.sprite = sprite
+
+class RenderingProcessor(Processor):
+    def process(self):
+        self.scene.tile_vu_list = []
+        self.scene.tile_list = arcade.SpriteList()
+
+        for ent, (space, vu) in self.scene.get_components(Space, SpriteVu):
+            position = self.scene.camera.project(space.position)
+            vu.position = position
+            #print("position: ", position)
+            vu.sprite.set_position(*position.xy)
+            self.scene.tile_vu_list.append(vu)
+
+        self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: vu.position.z)
+        for vu in self.scene.tile_vu_list:
+            self.scene.tile_list.append(vu.sprite)
+
+
+class Scene(arcade.View, esper.World):
+    def __init__(self, window=None):
+        super().__init__(window)
+        esper.World.__init__(self)
+
+        self.add_processor(RenderingProcessor())
         self.camera = WorldCamera(self, glm.vec3(), 1)
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1)
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
-        self.tiles = arcade.SpriteList()
-
+        self.tile_vu_list = []
+        self.tile_list = arcade.SpriteList()
         self.space = Space()
         self.selection = None
 
-        self.create_boxes()
-        self.create_sprites()
+        self.create_blocks()
+        #self.create_sprites()
 
-    def create_boxes(self):
+    def create_blocks(self):
         rotation = glm.vec3()
         shape = Cuboid(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH)
         for ty in range(0, 8):
@@ -123,25 +148,21 @@ class Deeper(arcade.Window):
                 x_distance = CELL_WIDTH * tx
                 position = glm.vec3(x_distance, CELL_HEIGHT, y_distance)
                 #print("position: ", position)
-                self.space.add_child(
-                    Space(position, rotation, shape)
-                )
+                block = Space(position, rotation, shape)
+                self.space.add_child(block)
+                vu = SpriteVu(arcade.Sprite(
+                    ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
+                ))
+                self.create_entity(block, vu)
 
-    def create_sprites(self):
-        sorted_spaces = sorted(self.space.children, key=lambda space: space.position.z)
-        for space in sorted_spaces:
-            sprite = arcade.Sprite(
-                ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
-            )
-            position = self.camera.project(space.position).xy
-            #print("position: ", pos)
-            sprite.set_position(*position)
-            self.tiles.append(sprite)
+    def on_update(self, delta_time: float):
+        self.process()
+        return super().on_update(delta_time)
 
     def on_draw(self):
         arcade.start_render()
         self.camera.use()
-        self.tiles.draw()
+        self.tile_list.draw()
 
         #self.draw_aabbs()
 
@@ -191,6 +212,12 @@ class Deeper(arcade.Window):
             self.selection = Selection(glm.vec3(contact))
         else:
             self.selection = None
+
+class Deeper(arcade.Window):
+    def __init__(self):
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
+        self.scene = Scene(self)
+        self.show_view(self.scene)
 
 
 def main():

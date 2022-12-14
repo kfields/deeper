@@ -1,3 +1,6 @@
+import glm
+
 class Vu:
-    def __init__(self, space) -> None:
-        self.space = space
+    position: glm.vec3 = glm.vec3()
+    def __init__(self) -> None:
+        pass

@@ -95,6 +95,14 @@ optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 
 [[package]]
+name = "esper"
+version = "2.4.1"
+description = "esper is a lightweight Entity System (ECS) for Python, with a focus on performance."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "exceptiongroup"
 version = "1.0.4"
 description = "Backport of PEP 654 (exception groups)"
@@ -387,7 +395,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8, <3.12"
-content-hash = "2d6cabcad0c0715a7f264fcbced589bb3bbb66a37c838e9f2077fccb4426bf03"
+content-hash = "f578db138b42c7e925c06435a0c324b24f8c9e4fd853f54ebbae589d7596a153"
 
 [metadata.files]
 arcade = [
@@ -498,6 +506,10 @@ click = [
 colorama = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
+]
+esper = [
+    {file = "esper-2.4.1-py3-none-any.whl", hash = "sha256:45794ad6cefa3c9cff78f64afd070591e562f7dc544975acd1f91a47ea9714e0"},
+    {file = "esper-2.4.1.zip", hash = "sha256:693b64d96e0bbb0e4e047f6534ca557dfe3eea57297fedf5a26e7bd8f78032d2"},
 ]
 exceptiongroup = [
     {file = "exceptiongroup-1.0.4-py3-none-any.whl", hash = "sha256:542adf9dea4055530d6e1279602fa5cb11dab2395fa650b8674eaec35fc4a828"},
