@@ -1,7 +1,7 @@
 import math
 import glm
 import arcade
-import esper
+from arcade.resources import resolve_resource_path
 import imgui
 
 from deeper import Space, Cuboid
@@ -11,6 +11,10 @@ from deeper.vu.sprite_vu import SpriteVu
 from deeper.processor.rendering import RenderingProcessor
 from deeper.catalog import Catalog
 from deeper.dimgui import Gui
+from deeper.editor.widgets import MainMenu, CatalogWidget
+#from deeper.editor.widgets.toolbar import Toolbar, Toolbutton
+from deeper.resources.icons.icons_material_design import IconsMaterialDesign
+
 
 class Hover:
     def __init__(self, space, position):
@@ -22,10 +26,12 @@ class Scene(arcade.View):
         super().__init__(window)
         self.world = world
         self.gui = Gui(self.window)
+        self.gui.add_child(MainMenu())
+        #TODO:Need glyph range which pyimgui does not support. :(
+        #self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
 
         self.catalog = Catalog(self.window)
-        self.current = 0
-        self.selection = None
+        self.gui.add_child(CatalogWidget(self.catalog))
 
         self.camera = WorldCamera(self, glm.vec3(), 1)
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1)
@@ -34,6 +40,9 @@ class Scene(arcade.View):
         self.tile_list = arcade.SpriteList()
         self.space = Space()
         self.hover = None
+
+        #self.toolbar = Toolbar([Toolbutton(IconsMaterialDesign.ICON_NAVIGATION), Toolbutton(IconsMaterialDesign.ICON_APPROVAL)])
+        #self.toolbar = Toolbar([Toolbutton('pick', selected=True), Toolbutton('stamp')])
 
         self.create_blocks()
 
@@ -75,24 +84,29 @@ class Scene(arcade.View):
             arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
         
         imgui.new_frame()
-        self.draw_catalog()
+        #self.draw_catalog()
+        #self.draw_mainmenu()
         self.gui.draw()
         arcade.finish_render()
+    """
+    def draw_mainmenu(self):
+        if imgui.begin_main_menu_bar():
+            # File
+            if imgui.begin_menu('File', True):
+                clicked_quit, selected_quit = imgui.menu_item(
+                    "Quit", 'Cmd+Q', False, True
+                )
 
-    def draw_catalog(self):
-        imgui.begin('Catalog')
-        clicked, self.current = imgui.combo(
-            "Category", self.current, self.catalog.category_names
-        )
-        for item in self.catalog.categories[self.current].items:
-            _, selected = imgui.selectable(item.name, item.selected)
-            if selected:
-                if self.selection:
-                    self.selection.selected = False
-                self.selection = item
-                item.selected = selected
-            item.draw()
-        imgui.end()
+                if clicked_quit:
+                    exit(1)
+                imgui.end_menu()
+            imgui.separator()
+            self.draw_toolbar()
+            imgui.end_main_menu_bar()
+
+    def draw_toolbar(self):
+        self.toolbar.draw()
+    """
 
     def draw_aabbs(self):
         for space in self.space.children:
