@@ -25,7 +25,6 @@ class WorldEditView(View):
     def __init__(self, window, world):
         super().__init__(window)
         self.world = world
-        #self.gui = Gui(self.window)
         self.gui = window.gui
         self.gui.add_child(MainMenu())
         #TODO:Need glyph range which pyimgui does not support. :(
