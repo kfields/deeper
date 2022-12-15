@@ -16,7 +16,11 @@ class Gui(Widget):
         new_font = io.fonts.add_font_from_file_ttf(str(font_path), 20)
         self.renderer.refresh_font_texture()
 
-    def draw(self):
-        super().draw()
+    def start_render(self):
+        imgui.new_frame()
+
+    def finish_render(self):
+        self.draw()
+        imgui.end_frame()
         imgui.render()
         self.renderer.render(imgui.get_draw_data())

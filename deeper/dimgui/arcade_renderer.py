@@ -16,14 +16,4 @@ class ArcadeRenderer(PygletMixin, ArcadeGLRenderer):
         self._map_keys()
 
         if attach_callbacks:
-            window.push_handlers(
-                self.on_mouse_motion,
-                self.on_key_press,
-                self.on_key_release,
-                self.on_text,
-                self.on_mouse_drag,
-                self.on_mouse_press,
-                self.on_mouse_release,
-                self.on_mouse_scroll,
-                self.on_resize,
-            )
+            self._attach_callbacks(window)

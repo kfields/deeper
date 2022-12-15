@@ -54,10 +54,10 @@ class WorldCamera:
         #self.update_matrices()
 
     def mouse_to_ray(self, mx, my):
-        viewportWidth = 800
-        viewPortHeight = 600
-        glOrthoWidth = 800
-        glOrthoHeight = 600
+        viewportWidth = SCREEN_WIDTH
+        viewPortHeight = SCREEN_HEIGHT
+        glOrthoWidth = SCREEN_WIDTH
+        glOrthoHeight = SCREEN_HEIGHT
 
         x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)

@@ -4,6 +4,7 @@ import arcade
 #from arcade.resources import resolve_resource_path
 import imgui
 
+from deeper.view import View
 from deeper import Space, Cuboid
 from deeper.constants import *
 from deeper.camera import WorldCamera
@@ -20,11 +21,12 @@ class Hover:
         self.space = space
         self.position = position
 
-class Scene(arcade.View):
+class WorldEditView(View):
     def __init__(self, window, world):
         super().__init__(window)
         self.world = world
-        self.gui = Gui(self.window)
+        #self.gui = Gui(self.window)
+        self.gui = window.gui
         self.gui.add_child(MainMenu())
         #TODO:Need glyph range which pyimgui does not support. :(
         #self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
@@ -63,9 +65,9 @@ class Scene(arcade.View):
 
     def on_draw(self):
         arcade.start_render()
-        imgui.new_frame()
+        self.gui.start_render()
 
-        self.camera.use()
+        self.camera.use() #TODO: This is messing with ImGui on resize...
         self.tile_list.draw()
 
         #self.draw_aabbs()
@@ -80,8 +82,7 @@ class Scene(arcade.View):
             pos = self.camera.project(self.hover.position).xy
             arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
         
-        self.gui.draw()
-
+        self.gui.finish_render()
         arcade.finish_render()
 
     def draw_aabbs(self):

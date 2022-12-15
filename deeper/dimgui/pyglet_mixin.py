@@ -1,5 +1,4 @@
 import imgui
-from imgui.integrations import compute_fb_scale
 from pyglet import clock
 from pyglet.window import key, mouse
 
@@ -26,23 +25,6 @@ class PygletMixin:
         key.Y: imgui.KEY_Y,
         key.Z: imgui.KEY_Z,
     }
-
-    def _set_pixel_ratio(self, window):
-        window_size = window.get_size()
-        self.io.display_size = window_size
-        # It is conceivable that the pyglet version will not be solely
-        # determinant of whether we use the fixed or programmable, so do some
-        # minor introspection here to check.
-        if hasattr(window, 'get_viewport'):
-            viewport = window.get_viewport()
-            viewport_size = viewport[1] - viewport[0], viewport[3] - viewport[2]
-            self.io.display_fb_scale = compute_fb_scale(window_size, viewport_size)
-        elif hasattr(window, 'get_pixel_ratio'):
-            self.io.display_fb_scale = (window.get_pixel_ratio(),
-                                        window.get_pixel_ratio())
-        else:
-            # Default to 1.0 in this unlikely circumstance
-            self.io.display_fb_scale = (1.0, 1.0)
 
     def _attach_callbacks(self, window):
         window.push_handlers(
