@@ -7,7 +7,7 @@ class World(esper.World):
         super().__init__(timed)
 
     def cast_ray(self, ray):
-        for ent, (space,) in self.get_components(Space):
-            result = space.cast_ray(ray)
+        for entity, (space,) in self.get_components(Space):
+            result = space.cast_ray(entity, ray)
             if result:
                 return result
