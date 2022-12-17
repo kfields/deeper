@@ -15,17 +15,20 @@ from deeper.dimgui import Gui
 from deeper.editor.widgets import MainMenu, CatalogWidget
 #from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
+from ..tools.pick import PickTool
 
+"""
 class Hover:
     def __init__(self, space, position):
         self.space = space
         self.position = position
+"""
 
 class WorldEditView(View):
     def __init__(self, window, world):
         super().__init__(window)
         self.world = world
-        self.gui = window.gui
+        #self.gui = window.gui
         self.gui.add_child(MainMenu())
         #TODO:Need glyph range which pyimgui does not support. :(
         #self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
@@ -39,11 +42,14 @@ class WorldEditView(View):
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
         self.space = Space()
-        self.hover = None
+        #self.hover = None
 
         self.create_blocks()
 
         self.world.add_processor(RenderingProcessor(self))
+
+        self.pick_tool = PickTool(self)
+        self.use_tool(self.pick_tool)
 
 
     def create_blocks(self):
@@ -62,10 +68,7 @@ class WorldEditView(View):
                 ))
                 self.world.create_entity(block, vu)
 
-    def on_draw(self):
-        arcade.start_render()
-        self.gui.start_render()
-
+    def draw(self):
         self.camera.use() #TODO: This is messing with ImGui on resize...
         self.tile_list.draw()
 
@@ -76,14 +79,11 @@ class WorldEditView(View):
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-
+        """
         if self.hover:
             pos = self.camera.project(self.hover.position).xy
             arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
-        
-        self.gui.finish_render()
-        arcade.finish_render()
-
+        """
     def draw_aabbs(self):
         for space in self.space.children:
             self.draw_aabb(space)
@@ -107,21 +107,7 @@ class WorldEditView(View):
         arcade.draw_line(btl.x, btl.y, btr.x, btr.y, arcade.color.YELLOW)
         #arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
         arcade.draw_line(btl.x, btl.y, ftl.x, ftl.y, arcade.color.YELLOW)
-
     """
-    def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
-        print("mouse: ", mouse_x, mouse_y)
-        ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
-        result = self.space.cast_ray(ray)
-        print(result)
-        if result:
-            space, contact = result
-            print("contact: ", contact)
-            self.hover = Hover(space, glm.vec3(contact))
-        else:
-            self.hover = None
-    """
-
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
         ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
@@ -133,3 +119,4 @@ class WorldEditView(View):
             self.hover = Hover(space, glm.vec3(contact))
         else:
             self.hover = None
+    """

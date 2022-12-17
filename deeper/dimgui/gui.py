@@ -3,7 +3,7 @@ import imgui
 from pyglet import clock
 from pyglet.window import key, mouse
 
-from . import Renderer
+from .renderer import GuiRenderer
 from .widget import Widget
 
 
@@ -30,22 +30,6 @@ class GuiBase(Widget):
         key.Y: imgui.KEY_Y,
         key.Z: imgui.KEY_Z,
     }
-
-    def _attach_callbacks(self, window):
-        window.push_handlers(self)
-        """
-        window.push_handlers(
-            self.on_key_press,
-            self.on_key_release,
-            self.on_text,
-            self.on_mouse_motion,
-            self.on_mouse_drag,
-            self.on_mouse_press,
-            self.on_mouse_release,
-            self.on_mouse_scroll,
-            self.on_resize,
-        )
-        """
 
     def _map_keys(self):
         key_map = self.io.key_map
@@ -129,17 +113,25 @@ class GuiBase(Widget):
 
 
 class Gui(GuiBase):
-    def __init__(self, window, children=[], attach_callbacks=True):
+    def __init__(self, window, children=[], auto_enable=True):
         self.window = window
         super().__init__(children)
         # Must create or set the context before instantiating the renderer
         imgui.create_context()
         self.io = imgui.get_io()
 
-        self.renderer = Renderer(window)
+        self.renderer = GuiRenderer(window)
 
-        if attach_callbacks:
-            self._attach_callbacks(self.window)
+        if auto_enable:
+            self.enable()
+        else:
+            window.push_handlers(self.on_resize)
+
+    def enable(self):
+        self.window.push_handlers(self)
+
+    def disable(self):
+        self.window.remove_handlers(self)
 
     def add_child(self, child):
         super().add_child(child)

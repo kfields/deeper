@@ -7,7 +7,7 @@ from pyglet import gl
 
 from arcade.gl import BufferDescription, Context
 
-class Renderer(BaseOpenGLRenderer):
+class GuiRenderer(BaseOpenGLRenderer):
     """
     A renderer using the arcade.gl module instead of PyOpenGL.
     This is using pyglet's OpenGL bindings instead.
