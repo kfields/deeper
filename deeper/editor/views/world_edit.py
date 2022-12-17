@@ -108,10 +108,24 @@ class WorldEditView(View):
         #arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
         arcade.draw_line(btl.x, btl.y, ftl.x, ftl.y, arcade.color.YELLOW)
 
+    """
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
         ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
         result = self.space.cast_ray(ray)
+        print(result)
+        if result:
+            space, contact = result
+            print("contact: ", contact)
+            self.hover = Hover(space, glm.vec3(contact))
+        else:
+            self.hover = None
+    """
+
+    def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
+        print("mouse: ", mouse_x, mouse_y)
+        ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
+        result = self.world.cast_ray(ray)
         print(result)
         if result:
             space, contact = result

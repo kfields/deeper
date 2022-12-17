@@ -27,17 +27,20 @@ class PygletMixin:
     }
 
     def _attach_callbacks(self, window):
+        window.push_handlers(self)
+        """
         window.push_handlers(
-            self.on_mouse_motion,
             self.on_key_press,
             self.on_key_release,
             self.on_text,
+            self.on_mouse_motion,
             self.on_mouse_drag,
             self.on_mouse_press,
             self.on_mouse_release,
             self.on_mouse_scroll,
             self.on_resize,
         )
+        """
 
     def _map_keys(self):
         key_map = self.io.key_map
@@ -52,9 +55,6 @@ class PygletMixin:
         self.io.key_super = mods & key.MOD_COMMAND
         self.io.key_alt = mods & key.MOD_ALT
         self.io.key_shift = mods & key.MOD_SHIFT
-
-    def on_mouse_motion(self, x, y, dx, dy):
-        self.io.mouse_pos = x, self.io.display_size.y - y
 
     def on_key_press(self, key_pressed, mods):
         if key_pressed in self.REVERSE_KEY_MAP:
@@ -71,6 +71,11 @@ class PygletMixin:
 
         for char in text:
             io.add_input_character(ord(char))
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        self.io.mouse_pos = x, self.io.display_size.y - y
+        if self.io.want_capture_mouse:
+            return True
 
     def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
         self.io.mouse_pos = x, self.io.display_size.y - y

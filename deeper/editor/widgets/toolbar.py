@@ -15,30 +15,15 @@ class Toolbutton(Widget):
 
     def create(self, gui):
         super().create(gui)
-        image = self.font.render_to_image(self.text, 64, 64)
+        image = self.font.render_to_image(self.text, 32, 32)
         self.texture = image.get_texture()
-        #print(self.texture.tex_coords)
-        #self.texture.tex_coords = (0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0)
-        #self.texture.tex_coords = (0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1)
-        #exit()
-        #flipped = texture.get_transform(flip_y=True)
-        #self.texture = flipped
 
     def draw(self):
         if self.selected:
-            imgui.image(self.texture.id, self.texture.width, self.texture.height)
-        elif imgui.image_button(self.texture.id, self.texture.width, self.texture.height):
+            imgui.image(self.texture.id, self.texture.width, self.texture.height, (0,1), (1,0))
+        elif imgui.image_button(self.texture.id, self.texture.width, self.texture.height, (0,1), (1,0)):
             self.select()
             return True
-
-    """
-    def draw(self):
-        if self.selected:
-            imgui.text(self.text)
-        elif imgui.button(self.text):
-            self.selected = True
-            return True
-    """            
 
 
 class Toolbar(Widget):

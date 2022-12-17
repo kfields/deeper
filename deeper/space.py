@@ -25,22 +25,9 @@ class Space:
     def add_child(self, child):
         self.children.append(child)
 
-    """
-    def cast_ray(self, ray):
-        if(self.shape):
-            return self.shape.cast_ray(self.isometry, ray)
-        for child in self.children:
-            contact = child.cast_ray(ray)
-            if contact:
-                return contact
-    """
     def cast_ray(self, ray):
         if(self.shape):
             contact = self.shape.cast_ray(self.isometry, ray)
             if contact:
                 return self, contact
             return None
-        for child in self.children:
-            result = child.cast_ray(ray)
-            if result:
-                return result
