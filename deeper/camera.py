@@ -8,7 +8,7 @@ from . import Ray
 class WorldCamera:
     def __init__(self, window, target, zoom=1.0):
         self.window = window
-        self.distance = zoom * 500
+        self.distance = zoom * 1000
         self.target = target
         self.zoom = zoom
 
