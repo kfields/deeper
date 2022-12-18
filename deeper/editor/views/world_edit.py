@@ -16,6 +16,7 @@ from deeper.editor.widgets import MainMenu, CatalogWidget
 #from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 from ..tools.pick import PickTool
+from ..tools.stamp import StampTool
 
 """
 class Hover:
@@ -33,7 +34,7 @@ class WorldEditView(View):
         #TODO:Need glyph range which pyimgui does not support. :(
         #self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
 
-        self.catalog = Catalog(self.window)
+        self.catalog = Catalog()
         self.gui.add_child(CatalogWidget(self.catalog))
 
         self.camera = WorldCamera(self, glm.vec3(), 1)
@@ -49,6 +50,8 @@ class WorldEditView(View):
         self.world.add_processor(RenderingProcessor(self))
 
         self.pick_tool = PickTool(self)
+        self.stamp_tool = StampTool(self)
+
         self.use_tool(self.pick_tool)
 
 

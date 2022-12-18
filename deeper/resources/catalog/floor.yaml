@@ -1,20 +1,14 @@
 Block:
   _abstract: true
+  shape: Cuboid
+  extents: [252, 16, 216]
   components:
-    - component: AnyShape<Cuboid>
-      extents: [252, 16, 216]
     - component: SpriteVu
-      extents: [252, 16, 216]
 
 Floor:
   _abstract: true
   extends: Block
   category: Floor
-  components:
-    - component: AnyShape<Cuboid>
-      extents: [252, 16, 216]
-    - component: SpriteVu
-      extents: [252, 16, 216]
       
 Floor1:
   extends: Floor

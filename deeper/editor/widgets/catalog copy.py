@@ -24,7 +24,6 @@ class DefinitionWidget(Widget):
         super().__init__()
         self.definition = definition
         self.selected = False
-        self.texture = None
 
     def create(self, gui):
         super().create(gui)
@@ -34,8 +33,6 @@ class DefinitionWidget(Widget):
 
     def draw(self):
         _, selected = imgui.selectable(self.definition.name, self.selected)
-        imgui.same_line()
-        imgui.image(self.texture.glo, *self.texture.size)
         return selected
 
 class CategoryWidget(Widget):
@@ -44,6 +41,16 @@ class CategoryWidget(Widget):
         self.category = category
         for definition in category.definitions:
             self.add_child(DefinitionWidget(definition))
+
+    def draw(self):
+        for definition in self.category.definitions:
+            _, selected = imgui.selectable(definition.name, definition.selected)
+            if selected:
+                if self.selection:
+                    self.selection.selected = False
+                self.selection = definition
+                definition.selected = selected
+            definition.draw()
 
 class CatalogWidget(Widget):
     def __init__(self, catalog):
@@ -56,25 +63,11 @@ class CatalogWidget(Widget):
         for category in catalog.categories:
             self.category_widgets.append(CategoryWidget(category))
 
-    def create(self, gui):
-        super().create(gui)
-        for widget in self.category_widgets:
-            widget.create(gui)
-
     def draw(self):
         imgui.begin('Catalog')
         clicked, self.current = imgui.combo(
             "Category", self.current, self.catalog.category_names
         )
-        for widget in self.category_widgets[self.current].children:
-            selected = widget.draw()
-            if selected:
-                if self.selection:
-                    self.selection.selected = False
-                self.selection = widget
-                widget.selected = selected
-
-        """
         for definition in self.catalog.categories[self.current].definitions:
             _, selected = imgui.selectable(definition.name, definition.selected)
             if selected:
@@ -83,5 +76,4 @@ class CatalogWidget(Widget):
                 self.selection = definition
                 definition.selected = selected
             definition.draw()
-        """
         imgui.end()

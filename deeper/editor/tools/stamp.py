@@ -15,7 +15,7 @@ class Selected:
         self.entity = entity
         self.space = space
 
-class PickTool(WorldTool):
+class StampTool(WorldTool):
     def __init__(self, view) -> None:
         super().__init__(view)
         self.hovered = None
@@ -42,8 +42,6 @@ class PickTool(WorldTool):
             self.world.delete_entity(self.selected.entity)
             if self.hovered.entity == self.selected.entity:
                 self.hovered = None
-            self.selected = None
-        elif symbol == key.ESCAPE:
             self.selected = None
 
     def draw(self):
