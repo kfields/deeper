@@ -116,6 +116,7 @@ class Gui(GuiBase):
     def __init__(self, window, children=[], auto_enable=True):
         self.window = window
         super().__init__(children)
+        self.default_font = None
         # Must create or set the context before instantiating the renderer
         imgui.create_context()
         self.io = imgui.get_io()
@@ -137,16 +138,21 @@ class Gui(GuiBase):
         super().add_child(child)
         child.create(self)
 
-    def load_font(self, font_path):
+    def load_font(self, font_path, font_pixel_size):
         io = imgui.get_io()
-        new_font = io.fonts.add_font_from_file_ttf(str(font_path), 20)
+        font = io.fonts.add_font_from_file_ttf(str(font_path), font_pixel_size)
         self.renderer.refresh_font_texture()
+        return font
 
     def start_render(self):
         imgui.new_frame()
+        if self.default_font:
+            imgui.push_font(self.default_font)
 
     def finish_render(self):
         self.draw()
+        if self.default_font:
+            imgui.pop_font()
         imgui.end_frame()
         imgui.render()
         self.renderer.render(imgui.get_draw_data())

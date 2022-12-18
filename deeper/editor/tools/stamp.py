@@ -2,7 +2,8 @@ import glm
 
 import arcade
 from arcade import key
-from deeper.tool import WorldTool
+
+from .tool import WorldEditTool
 
 class Hovered:
     def __init__(self, entity, space, position):
@@ -15,9 +16,9 @@ class Selected:
         self.entity = entity
         self.space = space
 
-class StampTool(WorldTool):
-    def __init__(self, view) -> None:
-        super().__init__(view)
+class StampTool(WorldEditTool):
+    def __init__(self, view, edit_state) -> None:
+        super().__init__(view, edit_state)
         self.hovered = None
         self.selected = None
 

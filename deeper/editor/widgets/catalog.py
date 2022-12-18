@@ -4,21 +4,6 @@ from arcade.resources import resolve_resource_path
 
 from deeper.dimgui import Widget
 
-"""
-class Item(Description):
-    def __init__(self, catalog, name, config):
-        super().__init__(catalog, name, config)
-        self.selected = False
-
-        with Image.open(resolve_resource_path(self.image)) as image:
-            image.thumbnail((64, 64))
-            self.texture = catalog.window.ctx.texture(image.size, components=3, data=image.convert("RGB").tobytes())
-
-    def draw(self):
-        imgui.same_line()
-        imgui.image(self.texture.glo, *self.texture.size)
-"""
-
 class DefinitionWidget(Widget):
     def __init__(self, definition):
         super().__init__()
@@ -45,10 +30,16 @@ class CategoryWidget(Widget):
         for definition in category.definitions:
             self.add_child(DefinitionWidget(definition))
 
+    def draw(self):
+        imgui.begin_child("entities", 150, -50, border=True)
+        super().draw()
+        imgui.end_child()
+
 class CatalogWidget(Widget):
-    def __init__(self, catalog):
+    def __init__(self, catalog, callback):
         super().__init__()
         self.catalog = catalog
+        self.callback = callback
         self.category_widgets = []
         self.current = 0
         self.selection = None
@@ -66,6 +57,7 @@ class CatalogWidget(Widget):
         clicked, self.current = imgui.combo(
             "Category", self.current, self.catalog.category_names
         )
+        imgui.begin_child("entities", 250, -50, border=True)
         for widget in self.category_widgets[self.current].children:
             selected = widget.draw()
             if selected:
@@ -73,15 +65,6 @@ class CatalogWidget(Widget):
                     self.selection.selected = False
                 self.selection = widget
                 widget.selected = selected
-
-        """
-        for definition in self.catalog.categories[self.current].definitions:
-            _, selected = imgui.selectable(definition.name, definition.selected)
-            if selected:
-                if self.selection:
-                    self.selection.selected = False
-                self.selection = definition
-                definition.selected = selected
-            definition.draw()
-        """
+                self.callback(widget.definition)
+        imgui.end_child()
         imgui.end()

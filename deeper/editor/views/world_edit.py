@@ -1,7 +1,7 @@
 import math
 import glm
 import arcade
-#from arcade.resources import resolve_resource_path
+from arcade.resources import resolve_resource_path
 import imgui
 
 from deeper.view import View
@@ -18,42 +18,39 @@ from deeper.editor.widgets import MainMenu, CatalogWidget
 from ..tools.pick import PickTool
 from ..tools.stamp import StampTool
 
-"""
-class Hover:
-    def __init__(self, space, position):
-        self.space = space
-        self.position = position
-"""
 
 class WorldEditView(View):
-    def __init__(self, window, world):
+    def __init__(self, window, edit_state):
         super().__init__(window)
-        self.world = world
-        #self.gui = window.gui
+        self.edit_state = edit_state
+        self.world = edit_state.world
         self.gui.add_child(MainMenu())
         #TODO:Need glyph range which pyimgui does not support. :(
         #self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
+        self.gui.default_font = self.gui.load_font(resolve_resource_path(f':deeper:fonts/Roboto-Regular.ttf'), 16)
 
         self.catalog = Catalog()
-        self.gui.add_child(CatalogWidget(self.catalog))
+        self.gui.add_child(CatalogWidget(self.catalog, self.on_catalog))
 
         self.camera = WorldCamera(self, glm.vec3(), 1)
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1)
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
+
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
         self.space = Space()
-        #self.hover = None
 
         self.create_blocks()
 
         self.world.add_processor(RenderingProcessor(self))
 
-        self.pick_tool = PickTool(self)
-        self.stamp_tool = StampTool(self)
+        self.pick_tool = PickTool(self, edit_state)
+        self.stamp_tool = StampTool(self, edit_state)
 
         self.use_tool(self.pick_tool)
 
+    def on_catalog(self, description):
+        self.edit_state.current_description = description
 
     def create_blocks(self):
         rotation = glm.vec3()
@@ -82,11 +79,7 @@ class WorldEditView(View):
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-        """
-        if self.hover:
-            pos = self.camera.project(self.hover.position).xy
-            arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
-        """
+
     def draw_aabbs(self):
         for space in self.space.children:
             self.draw_aabb(space)
@@ -110,16 +103,3 @@ class WorldEditView(View):
         arcade.draw_line(btl.x, btl.y, btr.x, btr.y, arcade.color.YELLOW)
         #arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
         arcade.draw_line(btl.x, btl.y, ftl.x, ftl.y, arcade.color.YELLOW)
-    """
-    def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
-        print("mouse: ", mouse_x, mouse_y)
-        ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
-        result = self.world.cast_ray(ray)
-        print(result)
-        if result:
-            space, contact = result
-            print("contact: ", contact)
-            self.hover = Hover(space, glm.vec3(contact))
-        else:
-            self.hover = None
-    """
