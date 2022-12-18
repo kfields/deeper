@@ -1,0 +1,23 @@
+Block:
+  _abstract: true
+  shape: Cuboid
+  extents: [252, 16, 216]
+  components:
+    - component: SpriteVu
+
+Stone:
+  _abstract: true
+  extends: Block
+  category: Stone
+      
+TileStone0:
+  extends: Stone
+  image: ":deeper:tiles/TileStone0.png"
+
+TileStone1:
+  extends: Stone
+  image: ":deeper:tiles/TileStone1.png"
+
+TileStone2:
+  extends: Stone
+  image: ":deeper:tiles/TileStone2.png"

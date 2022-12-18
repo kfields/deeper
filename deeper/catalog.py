@@ -2,17 +2,15 @@ import glob
 
 import yaml
 
-from PIL import Image
-import imgui
-
 from arcade.resources import resolve_resource_path
 
-class Description:
+class Blueprint:
     def __init__(self, catalog, name, config):
         self.catalog = catalog
+        self.category = None
         print("config: ", config)
         if 'extends' in config:
-            self.extend(self.catalog.descriptions[config['extends']])
+            self.extend(self.catalog.blueprints[config['extends']])
 
         print("name: ", name)
         self.name = name
@@ -21,8 +19,8 @@ class Description:
             print("config key, value: ", key, value)
             setattr(self, key, value)
 
-    def extend(self, description):
-        for key, value in vars(description).items():
+    def extend(self, blueprint):
+        for key, value in vars(blueprint).items():
             if key.startswith('_'):
                 continue
             setattr(self, key, value)
@@ -31,10 +29,10 @@ class Description:
 class Category:
     def __init__(self, name) -> None:
         self.name = name
-        self.definitions = []
+        self.blueprints = []
 
-    def add_description(self, definition):
-        self.definitions.append(definition)
+    def add_blueprint(self, blueprint):
+        self.blueprints.append(blueprint)
 
 
 class Catalog:
@@ -42,7 +40,7 @@ class Catalog:
         self.categories = []
         self.category_names = []
         self.category_map = {}
-        self.descriptions = {}
+        self.blueprints = {}
         self.build()
 
     def build(self):
@@ -54,28 +52,28 @@ class Catalog:
                 cat = yaml.full_load(file)
                 print(cat)
                 for key, value in cat.items():
-                    self.build_description(key, value)
+                    self.build_blueprint(key, value)
 
-    def build_description(self, key, value):
-        description = Description(self, key, value)
-        print("description: ", description.__dict__)
+    def build_blueprint(self, key, value):
+        blueprint = Blueprint(self, key, value)
+        print("blueprint: ", blueprint.__dict__)
 
         if '_abstract' in value:
-            return self.add_description(key, description)
+            return self.add_blueprint(key, blueprint)
 
         category = None
-        if description.category in self.category_map:
-            category = self.category_map[description.category]
+        if blueprint.category in self.category_map:
+            category = self.category_map[blueprint.category]
         else:
-            category = Category(description.category)
+            category = Category(blueprint.category)
             self.add_category(category)
-        category.add_description(description)
+        category.add_blueprint(blueprint)
 
 
-    def add_description(self, key, value):
-        self.descriptions[key] = value
+    def add_blueprint(self, key, value):
+        self.blueprints[key] = value
 
-    def add_category(self, category):
+    def add_category(self, category: Category):
         self.category_map[category.name] = category
         self.categories.append(category)
         self.category_names.append(category.name)

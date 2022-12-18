@@ -4,35 +4,52 @@ from arcade.resources import resolve_resource_path
 
 from deeper.dimgui import Widget
 
-class DefinitionWidget(Widget):
-    def __init__(self, definition):
+class BlueprintWidget(Widget):
+    def __init__(self, blueprint):
         super().__init__()
-        self.definition = definition
+        self.blueprint = blueprint
         self.selected = False
         self.texture = None
 
     def create(self, gui):
         super().create(gui)
-        with Image.open(resolve_resource_path(self.definition.image)) as image:
+        with Image.open(resolve_resource_path(self.blueprint.image)) as image:
             image.thumbnail((64, 64))
             self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert("RGB").tobytes())
 
     def draw(self):
-        _, selected = imgui.selectable(self.definition.name, self.selected)
+        _, selected = imgui.selectable(self.blueprint.name, self.selected)
         imgui.same_line()
         imgui.image(self.texture.glo, *self.texture.size)
         return selected
 
 class CategoryWidget(Widget):
-    def __init__(self, category):
+    def __init__(self, category, callback):
         super().__init__()
         self.category = category
-        for definition in category.definitions:
-            self.add_child(DefinitionWidget(definition))
+        self.callback = callback
+        self.selection = None
+        for blueprint in category.blueprints:
+            self.add_child(BlueprintWidget(blueprint))
+
+    def show(self):
+        pass
+
+    def hide(self):
+        if self.selection:
+            self.selection.selected = False
+        self.selection = None
 
     def draw(self):
-        imgui.begin_child("entities", 150, -50, border=True)
-        super().draw()
+        imgui.begin_child("entities", -1, -1, border=True)
+        for widget in self.children:
+            selected = widget.draw()
+            if selected:
+                if self.selection:
+                    self.selection.selected = False
+                self.selection = widget
+                widget.selected = selected
+                self.callback(widget.blueprint)
         imgui.end_child()
 
 class CatalogWidget(Widget):
@@ -41,11 +58,11 @@ class CatalogWidget(Widget):
         self.catalog = catalog
         self.callback = callback
         self.category_widgets = []
-        self.current = 0
-        self.selection = None
+        self.current_index = 0
+        self.current = None
 
         for category in catalog.categories:
-            self.category_widgets.append(CategoryWidget(category))
+            self.category_widgets.append(CategoryWidget(category, callable))
 
     def create(self, gui):
         super().create(gui)
@@ -54,17 +71,14 @@ class CatalogWidget(Widget):
 
     def draw(self):
         imgui.begin('Catalog')
-        clicked, self.current = imgui.combo(
-            "Category", self.current, self.catalog.category_names
+        clicked, self.current_index = imgui.combo(
+            "Category", self.current_index, self.catalog.category_names
         )
-        imgui.begin_child("entities", 250, -50, border=True)
-        for widget in self.category_widgets[self.current].children:
-            selected = widget.draw()
-            if selected:
-                if self.selection:
-                    self.selection.selected = False
-                self.selection = widget
-                widget.selected = selected
-                self.callback(widget.definition)
-        imgui.end_child()
+        current = self.category_widgets[self.current_index]
+        if current != self.current:
+            if self.current:
+                self.current.hide()
+            current.show
+        self.current = current
+        self.current.draw()
         imgui.end()
