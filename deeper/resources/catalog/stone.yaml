@@ -21,3 +21,28 @@ TileStone1:
 TileStone2:
   extends: Stone
   image: ":deeper:tiles/TileStone2.png"
+
+TileStone3:
+  extends: Stone
+  extents: [222, 100, 254]
+  image: ":deeper:tiles/TileStone3.png"
+
+TileStone4:
+  extends: Stone
+  extents: [222, 400, 254]
+  image: ":deeper:tiles/TileStone4.png"
+
+TileStone5:
+  extends: Stone
+  extents: [222, 100, 254]
+  image: ":deeper:tiles/TileStone5.png"
+
+TileStone6:
+  extends: Stone
+  image: ":deeper:tiles/TileStone6.png"
+
+TileStone7:
+  extends: Stone
+  description: "Wagon"
+  extents: [222, 400, 600]
+  image: ":deeper:tiles/TileStone7.png"
