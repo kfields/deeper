@@ -14,9 +14,12 @@ class BlockBuilder(Builder):
         #print(blueprint)
         target_space = world.component_for_entity(target, Space)
         target_pos = target_space.position
-        position = glm.vec3(target_pos.x, target_pos.y + CELL_HEIGHT, target_pos.z)
+        target_aabb = target_space.aabb
+
+        extents = blueprint.extents
+        position = glm.vec3(target_pos.x, target_aabb.maxy + extents[1]/2, target_pos.z)
         rotation = glm.vec3()
-        shape = Cuboid(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH)
+        shape = Cuboid(*extents)
         #print("position: ", position)
         block = Space(position, rotation, shape)
         vu = SpriteVu(arcade.Sprite(
