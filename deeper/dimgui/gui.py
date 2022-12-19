@@ -2,6 +2,7 @@ import imgui
 
 from pyglet import clock
 from pyglet.window import key, mouse
+import arcade
 
 from .renderer import GuiRenderer
 from .widget import Widget
@@ -90,6 +91,9 @@ class GuiBase(Widget):
         if button == mouse.MIDDLE:
             self.io.mouse_down[2] = 1
 
+        if self.io.want_capture_mouse:
+            return True
+
     def on_mouse_release(self, x, y, button, modifiers):
         self.io.mouse_pos = x, self.io.display_size.y - y
 
@@ -116,6 +120,7 @@ class Gui(GuiBase):
     def __init__(self, window, children=[], auto_enable=True):
         self.window = window
         super().__init__(children)
+        self.camera = arcade.Camera()
         self.default_font = None
         # Must create or set the context before instantiating the renderer
         imgui.create_context()
@@ -150,6 +155,7 @@ class Gui(GuiBase):
             imgui.push_font(self.default_font)
 
     def finish_render(self):
+        self.camera.use()
         self.draw()
         if self.default_font:
             imgui.pop_font()

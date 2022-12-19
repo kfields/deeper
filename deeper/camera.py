@@ -25,9 +25,6 @@ class WorldCamera:
         self.view_matrix = glm.rotate(
             self.view_matrix, WORLD_ROTATION, WORLD_AXIS_Y
         )
-        scale = 1 / self.zoom
-        self.view_matrix = glm.scale(self.view_matrix, glm.vec3(scale, scale, scale))
-
         self.inv_view = glm.inverse(self.view_matrix)
 
         self.direction = glm.normalize(self.inv_view * glm.vec3(0.0, 0.0, -1.0))
@@ -51,20 +48,26 @@ class WorldCamera:
         )
         #print("focal_point: ", focal_point)
         self.camera.move(focal_point)
-        #self.update_matrices()
+        self.update_matrices()
 
     def mouse_to_ray(self, mx, my):
-        viewportWidth = SCREEN_WIDTH
-        viewPortHeight = SCREEN_HEIGHT
-        glOrthoWidth = SCREEN_WIDTH
-        glOrthoHeight = SCREEN_HEIGHT
+        viewport = self.camera.viewport
+        print("viewport: ", viewport)
+        viewportWidth = viewport[2]
+        viewPortHeight = viewport[3]
+
+        projection = self.camera.projection
+        print("projection: ", projection)
+
+        glOrthoWidth = projection[1]
+        glOrthoHeight = projection[3]
 
         x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
 
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
-        ray_origin = (self.position + camera_right * x + camera_up * y)
+        ray_origin = (self.position + (camera_right * x) + (camera_up * y))
         ray_direction = self.direction
 
         #print("viewport: ", self.camera.viewport)

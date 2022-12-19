@@ -4,14 +4,16 @@ import imgui
 from deeper.dimgui import Widget
 
 class Toolbutton(Widget):
-    def __init__(self, text, font):
+    def __init__(self, text, font, callback):
         super().__init__()
         self.text = text
         self.font = font
+        self.callback = callback
         self.selected = False
 
     def select(self):
         self.selected = True
+        self.callback()
 
     def create(self, gui):
         super().create(gui)

@@ -9,7 +9,7 @@ class World(esper.World):
     def cast_ray(self, ray):
         results = []
         for entity, (space,) in self.get_components(Space):
-            result = space.cast_ray(entity, ray)
+            result = space.cast_ray(ray, entity)
             if result:
                 results.append(result)
         if len(results) == 0:

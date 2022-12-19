@@ -13,6 +13,10 @@ class View(arcade.View):
         self.current_tool: Tool = None
         
     def use_tool(self, tool: Tool):
+        if self.current_tool != tool:
+            if self.current_tool:
+                self.current_tool.disable()
+                        
         self.current_tool = tool
         self.gui.disable()
         tool.enable()
