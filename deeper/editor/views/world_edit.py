@@ -47,10 +47,12 @@ class WorldEditView(View):
         self.pick_tool = PickTool(self, edit_state)
         self.stamp_tool = StampTool(self, edit_state)
 
-        self.use_tool(self.pick_tool)
+        #self.use_tool(self.pick_tool)
+        self.use_tool(self.stamp_tool)
 
-    def on_catalog(self, description):
-        self.edit_state.current_description = description
+    def on_catalog(self, blueprint):
+        #exit()
+        self.edit_state.current_blueprint = blueprint
 
     def create_blocks(self):
         rotation = glm.vec3()

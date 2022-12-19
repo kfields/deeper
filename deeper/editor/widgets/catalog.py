@@ -61,8 +61,8 @@ class CatalogWidget(Widget):
         self.current_index = 0
         self.current = None
 
-        for category in catalog.categories:
-            self.category_widgets.append(CategoryWidget(category, callable))
+        for category in catalog.categories.values():
+            self.category_widgets.append(CategoryWidget(category, callback))
 
     def create(self, gui):
         super().create(gui)

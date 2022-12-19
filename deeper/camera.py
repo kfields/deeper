@@ -49,7 +49,7 @@ class WorldCamera:
         focal_point = self.project(target).xy - glm.vec2(
             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2
         )
-        print("focal_point: ", focal_point)
+        #print("focal_point: ", focal_point)
         self.camera.move(focal_point)
         #self.update_matrices()
 
@@ -67,9 +67,9 @@ class WorldCamera:
         ray_origin = (self.position + camera_right * x + camera_up * y)
         ray_direction = self.direction
 
-        print("viewport: ", self.camera.viewport)
-        print("camera position: ", self.position)
-        print("ray origin: ", ray_origin)
-        print("ray direction: ", ray_direction)
+        #print("viewport: ", self.camera.viewport)
+        #print("camera position: ", self.position)
+        #print("ray origin: ", ray_origin)
+        #print("ray direction: ", ray_direction)
         ray = Ray(*ray_origin, *ray_direction)
         return ray

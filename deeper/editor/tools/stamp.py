@@ -3,6 +3,7 @@ import glm
 import arcade
 from arcade import key
 
+from deeper.architect import Architect
 from .tool import WorldEditTool
 
 class Hovered:
@@ -23,20 +24,21 @@ class StampTool(WorldEditTool):
         self.selected = None
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
-        print("mouse: ", x, y)
+        #print("mouse: ", x, y)
         ray = self.camera.mouse_to_ray(x, y)
         result = self.world.cast_ray(ray)
         print(result)
         if result:
             entity, space, contact = result
-            print("contact: ", contact)
+            #print("contact: ", contact)
             self.hovered = Hovered(entity, space, glm.vec3(contact))
         else:
             self.hovered = None
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
-        if self.hovered:
-            self.selected = Selected(self.hovered.entity, self.hovered.space)
+        if self.hovered and self.edit_state.current_blueprint:
+            #self.selected = Selected(self.hovered.entity, self.hovered.space)
+            Architect.instance.build(self.world, self.hovered.entity, self.edit_state.current_blueprint)
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.DELETE:

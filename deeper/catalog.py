@@ -36,12 +36,23 @@ class Category:
 
 
 class Catalog:
+    _instance = None
+    @classmethod
+    @property
+    def instance(cls):
+        if cls._instance:
+            return cls._instance
+        cls._instance = cls()
+        return cls._instance
+
     def __init__(self) -> None:
-        self.categories = []
+        self.categories = {}
         self.category_names = []
-        self.category_map = {}
         self.blueprints = {}
         self.build()
+
+    def find(self, name):
+        return self.blueprints[name]
 
     def build(self):
         root = resolve_resource_path(":deeper:/catalog")
@@ -62,18 +73,22 @@ class Catalog:
             return self.add_blueprint(key, blueprint)
 
         category = None
-        if blueprint.category in self.category_map:
-            category = self.category_map[blueprint.category]
+        if blueprint.category in self.categories:
+            category = self.categories[blueprint.category]
         else:
             category = Category(blueprint.category)
             self.add_category(category)
         category.add_blueprint(blueprint)
+        self.add_blueprint(key, blueprint)
 
 
     def add_blueprint(self, key, value):
         self.blueprints[key] = value
 
     def add_category(self, category: Category):
-        self.category_map[category.name] = category
-        self.categories.append(category)
+        self.categories[category.name] = category
         self.category_names.append(category.name)
+
+    def dump(self):
+        for blueprint in self.blueprints.values():
+            print(blueprint.__dict__)
