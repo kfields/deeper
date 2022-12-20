@@ -90,14 +90,16 @@ class WorldEditView(View):
             y_distance = CELL_DEPTH * ty
             for tx in range(0, 8):
                 x_distance = CELL_WIDTH * tx
-                position = glm.vec3(x_distance, CELL_HEIGHT, y_distance)
+                #position = glm.vec3(x_distance, CELL_HEIGHT, y_distance)
+                position = glm.vec3(x_distance, 1, y_distance)
                 # print("position: ", position)
                 block = Space(position, rotation, shape)
                 self.space.add_child(block)
                 vu = SpriteVu(
                     arcade.Sprite(
                         # ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
-                        ":deeper:tiles/FloorD3.png",
+                        #":deeper:tiles/FloorD3.png",
+                        ":deeper:tiles/_Grid/GRID.png",
                         scale=1,
                     )
                 )

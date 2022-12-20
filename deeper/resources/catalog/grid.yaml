@@ -1,0 +1,15 @@
+Block:
+  _abstract: true
+  shape: Cuboid
+  extents: [222, 16, 254]
+  components:
+    - component: SpriteVu
+
+Grid:
+  _abstract: true
+  extends: Block
+  category: Grid
+      
+Cell:
+  extends: Grid
+  image: ":deeper:tiles/_Grid/GRID.png"

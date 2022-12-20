@@ -22,6 +22,6 @@ class RenderingProcessor(Processor):
 
         #self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z)
         self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z + vu.position.y)
-        
+
         for vu in self.scene.tile_vu_list:
             self.scene.tile_list.append(vu.sprite)

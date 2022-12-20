@@ -1,0 +1,31 @@
+Block:
+  _abstract: true
+  shape: Cuboid
+  extents: [222, 222, 254]
+  components:
+    - component: SpriteVu
+
+Wall:
+  _abstract: true
+  extends: Block
+  category: Wall
+      
+WallC_Big1:
+  extends: Wall
+  image: ":deeper:tiles/WallC_Big1.png"
+
+WallC_Tile22d3:
+  extends: Wall
+  image: ":deeper:tiles/WallC_Tile22d3.png"
+
+WallC_Tile22d4:
+  extends: Wall
+  image: ":deeper:tiles/WallC_Tile22d4.png"
+
+WallC_Tile22d6:
+  extends: Wall
+  image: ":deeper:tiles/WallC_Tile22d6.png"
+
+WallC_Tile22d7:
+  extends: Wall
+  image: ":deeper:tiles/WallC_Tile22d7.png"
