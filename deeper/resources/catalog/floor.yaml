@@ -1,7 +1,7 @@
 Block:
   _abstract: true
   shape: Cuboid
-  extents: [222, 16, 254]
+  extents: [1, 1, 1]
   components:
     - component: SpriteVu
 
@@ -9,9 +9,11 @@ Floor:
   _abstract: true
   extends: Block
   category: Floor
+  extents: [1, .1, 1]
       
 Floor1:
   extends: Floor
+  extents: [1, .01, 1]
   image: ":deeper:tiles/Floor1.png"
 
 Floor1e:

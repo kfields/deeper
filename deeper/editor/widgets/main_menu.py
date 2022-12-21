@@ -16,7 +16,6 @@ class MainMenu(Widget):
                 clicked_quit, selected_quit = imgui.menu_item(
                     "Quit", 'Cmd+Q', False, True
                 )
-
                 if clicked_quit:
                     exit(1)
                 imgui.end_menu()

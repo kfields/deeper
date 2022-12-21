@@ -15,11 +15,14 @@ CELL_DEPTH = 252
 ROT_X = 57
 ROT_Y = 30
 
+WORLD_UP = glm.vec3(0.0, 1.0, 0.0)
+WORLD_AXIS_X = glm.vec3(1.0, 0.0, 0.0)
+WORLD_AXIS_Y = glm.vec3(0.0, 1.0, 0.0)
+WORLD_AXIS_Z = glm.vec3(0.0, 0.0, 1.0)
 
 class WorldCamera:
     def __init__(self, window, target, zoom=1.0):
         self.window = window
-        self.distance = zoom * 300
         self.target = target
         self.zoom = zoom
 
@@ -28,39 +31,22 @@ class WorldCamera:
         
         self.camera = arcade.Camera(zoom=zoom)
         # self.camera = arcade.Camera()
-        self.update_view_matrix()
-        self.look_at(target, self.distance)
+        self.position = glm.vec3(95, 295, 165)
+        self.zoom_unit = glm.length(self.position) * 10
+        self.distance = zoom * self.zoom_unit
+        self.direction = glm.normalize(self.position * -1)
+        self.orientation = glm.quatLookAt(self.direction, glm.vec3(0, 1, 0))
+        self.view_matrix = glm.lookAt(self.position, glm.vec3(0, 0, 0), glm.vec3(0.0, 1.0, 0.0))
 
-    def update_view_matrix(self):
-        """
-        tx = self.target[0] + self.target[0] / 2
-        ty = self.target[1] + self.target[1] / 2
-        self.view_matrix = glm.translate(glm.mat4(1), glm.vec3(tx, 0, ty))
-        """
-        self.view_matrix = glm.rotate(glm.mat4(1), -ROT_X * degRads, glm.vec3(1, 0, 0))
-        self.view_matrix = glm.rotate(
-            self.view_matrix, -ROT_Y * degRads, glm.vec3(0, 1, 0)
-        )
-        scale = 1 / self.zoom
+        scale = 1/zoom
         self.view_matrix = glm.scale(self.view_matrix, glm.vec3(scale, scale, scale))
         self.inv_view = glm.inverse(self.view_matrix)
+        #self.orientation = glm.quat(self.inv_view)
+        self.proj = glm.ortho(-1, 1, -1, 1, -1.0, 1.0)
+        self.inv_proj = glm.inverse(self.proj)
 
-        self.orientation = glm.rotate(
-            glm.quat(), ROT_X * degRads, glm.vec3(1, 0, 0)
-        )
-        self.orientation = glm.rotate(
-            self.orientation, ROT_Y * degRads, glm.vec3(0, 1, 0)
-        )
-        self.direction = glm.normalize(self.orientation * glm.vec3(0.0, 0.0, 1.0))
-        #self.direction = glm.normalize(self.inv_view * glm.vec3(0.0, 0.0, 1.0))
-        """        
-        self.camera_matrix = glm.rotate(glm.mat4(1), ROT_X * degRads, glm.vec3(1, 0, 0))
-        self.camera_matrix = glm.rotate(
-            self.camera_matrix, ROT_Y * degRads, glm.vec3(0, 1, 0)
-        )
-        #self.direction = self.camera_matrix * glm.vec3(0.0, 0.0, 1.0)
-        self.direction = self.inv_view * glm.vec3(0.0, 0.0, 1.0)
-        """
+        self.look_at(target, self.distance)
+
     def use(self):
         self.camera.use()
 
@@ -83,18 +69,38 @@ class WorldCamera:
         )
         print("focal_point: ", focal_point)
         self.camera.move(focal_point)
-        self.update_view_matrix()
 
-    def mouse_to_ray(self, mouse_nds):
-        ray_clip = glm.vec4(mouse_nds.xy, -1.0, 1.0)
-        ray_eye = self.inv_proj * ray_clip
+    def mouse_to_ray(self, mx, my):
+        viewport = self.camera.viewport
+        print("viewport: ", viewport)
+        viewportWidth = viewport[2]
+        viewPortHeight = viewport[3]
+
+        projection = self.camera.projection
+        print("projection: ", projection)
+
+        glOrthoWidth = projection[1]
+        glOrthoHeight = projection[3]
+
+        x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
+        y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
+
+        #TODO: A little better, but not quite there
+        #inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
+        #mouse_vec = self.inv_world_matrix * glm.vec3(x, y, 0)
+        #x, y = (inv_view * mouse_vec).xy
+        #x, y = mouse_vec.xy
+
+        camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
+        camera_up = glm.normalize(glm.cross(camera_right, self.direction))
+        ray_origin = (self.position + (camera_right * x) + (camera_up * y))
+        ray_direction = self.direction
+
+        print("viewport: ", self.camera.viewport)
         print("camera position: ", self.position)
-        print("camera direction: ", self.direction)
-        print("camera target: ", self.target)
-        print("ray_eye: ", ray_eye)
-        ray_world = glm.normalize((self.inv_view * ray_eye).xyz)
-        print("ray_world: ", ray_world)
-        ray = Ray(*self.position, *ray_world)
+        print("ray origin: ", ray_origin)
+        print("ray direction: ", ray_direction)
+        ray = Ray(*ray_origin, *ray_direction)
         return ray
 
 
@@ -116,6 +122,12 @@ class Deeper(arcade.Window):
 
         self.create_boxes()
         self.create_sprites()
+
+    def cast_ray(self, ray):
+        for space in self.space.children:
+            result = space.cast_ray(ray)
+            if result:
+                return result
 
     def create_boxes(self):
         rotation = glm.vec3()
@@ -159,17 +171,11 @@ class Deeper(arcade.Window):
 
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
-        width, height = self.get_size()
-        # normalize device coordinates
-        x = (2.0 * mouse_x) / width - 1.0
-        y = 1.0 - (2.0 * mouse_y) / height
-        z = 1.0
-        print("nds: ", x, y, z)
-        ray_nds = glm.vec3(x, y, z)
-        ray = self.camera.mouse_to_ray(ray_nds)
-        contact = self.space.cast_ray(ray)
-        print(contact)
-        if contact:
+        ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
+        result = self.cast_ray(ray)
+        if result:
+            entity, space, contact = result
+            print(contact)
             self.selection = Selection(glm.vec3(contact))
         else:
             self.selection = None

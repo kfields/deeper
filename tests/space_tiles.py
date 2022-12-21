@@ -49,7 +49,7 @@ class Deeper(arcade.Window):
     def create_sprites(self):
         sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
-            sprite = arcade.Sprite("../resources/tiles/Floor8a.png")
+            sprite = arcade.Sprite(":deeper:tiles/Floor8a.png")
             model = glm.mat4(1)
             pos = proj * view * model * space.position
             sprite.set_position(pos[0], pos[2])

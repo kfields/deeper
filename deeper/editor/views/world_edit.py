@@ -35,8 +35,8 @@ class WorldEditView(View):
         self.catalog = Catalog()
         self.gui.add_child(CatalogWidget(self.catalog, self.on_catalog))
 
-        self.camera = WorldCamera(self, glm.vec3(), 1)
-        # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*4, 0, CELL_DEPTH*4), 1)
+        self.camera = WorldCamera(self, glm.vec3(), 1.25)
+        #self.camera = WorldCamera(self, glm.vec3(4, 0, 4), 1.25)
         # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
 
         self.tile_vu_list = []
@@ -85,23 +85,15 @@ class WorldEditView(View):
 
     def create_blocks(self):
         rotation = glm.vec3()
-        shape = Cuboid(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH)
+        shape = Cuboid(1, .01, 1)
         for ty in range(0, 8):
-            y_distance = CELL_DEPTH * ty
             for tx in range(0, 8):
-                x_distance = CELL_WIDTH * tx
-                #position = glm.vec3(x_distance, CELL_HEIGHT, y_distance)
-                position = glm.vec3(x_distance, 1, y_distance)
+                position = glm.vec3(tx, 0, ty)
                 # print("position: ", position)
                 block = Space(position, rotation, shape)
                 self.space.add_child(block)
                 vu = SpriteVu(
-                    arcade.Sprite(
-                        # ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
-                        #":deeper:tiles/FloorD3.png",
-                        ":deeper:tiles/_Grid/GRID.png",
-                        scale=1,
-                    )
+                    arcade.Sprite(":deeper:tiles/_Grid/GRID.png",)
                 )
                 self.world.create_entity(block, vu)
 

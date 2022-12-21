@@ -42,7 +42,7 @@ class Deeper(arcade.Window):
     def create_sprites(self):
         sorted_boxes = sorted(self.boxes, key=lambda box: box.center[2])
         for box in sorted_boxes:
-            sprite = arcade.Sprite("../resources/tiles/Floor8a.png")
+            sprite = arcade.Sprite(":deeper:tiles/Floor8a.png")
             center = box.center
             model = glm.mat4(1)
             pos = proj * view * model * glm.vec4(center[0], center[1], center[2], 1)

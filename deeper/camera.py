@@ -8,9 +8,12 @@ from . import Ray
 class WorldCamera:
     def __init__(self, window, target, zoom=1.0):
         self.window = window
-        self.distance = zoom * 1000
+        self.distance = zoom * 10
         self.target = target
         self.zoom = zoom
+
+        self.world_matrix = glm.scale(glm.mat4(1), glm.vec3(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH))
+        self.inv_world_matrix = glm.inverse(self.world_matrix)
 
         self.proj = glm.ortho(-1, 1, -1, 1, -1.0, 1.0)
         self.inv_proj = glm.inverse(self.proj)
@@ -25,6 +28,7 @@ class WorldCamera:
         self.view_matrix = glm.rotate(
             self.view_matrix, WORLD_ROTATION, WORLD_AXIS_Y
         )
+        self.view_matrix = glm.scale(self.view_matrix, glm.vec3(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH))
         self.inv_view = glm.inverse(self.view_matrix)
 
         self.direction = glm.normalize(self.inv_view * glm.vec3(0.0, 0.0, -1.0))
@@ -35,9 +39,11 @@ class WorldCamera:
 
     def project(self, point, model=glm.mat4(1)):
         return glm.vec3(self.proj * self.view_matrix * model * point)
+        #return glm.vec3(self.proj * self.view_matrix * self.world_matrix * model * point)
 
     def unproject(self, point, model=glm.mat4(1)):
         return glm.vec3(self.inv_proj * self.inv_view * model * point)
+        #return glm.vec3(self.inv_proj * self.inv_view * self.inv_world_matrix * model * point)
 
     def look_at(self, target, distance):
         self.target = target
@@ -64,6 +70,12 @@ class WorldCamera:
 
         x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
+
+        #TODO: A little better, but not quite there
+        inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
+        mouse_vec = self.inv_world_matrix * glm.vec3(x, y, 0)
+        #x, y = (inv_view * mouse_vec).xy
+        x, y = mouse_vec.xy
 
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))

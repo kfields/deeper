@@ -22,7 +22,5 @@ class BlockBuilder(Builder):
         shape = Cuboid(*extents)
         #print("position: ", position)
         block = Space(position, rotation, shape)
-        vu = SpriteVu(arcade.Sprite(
-            blueprint.image, scale=1
-        ))
+        vu = SpriteVu(arcade.Sprite(blueprint.image))
         world.create_entity(block, vu)

@@ -141,7 +141,7 @@ class Deeper(arcade.Window):
         sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
             sprite = arcade.Sprite(
-                "../resources/tiles/FloorD3.png", scale=1 / self.camera.zoom
+                ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
             )
             position = self.camera.project(space.position)
             #print("position: ", pos)

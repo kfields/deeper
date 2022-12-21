@@ -151,7 +151,7 @@ class Deeper(arcade.Window):
     def create_sprites(self):
         sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
         for space in sorted_spaces:
-            sprite = arcade.Sprite("../resources/tiles/Floor8a.png", scale=1/self.camera.zoom)
+            sprite = arcade.Sprite(":deeper:tiles/Floor8a.png", scale=1/self.camera.zoom)
             pos = self.camera.project(space.position)
             sprite.set_position(pos[0], pos[2])
             self.tiles.append(sprite)

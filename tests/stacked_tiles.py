@@ -41,9 +41,9 @@ class Deeper(arcade.Window):
             y_distance = 252 * ty
             for tx in range(0, 8):
                 x_distance = 216 * tx
-                self.blocks.append(Block(x_distance, 0, -y_distance, "../resources/tiles/Floor2.png"))
-                #self.blocks.append(Block(x_distance, 64, -y_distance, "../resources/tiles/TileStone5.png"))
-                self.blocks.append(Block(x_distance - 40, 100, -y_distance, "../resources/tiles/Door3/Door30005.png"))
+                self.blocks.append(Block(x_distance, 0, -y_distance, ":deeper:tiles/Floor2.png"))
+                #self.blocks.append(Block(x_distance, 64, -y_distance, ":deeper:tiles/TileStone5.png"))
+                self.blocks.append(Block(x_distance - 40, 100, -y_distance, ":deeper:tiles/Door3/Door30005.png"))
 
     def create_sprite(self, box, path):
         sprite = arcade.Sprite(path)
@@ -56,7 +56,7 @@ class Deeper(arcade.Window):
     def create_sprites(self):
         sorted_blocks = sorted(self.blocks, key=lambda box: box.center[2] + box.center[1])
         for box in sorted_blocks:
-            #self.create_sprite(box, "../resources/tiles/Floor2.png")
+            #self.create_sprite(box, ":deeper:tiles/Floor2.png")
             self.create_sprite(box, box.path)
 
     def on_draw(self):
