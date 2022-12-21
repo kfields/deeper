@@ -20,7 +20,8 @@ class RenderingProcessor(Processor):
             vu.sprite.set_position(*position.xy)
             self.scene.tile_vu_list.append(vu)
 
-        self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z + vu.position.y)
+        #self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z + vu.position.y)
+        self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z)
 
         for vu in self.scene.tile_vu_list:
             self.scene.tile_list.append(vu.sprite)

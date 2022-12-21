@@ -35,7 +35,7 @@ class WorldEditView(View):
         self.catalog = Catalog()
         self.gui.add_child(CatalogWidget(self.catalog, self.on_catalog))
 
-        self.camera = WorldCamera(self, glm.vec3(), 1.25)
+        self.camera = WorldCamera(self, glm.vec3(), 1.5)
         #self.camera = WorldCamera(self, glm.vec3(4, 0, 4), 1.25)
         # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
 
@@ -85,10 +85,10 @@ class WorldEditView(View):
 
     def create_blocks(self):
         rotation = glm.vec3()
-        shape = Cuboid(1, .01, 1)
+        shape = Cuboid(0.875, .01, 1)
         for ty in range(0, 8):
             for tx in range(0, 8):
-                position = glm.vec3(tx, 0, ty)
+                position = glm.vec3(tx * 0.875, 0, ty)
                 # print("position: ", position)
                 block = Space(position, rotation, shape)
                 self.space.add_child(block)

@@ -16,7 +16,7 @@ TileStone0:
 
 TileStone1:
   extends: Stone
-  extents: [.5, 1, 1]
+  extents: [.5, .75, .5]
   image: ":deeper:tiles/TileStone1.png"
 
 TileStone2:

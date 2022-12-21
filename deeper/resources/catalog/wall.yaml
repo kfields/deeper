@@ -25,10 +25,10 @@ WallC_Tile22d4:
 
 WallC_Tile22d6:
   extends: Wall
-  extents: [1, 1.75, 1]
+  extents: [1, 1.5, 1]
   image: ":deeper:tiles/WallC_Tile22d6.png"
 
 WallC_Tile22d7:
   extends: Wall
-  extents: [.5, 1.75, .5]
+  extents: [.5, 1.5, .5]
   image: ":deeper:tiles/WallC_Tile22d7.png"

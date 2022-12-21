@@ -68,19 +68,16 @@ class WorldCamera:
         glOrthoWidth = projection[1]
         glOrthoHeight = projection[3]
 
-        #mx = mx + SCREEN_WIDTH / 2
-        #my = my + SCREEN_HEIGHT / 2
-
         x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
 
         #TODO: A little better, but not quite there
         inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
         mouse_vec = glm.vec3(x, y, 0)
-        mouse_vec = self.inv_world_matrix * inv_view * mouse_vec
-        #mouse_vec = self.inv_world_matrix * mouse_vec
-        #x, y = (inv_view * mouse_vec).xy
-        x, y = mouse_vec.xy * self.zoom
+        #mouse_vec = mouse_vec + glm.vec3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0)
+        mouse_vec = self.inv_world_matrix * mouse_vec
+        x, y = (inv_view * mouse_vec).xy
+        #x, y = mouse_vec.xy
 
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
