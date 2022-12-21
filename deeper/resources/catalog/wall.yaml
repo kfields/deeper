@@ -1,7 +1,7 @@
 Block:
   _abstract: true
   shape: Cuboid
-  extents: [1, 1, 1]
+  extents: [0.875, 1, 1]
   components:
     - component: SpriteVu
 
@@ -12,7 +12,7 @@ Wall:
       
 WallC_Big1:
   extends: Wall
-  extents: [1, .75, 1]
+  extents: [0.875, .75, 1]
   image: ":deeper:tiles/WallC_Big1.png"
 
 WallC_Tile22d3:
@@ -25,10 +25,25 @@ WallC_Tile22d4:
 
 WallC_Tile22d6:
   extends: Wall
-  extents: [1, 1.5, 1]
+  extents: [0.875, 1.5, 1]
   image: ":deeper:tiles/WallC_Tile22d6.png"
 
 WallC_Tile22d7:
   extends: Wall
-  extents: [.5, 1.5, .5]
+  extents: [0.4375, 1.5, .5]
   image: ":deeper:tiles/WallC_Tile22d7.png"
+
+WallC_Tile61:
+  extends: Wall
+  extents: [0.4375, .75, .5]
+  image: ":deeper:tiles/WallC_Tile61.png"
+
+WallC_Tile71bCorner2:
+  extends: Wall
+  extents: [0.875, .75, 1]
+  image: ":deeper:tiles/WallC_Tile71bCorner2.png"
+
+WallH_Tile24a:
+  extends: Wall
+  extents: [0.875, 1.40, .20]
+  image: ":deeper:tiles/WallH_Tile24a.png"

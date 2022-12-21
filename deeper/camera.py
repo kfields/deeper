@@ -10,9 +10,9 @@ class WorldCamera:
         self.window = window
         self.distance = zoom * 10
         self.target = target
-        self.zoom = zoom
+        self._zoom = zoom
 
-        self.world_matrix = glm.scale(glm.mat4(1), glm.vec3(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH))
+        self.world_matrix = glm.scale(glm.mat4(1), glm.vec3(WORLD_SCALE, WORLD_SCALE, WORLD_SCALE))
         self.inv_world_matrix = glm.inverse(self.world_matrix)
 
         self.proj = glm.ortho(-1, 1, -1, 1, -1.0, 1.0)
@@ -23,12 +23,21 @@ class WorldCamera:
         self.update_matrices()
         self.look_at(target, self.distance)
 
+    @property
+    def zoom(self):
+        return self._zoom
+
+    @zoom.setter
+    def zoom(self, zoom):
+        self._zoom = zoom
+        self.camera.zoom = zoom
+
     def update_matrices(self):
         self.view_matrix = glm.rotate(glm.mat4(1), WORLD_TILT, WORLD_AXIS_X)
         self.view_matrix = glm.rotate(
             self.view_matrix, WORLD_ROTATION, WORLD_AXIS_Y
         )
-        self.view_matrix = glm.scale(self.view_matrix, glm.vec3(CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH))
+        self.view_matrix = glm.scale(self.view_matrix, glm.vec3(WORLD_SCALE, WORLD_SCALE, WORLD_SCALE))
         self.inv_view = glm.inverse(self.view_matrix)
 
         self.direction = glm.normalize(self.inv_view * glm.vec3(0.0, 0.0, -1.0))

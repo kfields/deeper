@@ -3,6 +3,7 @@ import glm
 import pyglet
 import arcade
 from arcade.resources import resolve_resource_path
+from arcade import key
 import imgui
 
 from deeper.view import View
@@ -82,6 +83,13 @@ class WorldEditView(View):
     def on_catalog(self, blueprint):
         # exit()
         self.edit_state.current_blueprint = blueprint
+
+    def on_key_press(self, symbol, modifiers):
+        super().on_key_press(symbol, modifiers)
+        if symbol == key.NUM_ADD:
+            self.camera.zoom = self.camera.zoom + .1
+        elif symbol == key.NUM_SUBTRACT:
+            self.camera.zoom = self.camera.zoom - .1
 
     def create_blocks(self):
         rotation = glm.vec3()
