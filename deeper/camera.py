@@ -67,12 +67,12 @@ class WorldCamera:
 
     def mouse_to_ray(self, mx, my):
         viewport = self.camera.viewport
-        print("viewport: ", viewport)
+        #print("viewport: ", viewport)
         viewportWidth = viewport[2]
         viewPortHeight = viewport[3]
 
         projection = self.camera.projection
-        print("projection: ", projection)
+        #print("projection: ", projection)
 
         glOrthoWidth = projection[1]
         glOrthoHeight = projection[3]

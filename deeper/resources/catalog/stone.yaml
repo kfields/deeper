@@ -3,7 +3,7 @@ Block:
   shape: Cuboid
   extents: [0.875, 1, 1]
   components:
-    - component: SpriteVu
+    SpriteVu:
 
 Stone:
   _abstract: true
@@ -13,7 +13,7 @@ Stone:
 TileStone0:
   extends: Stone
   image: ":deeper:tiles/TileStone0.png"
-
+      
 TileStone1:
   extends: Stone
   extents: [0.4375, .75, .5]
@@ -42,8 +42,10 @@ TileStone6:
   extends: Stone
   image: ":deeper:tiles/TileStone6.png"
 
-TileStone7:
+Wagon:
   extends: Stone
-  description: "Wagon"
   extents: [0.875, 1.5, 2]
   image: ":deeper:tiles/TileStone7.png"
+  components:
+    SpriteVu:
+      offset: [0, 0, 0]

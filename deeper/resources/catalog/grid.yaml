@@ -3,7 +3,7 @@ Block:
   shape: Cuboid
   extents: [1, .01, 1]
   components:
-    - component: SpriteVu
+    SpriteVu:
 
 Grid:
   _abstract: true

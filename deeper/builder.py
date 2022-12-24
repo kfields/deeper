@@ -8,5 +8,13 @@ class Builder:
     def __init__(self, name) -> None:
         self.name = name
 
+    def build(self, blueprint, world, target=None):
+        pass
+
+class EntityBuilder(Builder):
+    def build(self, world, blueprint):
+        pass
+
+class ComponentBuilder(Builder):
     def build(self, world, blueprint):
         pass

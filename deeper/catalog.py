@@ -5,25 +5,52 @@ import yaml
 from arcade.resources import resolve_resource_path
 
 class Blueprint:
-    def __init__(self, catalog, name, config):
+    def __init__(self, catalog, name, config, parent=None):
         self.catalog = catalog
-        self.category = None
-        print("config: ", config)
-        if 'extends' in config:
-            self.extend(self.catalog.blueprints[config['extends']])
-
-        print("name: ", name)
         self.name = name
+        self.category = None
+        self.parent = parent
+        self.children = []
+        self._abstract = False
+        self.config = self.configure(config)
 
+    def __repr__(self) -> str:
+        return f"<Blueprint name={self.name}>"
+        #return f"<Blueprint {self.__dict__}>"
+
+    def configure(self, config):
+        print("config: ", config)
+        if not config:
+            return {}
+        #print("config: ", config)
+        if 'extends' in config:
+            config = self.extend(config)
+        
         for key, value in config.items():
-            print("config key, value: ", key, value)
+            #print("config key, value: ", key, value)
             setattr(self, key, value)
 
-    def extend(self, blueprint):
-        for key, value in vars(blueprint).items():
+        if (not self._abstract) and hasattr(self, 'components'):            
+            for key, value in self.components.items():
+                self.add_child(Blueprint(self.catalog, key, value, self))
+
+        return config
+
+    def add_child(self, child):
+        self.children.append(child)
+
+    def extend(self, config):
+        blueprint = self.catalog.blueprints[config['extends']]
+        newconfig = {}
+        for key, value in blueprint.config.items():
             if key.startswith('_'):
                 continue
-            setattr(self, key, value)
+            newconfig[key] = value
+
+        for key, value in config.items():
+            newconfig[key] = value
+
+        return newconfig
 
 
 class Category:
@@ -58,16 +85,16 @@ class Catalog:
         root = resolve_resource_path(":deeper:/catalog")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
-            print(path)
+            #print(path)
             with open(path, 'r') as file:
                 cat = yaml.full_load(file)
-                print(cat)
+                #print(cat)
                 for key, value in cat.items():
                     self.build_blueprint(key, value)
 
     def build_blueprint(self, key, value):
         blueprint = Blueprint(self, key, value)
-        print("blueprint: ", blueprint.__dict__)
+        #print("blueprint: ", blueprint.__dict__)
 
         if '_abstract' in value:
             return self.add_blueprint(key, blueprint)

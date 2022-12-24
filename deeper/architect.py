@@ -29,10 +29,14 @@ class Architect:
         if hasattr(blueprint, 'extends'):
             return self.find(blueprint.catalog.find(blueprint.extends))
 
-    def build(self, world, target, blueprint):
-        print(blueprint.__dict__)
+    def build(self, blueprint, world, target=None):
+        #print(blueprint.__dict__)
         builder = self.find(blueprint)
-        builder.build(world, target, blueprint)
+        components = []
+        for child in blueprint.children:
+            #print(child.__dict__)
+            components.append(self.build(child, world))
+        return builder.build(blueprint, world, target, components)
 
     def create_builders(self):
         builder_classes = self.discover_builders(deeper.builders)

@@ -22,13 +22,13 @@ class PickTool(WorldEditTool):
         self.selected = None
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
-        print("mouse: ", x, y)
+        #print("mouse: ", x, y)
         ray = self.camera.mouse_to_ray(x, y)
         result = self.world.cast_ray(ray)
-        print(result)
+        #print(result)
         if result:
             entity, space, contact = result
-            print("contact: ", contact)
+            #print("contact: ", contact)
             self.hovered = Hovered(entity, space, glm.vec3(contact))
         else:
             self.hovered = None

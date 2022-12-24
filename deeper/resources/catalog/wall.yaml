@@ -3,7 +3,7 @@ Block:
   shape: Cuboid
   extents: [0.875, 1, 1]
   components:
-    - component: SpriteVu
+    SpriteVu:
 
 Wall:
   _abstract: true
@@ -17,10 +17,12 @@ WallC_Big1:
 
 WallC_Tile22d3:
   extends: Wall
+  extents: [0.875, .75, 1]
   image: ":deeper:tiles/WallC_Tile22d3.png"
 
 WallC_Tile22d4:
   extends: Wall
+  extents: [0.4375, .75, .5]
   image: ":deeper:tiles/WallC_Tile22d4.png"
 
 WallC_Tile22d6:

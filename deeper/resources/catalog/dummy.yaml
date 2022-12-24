@@ -1,9 +1,9 @@
 Block:
   _abstract: true
   shape: Cuboid
-  extents: [1, 1, 1]
+  extents: [0.875, 1, 1]
   components:
-    - component: SpriteVu
+    SpriteVu:
 
 Dummy:
   _abstract: true
@@ -40,7 +40,7 @@ DummyDoll7:
 
 DummySkeleton:
   extends: Dummy
-  extents: [222, 300, 254]
+  extents: [0.875, 1.5, 1]
   image: ":deeper:tiles/Dummy/DummySkeleton.png"
 
 DummySkeleton2:

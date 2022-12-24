@@ -3,7 +3,7 @@ Block:
   shape: Cuboid
   extents: [0.875, 1, 1]
   components:
-    - component: SpriteVu
+    SpriteVu:
 
 Floor:
   _abstract: true
@@ -23,3 +23,12 @@ Floor1e:
 Floor1f:
   extends: Floor
   image: ":deeper:tiles/Floor1f.png"
+
+Floor1g:
+  extends: Floor
+  extents: [0.875, .01, 1]
+  image: ":deeper:tiles/Floor1g.png"
+
+Floor2:
+  extends: Floor
+  image: ":deeper:tiles/Floor2.png"
