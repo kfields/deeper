@@ -25,6 +25,13 @@ impl Ray {
             inner: query::Ray { origin, dir },
         }
     }
+    #[getter]
+    fn origin(& self) -> Py<PyTuple> {
+        Python::with_gil(|py| -> Py<PyTuple> {
+            let origin = self.inner.origin;
+            PyTuple::new(py, [origin.x, origin.y, origin.z]).into_py(py)
+        })    
+    }
     fn __repr__(&self) -> String {
         let o = self.inner.origin;
         let d = self.inner.dir;

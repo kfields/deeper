@@ -1,3 +1,2 @@
-#from .game import main
-from .editor import main
+from .app import main
 main()

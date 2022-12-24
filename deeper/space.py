@@ -8,7 +8,6 @@ class Space:
         self.position = position
         self.rotation = rotation
         self.isometry = Isometry(*position, *rotation)
-        #print(self.isometry)
         self.children = []
         self.shape = shape
 

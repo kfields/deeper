@@ -1,6 +1,7 @@
 import imgui
 
 from pyglet import clock
+from pyglet import event
 from pyglet.window import key, mouse
 import arcade
 
@@ -65,7 +66,7 @@ class GuiBase(Widget):
     def on_mouse_motion(self, x, y, dx, dy):
         self.io.mouse_pos = x, self.io.display_size.y - y
         if self.io.want_capture_mouse:
-            return True
+            return event.EVENT_HANDLED
 
     def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
         self.io.mouse_pos = x, self.io.display_size.y - y
@@ -92,7 +93,7 @@ class GuiBase(Widget):
             self.io.mouse_down[2] = 1
 
         if self.io.want_capture_mouse:
-            return True
+            return event.EVENT_HANDLED
 
     def on_mouse_release(self, x, y, button, modifiers):
         self.io.mouse_pos = x, self.io.display_size.y - y

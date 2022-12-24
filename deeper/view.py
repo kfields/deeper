@@ -50,3 +50,8 @@ class View(arcade.View):
         super().on_hide_view()
         self.ui_manager.disable()
         self.gui.disable()
+
+class WorldView(View):
+    def on_update(self, delta_time: float):
+        self.world.process()
+        return super().on_update(delta_time)

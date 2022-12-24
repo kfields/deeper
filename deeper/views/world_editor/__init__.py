@@ -6,7 +6,7 @@ from arcade.resources import resolve_resource_path
 from arcade import key
 import imgui
 
-from deeper.view import View
+from deeper.view import WorldView
 from deeper import Space, Cuboid
 from deeper.constants import *
 from deeper.camera import WorldCamera
@@ -14,16 +14,16 @@ from deeper.vu.sprite_vu import SpriteVu
 from deeper.processor.rendering import RenderingProcessor
 from deeper.catalog import Catalog
 from deeper.dimgui import Gui
-from deeper.editor.widgets import MainMenu, CatalogWidget
+from deeper.widgets import MainMenu, CatalogWidget
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
-from ..tools.pick import PickTool
-from ..tools.stamp import StampTool
+from deeper.tools.pick import PickTool
+from deeper.tools.stamp import StampTool
 
-from ..widgets.toolbar import Toolbar, Toolbutton
+from deeper.widgets.toolbar import Toolbar, Toolbutton
 
 
-class WorldEditView(View):
+class WorldEditor(WorldView):
     def __init__(self, window, edit_state):
         super().__init__(window)
         self.edit_state = edit_state

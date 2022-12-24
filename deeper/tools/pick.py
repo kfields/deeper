@@ -38,7 +38,7 @@ class PickTool(WorldEditTool):
             self.selected = Selected(self.hovered.entity, self.hovered.space)
 
     def on_key_press(self, symbol: int, modifiers: int):
-        if symbol == key.DELETE:
+        if symbol == key.DELETE and self.selected:
             self.world.delete_entity(self.selected.entity)
             if self.hovered.entity == self.selected.entity:
                 self.hovered = None
