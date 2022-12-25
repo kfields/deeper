@@ -1,20 +1,20 @@
 import arcade
 
-from deeper.constants import *
-from deeper.world import World
+from .window import Window
+from .constants import *
+from .world import World
 
-from .state import WorldEditState, BlueprintEditState
-from .views import WorldEditor, BlueprintEditor
+from .state import WorldEditState
+from .views import WorldEditor
 
 
-class Deeper(arcade.Window):
+class Deeper(Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
         self.world = World()
         #self.edit_state = WorldEditState(self.world)
         #view = WorldEditor(self, self.edit_state)
         view = WorldEditor(self, WorldEditState(self.world))
-        #view = BlueprintEditor(self, BlueprintEditState(World()))
         self.show_view(view)
 
     """

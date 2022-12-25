@@ -45,7 +45,7 @@ TileStone6:
 
 Wagon:
   extends: Stone
-  extents: [0.875, 1.5, 2]
+  extents: [0.875, 1.25, 2]
   image: ":deeper:tiles/TileStone7.png"
   components:
     SpriteVu:

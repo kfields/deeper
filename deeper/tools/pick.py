@@ -1,8 +1,8 @@
 import glm
-
 import arcade
 from arcade import key
 from .tool import WorldEditTool
+
 
 class Hovered:
     def __init__(self, entity, space, position):
@@ -34,8 +34,18 @@ class PickTool(WorldEditTool):
             self.hovered = None
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
-        if self.hovered:
-            self.selected = Selected(self.hovered.entity, self.hovered.space)
+        super().on_mouse_press(x, y, button, modifiers)
+        if not self.hovered:
+            return
+        
+        self.selected = Selected(self.hovered.entity, self.hovered.space)
+
+        if self._click_count == 2:
+            from deeper.state import EntityEditState
+            from deeper.views.entity_editor import EntityEditor
+            self.window.show_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.entity)))
+            return
+
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.DELETE and self.selected:
