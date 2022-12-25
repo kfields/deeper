@@ -1,0 +1,21 @@
+Block:
+  _abstract: true
+  shape: Cuboid
+  extents: [0.875, 1, 1]
+
+Animated:
+  _abstract: true
+  extends: Block
+  category: Animated
+  components:
+    AnimatedSpriteVu:
+
+Boiler:
+  extends: Animated
+  extents: [0.875, .75, 1]
+  image: ":deeper:tiles/Boiler1/Boiler10001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Boiler1/Boiler1Frames.png"
+      width: 238
+      height: 252

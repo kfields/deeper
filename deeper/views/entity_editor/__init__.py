@@ -1,19 +1,15 @@
-import math
 import glm
 import pyglet
 import arcade
 from arcade.resources import resolve_resource_path
 from arcade import key
-import imgui
 
 from deeper.view import WorldView
-from deeper import Space, Cuboid
+from deeper import Space
 from deeper.constants import *
 from deeper.camera import WorldCamera
-from deeper.vu.sprite_vu import SpriteVu
 from deeper.processor.rendering import RenderingProcessor
-from deeper.dimgui import Gui
-from deeper.widgets import MainMenu, CatalogWidget
+from deeper.widgets import MainMenu
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
@@ -33,15 +29,12 @@ class EntityEditor(WorldView):
 
         space = self.world.component_for_entity(edit_state.entity, Space)
         pos = space.position
-        #self.camera = WorldCamera(self, glm.vec3(), 1.5)
         self.camera = WorldCamera(self, pos, 1)
-        # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
 
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
         self.space = Space()
 
-        #self.create_blocks()
 
         self.world.add_processor(RenderingProcessor(self))
 

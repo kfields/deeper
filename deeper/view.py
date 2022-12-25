@@ -54,5 +54,5 @@ class View(arcade.View):
 
 class WorldView(View):
     def on_update(self, delta_time: float):
-        self.world.process()
+        self.world.process(delta_time)
         return super().on_update(delta_time)
