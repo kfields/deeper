@@ -9,13 +9,104 @@ Animated:
   category: Animated
   components:
     AnimatedSpriteVu:
+      rate: .5
 
-Boiler:
+AnimBWheel2:
   extends: Animated
-  extents: [0.875, .75, 1]
+  extents: [0.875, 1.25, 1]
+  image: ":deeper:tiles/AnimBWheel2/AnimBWheel20001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/AnimBWheel2/AnimBWheel2Frames.png"
+      width: 330
+      height: 416
+      frames: 90
+
+AnimGnome1:
+  extends: Animated
+  extents: [0.875, 1.25, 1]
+  image: ":deeper:tiles/AnimGnome1/AnimGnome10001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/AnimGnome1/AnimGnome1Frames.png"
+      width: 250
+      height: 382
+      frames: 30
+
+AnimTree1:
+  extends: Animated
+  extents: [0.875, 1.25, 1]
+  image: ":deeper:tiles/AnimTree1/AnimTree10001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/AnimTree1/AnimTree1Frames.png"
+      width: 262
+      height: 309
+      frames: 60
+
+Boiler1:
+  extends: Animated
+  extents: [0.875, 1, 1]
   image: ":deeper:tiles/Boiler1/Boiler10001.png"
   components:
     AnimatedSpriteVu:
       image: ":deeper:tiles/Boiler1/Boiler1Frames.png"
       width: 238
       height: 252
+      frames: 15
+
+BoilerSmoke:
+  extends: Animated
+  extents: [0.875, 2.25, 1]
+  image: ":deeper:tiles/BoilerSmoke/BoilerSmoke0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/BoilerSmoke/BoilerSmokeFrames.png"
+      width: 247
+      height: 498
+      frames: 30
+
+Door:
+  extends: Animated
+  extents: [0.875, 1.40, .20]
+  image: ":deeper:tiles/Door/Door0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Door/DoorFrames.png"
+      width: 237
+      height: 395
+      frames: 15
+
+Door2:
+  extends: Animated
+  extents: [0.875, 1.40, .20]
+  image: ":deeper:tiles/Door2/Door20001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Door2/Door2Frames.png"
+      width: 157
+      height: 322
+      frames: 15
+
+Door2Right:
+  extends: Animated
+  extents: [0.875, 1.40, .20]
+  image: ":deeper:tiles/Door2Right/Door2Right0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Door2Right/Door2RightFrames.png"
+      width: 132
+      height: 376
+      frames: 15
+
+Door3:
+  extends: Animated
+  extents: [0.875, 1.40, .20]
+  image: ":deeper:tiles/Door3/Door30001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Door3/Door3Frames.png"
+      width: 222
+      height: 313
+      frames: 5
+      rate: .1

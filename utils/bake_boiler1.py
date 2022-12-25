@@ -1,10 +1,11 @@
 from pathlib import Path
 from PIL import Image
 
-FRAMES = 15
-
 SPRITE_WIDTH = 238
 SPRITE_HEIGHT = 252
+
+FRAMES = 15
+
 SS_WIDTH = SPRITE_WIDTH * FRAMES
 SS_HEIGHT = SPRITE_HEIGHT
 

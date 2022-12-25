@@ -1,39 +1,34 @@
 import arcade
 
 
-SPRITE_WIDTH = 238
-SPRITE_HEIGHT = 252
-
-FRAMES = 15
-
 class AnimatedSprite(arcade.Sprite):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
+    def __init__(self, filename, image_width, image_height, frames, rate=1):
+        super().__init__(image_width=image_width, image_height=image_height)
+        self.frames = frames
         # Animation timing
         self.time = 1
         self.update_time = 0
-        self.rate = 1/60
+        self.interval = 1/(60*rate)
 
-        # --- Load Textures ---
+        # Load Textures
         texture_coords = []
-        for i in range(FRAMES):
-            texture_coords.append( (i*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT) )
+        for i in range(frames):
+            texture_coords.append( (i*image_width, 0, image_width, image_height) )
 
-        #self.walk_textures = arcade.load_textures(asset('sprites/butterflies.png'), texture_coords)
-        self.textures = arcade.load_textures(args[0], texture_coords)
+        self.textures = arcade.load_textures(filename, texture_coords)
         self.texture = self.textures[0]
 
     def update_animation(self, delta_time: float = 1/60):
         self.time += delta_time
 
-        if self.update_time > self.time:
+        if self.time < self.update_time:
             return
-        self.update_time = self.time + self.rate
+
+        self.update_time = self.time + self.interval
 
         self.cur_texture_index += 1
 
-        if self.cur_texture_index > FRAMES-1:
+        if self.cur_texture_index > self.frames-1:
             self.cur_texture_index = 0
 
         self.texture = self.textures[self.cur_texture_index]

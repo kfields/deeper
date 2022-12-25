@@ -22,11 +22,13 @@ class AnimatedSpriteVuBuilder(Builder):
         super().__init__("AnimatedSpriteVu")
 
     def build(self, blueprint, world, target=None, components=[]):
-        print("blueprint.__dict__", blueprint.parent.__dict__)
+        print("blueprint.__dict__", blueprint.__dict__)
         return AnimatedSpriteVu(
             AnimatedSprite(
                 blueprint.image,
                 image_width=blueprint.width,
                 image_height=blueprint.height,
+                frames=blueprint.frames,
+                rate=blueprint.rate
             )
         )

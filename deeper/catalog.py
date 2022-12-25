@@ -1,8 +1,49 @@
+import copy
 import glob
 
 import yaml
 
 from arcade.resources import resolve_resource_path
+from  . import mergedeep
+
+"""
+from functools import reduce
+
+def merge(a, b, path=None):
+    "merges b into a"
+    if path is None: path = []
+    for key in b:
+        if key.startswith('_'):
+            continue
+        if key in a:
+            if isinstance(a[key], dict) and isinstance(b[key], dict):
+                merge(a[key], b[key], path + [str(key)])
+            elif a[key] == b[key]:
+                pass # same leaf value
+            else:
+                #raise Exception('Conflict at %s' % '.'.join(path + [str(key)]))
+                a[key] = b[key]
+        else:
+            a[key] = b[key]
+    return a
+"""
+
+"""
+def merge(source, destination):
+    for key, value in source.items():
+        if key.startswith('_'):
+            continue
+        if isinstance(value, dict):
+            # get node or create one
+            node = destination.setdefault(key, {})
+            if not node:
+                node = {}
+            merge(value, node)
+        else:
+            destination[key] = value
+
+    return destination
+"""
 
 class Blueprint:
     def __init__(self, catalog, name, config, parent=None):
@@ -30,7 +71,8 @@ class Blueprint:
             #print("config key, value: ", key, value)
             setattr(self, key, value)
 
-        if (not self._abstract) and hasattr(self, 'components'):            
+        #if (not self._abstract) and hasattr(self, 'components'):            
+        if hasattr(self, 'components'):            
             for key, value in self.components.items():
                 self.add_child(Blueprint(self.catalog, key, value, self))
 
@@ -41,6 +83,7 @@ class Blueprint:
 
     def extend(self, config):
         blueprint = self.catalog.blueprints[config['extends']]
+        """
         newconfig = {}
         for key, value in blueprint.config.items():
             if key.startswith('_'):
@@ -49,6 +92,15 @@ class Blueprint:
 
         for key, value in config.items():
             newconfig[key] = value
+        """
+        #newconfig = copy.deepcopy(blueprint.config)
+        #print('newconfig:', newconfig)
+        #newconfig = merge(config, newconfig)
+        #newconfig = merge({}, config, blueprint.config)
+        newconfig = copy.deepcopy(blueprint.config)
+        #newconfig = mergedeep.merge(newconfig, config, strategy=mergedeep.Strategy.TYPESAFE_REPLACE)
+        newconfig = mergedeep.merge(newconfig, config, strategy=mergedeep.Strategy.REPLACE)
+        print('newconfig:', newconfig)
 
         return newconfig
 
