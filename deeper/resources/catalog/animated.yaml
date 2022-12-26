@@ -90,7 +90,7 @@ Door2:
 
 Door2Right:
   extends: Animated
-  extents: [0.875, 1.40, .20]
+  extents: [.15, 1.40, 1]
   image: ":deeper:tiles/Door2Right/Door2Right0001.png"
   components:
     AnimatedSpriteVu:
@@ -110,3 +110,164 @@ Door3:
       height: 313
       frames: 5
       rate: .1
+
+Door3Right:
+  extends: Animated
+  extents: [.20, 1.40, 1]
+  image: ":deeper:tiles/Door3Right/Door3Right0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Door3Right/Door3RightFrames.png"
+      width: 263
+      height: 339
+      frames: 5
+      rate: .1
+
+FireSmoke:
+  extends: Animated
+  extents: [0.875, 2.25, 1]
+  image: ":deeper:tiles/FireSmoke/FireSmoke0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/FireSmoke/FireSmokeFrames.png"
+      width: 330
+      height: 804
+      frames: 30
+
+FireSparks:
+  extends: Animated
+  extents: [0.875, 1.40, 1]
+  image: ":deeper:tiles/FireSparks/FireSparks0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/FireSparks/FireSparksFrames.png"
+      width: 152
+      height: 340
+      frames: 40
+
+FireTorch:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/FireTorch/FireTorch0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/FireTorch/FireTorchFrames.png"
+      width: 296
+      height: 320
+      frames: 8
+
+FireTorchSmall:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/FireTorchSmall/FireTorchSmall0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/FireTorchSmall/FireTorchSmallFrames.png"
+      width: 192
+      height: 234
+      frames: 8
+
+FireTorchSmall4:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/FireTorchSmall4/FireTorchSmall40001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/FireTorchSmall4/FireTorchSmall4Frames.png"
+      width: 152
+      height: 126
+      frames: 8
+
+FireTorchSmall5:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/FireTorchSmall5/FireTorchSmall50001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/FireTorchSmall5/FireTorchSmall5Frames.png"
+      width: 85
+      height: 121
+      frames: 8
+
+Lever1:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/Lever1/Lever10001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Lever1/Lever1Frames.png"
+      width: 227
+      height: 234
+      frames: 10
+      rate: .25
+
+Lever2:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/Lever2/Lever20001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Lever2/Lever2Frames.png"
+      width: 243
+      height: 325
+      frames: 10
+      rate: .25
+
+Lever3:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/Lever3/Lever30001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Lever3/Lever3Frames.png"
+      width: 243
+      height: 300
+      frames: 10
+      rate: .25
+
+Lever4:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/Lever4/Lever40001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Lever4/Lever4Frames.png"
+      width: 253
+      height: 328
+      frames: 10
+      rate: .25
+
+Lever5:
+  extends: Animated
+  extents: [0.875, 1, 1]
+  image: ":deeper:tiles/Lever5/Lever50001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Lever5/Lever5Frames.png"
+      width: 188
+      height: 386
+      frames: 10
+      rate: .25
+
+MushroomSparks:
+  extends: Animated
+  extents: [0.875, 1.40, 1]
+  image: ":deeper:tiles/MushroomSparks/MushroomSparks0001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/MushroomSparks/MushroomSparksFrames.png"
+      width: 133
+      height: 212
+      frames: 34
+
+Spike1:
+  extends: Animated
+  extents: [0.4375, .5, .5]
+  image: ":deeper:tiles/Spike1/Spike10001.png"
+  components:
+    AnimatedSpriteVu:
+      image: ":deeper:tiles/Spike1/Spike1Frames.png"
+      width: 135
+      height: 158
+      frames: 12
+      rate: .25
