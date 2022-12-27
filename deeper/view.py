@@ -53,6 +53,29 @@ class View(arcade.View):
         self.gui.disable()
 
 class WorldView(View):
+    def __init__(self, window, world):
+        super().__init__(window)
+        self.world = world
+        self.processors = []
+
+    def add_processor(self, processor):
+        self.processors.append(processor)
+        #self.world.add_processor(processor)
+
+    def remove_processor(self, processor):
+        self.processors.remove(processor)
+        #self.world.remove_processor(processor)
+
+    def on_show_view(self):
+        super().on_show_view()
+        for processor in self.processors:
+            self.world.add_processor(processor)
+
+    def on_hide_view(self):
+        super().on_hide_view()
+        for processor in self.processors:
+            self.world.remove_processor(processor.__class__) #TODO: Weird, why doesn't esper remove by instance?
+
     def on_update(self, delta_time: float):
         self.world.process(delta_time)
         return super().on_update(delta_time)

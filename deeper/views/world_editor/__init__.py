@@ -25,9 +25,8 @@ from deeper.widgets.toolbar import Toolbar, Toolbutton
 
 class WorldEditor(WorldView):
     def __init__(self, window, edit_state):
-        super().__init__(window)
+        super().__init__(window, edit_state.world)
         self.edit_state = edit_state
-        self.world = edit_state.world
 
         self.gui.default_font = self.gui.load_font(
             resolve_resource_path(f":deeper:fonts/Roboto-Regular.ttf"), 16
@@ -46,7 +45,8 @@ class WorldEditor(WorldView):
 
         self.create_blocks()
 
-        self.world.add_processor(RenderingProcessor(self))
+        #self.world.add_processor(RenderingProcessor(self))
+        self.add_processor(RenderingProcessor(self))
 
         self.pick_tool = PickTool(self, edit_state)
         self.stamp_tool = StampTool(self, edit_state)

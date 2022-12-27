@@ -19,9 +19,8 @@ from deeper.widgets.entity_window import EntityWindow
 
 class EntityEditor(WorldView):
     def __init__(self, window, edit_state):
-        super().__init__(window)
+        super().__init__(window, edit_state.world)
         self.edit_state = edit_state
-        self.world = edit_state.world
 
         self.gui.default_font = self.gui.load_font(
             resolve_resource_path(f":deeper:fonts/Roboto-Regular.ttf"), 16
@@ -38,7 +37,8 @@ class EntityEditor(WorldView):
         self.space = Space()
 
 
-        self.world.add_processor(RenderingProcessor(self))
+        #self.world.add_processor(RenderingProcessor(self))
+        self.add_processor(RenderingProcessor(self))
 
         self.pick_tool = PickTool(self, edit_state)
 
