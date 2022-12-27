@@ -10,21 +10,15 @@ from ..builder import Builder
 
 class SpriteVuBuilder(Builder):
     key = 'SpriteVu'
-    #def __init__(self) -> None:
-    #    super().__init__("SpriteVu")
 
     def build(self, blueprint, world, target=None, components=[]):
-        #print("blueprint.__dict__", blueprint.parent.__dict__)
         return SpriteVu(arcade.Sprite(blueprint.parent.image))
 
 
 class AnimatedSpriteVuBuilder(Builder):
     key = 'AnimatedSpriteVu'
-    #def __init__(self) -> None:
-    #    super().__init__("AnimatedSpriteVu")
 
     def build(self, blueprint, world, target=None, components=[]):
-        #print("blueprint.__dict__", blueprint.__dict__)
         return AnimatedSpriteVu(
             AnimatedSprite(
                 blueprint.image,
