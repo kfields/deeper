@@ -5,11 +5,22 @@ from deeper import Isometry, Shape
 
 class Space:
     def __init__(self, position=glm.vec3(), rotation=glm.vec3(), shape=None) -> None:
-        self.position = position
+        self._position = position
         self.rotation = rotation
         self.isometry = Isometry(*position, *rotation)
         self.children = []
         self.shape = shape
+
+    @property
+    def position(self):
+        return self._position
+
+    @position.setter
+    def position(self, position):
+        self._position = position
+        self.isometry = Isometry(*position, *self.rotation)
+        if self.shape:
+            self.aabb = self.shape.aabb(self.isometry)
 
     @property
     def shape(self):

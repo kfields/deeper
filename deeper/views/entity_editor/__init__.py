@@ -88,23 +88,3 @@ class EntityEditor(WorldView):
     def draw_aabbs(self):
         for space in self.space.children:
             self.draw_aabb(space)
-
-    def draw_aabb(self, space):
-        aabb = space.aabb
-        bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
-        bbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz))
-        fbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz))
-        fbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz))
-
-        btl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz))
-        btr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz))
-        ftl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz))
-        ftr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz))
-
-        arcade.draw_line(bbl.x, bbl.y, bbr.x, bbr.y, arcade.color.YELLOW)
-        # arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
-        arcade.draw_line(bbl.x, bbl.y, fbl.x, fbl.y, arcade.color.YELLOW)
-
-        arcade.draw_line(btl.x, btl.y, btr.x, btr.y, arcade.color.YELLOW)
-        # arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, arcade.color.YELLOW)
-        arcade.draw_line(btl.x, btl.y, ftl.x, ftl.y, arcade.color.YELLOW)
