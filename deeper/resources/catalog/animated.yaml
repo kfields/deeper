@@ -13,7 +13,7 @@ Animated:
 
 AnimBWheel2:
   extends: Animated
-  extents: [0.875, 1.25, 1]
+  extents: [0.875, 1.5, 1]
   image: ":deeper:tiles/AnimBWheel2/AnimBWheel20001.png"
   components:
     AnimatedSpriteVu:

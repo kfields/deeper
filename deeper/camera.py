@@ -13,9 +13,6 @@ class WorldCamera:
 
         self.world_matrix = glm.scale(glm.mat4(1), glm.vec3(WORLD_SCALE, WORLD_SCALE, WORLD_SCALE))
         self.inv_world_matrix = glm.inverse(self.world_matrix)
-
-        self.proj = glm.ortho(-1, 1, -1, 1, -1.0, 1.0)
-        self.inv_proj = glm.inverse(self.proj)
         
         self.camera = arcade.Camera(zoom=zoom)
 
@@ -45,13 +42,11 @@ class WorldCamera:
     def use(self):
         self.camera.use()
 
-    def project(self, point, model=glm.mat4(1)):
-        return glm.vec3(self.proj * self.view_matrix * model * point)
-        #return glm.vec3(self.proj * self.view_matrix * self.world_matrix * model * point)
+    def project(self, point):
+        return glm.vec3(self.view_matrix * point)
 
-    def unproject(self, point, model=glm.mat4(1)):
-        return glm.vec3(self.inv_proj * self.inv_view * model * point)
-        #return glm.vec3(self.inv_proj * self.inv_view * self.inv_world_matrix * model * point)
+    def unproject(self, point):
+        return glm.vec3(self.inv_view * point)
 
     def look_at(self, target, distance):
         self.target = target
@@ -76,18 +71,12 @@ class WorldCamera:
         glOrthoWidth = projection[1]
         glOrthoHeight = projection[3]
 
-        #mx = mx + SCREEN_WIDTH / 2
-        #my = my + SCREEN_HEIGHT / 2
-
         x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
 
-        #TODO: A little better, but not quite there
         inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
         mouse_vec = glm.vec3(x, y, 0)
         mouse_vec = self.inv_world_matrix * inv_view * mouse_vec
-        #mouse_vec = self.inv_world_matrix * mouse_vec
-        #x, y = (inv_view * mouse_vec).xy
         x, y = mouse_vec.xy * self.zoom
 
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))

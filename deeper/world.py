@@ -1,3 +1,4 @@
+import glm
 import esper
 
 from . import Space
@@ -17,5 +18,6 @@ class World(esper.World):
         if len(results) == 1:
             return results[0]
 
-        sorted_results = sorted(results, key=lambda result: -(result[1].position.y))
+        origin = ray.origin
+        sorted_results = sorted(results, key=lambda result: glm.distance(result[1].position, origin))
         return sorted_results[0]

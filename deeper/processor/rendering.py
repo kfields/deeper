@@ -30,8 +30,8 @@ class RenderingProcessor(Processor):
             vu.sprite.update_animation(delta_time)
             self.scene.tile_vu_list.append(vu)
 
-        #self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z + vu.position.y)
-        self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z)
+        #self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: vu.position.z + vu.position.y)
+        self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: vu.position.z)
         #self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: vu.aabb.maxz)
 
         for vu in self.scene.tile_vu_list:
