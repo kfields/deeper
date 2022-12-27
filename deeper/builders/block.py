@@ -29,7 +29,7 @@ class BlockBuilder(Builder):
         block = Space(position, rotation, shape)
         #vu = SpriteVu(arcade.Sprite(blueprint.image))
         #world.create_entity(block, vu)
-        print("components: ", components)
+        #print("components: ", components)
         #exit(1)
         world.create_entity(block, *components)
 

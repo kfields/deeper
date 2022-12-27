@@ -1,4 +1,3 @@
-import math
 import arcade
 import glm
 

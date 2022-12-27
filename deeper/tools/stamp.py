@@ -27,7 +27,7 @@ class StampTool(WorldEditTool):
         #print("mouse: ", x, y)
         ray = self.camera.mouse_to_ray(x, y)
         result = self.world.cast_ray(ray)
-        print(result)
+        #print(result)
         if result:
             entity, space, contact = result
             #print("contact: ", contact)

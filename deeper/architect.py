@@ -3,6 +3,8 @@ from inspect import isclass
 from types import ModuleType
 from typing import Coroutine, Dict, Iterable, List, Optional, Tuple, Type, Union, cast
 
+from loguru import logger
+
 from .builder import Builder
 import deeper.builders
 
@@ -40,7 +42,7 @@ class Architect:
 
     def create_builders(self):
         builder_classes = self.discover_builders(deeper.builders)
-        print(builder_classes)
+        #print(builder_classes)
         for cls in builder_classes:
             self.add_builder(cls())
 
@@ -65,6 +67,6 @@ class Architect:
             if isclass(attr) and issubclass(attr, Builder) and not attr._meta.abstract:
                 discovered_builders.append(attr)
         if not discovered_builders:
-            print(f'Module "{builders_path}" has no builders')
+            logger.debug(f'Module "{builders_path}" has no builders')
         return discovered_builders
 

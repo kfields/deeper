@@ -22,7 +22,7 @@ class Blueprint:
         # return f"<Blueprint {self.__dict__}>"
 
     def configure(self, config):
-        print("config: ", config)
+        #print("config: ", config)
         if not config:
             return {}
         # print("config: ", config)
@@ -60,7 +60,7 @@ class Blueprint:
         newconfig = mergedeep.merge(
             newconfig, config, strategy=mergedeep.Strategy.REPLACE
         )
-        print("newconfig:", newconfig)
+        #print("newconfig:", newconfig)
 
         return newconfig
 

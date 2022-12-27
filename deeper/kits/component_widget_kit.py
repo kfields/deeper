@@ -3,7 +3,8 @@ from inspect import isclass
 from types import ModuleType
 from typing import Coroutine, Dict, Iterable, List, Optional, Tuple, Type, Union, cast
 
-#from deeper.widgets.component.component_widget import ComponentWidgetBuilder
+from loguru import logger
+
 from deeper.builder import Builder
 import deeper.widgets.component
 
@@ -38,7 +39,7 @@ class ComponentWidgetKit:
 
     def create_builders(self):
         builder_classes = self.discover_builders(deeper.widgets.component)
-        print(builder_classes)
+        #print(builder_classes)
         for cls in builder_classes:
             self.add_builder(cls())
 
@@ -63,6 +64,6 @@ class ComponentWidgetKit:
             if isclass(attr) and issubclass(attr, Builder) and not attr._meta.abstract:
                 discovered_builders.append(attr)
         if not discovered_builders:
-            print(f'Module "{builders_path}" has no builders')
+            logger.debug(f'Module "{builders_path}" has no builders')
         return discovered_builders
 

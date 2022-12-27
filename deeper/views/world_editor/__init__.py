@@ -21,7 +21,7 @@ from deeper.tools.pick import PickTool
 from deeper.tools.stamp import StampTool
 
 from deeper.widgets.toolbar import Toolbar, Toolbutton
-
+from deeper.widgets.camera_window import CameraWindow
 
 class WorldEditor(WorldView):
     def __init__(self, window, edit_state):
@@ -36,6 +36,7 @@ class WorldEditor(WorldView):
         self.gui.add_child(CatalogWidget(self.catalog, self.on_catalog))
 
         self.camera = WorldCamera(self, glm.vec3(), 1.5)
+        self.gui.add_child(CameraWindow(self.camera))
         #self.camera = WorldCamera(self, glm.vec3(4, 0, 4), 1.25)
         # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
 
@@ -45,7 +46,6 @@ class WorldEditor(WorldView):
 
         self.create_blocks()
 
-        #self.world.add_processor(RenderingProcessor(self))
         self.add_processor(RenderingProcessor(self))
 
         self.pick_tool = PickTool(self, edit_state)
