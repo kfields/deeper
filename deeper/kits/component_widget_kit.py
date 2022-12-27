@@ -3,10 +3,11 @@ from inspect import isclass
 from types import ModuleType
 from typing import Coroutine, Dict, Iterable, List, Optional, Tuple, Type, Union, cast
 
-from .builder import Builder
-import deeper.builders
+#from deeper.widgets.component.component_widget import ComponentWidgetBuilder
+from deeper.builder import Builder
+import deeper.widgets.component
 
-class Architect:
+class ComponentWidgetKit:
     def __init__(self) -> None:
         self.builders = {}
         self.create_builders()
@@ -23,23 +24,20 @@ class Architect:
     def add_builder(self, builder):
         self.builders[builder.key] = builder
 
-    def find(self, blueprint):
-        if blueprint.name in self.builders:
-            return self.builders[blueprint.name]
+    def find(self, component):
+        if component.__class__ in self.builders:
+            return self.builders[component.__class__]
+        """
         if hasattr(blueprint, 'extends'):
             return self.find(blueprint.catalog.find(blueprint.extends))
-
-    def build(self, blueprint, world, target=None):
+        """
+    def build(self, component):
         #print(blueprint.__dict__)
-        builder = self.find(blueprint)
-        components = []
-        for child in blueprint.children:
-            #print(child.__dict__)
-            components.append(self.build(child, world))
-        return builder.build(blueprint, world, target, components)
+        builder = self.find(component)
+        return builder.build(component)
 
     def create_builders(self):
-        builder_classes = self.discover_builders(deeper.builders)
+        builder_classes = self.discover_builders(deeper.widgets.component)
         print(builder_classes)
         for cls in builder_classes:
             self.add_builder(cls())

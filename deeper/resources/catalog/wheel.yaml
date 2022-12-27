@@ -1,0 +1,22 @@
+Block:
+  _abstract: true
+  shape: Cuboid
+  extents: [0.875, 1, 1]
+  components:
+    SpriteVu:
+
+Wheel:
+  _abstract: true
+  extends: Block
+  category: Wheel
+
+Wheel1:
+  extends: Wheel
+  extents: [0.875, 1.25, 1]
+  image: ":deeper:tiles/wheel.png"
+
+Wheels:
+  extends: Wheel
+  extents: [1.5, .75, 1.5]
+  image: ":deeper:tiles/wheels.png"
+

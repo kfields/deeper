@@ -163,3 +163,8 @@ class Gui(GuiBase):
         imgui.end_frame()
         imgui.render()
         self.renderer.render(imgui.get_draw_data())
+
+class ViewGui(Gui):
+    def __init__(self, view, children=[], auto_enable=True):
+        self.view = view
+        super().__init__(view.window, children, auto_enable)

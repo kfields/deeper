@@ -15,7 +15,7 @@ from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 from deeper.tools.pick import PickTool
 
 from deeper.widgets.toolbar import Toolbar, Toolbutton
-
+from deeper.widgets.entity_window import EntityWindow
 
 class EntityEditor(WorldView):
     def __init__(self, window, edit_state):
@@ -26,6 +26,8 @@ class EntityEditor(WorldView):
         self.gui.default_font = self.gui.load_font(
             resolve_resource_path(f":deeper:fonts/Roboto-Regular.ttf"), 16
         )
+
+        self.gui.add_child(EntityWindow(self.world, edit_state.entity))
 
         space = self.world.component_for_entity(edit_state.entity, Space)
         pos = space.position

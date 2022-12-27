@@ -9,8 +9,9 @@ from ..builder import Builder
 
 
 class SpriteVuBuilder(Builder):
-    def __init__(self) -> None:
-        super().__init__("SpriteVu")
+    key = 'SpriteVu'
+    #def __init__(self) -> None:
+    #    super().__init__("SpriteVu")
 
     def build(self, blueprint, world, target=None, components=[]):
         print("blueprint.__dict__", blueprint.parent.__dict__)
@@ -18,8 +19,9 @@ class SpriteVuBuilder(Builder):
 
 
 class AnimatedSpriteVuBuilder(Builder):
-    def __init__(self) -> None:
-        super().__init__("AnimatedSpriteVu")
+    key = 'AnimatedSpriteVu'
+    #def __init__(self) -> None:
+    #    super().__init__("AnimatedSpriteVu")
 
     def build(self, blueprint, world, target=None, components=[]):
         print("blueprint.__dict__", blueprint.__dict__)

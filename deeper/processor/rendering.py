@@ -16,6 +16,7 @@ class RenderingProcessor(Processor):
         for ent, (space, vu) in self.world.get_components(Space, SpriteVu):
             position = self.scene.camera.project(space.position)
             vu.position = position
+            vu.aabb = space.aabb
             #print("position: ", position)
             vu.sprite.set_position(*position.xy)
             self.scene.tile_vu_list.append(vu)
@@ -23,6 +24,7 @@ class RenderingProcessor(Processor):
         for ent, (space, vu) in self.world.get_components(Space, AnimatedSpriteVu):
             position = self.scene.camera.project(space.position)
             vu.position = position
+            vu.aabb = space.aabb
             #print("position: ", position)
             vu.sprite.set_position(*position.xy)
             vu.sprite.update_animation(delta_time)
@@ -30,6 +32,7 @@ class RenderingProcessor(Processor):
 
         #self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z + vu.position.y)
         self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: -vu.position.z)
+        #self.scene.tile_vu_list = sorted(self.scene.tile_vu_list, key=lambda vu: vu.aabb.maxz)
 
         for vu in self.scene.tile_vu_list:
             self.scene.tile_list.append(vu.sprite)

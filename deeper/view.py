@@ -1,7 +1,7 @@
 import arcade
 from arcade.gui import UIManager
 
-from .dimgui import Gui
+from .dimgui import ViewGui
 
 from .tool import Tool
 
@@ -9,7 +9,7 @@ class View(arcade.View):
     def __init__(self, window=None):
         super().__init__(window)
         self.ui_manager = UIManager(window)
-        self.gui = Gui(window, auto_enable=False)
+        self.gui = ViewGui(self, auto_enable=False)
         self.current_tool: Tool = None
         
     def use_tool(self, tool: Tool):

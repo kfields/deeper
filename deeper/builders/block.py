@@ -7,8 +7,9 @@ from deeper import Space, Cuboid
 from ..builder import Builder
 
 class BlockBuilder(Builder):
-    def __init__(self) -> None:
-        super().__init__('Block')
+    #def __init__(self) -> None:
+    #    super().__init__('Block')
+    key = 'Block'
 
     def build(self, blueprint, world, target=None, components=[]):
         #print(blueprint)
