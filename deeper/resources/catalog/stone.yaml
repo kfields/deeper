@@ -48,4 +48,4 @@ Wagon:
   image: ":deeper:tiles/TileStone7.png"
   components:
     SpriteVu:
-      offset: [0, 0, 0]
+      offset: [0, 0]

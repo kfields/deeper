@@ -1,7 +1,7 @@
 import arcade
 
 from deeper import Block
-from deeper.vu.sprite_vu import SpriteVu, AnimatedSpriteVu
+from deeper.components.sprite_vu import SpriteVu, AnimatedSpriteVu
 from . import Processor
 
 class RenderingProcessor(Processor):

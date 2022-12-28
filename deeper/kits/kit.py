@@ -5,10 +5,12 @@ from typing import Coroutine, Dict, Iterable, List, Optional, Tuple, Type, Union
 
 from loguru import logger
 
-from .builder import Builder
-import deeper.builders
+from deeper.builder import Builder
 
-class Architect:
+class Kit:
+    builder_type = Builder
+    builders_path = None
+    
     def __init__(self) -> None:
         self.builders = {}
         self.create_builders()
@@ -25,23 +27,8 @@ class Architect:
     def add_builder(self, builder):
         self.builders[builder.key] = builder
 
-    def find(self, blueprint):
-        if blueprint.name in self.builders:
-            return self.builders[blueprint.name]
-        if hasattr(blueprint, 'extends'):
-            return self.find(blueprint.catalog.find(blueprint.extends))
-
-    def build(self, blueprint, world, target=None):
-        #print(blueprint.__dict__)
-        builder = self.find(blueprint)
-        components = []
-        for child in blueprint.children:
-            #print(child.__dict__)
-            components.append(self.build(child, world))
-        return builder.build(blueprint, world, target, components)
-
     def create_builders(self):
-        builder_classes = self.discover_builders(deeper.builders)
+        builder_classes = self.discover_builders(self.builders_path)
         #print(builder_classes)
         for cls in builder_classes:
             self.add_builder(cls())
@@ -64,7 +51,7 @@ class Architect:
         if not possible_builders:
             possible_builders = [getattr(module, attr_name) for attr_name in dir(module)]
         for attr in possible_builders:
-            if isclass(attr) and issubclass(attr, Builder) and not attr._meta.abstract:
+            if isclass(attr) and issubclass(attr, self.builder_type) and not attr._meta.abstract:
                 discovered_builders.append(attr)
         if not discovered_builders:
             logger.debug(f'Module "{builders_path}" has no builders')

@@ -1,19 +1,29 @@
 import arcade
 
 from deeper.constants import *
-from deeper.vu.sprite_vu import SpriteVu, AnimatedSpriteVu
 from deeper.sprite import AnimatedSprite
-
+from .vu import Vu
 from ..builder import Builder
 
+class SpriteVu(Vu):
+    sprite: arcade.Sprite = None
+    def __init__(self, sprite: arcade.Sprite, offset=DEFAULT_VEC2) -> None:
+        self.sprite = sprite
+        self.offset = offset
 
 class SpriteVuBuilder(Builder):
     key = 'SpriteVu'
 
     def build(self, blueprint, world, target=None, components=[]):
-        offset = glm.vec2(blueprint.offset[0], blueprint.offset[1]) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
+        offset = glm.vec2(*blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
         return SpriteVu(arcade.Sprite(blueprint.parent.image), offset)
 
+
+class AnimatedSpriteVu(Vu):
+    sprite: AnimatedSprite = None
+    def __init__(self, sprite: AnimatedSprite, offset=DEFAULT_VEC2) -> None:
+        self.sprite = sprite
+        self.offset = offset
 
 class AnimatedSpriteVuBuilder(Builder):
     key = 'AnimatedSpriteVu'

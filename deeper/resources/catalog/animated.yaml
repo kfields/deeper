@@ -23,7 +23,7 @@ AnimBWheel2:
 
 AnimGnome1:
   extends: Animated
-  extents: [0.875, 1.25, 1]
+  extents: [0.875, 1.20, 1]
   image: ":deeper:tiles/AnimGnome1/AnimGnome10001.png"
   components:
     AnimatedSpriteVu:

@@ -5,9 +5,6 @@ class MetaInfo:
 class Builder:
     _meta = MetaInfo()
 
-    #def __init__(self, name) -> None:
-    #    self.name = name
-
     def build(self, blueprint, world, target=None):
         pass
 

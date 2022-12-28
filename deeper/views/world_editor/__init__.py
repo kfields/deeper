@@ -10,7 +10,7 @@ from deeper.view import WorldView
 from deeper import Block, Cuboid
 from deeper.constants import *
 from deeper.camera import WorldCamera
-from deeper.vu.sprite_vu import SpriteVu
+from deeper.components.sprite_vu import SpriteVu
 from deeper.processor.rendering import RenderingProcessor
 from deeper.catalog import Catalog
 from deeper.dimgui import Gui

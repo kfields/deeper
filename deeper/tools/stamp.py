@@ -3,7 +3,8 @@ import glm
 import arcade
 from arcade import key
 
-from deeper.architect import Architect
+#from deeper.architect import Architect
+from deeper.kits import EntityKit
 from .tool import WorldEditTool
 
 class Hovered:
@@ -37,7 +38,8 @@ class StampTool(WorldEditTool):
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         if self.hovered and self.edit_state.current_blueprint:
-            Architect.instance.build(self.edit_state.current_blueprint, self.world, self.hovered.entity)
+            #Architect.instance.build(self.edit_state.current_blueprint, self.world, self.hovered.entity)
+            EntityKit.instance.build(self.edit_state.current_blueprint, self.world, self.hovered.entity)
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.DELETE:
