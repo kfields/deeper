@@ -2,7 +2,7 @@ import math
 import arcade
 import glm
 
-from deeper import Space, Cuboid, Ray
+from deeper import Block, Cuboid, Ray
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -121,7 +121,7 @@ class Deeper(arcade.Window):
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
         self.tiles = arcade.SpriteList()
 
-        self.space = Space()
+        self.block = Block()
         self.selection = None
 
         self.create_boxes()
@@ -134,17 +134,17 @@ class Deeper(arcade.Window):
             for tx in range(0, 8):
                 position = glm.vec3(tx, 0, ty)
                 #print("position: ", position)
-                self.space.add_child(
-                    Space(position, rotation, shape)
+                self.block.add_child(
+                    Block(position, rotation, shape)
                 )
 
     def create_sprites(self):
-        sorted_spaces = sorted(self.space.children, key=lambda space: space.position.z)
-        for space in sorted_spaces:
+        sorted_spaces = sorted(self.block.children, key=lambda block: block.position.z)
+        for block in sorted_spaces:
             sprite = arcade.Sprite(
                 ":deeper:tiles/FloorD3.png"
             )
-            position = self.camera.project(space.position).xy
+            position = self.camera.project(block.position).xy
             print("position: ", position)
             sprite.set_position(*position)
             self.tiles.append(sprite)
@@ -168,11 +168,11 @@ class Deeper(arcade.Window):
         arcade.finish_render()
 
     def draw_aabbs(self):
-        for space in self.space.children:
-            self.draw_aabb(space)
+        for block in self.block.children:
+            self.draw_aabb(block)
 
-    def draw_aabb(self, space):
-        aabb = space.aabb
+    def draw_aabb(self, block):
+        aabb = block.aabb
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
         bbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz))
         fbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz))
@@ -194,10 +194,10 @@ class Deeper(arcade.Window):
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
         ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
-        result = self.space.cast_ray(ray)
+        result = self.block.cast_ray(ray)
         print(result)
         if result:
-            space, contact = result
+            block, contact = result
             print("contact: ", contact)
             self.selection = Selection(glm.vec3(contact))
         else:

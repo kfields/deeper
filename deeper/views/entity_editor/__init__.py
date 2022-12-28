@@ -5,7 +5,7 @@ from arcade.resources import resolve_resource_path
 from arcade import key
 
 from deeper.view import WorldView
-from deeper import Space
+from deeper import Block
 from deeper.constants import *
 from deeper.camera import WorldCamera
 from deeper.processor.rendering import RenderingProcessor
@@ -28,13 +28,12 @@ class EntityEditor(WorldView):
 
         self.gui.add_child(EntityWindow(self.world, edit_state.entity))
 
-        space = self.world.component_for_entity(edit_state.entity, Space)
-        pos = space.position
+        self.block = self.world.component_for_entity(edit_state.entity, Block)
+        pos = self.block.position
         self.camera = WorldCamera(self, pos, 1)
 
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
-        self.space = Space()
 
 
         #self.world.add_processor(RenderingProcessor(self))
@@ -78,6 +77,7 @@ class EntityEditor(WorldView):
         self.tile_list.draw()
 
         # self.draw_aabbs()
+        self.draw_aabb(self.block.aabb)
 
         pos = self.camera.project(self.camera.target).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
@@ -86,5 +86,5 @@ class EntityEditor(WorldView):
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
 
     def draw_aabbs(self):
-        for space in self.space.children:
-            self.draw_aabb(space)
+        for block in self.block.children:
+            self.draw_aabb(block)

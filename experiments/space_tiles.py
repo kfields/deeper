@@ -2,12 +2,12 @@ import math
 import arcade
 import glm
 
-from deeper import Isometry, Space
+from deeper import Isometry, Block
 '''
 body = Body((0, 1, 2))
-space = Space()
-space.add_body(body)
-print(space.bodies)
+block = Block()
+block.add_body(body)
+print(block.bodies)
 '''
 
 degRads = (math.pi * 2) / 360
@@ -32,7 +32,7 @@ view = glm.rotate(view, -30 * degRads, glm.vec3(0, 1, 0))
 class Deeper(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
-        self.space = Space()
+        self.block = Block()
         self.camera = arcade.Camera(zoom=1.5)
         self.tiles = arcade.SpriteList()
 
@@ -44,14 +44,14 @@ class Deeper(arcade.Window):
             y_distance = 252 * ty
             for tx in range(0, 8):
                 x_distance = 216 * tx
-                self.space.add_child(Space(glm.vec3(x_distance, 16, -y_distance)))
+                self.block.add_child(Block(glm.vec3(x_distance, 16, -y_distance)))
 
     def create_sprites(self):
-        sorted_spaces = sorted(self.space.children, key=lambda space: space.position[2])
-        for space in sorted_spaces:
+        sorted_spaces = sorted(self.block.children, key=lambda block: block.position[2])
+        for block in sorted_spaces:
             sprite = arcade.Sprite(":deeper:tiles/Floor8a.png")
             model = glm.mat4(1)
-            pos = proj * view * model * space.position
+            pos = proj * view * model * block.position
             sprite.set_position(pos[0], pos[2])
             self.tiles.append(sprite)
 

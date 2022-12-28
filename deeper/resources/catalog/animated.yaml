@@ -1,6 +1,5 @@
 Block:
   _abstract: true
-  shape: Cuboid
   extents: [0.875, 1, 1]
 
 Animated:
@@ -101,7 +100,7 @@ Door2Right:
 
 Door3:
   extends: Animated
-  extents: [0.875, 1.40, .20]
+  extents: [0.875, 1.1, .20]
   image: ":deeper:tiles/Door3/Door30001.png"
   components:
     AnimatedSpriteVu:

@@ -1,6 +1,5 @@
 Block:
   _abstract: true
-  shape: Cuboid
   extents: [0.875, 1, 1]
   components:
     SpriteVu:

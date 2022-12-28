@@ -1,6 +1,6 @@
-from deeper import Isometry, Space
+from deeper import Isometry, Block
 
-child = Space(Isometry(0, 1, 2))
-space = Space(Isometry())
-space.add_child(child)
-print(space.children)
+child = Block(Isometry(0, 1, 2))
+block = Block(Isometry())
+block.add_child(child)
+print(block.children)

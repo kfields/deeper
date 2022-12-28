@@ -1,7 +1,7 @@
 import glm
 import esper
 
-from . import Space
+from . import Block
 
 class World(esper.World):
     def __init__(self, timed=False):
@@ -9,8 +9,8 @@ class World(esper.World):
 
     def cast_ray(self, ray):
         results = []
-        for entity, (space,) in self.get_components(Space):
-            result = space.cast_ray(ray, entity)
+        for entity, (block,) in self.get_components(Block):
+            result = block.cast_ray(ray, entity)
             if result:
                 results.append(result)
         if len(results) == 0:

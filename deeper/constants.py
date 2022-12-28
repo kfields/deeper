@@ -18,3 +18,6 @@ WORLD_UP = glm.vec3(0.0, 1.0, 0.0)
 WORLD_AXIS_X = glm.vec3(1.0, 0.0, 0.0)
 WORLD_AXIS_Y = glm.vec3(0.0, 1.0, 0.0)
 WORLD_AXIS_Z = glm.vec3(0.0, 0.0, 1.0)
+
+DEFAULT_VEC2 = glm.vec2()
+DEFAULT_VEC3 = glm.vec3()

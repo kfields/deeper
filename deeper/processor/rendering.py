@@ -1,6 +1,6 @@
 import arcade
 
-from deeper import Space
+from deeper import Block
 from deeper.vu.sprite_vu import SpriteVu, AnimatedSpriteVu
 from . import Processor
 
@@ -13,20 +13,22 @@ class RenderingProcessor(Processor):
         self.scene.tile_vu_list = []
         self.scene.tile_list = arcade.SpriteList()
 
-        for ent, (space, vu) in self.world.get_components(Space, SpriteVu):
-            position = self.scene.camera.project(space.position)
+        for ent, (block, vu) in self.world.get_components(Block, SpriteVu):
+            position = self.scene.camera.project(block.position)
             vu.position = position
-            vu.aabb = space.aabb
+            vu.aabb = block.aabb
             #print("position: ", position)
-            vu.sprite.set_position(*position.xy)
+            sprite_position = position.xy + vu.offset
+            vu.sprite.set_position(*sprite_position)
             self.scene.tile_vu_list.append(vu)
 
-        for ent, (space, vu) in self.world.get_components(Space, AnimatedSpriteVu):
-            position = self.scene.camera.project(space.position)
+        for ent, (block, vu) in self.world.get_components(Block, AnimatedSpriteVu):
+            position = self.scene.camera.project(block.position)
             vu.position = position
-            vu.aabb = space.aabb
+            vu.aabb = block.aabb
             #print("position: ", position)
-            vu.sprite.set_position(*position.xy)
+            sprite_position = position.xy + vu.offset
+            vu.sprite.set_position(*sprite_position)
             vu.sprite.update_animation(delta_time)
             self.scene.tile_vu_list.append(vu)
 

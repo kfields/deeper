@@ -7,15 +7,15 @@ from deeper.architect import Architect
 from .tool import WorldEditTool
 
 class Hovered:
-    def __init__(self, entity, space, position):
+    def __init__(self, entity, block, position):
         self.entity = entity
-        self.space = space
+        self.block = block
         self.position = position
 
 class Selected:
-    def __init__(self, entity, space):
+    def __init__(self, entity, block):
         self.entity = entity
-        self.space = space
+        self.block = block
 
 class StampTool(WorldEditTool):
     def __init__(self, view, edit_state) -> None:
@@ -29,9 +29,9 @@ class StampTool(WorldEditTool):
         result = self.world.cast_ray(ray)
         #print(result)
         if result:
-            entity, space, contact = result
+            entity, block, contact = result
             #print("contact: ", contact)
-            self.hovered = Hovered(entity, space, glm.vec3(contact))
+            self.hovered = Hovered(entity, block, glm.vec3(contact))
         else:
             self.hovered = None
 
@@ -50,7 +50,7 @@ class StampTool(WorldEditTool):
         if self.hovered:
             pos = self.camera.project(self.hovered.position).xy
             arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
-            self.view.draw_aabb(self.hovered.space.aabb)
+            self.view.draw_aabb(self.hovered.block.aabb)
 
         if self.selected:
-            self.view.draw_aabb(self.selected.space.aabb, color=arcade.color.RED)
+            self.view.draw_aabb(self.selected.block.aabb, color=arcade.color.RED)

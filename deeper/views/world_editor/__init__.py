@@ -7,7 +7,7 @@ from arcade import key
 import imgui
 
 from deeper.view import WorldView
-from deeper import Space, Cuboid
+from deeper import Block, Cuboid
 from deeper.constants import *
 from deeper.camera import WorldCamera
 from deeper.vu.sprite_vu import SpriteVu
@@ -42,7 +42,7 @@ class WorldEditor(WorldView):
 
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
-        self.space = Space()
+        self.block = Block()
 
         self.create_blocks()
 
@@ -92,14 +92,13 @@ class WorldEditor(WorldView):
             self.camera.zoom = self.camera.zoom - .1
 
     def create_blocks(self):
-        rotation = glm.vec3()
-        shape = Cuboid(0.875, .01, 1)
+        extents = glm.vec3(CELL_WIDTH, .01, 1)
         for ty in range(0, 8):
             for tx in range(0, 8):
-                position = glm.vec3(tx * 0.875, 0, ty)
+                position = glm.vec3(tx * CELL_WIDTH, 0, ty)
                 # print("position: ", position)
-                block = Space(position, rotation, shape)
-                self.space.add_child(block)
+                block = Block(position, extents)
+                self.block.add_child(block)
                 vu = SpriteVu(
                     arcade.Sprite(":deeper:tiles/_Grid/GRID.png",)
                 )
@@ -118,5 +117,5 @@ class WorldEditor(WorldView):
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
 
     def draw_aabbs(self):
-        for space in self.space.children:
-            self.draw_aabb(space.aabb)
+        for block in self.block.children:
+            self.draw_aabb(block.aabb)

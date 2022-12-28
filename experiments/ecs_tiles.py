@@ -3,7 +3,7 @@ import glm
 import arcade
 import esper
 
-from deeper import Space, Cuboid, Ray
+from deeper import Block, Cuboid, Ray
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -110,8 +110,8 @@ class RenderingProcessor(Processor):
         self.scene.tile_vu_list = []
         self.scene.tile_list = arcade.SpriteList()
 
-        for ent, (space, vu) in self.scene.get_components(Space, SpriteVu):
-            position = self.scene.camera.project(space.position)
+        for ent, (block, vu) in self.scene.get_components(Block, SpriteVu):
+            position = self.scene.camera.project(block.position)
             vu.position = position
             #print("position: ", position)
             vu.sprite.set_position(*position.xy)
@@ -133,7 +133,7 @@ class Scene(arcade.View, esper.World):
         #self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
-        self.space = Space()
+        self.block = Block()
         self.selection = None
 
         self.create_blocks()
@@ -148,8 +148,8 @@ class Scene(arcade.View, esper.World):
                 x_distance = CELL_WIDTH * tx
                 position = glm.vec3(x_distance, CELL_HEIGHT, y_distance)
                 #print("position: ", position)
-                block = Space(position, rotation, shape)
-                self.space.add_child(block)
+                block = Block(position, rotation, shape)
+                self.block.add_child(block)
                 vu = SpriteVu(arcade.Sprite(
                     ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
                 ))
@@ -178,11 +178,11 @@ class Scene(arcade.View, esper.World):
         arcade.finish_render()
 
     def draw_aabbs(self):
-        for space in self.space.children:
-            self.draw_aabb(space)
+        for block in self.block.children:
+            self.draw_aabb(block)
 
-    def draw_aabb(self, space):
-        aabb = space.aabb
+    def draw_aabb(self, block):
+        aabb = block.aabb
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
         bbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz))
         fbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz))
@@ -204,10 +204,10 @@ class Scene(arcade.View, esper.World):
     def on_mouse_motion(self, mouse_x, mouse_y, mouse_dx, mouse_dy):
         print("mouse: ", mouse_x, mouse_y)
         ray = self.camera.mouse_to_ray(mouse_x, mouse_y)
-        result = self.space.cast_ray(ray)
+        result = self.block.cast_ray(ray)
         print(result)
         if result:
-            space, contact = result
+            block, contact = result
             print("contact: ", contact)
             self.selection = Selection(glm.vec3(contact))
         else:
