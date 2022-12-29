@@ -14,19 +14,25 @@ class BlueprintWidget(ComponentWidget):
         expanded, self.visible = imgui.collapsing_header("Blueprint", self.visible)
         if not expanded:
             return
-        """
-        changed, position = imgui.drag_float3(
-            "Position", *self.block.position, change_speed=0.1
-        )
-        if changed:
-            self.block.position = glm.vec3(*position)
+
+        imgui.text("name: ")
+        imgui.same_line()
+        imgui.text(self.blueprint.name)
+
+        imgui.text("extends: ")
+        imgui.same_line()
+        imgui.text(self.blueprint.extends)
+
+        imgui.text("category: ")
+        imgui.same_line()
+        imgui.text(self.blueprint.category)
 
         changed, extents = imgui.drag_float3(
-            "Extents", *self.block.extents, change_speed=0.1
+            "Extents", *self.blueprint.extents, change_speed=0.1
         )
         if changed:
-            self.block.extents = glm.vec3(*extents)
-      """
+            self.block.extents = extents
+
 
 class BlueprintWidgetBuilder(ComponentWidgetBuilder):
     key = Blueprint

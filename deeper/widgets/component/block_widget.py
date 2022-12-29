@@ -1,7 +1,7 @@
 import glm
 import imgui
 
-from deeper.block import Block
+from deeper.components.block import Block
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
 
 

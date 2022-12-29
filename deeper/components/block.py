@@ -1,7 +1,7 @@
 import glm
 
-from .constants import *
-from . import Isometry, Cuboid
+from ..constants import *
+from .. import Isometry, Cuboid
 
 class Block:
     def __init__(self, position=DEFAULT_VEC3, extents=glm.vec3(1,1,1), solid=True) -> None:

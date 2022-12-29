@@ -190,7 +190,7 @@ FireTorchSmall5:
 
 Lever1:
   extends: Animated
-  extents: [0.86, 1, 1]
+  extents: [0.86, .5, 1]
   image: ":deeper:tiles/Lever1/Lever10001.png"
   components:
     AnimatedSpriteVu:
@@ -250,7 +250,7 @@ Lever5:
 
 MushroomSparks:
   extends: Animated
-  extents: [0.86, 1.40, 1]
+  extents: [0.43, .5, .5]
   image: ":deeper:tiles/MushroomSparks/MushroomSparks0001.png"
   components:
     AnimatedSpriteVu:
