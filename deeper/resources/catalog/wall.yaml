@@ -127,7 +127,7 @@ WallH_Tile24a:
 
 WallH_TileStair5:
   extends: Wall
-  extents: [0.86, 1, .5]
+  extents: [0.86, .75, .5]
   image: ":deeper:tiles/WallH_TileStair5.png"
 
 WallV_Tile31b:
