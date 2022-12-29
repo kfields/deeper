@@ -1,2 +1,3 @@
+from .blueprint_widget import BlueprintWidgetBuilder
 from .block_widget import BlockWidgetBuilder
 from .sprite_vu_widget import SpriteVuWidgetBuilder, AnimatedSpriteVuWidgetBuilder

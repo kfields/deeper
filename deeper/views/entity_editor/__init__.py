@@ -5,10 +5,10 @@ from arcade.resources import resolve_resource_path
 from arcade import key
 
 from deeper.view import WorldView
-from deeper import Block
+from deeper import Blueprint, Block
 from deeper.constants import *
 from deeper.camera import WorldCamera
-from deeper.processor.rendering import RenderingProcessor
+from deeper.processors.rendering import RenderingProcessor
 from deeper.widgets import MainMenu
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
@@ -16,6 +16,7 @@ from deeper.tools.pick import PickTool
 
 from deeper.widgets.toolbar import Toolbar, Toolbutton
 from deeper.widgets.entity_window import EntityWindow
+from deeper.widgets.blueprint_window import BlueprintWindow
 
 class EntityEditor(WorldView):
     def __init__(self, window, edit_state):
@@ -28,6 +29,10 @@ class EntityEditor(WorldView):
 
         self.gui.add_child(EntityWindow(self.world, edit_state.entity))
 
+
+        self.blueprint = self.world.component_for_entity(edit_state.entity, Blueprint)
+        self.gui.add_child(BlueprintWindow(self.blueprint))
+
         self.block = self.world.component_for_entity(edit_state.entity, Block)
         pos = self.block.position
         self.camera = WorldCamera(self, pos, 1)
@@ -35,8 +40,6 @@ class EntityEditor(WorldView):
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
 
-
-        #self.world.add_processor(RenderingProcessor(self))
         self.add_processor(RenderingProcessor(self))
 
         self.pick_tool = PickTool(self, edit_state)

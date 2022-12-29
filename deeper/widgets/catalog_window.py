@@ -2,7 +2,7 @@ from PIL import Image
 import imgui
 from arcade.resources import resolve_resource_path
 
-from deeper.dimgui import Widget
+from deeper.dimgui import Widget, Window
 
 class BlueprintWidget(Widget):
     def __init__(self, blueprint):
@@ -52,7 +52,7 @@ class CategoryWidget(Widget):
                 self.callback(widget.blueprint)
         imgui.end_child()
 
-class CatalogWidget(Widget):
+class CatalogPanel(Widget):
     def __init__(self, catalog, callback):
         super().__init__()
         self.catalog = catalog
@@ -70,7 +70,6 @@ class CatalogWidget(Widget):
             widget.create(gui)
 
     def draw(self):
-        imgui.begin('Catalog')
         clicked, self.current_index = imgui.combo(
             "Category", self.current_index, self.catalog.category_names
         )
@@ -81,4 +80,8 @@ class CatalogWidget(Widget):
             current.show
         self.current = current
         self.current.draw()
-        imgui.end()
+
+class CatalogWindow(Window):
+    def __init__(self, catalog, callback):
+        super().__init__("Catalog", [CatalogPanel(catalog, callback)])
+        self.catalog = catalog

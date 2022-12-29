@@ -22,7 +22,7 @@ class EntityKit(Kit):
     def build(self, blueprint, world, target=None):
         #print(blueprint.__dict__)
         builder = self.find(blueprint)
-        components = []
+        components = [blueprint]
         for child in blueprint.children:
             #print(child.__dict__)
             #components.append(self.build(child, world))

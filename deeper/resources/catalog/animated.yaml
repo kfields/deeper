@@ -1,6 +1,6 @@
 Block:
   _abstract: true
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
 
 Animated:
   _abstract: true
@@ -12,7 +12,7 @@ Animated:
 
 AnimBWheel2:
   extends: Animated
-  extents: [0.875, 1.5, 1]
+  extents: [0.86, 1.5, 1]
   image: ":deeper:tiles/AnimBWheel2/AnimBWheel20001.png"
   components:
     AnimatedSpriteVu:
@@ -23,7 +23,7 @@ AnimBWheel2:
 
 AnimGnome1:
   extends: Animated
-  extents: [0.875, 1.20, 1]
+  extents: [0.86, 1.20, 1]
   image: ":deeper:tiles/AnimGnome1/AnimGnome10001.png"
   components:
     AnimatedSpriteVu:
@@ -34,7 +34,7 @@ AnimGnome1:
 
 AnimTree1:
   extends: Animated
-  extents: [0.875, 1.25, 1]
+  extents: [0.86, 1.25, 1]
   image: ":deeper:tiles/AnimTree1/AnimTree10001.png"
   components:
     AnimatedSpriteVu:
@@ -45,7 +45,7 @@ AnimTree1:
 
 Boiler1:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/Boiler1/Boiler10001.png"
   components:
     AnimatedSpriteVu:
@@ -56,7 +56,7 @@ Boiler1:
 
 BoilerSmoke:
   extends: Animated
-  extents: [0.875, 2.25, 1]
+  extents: [0.86, 2.25, 1]
   image: ":deeper:tiles/BoilerSmoke/BoilerSmoke0001.png"
   components:
     AnimatedSpriteVu:
@@ -67,7 +67,7 @@ BoilerSmoke:
 
 Door:
   extends: Animated
-  extents: [0.875, 1.40, .20]
+  extents: [0.86, 1.40, .20]
   image: ":deeper:tiles/Door/Door0001.png"
   components:
     AnimatedSpriteVu:
@@ -78,7 +78,7 @@ Door:
 
 Door2:
   extends: Animated
-  extents: [0.875, 1.40, .20]
+  extents: [0.86, 1.40, .20]
   image: ":deeper:tiles/Door2/Door20001.png"
   components:
     AnimatedSpriteVu:
@@ -100,7 +100,7 @@ Door2Right:
 
 Door3:
   extends: Animated
-  extents: [0.875, 1.1, .20]
+  extents: [0.86, 1.1, .20]
   image: ":deeper:tiles/Door3/Door30001.png"
   components:
     AnimatedSpriteVu:
@@ -112,7 +112,7 @@ Door3:
 
 Door3Right:
   extends: Animated
-  extents: [.20, 1.40, 1]
+  extents: [0.215, 1.40, 1]
   image: ":deeper:tiles/Door3Right/Door3Right0001.png"
   components:
     AnimatedSpriteVu:
@@ -124,7 +124,7 @@ Door3Right:
 
 FireSmoke:
   extends: Animated
-  extents: [0.875, 2.25, 1]
+  extents: [0.86, 2.25, 1]
   image: ":deeper:tiles/FireSmoke/FireSmoke0001.png"
   components:
     AnimatedSpriteVu:
@@ -135,7 +135,7 @@ FireSmoke:
 
 FireSparks:
   extends: Animated
-  extents: [0.875, 1.40, 1]
+  extents: [0.86, 1.40, 1]
   image: ":deeper:tiles/FireSparks/FireSparks0001.png"
   components:
     AnimatedSpriteVu:
@@ -146,7 +146,7 @@ FireSparks:
 
 FireTorch:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorch/FireTorch0001.png"
   components:
     AnimatedSpriteVu:
@@ -157,7 +157,7 @@ FireTorch:
 
 FireTorchSmall:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorchSmall/FireTorchSmall0001.png"
   components:
     AnimatedSpriteVu:
@@ -168,7 +168,7 @@ FireTorchSmall:
 
 FireTorchSmall4:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorchSmall4/FireTorchSmall40001.png"
   components:
     AnimatedSpriteVu:
@@ -179,7 +179,7 @@ FireTorchSmall4:
 
 FireTorchSmall5:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorchSmall5/FireTorchSmall50001.png"
   components:
     AnimatedSpriteVu:
@@ -190,7 +190,7 @@ FireTorchSmall5:
 
 Lever1:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/Lever1/Lever10001.png"
   components:
     AnimatedSpriteVu:
@@ -202,7 +202,7 @@ Lever1:
 
 Lever2:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/Lever2/Lever20001.png"
   components:
     AnimatedSpriteVu:
@@ -214,7 +214,7 @@ Lever2:
 
 Lever3:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/Lever3/Lever30001.png"
   components:
     AnimatedSpriteVu:
@@ -226,7 +226,7 @@ Lever3:
 
 Lever4:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/Lever4/Lever40001.png"
   components:
     AnimatedSpriteVu:
@@ -238,7 +238,7 @@ Lever4:
 
 Lever5:
   extends: Animated
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   image: ":deeper:tiles/Lever5/Lever50001.png"
   components:
     AnimatedSpriteVu:
@@ -250,7 +250,7 @@ Lever5:
 
 MushroomSparks:
   extends: Animated
-  extents: [0.875, 1.40, 1]
+  extents: [0.86, 1.40, 1]
   image: ":deeper:tiles/MushroomSparks/MushroomSparks0001.png"
   components:
     AnimatedSpriteVu:
@@ -261,7 +261,7 @@ MushroomSparks:
 
 Spike1:
   extends: Animated
-  extents: [0.4375, .5, .5]
+  extents: [0.43, .5, .5]
   image: ":deeper:tiles/Spike1/Spike10001.png"
   components:
     AnimatedSpriteVu:

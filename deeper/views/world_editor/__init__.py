@@ -11,10 +11,10 @@ from deeper import Block, Cuboid
 from deeper.constants import *
 from deeper.camera import WorldCamera
 from deeper.components.sprite_vu import SpriteVu
-from deeper.processor.rendering import RenderingProcessor
+from deeper.processors.rendering import RenderingProcessor
 from deeper.catalog import Catalog
 from deeper.dimgui import Gui
-from deeper.widgets import MainMenu, CatalogWidget
+from deeper.widgets import MainMenu, CatalogWindow
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
@@ -33,7 +33,7 @@ class WorldEditor(WorldView):
         )
 
         self.catalog = Catalog()
-        self.gui.add_child(CatalogWidget(self.catalog, self.on_catalog))
+        self.gui.add_child(CatalogWindow(self.catalog, self.on_catalog))
 
         self.camera = WorldCamera(self, glm.vec3(), 1.5)
         self.gui.add_child(CameraWindow(self.camera))

@@ -1,6 +1,6 @@
 Block:
   _abstract: true
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   components:
     SpriteVu:
 
@@ -15,7 +15,7 @@ TileStone0:
       
 TileStone1:
   extends: Stone
-  extents: [0.4375, .75, .5]
+  extents: [0.43, .75, .5]
   image: ":deeper:tiles/TileStone1.png"
 
 TileStone2:
@@ -24,27 +24,27 @@ TileStone2:
 
 TileStone3:
   extends: Stone
-  extents: [0.4375, .5, .5]
+  extents: [0.43, .5, .5]
   image: ":deeper:tiles/TileStone3.png"
 
 TileStone4:
   extends: Stone
-  extents: [0.875, 2, 1]
+  extents: [0.86, 2, 1]
   image: ":deeper:tiles/TileStone4.png"
 
 TileStone5:
   extends: Stone
-  extents: [0.875, .5, 1]
+  extents: [0.86, .5, 1]
   image: ":deeper:tiles/TileStone5.png"
 
 TileStone6:
   extends: Stone
-  extents: [0.875, .5, 1]
+  extents: [0.86, .5, 1]
   image: ":deeper:tiles/TileStone6.png"
 
 Wagon:
   extends: Stone
-  extents: [0.875, 1.25, 2]
+  extents: [0.86, 1.25, 2]
   image: ":deeper:tiles/TileStone7.png"
   components:
     SpriteVu:

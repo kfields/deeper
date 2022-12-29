@@ -1,6 +1,6 @@
 Block:
   _abstract: true
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   components:
     SpriteVu:
 
@@ -11,7 +11,7 @@ Wheel:
 
 Wheel1:
   extends: Wheel
-  extents: [0.875, 1.25, 1]
+  extents: [0.86, 1.25, 1]
   image: ":deeper:tiles/wheel.png"
 
 Wheels:

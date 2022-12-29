@@ -23,12 +23,6 @@ class CameraPanel(Widget):
 
 
 class CameraWindow(Window):
-    #def __init__(self, world, entity, children = []):
     def __init__(self, camera):
         super().__init__("Camera", [CameraPanel(camera)])
         self.camera = camera
-    """
-    def draw(self):
-        imgui.begin('Catalog')
-        imgui.end()
-    """

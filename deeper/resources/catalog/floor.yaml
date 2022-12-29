@@ -1,6 +1,6 @@
 Block:
   _abstract: true
-  extents: [0.875, 1, 1]
+  extents: [0.86, 1, 1]
   components:
     SpriteVu:
 
@@ -8,11 +8,11 @@ Floor:
   _abstract: true
   extends: Block
   category: Floor
-  extents: [0.875, .1, 1]
+  extents: [0.86, .1, 1]
       
 Floor1:
   extends: Floor
-  extents: [0.875, .01, 1]
+  extents: [0.86, .01, 1]
   image: ":deeper:tiles/Floor1.png"
 
 Floor1e:
@@ -25,9 +25,89 @@ Floor1f:
 
 Floor1g:
   extends: Floor
-  extents: [0.875, .01, 1]
+  extents: [0.86, .01, 1]
   image: ":deeper:tiles/Floor1g.png"
 
 Floor2:
   extends: Floor
   image: ":deeper:tiles/Floor2.png"
+
+Floor3c:
+  extends: Floor
+  extents: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3c.png"
+
+Floor3Cracked1:
+  extends: Floor
+  extents: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3Cracked1.png"
+
+Floor3Cracked2:
+  extends: Floor
+  extents: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3Cracked2.png"
+
+Floor3d:
+  extends: Floor
+  extents: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3d.png"
+
+Floor3e:
+  extends: Floor
+  extents: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3e.png"
+
+Floor3g:
+  extends: Floor
+  extents: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3g.png"
+
+Floor3h:
+  extends: Floor
+  extents: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3h.png"
+
+Floor4a1:
+  extends: Floor
+  extents: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a1.png"
+
+Floor4a2:
+  extends: Floor
+  extents: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a2.png"
+
+Floor4a3:
+  extends: Floor
+  extents: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a3.png"
+
+Floor4a4:
+  extends: Floor
+  extents: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a4.png"
+
+Floor4a4:
+  extends: Floor
+  extents: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a4.png"
+
+Floor4b:
+  extends: Floor
+  image: ":deeper:tiles/Floor4b.png"
+
+Floor6a:
+  extends: Floor
+  image: ":deeper:tiles/Floor6a.png"
+
+Floor6b:
+  extends: Floor
+  image: ":deeper:tiles/Floor6b.png"
+
+Floor7a:
+  extends: Floor
+  image: ":deeper:tiles/Floor7a.png"
+
+Floor7b:
+  extends: Floor
+  image: ":deeper:tiles/Floor7b.png"

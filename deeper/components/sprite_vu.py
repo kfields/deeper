@@ -3,7 +3,7 @@ import arcade
 from deeper.constants import *
 from deeper.sprite import AnimatedSprite
 from .vu import Vu
-from ..builder import Builder
+from ..builder import ComponentBuilder
 
 class SpriteVu(Vu):
     sprite: arcade.Sprite = None
@@ -11,7 +11,7 @@ class SpriteVu(Vu):
         self.sprite = sprite
         self.offset = offset
 
-class SpriteVuBuilder(Builder):
+class SpriteVuBuilder(ComponentBuilder):
     key = 'SpriteVu'
 
     def build(self, blueprint, world, target=None, components=[]):
@@ -25,7 +25,7 @@ class AnimatedSpriteVu(Vu):
         self.sprite = sprite
         self.offset = offset
 
-class AnimatedSpriteVuBuilder(Builder):
+class AnimatedSpriteVuBuilder(ComponentBuilder):
     key = 'AnimatedSpriteVu'
 
     def build(self, blueprint, world, target=None, components=[]):

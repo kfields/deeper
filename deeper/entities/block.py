@@ -3,9 +3,9 @@ import arcade
 from deeper.constants import *
 from deeper import Block
 
-from ..builder import Builder
+from ..builder import EntityBuilder
 
-class BlockBuilder(Builder):
+class BlockBuilder(EntityBuilder):
     key = 'Block'
 
     def build(self, blueprint, world, target=None, components=[]):
