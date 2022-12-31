@@ -55,7 +55,7 @@ class Catalog(Kit):
         root = resolve_resource_path(":deeper:/catalog")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
-            print(path)
+            #print(path)
             with open(path, "r") as file:
                 #cat = yaml.full_load(file)
                 cat = load(file)

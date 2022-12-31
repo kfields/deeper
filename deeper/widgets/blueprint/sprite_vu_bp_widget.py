@@ -27,9 +27,6 @@ class AnimatedSpriteVuBpWidget(BlueprintWidget):
         self.blueprint = blueprint
 
     def draw(self):
-        expanded, self.visible = imgui.collapsing_header("AnimatedSprite", self.visible)
-        if not expanded:
-            return
         changed, offset = imgui.drag_float2(
             "Offset", *self.blueprint.offset, change_speed=0.1
         )

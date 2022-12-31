@@ -1,7 +1,6 @@
 import glm
 import imgui
 
-#from deeper.components.block import Block
 from deeper.blueprints.block_blueprint import BlockBlueprint
 from .blueprint_widget import BlueprintWidget, BlueprintWidgetBuilder
 

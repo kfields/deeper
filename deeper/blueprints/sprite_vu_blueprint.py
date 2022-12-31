@@ -12,4 +12,4 @@ class AnimatedSpriteVuBlueprint(ComponentBlueprint):
 
 class AnimatedSpriteVuBlueprintBuilder(BlueprintBuilder):
     key = 'AnimatedSpriteVu'
-    cls = SpriteVuBlueprint
+    cls = AnimatedSpriteVuBlueprint

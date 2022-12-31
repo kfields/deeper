@@ -8,6 +8,7 @@ Animated:
   category: Animated
   components:
     AnimatedSpriteVu:
+      offset: [0, 0]
       rate: .5
 
 AnimBWheel2:
