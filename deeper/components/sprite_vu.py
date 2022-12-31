@@ -11,6 +11,7 @@ class SpriteVu(Vu):
         self.sprite = sprite
         self.offset = offset
 
+
 class SpriteVuBuilder(ComponentBuilder):
     key = 'SpriteVu'
 

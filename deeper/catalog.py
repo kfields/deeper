@@ -5,7 +5,7 @@ import yaml
 from arcade.resources import resolve_resource_path
 from . import mergedeep
 
-from . import Blueprint
+from . import EntityBlueprint
 
 class Category:
     def __init__(self, name) -> None:
@@ -48,7 +48,7 @@ class Catalog:
                     self.build_blueprint(key, value)
 
     def build_blueprint(self, key, value):
-        blueprint = Blueprint(self, key, value)
+        blueprint = EntityBlueprint(self, key, value)
         # print("blueprint: ", blueprint.__dict__)
 
         if "_abstract" in value:

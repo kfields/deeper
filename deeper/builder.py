@@ -8,6 +8,10 @@ class Builder:
     def build(self, blueprint, world, target=None):
         pass
 
+class BlueprintBuilder(Builder):
+    def build(self, world, blueprint, target=None):
+        pass
+
 class EntityBuilder(Builder):
     def build(self, world, blueprint, target=None):
         pass

@@ -2,10 +2,10 @@ import glm
 import imgui
 
 from deeper.components.block import Block
-from .component_widget import ComponentWidget, ComponentWidgetBuilder
+from .blueprint_widget import BlueprintWidget, BlueprintWidgetBuilder
 
 
-class BlockWidget(ComponentWidget):
+class BlockBpWidget(BlueprintWidget):
     def __init__(self, block):
         super().__init__(block)
         self.block = block
@@ -24,6 +24,6 @@ class BlockWidget(ComponentWidget):
             self.block.extents = glm.vec3(*extents)
 
 
-class BlockWidgetBuilder(ComponentWidgetBuilder):
+class BlockBpWidgetBuilder(BlueprintWidgetBuilder):
     key = Block
     cls = BlockWidget

@@ -2,9 +2,18 @@ import glm
 
 from ..constants import *
 from .. import Isometry, Cuboid
+from .. import Component
 
-class Block:
-    def __init__(self, position=DEFAULT_VEC3, extents=glm.vec3(1,1,1), solid=True) -> None:
+
+class Block(Component):
+    def __init__(
+        self,
+        position=DEFAULT_VEC3,
+        extents=glm.vec3(1, 1, 1),
+        solid=True,
+        blueprint=None,
+    ) -> None:
+        super().__init__(blueprint)
         self._position = position
         self.solid = solid
         self.rotation = DEFAULT_VEC3
@@ -21,7 +30,7 @@ class Block:
     def position(self, position):
         self._position = position
         self.isometry = Isometry(*position, *self.rotation)
-        #if self.shape:
+        # if self.shape:
         #    self.aabb = self.shape.aabb(self.isometry)
 
     @property
@@ -33,7 +42,7 @@ class Block:
         self._extents = extents
         if self.solid:
             self.shape = Cuboid(extents.x, extents.y, extents.z)
-            #self.aabb = self.shape.aabb(self.isometry)
+            # self.aabb = self.shape.aabb(self.isometry)
 
     @property
     def shape(self):
@@ -41,7 +50,7 @@ class Block:
 
     @shape.setter
     def shape(self, shape):
-        #if shape:
+        # if shape:
         #    self.aabb = shape.aabb(self.isometry)
         self._shape = shape
 
@@ -53,7 +62,7 @@ class Block:
         self.children.append(child)
 
     def cast_ray(self, ray, entity=0):
-        if(self.shape):
+        if self.shape:
             contact = self.shape.cast_ray(self.isometry, ray)
             if contact:
                 return entity, self, contact

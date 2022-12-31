@@ -1,7 +1,7 @@
 import glm
 import imgui
 
-from deeper import Blueprint
+from deeper import EntityBlueprint
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
 
 
@@ -11,10 +11,6 @@ class BlueprintWidget(ComponentWidget):
         self.blueprint = blueprint
 
     def draw(self):
-        expanded, self.visible = imgui.collapsing_header("Blueprint", self.visible)
-        if not expanded:
-            return
-
         imgui.text("name: ")
         imgui.same_line()
         imgui.text(self.blueprint.name)
@@ -35,5 +31,5 @@ class BlueprintWidget(ComponentWidget):
 
 
 class BlueprintWidgetBuilder(ComponentWidgetBuilder):
-    key = Blueprint
+    key = EntityBlueprint
     cls = BlueprintWidget

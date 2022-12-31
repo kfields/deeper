@@ -4,7 +4,7 @@ import deeper.entities
 
 from .kit import Kit
 
-class ComponentKit(Kit):
+class BlueprintKit(Kit):
     builders_path = deeper.components
 
     def find(self, blueprint):

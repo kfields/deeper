@@ -16,7 +16,8 @@ from deeper.tools.pick import PickTool
 
 from deeper.widgets.toolbar import Toolbar, Toolbutton
 from deeper.widgets.entity_window import EntityWindow
-from deeper.widgets.blueprint_window import BlueprintWindow
+#from deeper.widgets.blueprint_window import BlueprintWindow
+from deeper.widgets.component.component_window import ComponentWindow
 
 class EntityEditor(WorldView):
     def __init__(self, window, edit_state):
@@ -30,10 +31,12 @@ class EntityEditor(WorldView):
         self.gui.add_child(EntityWindow(self.world, edit_state.entity))
 
 
-        self.blueprint = self.world.component_for_entity(edit_state.entity, Blueprint)
-        self.gui.add_child(BlueprintWindow(self.blueprint))
-
         self.block = self.world.component_for_entity(edit_state.entity, Block)
+
+        self.blueprint = self.block.blueprint
+        #self.gui.add_child(BlueprintWindow(self.blueprint))
+        self.gui.add_child(ComponentWindow(self.blueprint))
+
         pos = self.block.position
         self.camera = WorldCamera(self, pos, 1)
 

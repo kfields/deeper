@@ -57,3 +57,12 @@ class Blueprint:
         #print("newconfig:", newconfig)
 
         return newconfig
+
+
+class EntityBlueprint(Blueprint):
+    def __init__(self, catalog, name, config):
+        super().__init__(catalog, name, config)
+
+class ComponentBlueprint(Blueprint):
+    def __init__(self, catalog, name, config):
+        super().__init__(catalog, name, config)

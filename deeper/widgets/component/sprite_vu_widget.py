@@ -10,9 +10,6 @@ class SpriteVuWidget(ComponentWidget):
         self.vu = vu
 
     def draw(self):
-        expanded, self.visible = imgui.collapsing_header("Sprite", self.visible)
-        if not expanded:
-            return
         changed, offset = imgui.drag_float2(
             "Offset", *self.vu.offset, change_speed=0.1
         )
@@ -30,9 +27,6 @@ class AnimatedSpriteVuWidget(ComponentWidget):
         self.vu = vu
 
     def draw(self):
-        expanded, self.visible = imgui.collapsing_header("AnimatedSprite", self.visible)
-        if not expanded:
-            return
         changed, offset = imgui.drag_float2(
             "Offset", *self.vu.offset, change_speed=0.1
         )
