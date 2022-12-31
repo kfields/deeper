@@ -1,14 +1,15 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Dummy:
   _abstract: true
   extends: Block
   category: Dummy
-      
+  components:
+    SpriteVu:
+      offset: [0, 0]
+
 DummyDoll:
   extends: Dummy
   image: ":deeper:tiles/Dummy/DummyDoll.png"

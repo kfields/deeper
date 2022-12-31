@@ -1,5 +1,6 @@
 import copy
 from . import mergedeep
+from .builder import Builder
 
 
 class Blueprint:
@@ -30,7 +31,8 @@ class Blueprint:
         # if (not self._abstract) and hasattr(self, 'components'):
         if hasattr(self, "components"):
             for key, value in self.components.items():
-                self.add_child(Blueprint(self.catalog, key, value, self))
+                #self.add_child(Blueprint(self.catalog, key, value, self))
+                self.add_child(self.catalog.build(key, value, self))
 
         return config
 
@@ -54,15 +56,21 @@ class Blueprint:
         newconfig = mergedeep.merge(
             newconfig, config, strategy=mergedeep.Strategy.REPLACE
         )
-        #print("newconfig:", newconfig)
+        # print("newconfig:", newconfig)
 
         return newconfig
+
+
+class BlueprintBuilder(Builder):
+    def build(self, catalog, name, config, parent):
+        return self.cls(catalog, name, config, parent)
 
 
 class EntityBlueprint(Blueprint):
     def __init__(self, catalog, name, config):
         super().__init__(catalog, name, config)
 
+
 class ComponentBlueprint(Blueprint):
-    def __init__(self, catalog, name, config):
-        super().__init__(catalog, name, config)
+    def __init__(self, catalog, name, config, parent):
+        super().__init__(catalog, name, config, parent)

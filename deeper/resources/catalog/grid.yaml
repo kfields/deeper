@@ -1,14 +1,15 @@
-Block:
-  _abstract: true
-  extents: [1, .01, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Grid:
   _abstract: true
   extends: Block
   category: Grid
-      
+  components:
+    SpriteVu:
+      offset: [0, 0]
+
 Cell:
   extends: Grid
   image: ":deeper:tiles/_Grid/GRID.png"

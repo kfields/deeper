@@ -1,13 +1,14 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Wheel:
   _abstract: true
   extends: Block
   category: Wheel
+  components:
+    SpriteVu:
+      offset: [0, 0]
 
 Wheel1:
   extends: Wheel

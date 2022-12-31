@@ -3,12 +3,17 @@ import imgui
 
 from deeper import EntityBlueprint
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
+from deeper.kits.blueprint_widget_kit import BlueprintWidgetKit
 
-
-class BlueprintWidget(ComponentWidget):
+class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):
-        super().__init__(blueprint)
+        #super().__init__(blueprint)
         self.blueprint = blueprint
+
+        children = []
+        for child in blueprint.children:
+            children.append(BlueprintWidgetKit.instance.build(child))
+        super().__init__(blueprint, children)
 
     def draw(self):
         imgui.text("name: ")
@@ -29,7 +34,11 @@ class BlueprintWidget(ComponentWidget):
         if changed:
             self.block.extents = extents
 
+        for child in self.children:
+            expanded, child.visible = imgui.collapsing_header(child.blueprint.name, child.visible)
+            if expanded:
+                child.draw()
 
-class BlueprintWidgetBuilder(ComponentWidgetBuilder):
+class EntityBpWidgetBuilder(ComponentWidgetBuilder):
     key = EntityBlueprint
-    cls = BlueprintWidget
+    cls = EntityBpWidget

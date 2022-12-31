@@ -1,11 +1,15 @@
-import copy
 import glob
 import yaml
 
+from loguru import logger
 from arcade.resources import resolve_resource_path
-from . import mergedeep
 
-from . import EntityBlueprint
+import deeper.blueprints
+
+from ..kits import Kit
+
+from deeper import EntityBlueprint
+from .loader import load
 
 class Category:
     def __init__(self, name) -> None:
@@ -16,9 +20,10 @@ class Category:
         self.blueprints.append(blueprint)
 
 
-class Catalog:
-    _instance = None
+class Catalog(Kit):
+    builders_path = deeper.blueprints
 
+    _instance = None
     @classmethod
     @property
     def instance(cls):
@@ -28,22 +33,33 @@ class Catalog:
         return cls._instance
 
     def __init__(self) -> None:
+        super().__init__()
         self.categories = {}
         self.category_names = []
         self.blueprints = {}
-        self.build()
+        self.load()
+
+    def find_builder(self, name):
+        if name in self.builders:
+            return self.builders[name]
+
+    def build(self, name, config, parent):
+        #print(blueprint.__dict__)
+        builder = self.find_builder(name)
+        return builder.build(self, name, config, parent)
 
     def find(self, name):
         return self.blueprints[name]
 
-    def build(self):
+    def load(self):
         root = resolve_resource_path(":deeper:/catalog")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
-            # print(path)
+            print(path)
             with open(path, "r") as file:
-                cat = yaml.full_load(file)
-                # print(cat)
+                #cat = yaml.full_load(file)
+                cat = load(file)
+                #print(cat)
                 for key, value in cat.items():
                     self.build_blueprint(key, value)
 

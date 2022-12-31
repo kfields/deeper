@@ -1,14 +1,15 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Wall:
   _abstract: true
   extends: Block
   category: Wall
-      
+  components:
+    SpriteVu:
+      offset: [0, 0]
+
 WallC_Big1:
   extends: Wall
   extents: [0.86, .75, 1]

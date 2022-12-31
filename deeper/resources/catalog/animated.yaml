@@ -1,6 +1,6 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
+Block: !import
+  - block.yaml
+  - Block
 
 Animated:
   _abstract: true

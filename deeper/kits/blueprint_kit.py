@@ -1,23 +1,17 @@
 from loguru import logger
 
-import deeper.entities
+import deeper.blueprints
 
 from .kit import Kit
 
 class BlueprintKit(Kit):
-    builders_path = deeper.components
+    builders_path = deeper.blueprints
 
-    def find(self, blueprint):
-        if blueprint.name in self.builders:
-            return self.builders[blueprint.name]
-        if hasattr(blueprint, 'extends'):
-            return self.find(blueprint.catalog.find(blueprint.extends))
+    def find(self, name):
+        if name in self.builders:
+            return self.builders[name]
 
-    def build(self, blueprint, world, target=None):
+    def build(self, catalog, name, config):
         #print(blueprint.__dict__)
-        builder = self.find(blueprint)
-        components = []
-        for child in blueprint.children:
-            #print(child.__dict__)
-            components.append(self.build(child, world))
-        return builder.build(blueprint, world, target, components)
+        builder = self.find(name)
+        return builder.build(catalog, name, config)

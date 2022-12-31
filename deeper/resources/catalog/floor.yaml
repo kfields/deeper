@@ -1,15 +1,16 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Floor:
   _abstract: true
   extends: Block
   category: Floor
   extents: [0.86, .1, 1]
-      
+  components:
+    SpriteVu:
+      offset: [0, 0]
+
 Floor1:
   extends: Floor
   extents: [0.86, .01, 1]

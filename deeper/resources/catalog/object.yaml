@@ -1,13 +1,14 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Object:
   _abstract: true
   extends: Block
   category: Object
+  components:
+    SpriteVu:
+      offset: [0, 0]
 
 Barrel:
   extends: Object

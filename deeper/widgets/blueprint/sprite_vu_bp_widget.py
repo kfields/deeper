@@ -1,7 +1,7 @@
 import glm
 import imgui
 
-from deeper.components.sprite_vu import SpriteVu, AnimatedSpriteVu
+from deeper.blueprints.sprite_vu_blueprint import SpriteVuBlueprint, AnimatedSpriteVuBlueprint
 from .blueprint_widget import BlueprintWidget, BlueprintWidgetBuilder
 
 class SpriteVuBpWidget(BlueprintWidget):
@@ -10,9 +10,6 @@ class SpriteVuBpWidget(BlueprintWidget):
         self.blueprint = blueprint
 
     def draw(self):
-        expanded, self.visible = imgui.collapsing_header("Sprite", self.visible)
-        if not expanded:
-            return
         changed, offset = imgui.drag_float2(
             "Offset", *self.blueprint.offset, change_speed=0.1
         )
@@ -20,7 +17,7 @@ class SpriteVuBpWidget(BlueprintWidget):
             self.blueprint.offset = glm.vec2(*offset)
 
 class SpriteVuBpWidgetBuilder(BlueprintWidgetBuilder):
-    key = SpriteVu
+    key = SpriteVuBlueprint
     cls = SpriteVuBpWidget
 
 
@@ -41,5 +38,5 @@ class AnimatedSpriteVuBpWidget(BlueprintWidget):
 
 
 class AnimatedSpriteVuBpWidgetBuilder(BlueprintWidgetBuilder):
-    key = AnimatedSpriteVu
+    key = AnimatedSpriteVuBlueprint
     cls = AnimatedSpriteVuBpWidget

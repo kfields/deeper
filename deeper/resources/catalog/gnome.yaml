@@ -1,13 +1,14 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Gnome:
   _abstract: true
   extends: Block
   category: Gnome
+  components:
+    SpriteVu:
+      offset: [0, 0]
 
 TileGnome1:
   extends: Gnome

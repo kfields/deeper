@@ -1,14 +1,15 @@
-Block:
-  _abstract: true
-  extents: [0.86, 1, 1]
-  components:
-    SpriteVu:
+Block: !import
+  - block.yaml
+  - Block
 
 Stone:
   _abstract: true
   extends: Block
   category: Stone
-      
+  components:
+    SpriteVu:
+      offset: [0, 0]
+
 TileStone0:
   extends: Stone
   image: ":deeper:tiles/TileStone0.png"

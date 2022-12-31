@@ -2,19 +2,20 @@ class MetaInfo:
     def __init__(self) -> None:
         self.abstract = False
 
+
 class Builder:
     _meta = MetaInfo()
 
-    def build(self, blueprint, world, target=None):
-        pass
-
+"""
 class BlueprintBuilder(Builder):
-    def build(self, world, blueprint, target=None):
+    def build(self, catalog, name, config):
         pass
+"""
 
 class EntityBuilder(Builder):
     def build(self, world, blueprint, target=None):
         pass
+
 
 class ComponentBuilder(Builder):
     def build(self, world, blueprint, target=None):

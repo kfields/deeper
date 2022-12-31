@@ -14,6 +14,6 @@ class BlueprintWidgetKit(Kit):
             return self.builders[blueprint.__class__]
 
     def build(self, blueprint):
-        #print(blueprint.__dict__)
+        print(blueprint.__dict__)
         builder = self.find(blueprint)
         return builder.build(blueprint)
