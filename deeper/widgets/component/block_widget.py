@@ -17,11 +17,11 @@ class BlockWidget(ComponentWidget):
         if changed:
             self.block.position = glm.vec3(*position)
 
-        changed, extents = imgui.drag_float3(
-            "Extents", *self.block.extents, change_speed=0.1
+        changed, size = imgui.drag_float3(
+            "Size", *self.block.size, change_speed=0.1
         )
         if changed:
-            self.block.extents = glm.vec3(*extents)
+            self.block.size = glm.vec3(*size)
 
 
 class BlockWidgetBuilder(ComponentWidgetBuilder):

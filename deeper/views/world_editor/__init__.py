@@ -92,12 +92,12 @@ class WorldEditor(WorldView):
             self.camera.zoom = self.camera.zoom - .1
 
     def create_blocks(self):
-        extents = glm.vec3(CELL_WIDTH, .01, 1)
+        size = glm.vec3(CELL_WIDTH, .01, 1)
         for ty in range(0, 8):
             for tx in range(0, 8):
                 position = glm.vec3(tx * CELL_WIDTH, 0, ty)
                 # print("position: ", position)
-                block = Block(position, extents)
+                block = Block(position, size)
                 self.block.add_child(block)
                 vu = SpriteVu(
                     arcade.Sprite(":deeper:tiles/_Grid/GRID.png",)

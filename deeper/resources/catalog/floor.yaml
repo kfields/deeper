@@ -6,14 +6,14 @@ Floor:
   _abstract: true
   extends: Block
   category: Floor
-  extents: [0.86, .1, 1]
+  size: [0.86, .1, 1]
   components:
     SpriteVu:
       offset: [0, 0]
 
 Floor1:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/Floor1.png"
 
 Floor1e:
@@ -26,7 +26,7 @@ Floor1f:
 
 Floor1g:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/Floor1g.png"
 
 Floor2:
@@ -35,62 +35,62 @@ Floor2:
 
 Floor3c:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor3c.png"
 
 Floor3Cracked1:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor3Cracked1.png"
 
 Floor3Cracked2:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor3Cracked2.png"
 
 Floor3d:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor3d.png"
 
 Floor3e:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor3e.png"
 
 Floor3g:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor3g.png"
 
 Floor3h:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor3h.png"
 
 Floor4a1:
   extends: Floor
-  extents: [0.86, .15, 1]
+  size: [0.86, .15, 1]
   image: ":deeper:tiles/Floor4a1.png"
 
 Floor4a2:
   extends: Floor
-  extents: [0.86, .15, 1]
+  size: [0.86, .15, 1]
   image: ":deeper:tiles/Floor4a2.png"
 
 Floor4a3:
   extends: Floor
-  extents: [0.86, .15, 1]
+  size: [0.86, .15, 1]
   image: ":deeper:tiles/Floor4a3.png"
 
 Floor4a4:
   extends: Floor
-  extents: [0.86, .15, 1]
+  size: [0.86, .15, 1]
   image: ":deeper:tiles/Floor4a4.png"
 
 Floor4a4:
   extends: Floor
-  extents: [0.86, .15, 1]
+  size: [0.86, .15, 1]
   image: ":deeper:tiles/Floor4a4.png"
 
 Floor4b:
@@ -115,52 +115,52 @@ Floor7b:
 
 Floor7borderBackLeft:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderBackLeft.png"
 
 Floor7borderBackRight:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderBackRight.png"
 
 Floor7borderCornerBackRight:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderCornerBackRight.png"
 
 Floor7borderCornerDouble1:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderCornerDouble1.png"
 
 Floor7borderCornerDouble2:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderCornerDouble2.png"
 
 Floor7borderCornerFrontLeft:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderCornerFrontLeft.png"
 
 Floor7borderCornerFrontRight:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderCornerFrontRight.png"
 
 Floor7borderFront1:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderFront1.png"
 
 Floor7borderFront2:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderFront2.png"
 
 Floor7borderFront2Bridge:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderFront2Bridge.png"
   components:
     SpriteVu:
@@ -168,32 +168,32 @@ Floor7borderFront2Bridge:
 
 Floor7borderFrontLeft:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderFrontLeft.png"
 
 Floor7borderFrontRight:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderFrontRight.png"
 
 Floor7borderLeft:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderLeft.png"
 
 Floor7borderRight:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderRight.png"
 
 Floor7borderRight2:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderRight2.png"
 
 Floor7borderRight2Bridge:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderRight2Bridge.png"
   components:
     SpriteVu:
@@ -201,12 +201,12 @@ Floor7borderRight2Bridge:
 
 Floor7borderRightCracked:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderRightCracked.png"
 
 Floor7borderRightCracked2:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/Floor7borderRightCracked2.png"
 
 Floor7c:
@@ -219,12 +219,12 @@ Floor7c3:
 
 Floor7c4:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/Floor7c4.png"
 
 Floor7c5:
   extends: Floor
-  extents: [0.86, .08, 1]
+  size: [0.86, .08, 1]
   image: ":deeper:tiles/Floor7c5.png"
 
 Floor7cOld:
@@ -269,12 +269,12 @@ Floor8h:
 
 FloorABorder0:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorABorder0.png"
 
 FloorABorder9:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorABorder9.png"
 
 FloorB1:
@@ -391,92 +391,92 @@ FloorC49:
 
 FloorC50:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorC50.png"
 
 FloorC51:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorC51.png"
 
 FloorC52:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorC52.png"
 
 FloorC53:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorC53.png"
 
 FloorC54:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorC54.png"
 
 FloorC55:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorC55.png"
 
 FloorCBorder0:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorCBorder0.png"
 
 FloorCBorder9:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorCBorder9.png"
 
 FloorCBorder10:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorCBorder10.png"
 
 FloorCBorder11:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorCBorder11.png"
 
 FloorD:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorD.png"
 
 FloorD2:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorD2.png"
 
 FloorD3:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorD3.png"
 
 FloorD4:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorD4.png"
 
 FloorE:
   extends: Floor
-  extents: [0.86, .05, 1]
+  size: [0.86, .05, 1]
   image: ":deeper:tiles/FloorE.png"
 
 FloorEBorder0:
   extends: Floor
-  extents: [0.86, .05, 1]
+  size: [0.86, .05, 1]
   image: ":deeper:tiles/FloorEBorder0.png"
 
 FloorEBorder9:
   extends: Floor
-  extents: [0.86, .05, 1]
+  size: [0.86, .05, 1]
   image: ":deeper:tiles/FloorEBorder9.png"
 
 FloorEBorder10:
   extends: Floor
-  extents: [0.86, .05, 1]
+  size: [0.86, .05, 1]
   image: ":deeper:tiles/FloorEBorder10.png"
 
 FloorF:
@@ -489,12 +489,12 @@ FloorF1:
 
 FloorG1:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/FloorG1.png"
 
 FloorG2:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/FloorG2.png"
 
 FloorGreen1:
@@ -611,82 +611,82 @@ FloorGridB9:
 
 FloorI1:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI1.png"
 
 FloorI2:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI2.png"
 
 FloorI3:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI3.png"
 
 FloorI4:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI4.png"
 
 FloorI5:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI5.png"
 
 FloorI6:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI6.png"
 
 FloorI7:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI7.png"
 
 FloorI8:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI8.png"
 
 FloorI9:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI9.png"
 
 FloorI9:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorI9.png"
 
 FloorJ1:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorJ1.png"
 
 FloorJ2:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorJ2.png"
 
 FloorJ3:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorJ3.png"
 
 FloorJ4:
   extends: Floor
-  extents: [0.86, .01, 1]
+  size: [0.86, .01, 1]
   image: ":deeper:tiles/FloorJ4.png"
 
 FloorRailsEnd1:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/FloorRailsEnd1.png"
 
 FloorRailsEnd2:
   extends: Floor
-  extents: [0.86, .6, 1]
+  size: [0.86, .6, 1]
   image: ":deeper:tiles/FloorRailsEnd2.png"
 
 FloorStair:

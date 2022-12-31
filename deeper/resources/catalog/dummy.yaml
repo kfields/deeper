@@ -16,7 +16,7 @@ DummyDoll:
 
 DummyDoll2:
   extends: Dummy
-  extents: [0.86, 1.5, 1]
+  size: [0.86, 1.5, 1]
   image: ":deeper:tiles/Dummy/DummyDoll2.png"
 
 DummyDoll3:
@@ -25,7 +25,7 @@ DummyDoll3:
 
 DummyDoll4:
   extends: Dummy
-  extents: [0.86, 1.5, 1]
+  size: [0.86, 1.5, 1]
   image: ":deeper:tiles/Dummy/DummyDoll4.png"
 
 DummyDoll5:
@@ -42,7 +42,7 @@ DummyDoll7:
 
 DummySkeleton:
   extends: Dummy
-  extents: [0.86, 1.5, 1]
+  size: [0.86, 1.5, 1]
   image: ":deeper:tiles/Dummy/DummySkeleton.png"
 
 DummySkeleton2:

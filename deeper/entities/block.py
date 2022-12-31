@@ -12,8 +12,8 @@ class BlockBuilder(EntityBuilder):
         #print(blueprint)
         position = self.compute_position(blueprint, world, target)
         #print("position: ", position)
-        extents = glm.vec3(*blueprint.extents)
-        block = Block(position, extents, blueprint=blueprint)
+        size = glm.vec3(*blueprint.size)
+        block = Block(position, size, blueprint=blueprint)
         world.create_entity(block, *components)
 
 
@@ -24,5 +24,5 @@ class BlockBuilder(EntityBuilder):
         target_pos = target_space.position
         target_aabb = target_space.aabb
 
-        extents = blueprint.extents
-        return glm.vec3(target_pos.x, target_aabb.maxy + extents[1]/2, target_pos.z)
+        size = blueprint.size
+        return glm.vec3(target_pos.x, target_aabb.maxy + size[1]/2, target_pos.z)

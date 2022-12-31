@@ -9,7 +9,7 @@ class Block(Component):
     def __init__(
         self,
         position=DEFAULT_VEC3,
-        extents=glm.vec3(1, 1, 1),
+        size=glm.vec3(1, 1, 1),
         solid=True,
         blueprint=None,
     ) -> None:
@@ -19,7 +19,7 @@ class Block(Component):
         self.rotation = DEFAULT_VEC3
         self.isometry = Isometry(*position, *self.rotation)
         self.shape = None
-        self.extents = extents
+        self.size = size
         self.children = []
 
     @property
@@ -34,14 +34,14 @@ class Block(Component):
         #    self.aabb = self.shape.aabb(self.isometry)
 
     @property
-    def extents(self):
-        return self._extents
+    def size(self):
+        return self._size
 
-    @extents.setter
-    def extents(self, extents):
-        self._extents = extents
+    @size.setter
+    def size(self, size):
+        self._size = size
         if self.solid:
-            self.shape = Cuboid(extents.x, extents.y, extents.z)
+            self.shape = Cuboid(size.x, size.y, size.z)
             # self.aabb = self.shape.aabb(self.isometry)
 
     @property
