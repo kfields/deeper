@@ -3,13 +3,13 @@ import glm
 from ..constants import *
 from .. import Isometry, Cuboid
 from .. import Component
-
+from ..builder import ComponentBuilder
 
 class Block(Component):
     def __init__(
         self,
         position=DEFAULT_VEC3,
-        size=glm.vec3(1, 1, 1),
+        size=glm.vec3(CELL_WIDTH, 1, 1),
         solid=True,
         blueprint=None,
     ) -> None:
@@ -67,3 +67,11 @@ class Block(Component):
             if contact:
                 return entity, self, contact
             return None
+
+class BlockBuilder(ComponentBuilder):
+    key = 'Block'
+
+    def build(self, blueprint, world, target=None, components=[]):
+        #size = glm.vec3(*blueprint.size) if hasattr(blueprint, 'size') else glm.vec3(CELL_WIDTH, 1, 1)
+        size = glm.vec3(*blueprint.parent.size) if hasattr(blueprint.parent, 'size') else glm.vec3(CELL_WIDTH, 1, 1)
+        return Block(size=size, blueprint=blueprint)

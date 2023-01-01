@@ -12,9 +12,16 @@ class BlockBuilder(EntityBuilder):
         #print(blueprint)
         position = self.compute_position(blueprint, world, target)
         #print("position: ", position)
-        size = glm.vec3(*blueprint.size)
-        block = Block(position, size, blueprint=blueprint)
-        world.create_entity(block, *components)
+        #size = glm.vec3(*blueprint.size)
+        #block = Block(position, size, blueprint=blueprint)
+        block = None
+        for component in components:
+            if component.__class__ == Block:
+                block = component
+                break
+        block.position = position
+        #world.create_entity(block, *components)
+        world.create_entity(*components)
 
 
     def compute_position(self, blueprint, world, target):

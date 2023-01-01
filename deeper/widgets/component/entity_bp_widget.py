@@ -27,13 +27,13 @@ class EntityBpWidget(ComponentWidget):
         imgui.text("category: ")
         imgui.same_line()
         imgui.text(self.blueprint.category)
-
+        """
         changed, size = imgui.drag_float3(
             "Size", *self.blueprint.size, change_speed=0.1
         )
         if changed:
             self.block.size = size
-
+        """
         for child in self.children:
             expanded, child.visible = imgui.collapsing_header(child.blueprint.name, child.visible)
             if expanded:

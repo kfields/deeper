@@ -14,6 +14,7 @@ class ComponentWidgetKit(Kit):
             return self.builders[component.__class__]
 
     def build(self, component):
-        #print(blueprint.__dict__)
+        #print(component.__dict__)
+        #print(component.__class__.__name__)
         builder = self.find(component)
         return builder.build(component)

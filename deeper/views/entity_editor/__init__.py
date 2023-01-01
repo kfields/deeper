@@ -5,7 +5,7 @@ from arcade.resources import resolve_resource_path
 from arcade import key
 
 from deeper.view import WorldView
-from deeper import Blueprint, Block
+from deeper import EntityBlueprint, Block
 from deeper.constants import *
 from deeper.camera import WorldCamera
 from deeper.processors.rendering import RenderingProcessor
@@ -33,7 +33,8 @@ class EntityEditor(WorldView):
 
         self.block = self.world.component_for_entity(edit_state.entity, Block)
 
-        self.blueprint = self.block.blueprint
+        #self.blueprint = self.block.blueprint
+        self.blueprint = self.world.component_for_entity(edit_state.entity, EntityBlueprint)
         #self.gui.add_child(BlueprintWindow(self.blueprint))
         self.gui.add_child(ComponentWindow(self.blueprint))
 

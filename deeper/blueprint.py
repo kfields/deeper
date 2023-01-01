@@ -1,5 +1,6 @@
 import copy
 from . import mergedeep
+from .constants import *
 from .builder import Builder
 
 
@@ -67,6 +68,7 @@ class BlueprintBuilder(Builder):
 
 
 class EntityBlueprint(Blueprint):
+    size = [CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH]
     def __init__(self, catalog, name, config):
         super().__init__(catalog, name, config)
 

@@ -45,6 +45,8 @@ class Catalog(Kit):
 
     def build(self, name, config, parent):
         #print(blueprint.__dict__)
+        if not config:
+            config = {}
         builder = self.find_builder(name)
         return builder.build(self, name, config, parent)
 
