@@ -1,4 +1,3 @@
-import pyglet
 import imgui
 
 from deeper.dimgui import Widget

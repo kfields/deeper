@@ -1,10 +1,10 @@
-import math
 import glm
 import pyglet
+from pyglet import clock
 import arcade
 from arcade.resources import resolve_resource_path
 from arcade import key
-import imgui
+
 
 from deeper.view import WorldView
 from deeper import Block, Cuboid
@@ -13,7 +13,6 @@ from deeper.camera import WorldCamera
 from deeper.components.sprite_vu import SpriteVu
 from deeper.processors.rendering import RenderingProcessor
 from deeper.catalog import Catalog
-from deeper.dimgui import Gui
 from deeper.widgets import MainMenu, CatalogWindow
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 

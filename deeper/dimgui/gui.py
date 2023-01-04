@@ -116,29 +116,48 @@ class GuiBase(Widget):
     def on_resize(self, width, height):
         self.io.display_size = width, height
 
-
 class Gui(GuiBase):
+    context = None
+    renderer = None
     def __init__(self, window, children=[], auto_enable=True):
         self.window = window
         super().__init__(children)
         self.camera = arcade.Camera()
         self.default_font = None
         # Must create or set the context before instantiating the renderer
-        imgui.create_context()
+        #TODO: Definitely need to share the renderer.
+        # Since the renderer is tied to the context we need to share that also.
+        if not self.context:
+            print("create_context")
+            imgui.create_context()
+            Gui.context = imgui.get_current_context()
+
         self.io = imgui.get_io()
 
-        self.renderer = GuiRenderer(window)
+        if not self.renderer:
+            Gui.renderer = GuiRenderer(window)
 
         if auto_enable:
             self.enable()
         else:
             window.push_handlers(self.on_resize)
 
+    #def __del__(self):
+    #    imgui.destroy_context(self.context)
+
     def enable(self):
+        #imgui.set_current_context(self.context)
         self.window.push_handlers(self)
 
     def disable(self):
         self.window.remove_handlers(self)
+
+    def show(self):
+        #imgui.set_current_context(self.context)
+        pass
+
+    def hide(self):
+        pass
 
     def add_child(self, child):
         super().add_child(child)
@@ -151,11 +170,13 @@ class Gui(GuiBase):
         return font
 
     def start_render(self):
+        #imgui.set_current_context(self.context)
         imgui.new_frame()
         if self.default_font:
             imgui.push_font(self.default_font)
 
     def finish_render(self):
+        #imgui.set_current_context(self.context)
         self.camera.use()
         self.draw()
         if self.default_font:

@@ -1,4 +1,5 @@
 import glm
+from pyglet import clock
 import arcade
 from arcade import key
 from .tool import WorldEditTool
@@ -41,11 +42,17 @@ class PickTool(WorldEditTool):
         self.selected = Selected(self.hovered.entity, self.hovered.block)
 
         if self._click_count == 2:
-            from deeper.state import EntityEditState
-            from deeper.views.entity_editor import EntityEditor
-            self.window.show_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.entity)))
+            #self._click_count = 0
+            #self.push_entity_editor()
+            clock.schedule_once(lambda dt, *args, **kwargs : self.push_entity_editor(), 0)
             return
 
+
+    def push_entity_editor(self):
+        from deeper.state import EntityEditState
+        from deeper.views.entity_editor import EntityEditor
+        #self.window.show_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.entity)))
+        self.window.push_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.entity)))
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.DELETE and self.selected:

@@ -77,7 +77,7 @@ class CatalogPanel(Widget):
         if current != self.current:
             if self.current:
                 self.current.hide()
-            current.show
+            current.show()
         self.current = current
         self.current.draw()
 

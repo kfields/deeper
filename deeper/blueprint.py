@@ -8,11 +8,12 @@ class Blueprint:
     def __init__(self, catalog, name, config, parent=None):
         self.catalog = catalog
         self.name = name
+        self.config = config
         self.category = None
         self.parent = parent
         self.children = []
         self._abstract = False
-        self.config = self.configure(config)
+        self.xconfig = self.configure(config)
 
     def __repr__(self) -> str:
         return f"<Blueprint name={self.name}>"
@@ -43,23 +44,23 @@ class Blueprint:
     def extend(self, config):
         blueprint = self.catalog.blueprints[config["extends"]]
         """
-        newconfig = {}
+        xconfig = {}
         for key, value in blueprint.config.items():
             if key.startswith('_'):
                 continue
-            newconfig[key] = value
+            xconfig[key] = value
 
         for key, value in config.items():
-            newconfig[key] = value
+            xconfig[key] = value
         """
-        newconfig = copy.deepcopy(blueprint.config)
-        # newconfig = mergedeep.merge(newconfig, config, strategy=mergedeep.Strategy.TYPESAFE_REPLACE)
-        newconfig = mergedeep.merge(
-            newconfig, config, strategy=mergedeep.Strategy.REPLACE
+        xconfig = copy.deepcopy(blueprint.xconfig)
+        # xconfig = mergedeep.merge(xconfig, config, strategy=mergedeep.Strategy.TYPESAFE_REPLACE)
+        xconfig = mergedeep.merge(
+            xconfig, config, strategy=mergedeep.Strategy.REPLACE
         )
-        # print("newconfig:", newconfig)
+        # print("xconfig:", xconfig)
 
-        return newconfig
+        return xconfig
 
 
 class BlueprintBuilder(Builder):

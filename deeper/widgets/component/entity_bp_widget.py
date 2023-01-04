@@ -7,7 +7,6 @@ from deeper.kits.blueprint_widget_kit import BlueprintWidgetKit
 
 class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):
-        #super().__init__(blueprint)
         self.blueprint = blueprint
 
         children = []

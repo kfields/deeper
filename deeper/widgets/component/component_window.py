@@ -6,5 +6,4 @@ class ComponentWindow(Window):
         self.component = component
         children = []
         children.append(ComponentWidgetKit.instance.build(component))
-        #super().__init__("Entity", children)
         super().__init__(component.__class__.__name__, children)

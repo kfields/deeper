@@ -1,5 +1,6 @@
 import glm
 import pyglet
+from pyglet import clock
 import arcade
 from arcade.resources import resolve_resource_path
 from arcade import key
@@ -14,6 +15,7 @@ from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
 
+from deeper.widgets.button import Button
 from deeper.widgets.toolbar import Toolbar, Toolbutton
 from deeper.widgets.entity_window import EntityWindow
 #from deeper.widgets.blueprint_window import BlueprintWindow
@@ -33,7 +35,6 @@ class EntityEditor(WorldView):
 
         self.block = self.world.component_for_entity(edit_state.entity, Block)
 
-        #self.blueprint = self.block.blueprint
         self.blueprint = self.world.component_for_entity(edit_state.entity, EntityBlueprint)
         #self.gui.add_child(BlueprintWindow(self.blueprint))
         self.gui.add_child(ComponentWindow(self.blueprint))
@@ -63,12 +64,18 @@ class EntityEditor(WorldView):
                     Toolbar(
                         [
                             Toolbutton(IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick),
+                            Toolbutton(IconsMaterialDesign.ICON_CLOSE, font, self.close),
                         ]
                     )
                 ]
             )
         )
 
+    def close(self):
+        print('close')
+        #self.window.pop_view()
+        clock.schedule_once(lambda dt, *args, **kwargs : self.window.pop_view(), 0)
+    
     def use_pick(self):
         self.use_tool(self.pick_tool)
 
