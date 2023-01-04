@@ -46,15 +46,15 @@ class View(arcade.View):
         super().on_show_view()
         self.ui_manager.enable()
         self.gui.show()
-        if self.current_tool:
-            self.current_tool.enable()
+        #if self.current_tool:
+        #    self.current_tool.enable()
         self.gui.enable()
 
     def on_hide_view(self):
         super().on_hide_view()
         self.ui_manager.disable()
-        if self.current_tool:
-            self.current_tool.disable()
+        #if self.current_tool:
+        #    self.current_tool.disable()
         self.gui.disable()
         self.gui.hide()
 

@@ -72,9 +72,7 @@ class EntityEditor(WorldView):
         )
 
     def close(self):
-        print('close')
-        #self.window.pop_view()
-        clock.schedule_once(lambda dt, *args, **kwargs : self.window.pop_view(), 0)
+        self.window.pop_view()
     
     def use_pick(self):
         self.use_tool(self.pick_tool)

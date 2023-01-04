@@ -125,7 +125,7 @@ class Gui(GuiBase):
         self.camera = arcade.Camera()
         self.default_font = None
         # Must create or set the context before instantiating the renderer
-        #TODO: Definitely need to share the renderer.
+        # Note: Definitely need to share the renderer to use gui per view.
         # Since the renderer is tied to the context we need to share that also.
         if not self.context:
             print("create_context")

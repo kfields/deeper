@@ -37,6 +37,8 @@ class StampTool(WorldEditTool):
             self.hovered = None
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
+        super().on_mouse_press(x, y, button, modifiers)
+        print('stamp')
         if self.hovered and self.edit_state.current_blueprint:
             #Architect.instance.build(self.edit_state.current_blueprint, self.world, self.hovered.entity)
             EntityKit.instance.build(self.edit_state.current_blueprint, self.world, self.hovered.entity)

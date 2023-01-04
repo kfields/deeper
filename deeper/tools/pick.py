@@ -36,15 +36,14 @@ class PickTool(WorldEditTool):
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)
+        print('pick')
         if not self.hovered:
             return
         
         self.selected = Selected(self.hovered.entity, self.hovered.block)
-
         if self._click_count == 2:
             #self._click_count = 0
-            #self.push_entity_editor()
-            clock.schedule_once(lambda dt, *args, **kwargs : self.push_entity_editor(), 0)
+            self.push_entity_editor()
             return
 
 

@@ -91,6 +91,7 @@ class WorldEditor(WorldView):
             self.camera.zoom = self.camera.zoom - .1
 
     def create_blocks(self):
+        blueprint = self.catalog.find('Cell')
         size = glm.vec3(CELL_WIDTH, .01, 1)
         for ty in range(0, 8):
             for tx in range(0, 8):
@@ -101,7 +102,7 @@ class WorldEditor(WorldView):
                 vu = SpriteVu(
                     arcade.Sprite(":deeper:tiles/_Grid/GRID.png",)
                 )
-                self.world.create_entity(block, vu)
+                self.world.create_entity(block, vu, blueprint)
 
     def draw(self):
         self.camera.use()  # TODO: This is messing with ImGui on resize...
