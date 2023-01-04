@@ -8,9 +8,16 @@ class Setting(Data):
     #def __init__(self, name) -> None:
     #    self.name = name
 
-class Settings(Setting):
-    def __init__(self, name) -> None:
-        super().__init__(name)
+class SettingGroup(Setting):
+    value: list[Setting]
+
+    @validator('value', pre=True)
+    def validate_value(cls, v):
+        result = []
+        for item in v:
+            result.append(cls.setting_map[item['name']].parse_obj(item))
+        return result
+
 
 class Vec3Setting(Setting):
     class Config:
