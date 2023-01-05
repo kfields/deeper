@@ -24,7 +24,7 @@ from deeper.widgets.camera_window import CameraWindow
 
 class WorldEditor(WorldView):
     def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.world)
+        super().__init__(window, edit_state.world, 'World Editor')
         self.edit_state = edit_state
 
         self.gui.default_font = self.gui.load_font(
@@ -47,11 +47,8 @@ class WorldEditor(WorldView):
 
         self.add_processor(RenderingProcessor(self))
 
-        self.pick_tool = PickTool(self, edit_state)
+        self.current_tool = self.pick_tool = PickTool(self, edit_state)
         self.stamp_tool = StampTool(self, edit_state)
-
-        self.use_tool(self.pick_tool)
-        #self.use_tool(self.stamp_tool)
 
         # TODO:Need glyph range which pyimgui does not support. :(
         # self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))

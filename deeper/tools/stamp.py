@@ -20,7 +20,7 @@ class Selected:
 
 class StampTool(WorldEditTool):
     def __init__(self, view, edit_state) -> None:
-        super().__init__(view, edit_state)
+        super().__init__(view, edit_state, 'Stamp')
         self.hovered = None
         self.selected = None
 

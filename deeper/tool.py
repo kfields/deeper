@@ -2,9 +2,10 @@ import time
 
 
 class Tool:
-    def __init__(self, view) -> None:
+    def __init__(self, view, title='') -> None:
         self.view = view
         self.window = view.window
+        self.title = title
         self._click_time = time.time()
         self._click_count = 0
 
@@ -27,7 +28,7 @@ class Tool:
         self._click_time = time.time()
 
 class WorldTool(Tool):
-    def __init__(self, view) -> None:
-        super().__init__(view)
+    def __init__(self, view, title='') -> None:
+        super().__init__(view, title)
         self.world = view.world
         self.camera = view.camera

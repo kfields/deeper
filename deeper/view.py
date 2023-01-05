@@ -6,8 +6,9 @@ from .dimgui import ViewGui
 from .tool import Tool
 
 class View(arcade.View):
-    def __init__(self, window):
+    def __init__(self, window, title=''):
         super().__init__(window)
+        self.title = title
         self.ui_manager = UIManager(window)
         self.gui = ViewGui(self, auto_enable=False)
         self.current_tool: Tool = None
@@ -46,21 +47,21 @@ class View(arcade.View):
         super().on_show_view()
         self.ui_manager.enable()
         self.gui.show()
-        #if self.current_tool:
-        #    self.current_tool.enable()
+        if self.current_tool:
+            self.current_tool.enable()
         self.gui.enable()
 
     def on_hide_view(self):
         super().on_hide_view()
         self.ui_manager.disable()
-        #if self.current_tool:
-        #    self.current_tool.disable()
+        if self.current_tool:
+            self.current_tool.disable()
         self.gui.disable()
         self.gui.hide()
 
 class WorldView(View):
-    def __init__(self, window, world):
-        super().__init__(window)
+    def __init__(self, window, world, title=''):
+        super().__init__(window, title)
         self.world = world
         self.processors = []
 

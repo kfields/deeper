@@ -23,7 +23,7 @@ from deeper.widgets.component.component_window import ComponentWindow
 
 class EntityEditor(WorldView):
     def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.world)
+        super().__init__(window, edit_state.world, 'Entity Editor')
         self.edit_state = edit_state
 
         self.gui.default_font = self.gui.load_font(
@@ -47,9 +47,8 @@ class EntityEditor(WorldView):
 
         self.add_processor(RenderingProcessor(self))
 
-        self.pick_tool = PickTool(self, edit_state)
+        self.current_tool = self.pick_tool = PickTool(self, edit_state)
 
-        self.use_tool(self.pick_tool)
 
         # TODO:Need glyph range which pyimgui does not support. :(
         # self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
@@ -72,7 +71,8 @@ class EntityEditor(WorldView):
         )
 
     def close(self):
-        self.window.pop_view()
+        #self.window.pop_view()
+        clock.schedule_once(lambda dt, *args, **kwargs : self.window.pop_view(), 0)
     
     def use_pick(self):
         self.use_tool(self.pick_tool)

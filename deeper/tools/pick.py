@@ -1,7 +1,10 @@
+from loguru import logger
+
 import glm
 from pyglet import clock
 import arcade
 from arcade import key
+
 from .tool import WorldEditTool
 
 
@@ -18,7 +21,7 @@ class Selected:
 
 class PickTool(WorldEditTool):
     def __init__(self, view, edit_state) -> None:
-        super().__init__(view, edit_state)
+        super().__init__(view, edit_state, 'Pick')
         self.hovered = None
         self.selected = None
 
@@ -36,14 +39,15 @@ class PickTool(WorldEditTool):
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)
-        print('pick')
+        logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
         if not self.hovered:
             return
         
         self.selected = Selected(self.hovered.entity, self.hovered.block)
         if self._click_count == 2:
             #self._click_count = 0
-            self.push_entity_editor()
+            #self.push_entity_editor()
+            clock.schedule_once(lambda dt, *args, **kwargs : self.push_entity_editor(), 0)
             return
 
 
