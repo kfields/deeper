@@ -1,7 +1,7 @@
 import glm
 import imgui
 
-from deeper.blueprints.sprite_vu_blueprint import SpriteVuBlueprint, AnimatedSpriteVuBlueprint
+from deeper.blueprints.component.sprite_vu_blueprint import SpriteVuBlueprint, AnimatedSpriteVuBlueprint
 from .blueprint_widget import BlueprintWidget, BlueprintWidgetBuilder
 
 class SpriteVuBpWidget(BlueprintWidget):

@@ -2,7 +2,7 @@ import copy
 from . import mergedeep
 from .constants import *
 from .builder import Builder
-
+from .setting import Setting, SettingGroup, Vec3Setting
 
 class Blueprint:
     def __init__(self, catalog, name, config, parent=None):
@@ -66,14 +66,3 @@ class Blueprint:
 class BlueprintBuilder(Builder):
     def build(self, catalog, name, config, parent):
         return self.cls(catalog, name, config, parent)
-
-
-class EntityBlueprint(Blueprint):
-    size = [CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH]
-    def __init__(self, catalog, name, config):
-        super().__init__(catalog, name, config)
-
-
-class ComponentBlueprint(Blueprint):
-    def __init__(self, catalog, name, config, parent):
-        super().__init__(catalog, name, config, parent)

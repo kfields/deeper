@@ -8,7 +8,7 @@ import deeper.blueprints
 
 from ..kits import Kit
 
-from deeper import EntityBlueprint
+from ..blueprints import EntityBlueprint
 from .loader import load
 
 class Category:

@@ -1,9 +1,9 @@
 import glm
 import imgui
 
-from deeper import EntityBlueprint
+from ...kits.blueprint_widget_kit import BlueprintWidgetKit
+from ...blueprints import EntityBlueprint
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
-from deeper.kits.blueprint_widget_kit import BlueprintWidgetKit
 
 class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):

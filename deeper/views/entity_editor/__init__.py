@@ -6,7 +6,8 @@ from arcade.resources import resolve_resource_path
 from arcade import key
 
 from deeper.view import WorldView
-from deeper import EntityBlueprint, Block
+from deeper import Block
+from deeper.blueprints import EntityBlueprint
 from deeper.constants import *
 from deeper.camera import WorldCamera
 from deeper.processors.rendering import RenderingProcessor
@@ -15,7 +16,6 @@ from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
 
-from deeper.widgets.button import Button
 from deeper.widgets.toolbar import Toolbar, Toolbutton
 from deeper.widgets.entity_window import EntityWindow
 #from deeper.widgets.blueprint_window import BlueprintWindow
