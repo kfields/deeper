@@ -13,6 +13,7 @@ class Blueprint:
         self.parent = parent
         self.children = []
         self._abstract = False
+        self.base = None
         self.xconfig = self.configure(config)
         self.settings = self.create_settings(config)
 
@@ -25,6 +26,7 @@ class Blueprint:
             return {}
         # print("config: ", config)
         if "extends" in config:
+            self.base = self.catalog.find(config["extends"])
             config = self.extend(config)
 
         for key, value in config.items():

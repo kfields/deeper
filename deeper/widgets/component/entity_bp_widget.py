@@ -10,10 +10,17 @@ from ...blueprints import EntityBlueprint
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
 
 class SettingsPanel(Widget):
-    def __init__(self, settings):
+    def __init__(self, blueprint):
+        self.blueprint = blueprint
+        settings = blueprint.settings
         self.settings = settings
-        child = SettingWidgetKit.instance.build(settings)
-        super().__init__([child])
+        #child = SettingWidgetKit.instance.build(settings)
+        children = []
+        bp = blueprint
+        while bp:
+            children.append(SettingWidgetKit.instance.build(bp.settings))
+            bp = bp.base
+        super().__init__(children)
 
 class BlueprintsPanel(Widget):
     def __init__(self, blueprint):
@@ -52,7 +59,7 @@ class BlueprintsPanel(Widget):
 class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):
         self.blueprint = blueprint
-        self.panels = [SettingsPanel(blueprint.settings), BlueprintsPanel(blueprint)]
+        self.panels = [SettingsPanel(blueprint), BlueprintsPanel(blueprint)]
         self.panel_names = ['Settings', 'Blueprints']
         self.current_index = 0
         self.current = None

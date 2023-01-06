@@ -9,7 +9,7 @@ class Vec2Widget(SettingWidget):
         super().__init__(setting)
 
     def draw(self):
-        changed, self.value = imgui.drag_float2(self.name, self.value)
+        changed, self.value = imgui.drag_float2(self.name, *self.value)
         
 
 class Vec2WidgetBuilder(SettingWidgetBuilder):
