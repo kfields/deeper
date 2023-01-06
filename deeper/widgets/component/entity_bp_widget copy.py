@@ -1,28 +1,18 @@
 import glm
 import imgui
 
-from deeper.dimgui import Widget
-
-from ...kits.setting_widget_kit import SettingWidgetKit
-
 from ...kits.blueprint_widget_kit import BlueprintWidgetKit
 from ...blueprints import EntityBlueprint
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
 
-class SettingsPanel(Widget):
-    def __init__(self, settings):
-        self.settings = settings
-        child = SettingWidgetKit.instance.build(settings)
-        super().__init__([child])
-
-class BlueprintsPanel(Widget):
+class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):
         self.blueprint = blueprint
 
         children = []
         for child in blueprint.children:
             children.append(BlueprintWidgetKit.instance.build(child))
-        super().__init__(children)
+        super().__init__(blueprint, children)
 
     def draw(self):
         imgui.text("name: ")
@@ -47,31 +37,6 @@ class BlueprintsPanel(Widget):
             expanded, child.visible = imgui.collapsing_header(child.blueprint.name, child.visible)
             if expanded:
                 child.draw()
-
-
-class EntityBpWidget(ComponentWidget):
-    def __init__(self, blueprint):
-        self.blueprint = blueprint
-        self.panels = [SettingsPanel(blueprint.settings), BlueprintsPanel(blueprint)]
-        self.panel_names = ['Settings', 'Blueprints']
-        self.current_index = 0
-        self.current = None
-
-        super().__init__(blueprint)
-
-    def draw(self):
-        clicked, self.current_index = imgui.combo(
-            "View", self.current_index, self.panel_names
-        )
-        current = self.panels[self.current_index]
-        """
-        if current != self.current:
-            if self.current:
-                self.current.hide()
-            current.show()
-        """
-        self.current = current
-        self.current.draw()
 
 class EntityBpWidgetBuilder(ComponentWidgetBuilder):
     key = EntityBlueprint

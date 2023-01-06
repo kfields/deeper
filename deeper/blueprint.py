@@ -2,7 +2,7 @@ import copy
 from . import mergedeep
 from .constants import *
 from .builder import Builder
-from .setting import Setting, SettingGroup, Vec3Setting
+from .setting import decompose
 
 class Blueprint:
     def __init__(self, catalog, name, config, parent=None):
@@ -14,6 +14,7 @@ class Blueprint:
         self.children = []
         self._abstract = False
         self.xconfig = self.configure(config)
+        self.settings = self.create_settings(config)
 
     def __repr__(self) -> str:
         return f"<Blueprint name={self.name}>"
@@ -61,6 +62,12 @@ class Blueprint:
         # print("xconfig:", xconfig)
 
         return xconfig
+
+    def create_settings(self, config):
+        decomposed = decompose(config)
+        obj = {"name": self.name, "value": decomposed}
+        print(obj)
+        return self.settings_class.parse_obj(obj)
 
 
 class BlueprintBuilder(Builder):
