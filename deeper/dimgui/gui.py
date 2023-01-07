@@ -7,7 +7,7 @@ import arcade
 
 from .renderer import GuiRenderer
 from .widget import Widget
-
+from .board import Clipboard, Dropboard
 
 class GuiBase(Widget):
     REVERSE_KEY_MAP = {
@@ -124,11 +124,13 @@ class Gui(GuiBase):
         super().__init__(children)
         self.camera = arcade.Camera()
         self.default_font = None
+        self.clipboard = Clipboard()
+        self.dropboard = Dropboard()
         # Must create or set the context before instantiating the renderer
         # Note: Definitely need to share the renderer to use gui per view.
         # Since the renderer is tied to the context we need to share that also.
         if not self.context:
-            print("create_context")
+            #print("create_context")
             imgui.create_context()
             Gui.context = imgui.get_current_context()
 

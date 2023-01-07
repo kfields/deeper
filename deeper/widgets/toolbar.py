@@ -2,7 +2,7 @@ import imgui
 
 from deeper.dimgui import Widget
 
-class Toolbutton(Widget):
+class ToolButton(Widget):
     def __init__(self, text, font, callback):
         super().__init__()
         self.text = text

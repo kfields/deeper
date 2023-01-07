@@ -1,3 +1,4 @@
 from .catalog_window import CatalogWindow
-from .toolbar import Toolbar, Toolbutton
+from .icon import Icon, IconButton
+from .toolbar import Toolbar, ToolButton
 from .main_menu import MainMenu

@@ -19,7 +19,7 @@ from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 from deeper.tools.pick import PickTool
 from deeper.tools.stamp import StampTool
 
-from deeper.widgets.toolbar import Toolbar, Toolbutton
+from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.camera_window import CameraWindow
 
 class WorldEditor(WorldView):
@@ -62,8 +62,8 @@ class WorldEditor(WorldView):
                 children=[
                     Toolbar(
                         [
-                            Toolbutton(IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick),
-                            Toolbutton(IconsMaterialDesign.ICON_APPROVAL, font, self.use_stamp),
+                            ToolButton(IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick),
+                            ToolButton(IconsMaterialDesign.ICON_APPROVAL, font, self.use_stamp),
                         ]
                     )
                 ]

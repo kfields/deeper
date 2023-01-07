@@ -3,8 +3,10 @@ class Widget:
     def __init__(self, children=[]):
         self.children = []
         self.add_children(children)
+        self.gui = None
 
     def create(self, gui):
+        self.gui = gui
         for child in self.children:
             child.create(gui)
 

@@ -1,3 +1,6 @@
+from .setting_widget import SettingWidget
+from .setting_wrapper import SettingWrapper
+
 from .bool_widget import BoolWidgetBuilder
 from .float_widget import FloatWidgetBuilder
 from .int_widget import IntWidgetBuilder

@@ -16,7 +16,7 @@ from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
 
-from deeper.widgets.toolbar import Toolbar, Toolbutton
+from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.entity_window import EntityWindow
 #from deeper.widgets.blueprint_window import BlueprintWindow
 from deeper.widgets.component.component_window import ComponentWindow
@@ -26,6 +26,7 @@ class EntityEditor(WorldView):
         super().__init__(window, edit_state.world, 'Entity Editor')
         self.edit_state = edit_state
 
+        #TODO: Make helper method inside gui?
         self.gui.default_font = self.gui.load_font(
             resolve_resource_path(f":deeper:fonts/Roboto-Regular.ttf"), 16
         )
@@ -53,17 +54,17 @@ class EntityEditor(WorldView):
         # TODO:Need glyph range which pyimgui does not support. :(
         # self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
 
-        arcade.text.load_font(
-            f":deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"
-        )
+        #arcade.text.load_font(
+        #    f":deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"
+        #)
         font = pyglet.font.load("Material Icons")
         self.gui.add_child(
             MainMenu(
                 children=[
                     Toolbar(
                         [
-                            Toolbutton(IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick),
-                            Toolbutton(IconsMaterialDesign.ICON_CLOSE, font, self.close),
+                            ToolButton(IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick),
+                            ToolButton(IconsMaterialDesign.ICON_CLOSE, font, self.close),
                         ]
                     )
                 ]

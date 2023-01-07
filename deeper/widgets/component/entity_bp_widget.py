@@ -66,17 +66,16 @@ class EntityBpWidget(ComponentWidget):
 
         super().__init__(blueprint)
 
+    def create(self, gui):
+        super().create(gui)
+        for panel in self.panels:
+            panel.create(gui)
+
     def draw(self):
-        clicked, self.current_index = imgui.combo(
+        changed, self.current_index = imgui.combo(
             "View", self.current_index, self.panel_names
         )
         current = self.panels[self.current_index]
-        """
-        if current != self.current:
-            if self.current:
-                self.current.hide()
-            current.show()
-        """
         self.current = current
         self.current.draw()
 
