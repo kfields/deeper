@@ -11,6 +11,7 @@ from .component_widget import ComponentWidget, ComponentWidgetBuilder
 from .. import IconButton
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
+
 class SpriteVuWidget(ComponentWidget):
     """
     def __init__(self, vu):
@@ -23,10 +24,18 @@ class SpriteVuWidget(ComponentWidget):
         super().create(gui)
         self.drag_icon.create(gui)
     """
+
     def __init__(self, vu):
         self.vu = vu
         children = []
-        children.append(DragWrapper(SettingWidgetKit.instance.build(AttrSetting("offset", self.vu, Vec2SettingVType))))
+        children.append(
+            DragWrapper(
+                SettingWidgetKit.instance.build(
+                    AttrSetting("offset", self.vu, Vec2SettingVType),
+                    change_speed=0.1
+                )
+            )
+        )
         super().__init__(vu, children)
 
     """
@@ -54,6 +63,8 @@ class SpriteVuWidget(ComponentWidget):
         if changed:
             self.vu.offset = glm.vec2(*offset)
     """
+
+
 class SpriteVuWidgetBuilder(ComponentWidgetBuilder):
     key = SpriteVu
     cls = SpriteVuWidget
@@ -65,9 +76,7 @@ class AnimatedSpriteVuWidget(ComponentWidget):
         self.vu = vu
 
     def draw(self):
-        changed, offset = imgui.drag_float2(
-            "Offset", *self.vu.offset, change_speed=0.1
-        )
+        changed, offset = imgui.drag_float2("Offset", *self.vu.offset, change_speed=0.1)
         if changed:
             self.vu.offset = glm.vec2(*offset)
 

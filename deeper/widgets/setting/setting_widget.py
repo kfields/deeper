@@ -20,8 +20,8 @@ class SettingWidget(Widget):
         self.setting.value = value
 
 class SettingWidgetBuilder(Builder):
-    def build(self, setting):
-        return self.cls(setting)
+    def build(self, setting, **kwargs):
+        return self.cls(setting, **kwargs)
 
 class GenericWidgetBuilder(Builder):
     def build(self, setting):
