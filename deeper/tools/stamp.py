@@ -1,9 +1,11 @@
+import math
 import glm
 
 import arcade
 from arcade import key
 
 #from deeper.architect import Architect
+from deeper.constants import *
 from deeper.kits import EntityKit
 from .tool import WorldEditTool
 
@@ -33,6 +35,14 @@ class StampTool(WorldEditTool):
             entity, block, contact = result
             #print("contact: ", contact)
             self.hovered = Hovered(entity, block, glm.vec3(contact))
+            # TODO: Snap works, just didn't care for it.  Visually distracting
+            """
+            cx = round(contact[0] / CELL_QUARTER_WIDTH) * CELL_QUARTER_WIDTH
+            cy = round(contact[1] / CELL_QUARTER_HEIGHT) * CELL_QUARTER_HEIGHT
+            cz = round(contact[2] / CELL_QUARTER_DEPTH) * CELL_QUARTER_DEPTH
+            self.hovered = Hovered(entity, block, glm.vec3(cx, cy, cz))
+            """
+            
         else:
             self.hovered = None
 
