@@ -1,6 +1,6 @@
 import imgui
 
-from deeper.setting import BoolSetting
+from deeper.setting import BoolSetting, BoolSettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
@@ -12,5 +12,6 @@ class BoolWidget(SettingWidget):
         changed, self.value = imgui.checkbox(self.name, self.value)
 
 class BoolWidgetBuilder(SettingWidgetBuilder):
-    key = BoolSetting
+    #key = BoolSetting
+    key = BoolSettingVType
     cls = BoolWidget

@@ -1,5 +1,6 @@
 from .setting_widget import SettingWidget
-from .setting_wrapper import SettingWrapper
+from .drag_wrapper import DragWrapper
+from .drop_wrapper import DropWrapper
 
 from .bool_widget import BoolWidgetBuilder
 from .float_widget import FloatWidgetBuilder

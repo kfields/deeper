@@ -1,8 +1,8 @@
 import imgui
 
-from deeper.setting import SettingGroup
+from deeper.setting import SettingGroup, SettingGroupVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
-from .setting_wrapper import SettingWrapper
+from .drop_wrapper import DropWrapper
 
 class SettingGroupWidget(SettingWidget):
     def __init__(self, setting, children=[]):
@@ -12,7 +12,7 @@ class SettingGroupWidget(SettingWidget):
             if isinstance(subsetting, SettingGroup):
                 children.append(SettingWidgetKit.instance.build(subsetting))
             else:
-                children.append(SettingWrapper(SettingWidgetKit.instance.build(subsetting)))
+                children.append(DropWrapper(SettingWidgetKit.instance.build(subsetting)))
         super().__init__(setting, children)
     """
     def draw(self):
@@ -26,5 +26,6 @@ class SettingGroupWidget(SettingWidget):
             imgui.tree_pop()
 
 class SettingGroupWidgetBuilder(SettingWidgetBuilder):
-    key = SettingGroup
+    #key = SettingGroup
+    key = SettingGroupVType
     cls = SettingGroupWidget

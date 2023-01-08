@@ -22,3 +22,7 @@ class SettingWidget(Widget):
 class SettingWidgetBuilder(Builder):
     def build(self, setting):
         return self.cls(setting)
+
+class GenericWidgetBuilder(Builder):
+    def build(self, setting):
+        return self.cls(setting)

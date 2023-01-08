@@ -1,6 +1,6 @@
 import imgui
 
-from deeper.setting import StringSetting
+from deeper.setting import StringSetting, StringSettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
@@ -17,5 +17,6 @@ class StringWidget(SettingWidget):
         
 
 class StringWidgetBuilder(SettingWidgetBuilder):
-    key = StringSetting
+    #key = StringSetting
+    key = StringSettingVType
     cls = StringWidget

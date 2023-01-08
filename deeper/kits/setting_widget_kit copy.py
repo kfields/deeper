@@ -11,8 +11,7 @@ class SettingWidgetKit(Kit):
 
     def find(self, setting, cls=None):
         if not cls:
-            #cls = setting.__class__
-            cls = setting.get_vtype()
+            cls = setting.__class__
         if cls in self.builders:
             return self.builders[cls]
         else:

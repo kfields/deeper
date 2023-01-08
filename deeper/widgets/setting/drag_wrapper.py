@@ -6,7 +6,7 @@ from deeper.dimgui import Widget
 from .. import Icon, IconButton
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
-class SettingWrapper(Widget):
+class DragWrapper(Widget):
     drag_icon = None
 
     def __init__(self, wrapped):
@@ -15,20 +15,19 @@ class SettingWrapper(Widget):
 
     def create(self, gui):
         super().create(gui)
-        if not SettingWrapper.drag_icon:
+        if not DragWrapper.drag_icon:
             font = pyglet.font.load("Material Icons")
-            SettingWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR, font)
+            DragWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR, font)
             self.drag_icon.create(gui)
 
     def draw(self):
         self.drag_icon.draw()
-        if imgui.begin_drag_drop_target():
-            payload = imgui.accept_drag_drop_payload('itemtype')
-            if payload is not None:
-                #print('Received:', payload)
-                self.wrapped.value = self.gui.dropboard.value
-            imgui.end_drag_drop_target()
-
+        if imgui.begin_drag_drop_source():
+            value = self.wrapped.value
+            self.gui.dropboard.value = value
+            imgui.button(value.__repr__())
+            imgui.end_drag_drop_source()
+        
         imgui.same_line()
 
         super().draw()

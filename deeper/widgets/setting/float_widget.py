@@ -1,6 +1,6 @@
 import imgui
 
-from deeper.setting import FloatSetting
+from deeper.setting import FloatSetting, FloatSettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
@@ -13,5 +13,6 @@ class FloatWidget(SettingWidget):
         
 
 class FloatWidgetBuilder(SettingWidgetBuilder):
-    key = FloatSetting
+    #key = FloatSetting
+    key = FloatSettingVType
     cls = FloatWidget

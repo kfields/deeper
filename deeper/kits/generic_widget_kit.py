@@ -5,14 +5,13 @@ import deeper.widgets.setting
 
 from .kit import Kit
 
-class SettingWidgetKit(Kit):
+class GenericWidgetKit(Kit):
     builders_path = deeper.widgets.setting
     #builder_type = Builder
 
     def find(self, setting, cls=None):
         if not cls:
-            #cls = setting.__class__
-            cls = setting.get_vtype()
+            cls = setting.__class__
         if cls in self.builders:
             return self.builders[cls]
         else:

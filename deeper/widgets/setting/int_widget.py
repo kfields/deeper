@@ -1,6 +1,6 @@
 import imgui
 
-from deeper.setting import IntSetting
+from deeper.setting import IntSetting, IntSettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
@@ -13,5 +13,6 @@ class IntWidget(SettingWidget):
         
 
 class IntWidgetBuilder(SettingWidgetBuilder):
-    key = IntSetting
+    #key = IntSetting
+    key = IntSettingVType
     cls = IntWidget

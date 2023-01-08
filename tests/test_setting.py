@@ -7,7 +7,7 @@ from deeper.setting import Setting, SettingGroup, Vec3Setting
 setting = Vec3Setting.parse_obj({"name": "position", "value": [1, 2, 3]})
 print(setting)
 # print(json.dumps(setting, indent=4, default=pydantic_encoder))
-print(setting.json())
+#print(setting.json())
 
 
 class BlockSettings(SettingGroup):
@@ -63,3 +63,6 @@ entity_settings = EntitySettings.parse_obj(
     }
 )
 print(entity_settings)
+
+vtype = entity_settings.get_vtype()
+print(vtype)

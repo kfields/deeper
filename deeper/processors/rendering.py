@@ -1,5 +1,6 @@
 import arcade
 
+from ..constants import *
 from deeper import Block
 from deeper.components.sprite_vu import SpriteVu, AnimatedSpriteVu
 from . import Processor
@@ -18,7 +19,8 @@ class RenderingProcessor(Processor):
             vu.position = position
             vu.aabb = block.aabb
             #print("position: ", position)
-            sprite_position = position.xy + vu.offset
+            #sprite_position = position.xy + vu.offset
+            sprite_position = position.xy + (vu.offset * WORLD_SCALE)
             vu.sprite.set_position(*sprite_position)
             self.scene.tile_vu_list.append(vu)
 

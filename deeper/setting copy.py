@@ -1,6 +1,4 @@
-#from pydantic import BaseModel, ValidationError, validator
-from dataclasses import dataclass
-
+from pydantic import BaseModel, ValidationError, validator
 import glm
 from .data import Data
 
@@ -16,62 +14,40 @@ def decompose(d):
     return a
 
 
-#class Setting(Data):
-@dataclass
-class Setting:
+class Setting(Data):
     name: str
-    _value: object = None
-    vtype: object = None
     # value: object
     # def __init__(self, name) -> None:
     #    self.name = name
-    @classmethod
-    def parse_obj(cls, obj):
-        v = cls.validate(obj["value"])
-        #return cls(obj["name"], obj["value"])
-        return cls(obj["name"], v)
 
     def get_vtype(self):
-        return self.__annotations__["_value"]
+        return self.__annotations__["value"]
 
-    @classmethod
-    def validate(cls, value):
-        return value
-
-    @property
-    def value(self):
-        #return getattr(self.obj, self.name)
-        return self._value
-
-    @value.setter
-    def value(self, value):
-        self._value =  value
 
 class AttrSetting(Setting):
-    #obj: object
+    obj: object
+    vtype: object = None
 
     def get_vtype(self):
         return self.vtype
 
     @property
     def value(self):
-        #return getattr(self.obj, self.name)
-        return getattr(self._value, self.name)
+        return getattr(self.obj, self.name)
 
     @value.setter
     def value(self, value):
-        #setattr(self.obj, self.name, value)
-        setattr(self._value, self.name, value)
+        setattr(self.obj, self.name, value)
 
 
 SettingGroupVType = list[Setting]
 
 
 class SettingGroup(Setting):
-    _value: SettingGroupVType
+    value: SettingGroupVType
 
-    @classmethod
-    def validate(cls, v):
+    @validator("value", pre=True)
+    def validate_value(cls, v):
         result = []
         for item in v:
             result.append(cls.setting_map[item["name"]].parse_obj(item))
@@ -80,37 +56,49 @@ class SettingGroup(Setting):
 BoolSettingVType = bool
 
 class BoolSetting(Setting):
-    _value: BoolSettingVType
+    value: BoolSettingVType
 
 IntSettingVType = int
 
 class IntSetting(Setting):
-    _value: IntSettingVType
+    value: IntSettingVType
 
 FloatSettingVType = float
 
 class FloatSetting(Setting):
-    _value: FloatSettingVType
+    value: FloatSettingVType
 
 StringSettingVType = str
 
 class StringSetting(Setting):
-    _value: StringSettingVType
+    value: StringSettingVType
 
 Vec2SettingVType = glm.vec2
 
 class Vec2Setting(Setting):
-    _value: Vec2SettingVType
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            glm.vec2: lambda v: list(v),
+        }
+
+    value: Vec2SettingVType
     # value: list
-    @classmethod
-    def validate(cls, v):
+    @validator("value", pre=True)
+    def validate_value(cls, v):
         return glm.vec2(*v)
 
 Vec3SettingVType = glm.vec3
 
 class Vec3Setting(Setting):
-    _value: Vec3SettingVType
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            glm.vec3: lambda v: list(v),
+        }
+
+    value: Vec3SettingVType
     # value: list
-    @classmethod
-    def validate(cls, v):
+    @validator("value", pre=True)
+    def validate_value(cls, v):
         return glm.vec3(*v)
