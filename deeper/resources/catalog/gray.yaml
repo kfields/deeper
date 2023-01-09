@@ -34,7 +34,7 @@ TileGray3:
 
 TileGray3Corner:
   extends: Gray
-  size: [0.86, 1.55, 1]
+  size: [0.86, 1.5, 1]
   image: ":deeper:tiles/TileGray3Corner.png"
 
 TileGray3Corner2:

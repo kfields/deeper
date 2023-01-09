@@ -8,6 +8,18 @@ from ..builder import EntityBuilder
 class BlockBuilder(EntityBuilder):
     key = 'Block'
 
+    def build(self, blueprint, world, position = DEFAULT_VEC3, components=[]):
+        #print(blueprint)
+        #print("position: ", position)
+        block = None
+        for component in components:
+            if component.__class__ == Block:
+                block = component
+                break
+        block.position = position
+        world.create_entity(*components)
+
+    """
     def build(self, blueprint, world, target=None, components=[]):
         #print(blueprint)
         position = self.compute_position(blueprint, world, target)
@@ -23,7 +35,6 @@ class BlockBuilder(EntityBuilder):
         #world.create_entity(block, *components)
         world.create_entity(*components)
 
-
     def compute_position(self, blueprint, world, target):
         if not target:
             return glm.vec3()
@@ -33,3 +44,4 @@ class BlockBuilder(EntityBuilder):
 
         size = blueprint.size
         return glm.vec3(target_pos.x, target_aabb.maxy + size[1]/2, target_pos.z)
+    """

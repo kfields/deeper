@@ -125,7 +125,7 @@ Floor7borderBackRight:
 
 Floor7borderCornerBackRight:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, .5]
   image: ":deeper:tiles/Floor7borderCornerBackRight.png"
 
 Floor7borderCornerDouble1:
@@ -140,22 +140,22 @@ Floor7borderCornerDouble2:
 
 Floor7borderCornerFrontLeft:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, .5]
   image: ":deeper:tiles/Floor7borderCornerFrontLeft.png"
 
 Floor7borderCornerFrontRight:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, .5]
   image: ":deeper:tiles/Floor7borderCornerFrontRight.png"
 
 Floor7borderFront1:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.86, .6, .5]
   image: ":deeper:tiles/Floor7borderFront1.png"
 
 Floor7borderFront2:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.86, .6, .5]
   image: ":deeper:tiles/Floor7borderFront2.png"
 
 Floor7borderFront2Bridge:
@@ -164,7 +164,7 @@ Floor7borderFront2Bridge:
   image: ":deeper:tiles/Floor7borderFront2Bridge.png"
   components:
     SpriteVu:
-      offset: [0, 29]
+      offset: [0, .1]
 
 Floor7borderFrontLeft:
   extends: Floor
@@ -178,17 +178,17 @@ Floor7borderFrontRight:
 
 Floor7borderLeft:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, 1]
   image: ":deeper:tiles/Floor7borderLeft.png"
 
 Floor7borderRight:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, 1]
   image: ":deeper:tiles/Floor7borderRight.png"
 
 Floor7borderRight2:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, 1]
   image: ":deeper:tiles/Floor7borderRight2.png"
 
 Floor7borderRight2Bridge:
@@ -197,16 +197,16 @@ Floor7borderRight2Bridge:
   image: ":deeper:tiles/Floor7borderRight2Bridge.png"
   components:
     SpriteVu:
-      offset: [0, 16]
+      offset: [0, .1]
 
 Floor7borderRightCracked:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, 1]
   image: ":deeper:tiles/Floor7borderRightCracked.png"
 
 Floor7borderRightCracked2:
   extends: Floor
-  size: [0.86, .6, 1]
+  size: [0.43, .6, 1]
   image: ":deeper:tiles/Floor7borderRightCracked2.png"
 
 Floor7c:

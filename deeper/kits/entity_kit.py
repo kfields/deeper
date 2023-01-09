@@ -1,7 +1,7 @@
 from loguru import logger
 
 import deeper.entities
-
+from deeper.constants import *
 from .kit import Kit
 from .component_kit import ComponentKit
 
@@ -13,7 +13,7 @@ class EntityKit(Kit):
             return self.builders[blueprint.name]
         if hasattr(blueprint, 'extends'):
             return self.find(blueprint.catalog.find(blueprint.extends))
-
+    """
     def build(self, blueprint, world, target=None):
         #print(blueprint.__dict__)
         builder = self.find(blueprint)
@@ -23,3 +23,14 @@ class EntityKit(Kit):
             #components.append(self.build(child, world))
             components.append(ComponentKit.instance.build(child, world))
         return builder.build(blueprint, world, target, components)
+    """
+
+    def build(self, blueprint, world, position = DEFAULT_VEC3):
+        #print(blueprint.__dict__)
+        builder = self.find(blueprint)
+        components = [blueprint]
+        for child in blueprint.children:
+            #print(child.__dict__)
+            #components.append(self.build(child, world))
+            components.append(ComponentKit.instance.build(child, world))
+        return builder.build(blueprint, world, position, components)
