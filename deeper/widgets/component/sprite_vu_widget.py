@@ -32,7 +32,7 @@ class SpriteVuWidget(ComponentWidget):
             DragWrapper(
                 SettingWidgetKit.instance.build(
                     AttrSetting("offset", self.vu, Vec2SettingVType),
-                    change_speed=0.1
+                    change_speed=0.01
                 )
             )
         )
