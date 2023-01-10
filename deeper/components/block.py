@@ -65,7 +65,7 @@ class Block(Component):
         if self.shape:
             contact = self.shape.cast_ray(self.isometry, ray)
             if contact:
-                return entity, self, contact
+                return entity, self, glm.vec3(contact)
             return None
 
 class BlockBuilder(ComponentBuilder):

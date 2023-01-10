@@ -12,10 +12,12 @@ Gray:
 
 TileGray1:
   extends: Gray
+  size: [0.43, 1.25, .5]
   image: ":deeper:tiles/TileGray1.png"
 
 TileGray1b:
   extends: Gray
+  size: [0.43, 1.25, .5]
   image: ":deeper:tiles/TileGray1b.png"
 
 TileGray2:
@@ -30,6 +32,7 @@ TileGray2b:
 
 TileGray3:
   extends: Gray
+  size: [0.43, 1.25, .5]
   image: ":deeper:tiles/TileGray3.png"
 
 TileGray3Corner:
@@ -39,8 +42,10 @@ TileGray3Corner:
 
 TileGray3Corner2:
   extends: Gray
+  size: [0.43, 1.5, 1]
   image: ":deeper:tiles/TileGray3Corner2.png"
 
 TileGray3Corner3:
   extends: Gray
+  size: [0.86, 1.5, .5]
   image: ":deeper:tiles/TileGray3Corner3.png"

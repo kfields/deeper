@@ -37,7 +37,7 @@ TileGnome5:
 
 TileGnome6:
   extends: Gnome
-  size: [.75, .75, .5]
+  size: [.645, .75, .5]
   image: ":deeper:tiles/TileGnome6.png"
 
 TileGnome7:

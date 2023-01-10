@@ -199,7 +199,7 @@ class Deeper(arcade.Window):
         if result:
             block, contact = result
             print("contact: ", contact)
-            self.selection = Selection(glm.vec3(contact))
+            self.selection = Selection(contact)
         else:
             self.selection = None
 

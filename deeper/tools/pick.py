@@ -33,7 +33,7 @@ class PickTool(WorldEditTool):
         if result:
             entity, block, contact = result
             #print("contact: ", contact)
-            self.hovered = Hovered(entity, block, glm.vec3(contact))
+            self.hovered = Hovered(entity, block, contact)
         else:
             self.hovered = None
 

@@ -4,6 +4,7 @@ import time
 class Tool:
     def __init__(self, view, title='') -> None:
         self.view = view
+        self.gui = view.gui
         self.window = view.window
         self.title = title
         self._click_time = time.time()

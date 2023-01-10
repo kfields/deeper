@@ -27,6 +27,9 @@ class Widget:
         child.parent = self
         self.children.append(child)
 
+    def remove_child(self, child):
+        self.children.remove(child)
+
     def draw(self):
         for child in self.children:
             child.draw()

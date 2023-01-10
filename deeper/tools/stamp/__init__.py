@@ -7,8 +7,11 @@ from arcade import key
 from deeper import Isometry, Cuboid, Block
 from deeper.constants import *
 from deeper.kits import EntityKit
-from .tool import WorldEditTool
+from ..tool import WorldEditTool
 
+from deeper.dimgui import Window
+from .stamp_widget import StampToolWidget
+from deeper.state import SnapOption
 
 class Hovered:
     def __init__(self, entity, block, position):
@@ -63,6 +66,16 @@ class StampTool(WorldEditTool):
         self.hovered = None
         self.selected = None
         self.stamp = None
+        self.widget = Window('Stamp Tool', [StampToolWidget(self)])
+        self.widget.create(self.gui)
+
+    def enable(self):
+        super().enable()
+        self.gui.add_child(self.widget)
+
+    def disable(self):
+        super().disable()
+        self.gui.remove_child(self.widget)
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         # print("mouse: ", x, y)
@@ -72,7 +85,7 @@ class StampTool(WorldEditTool):
         if result:
             entity, block, contact = result
             # print("contact: ", contact)
-            self.hovered = Hovered(entity, block, glm.vec3(contact))
+            self.hovered = Hovered(entity, block, contact)
 
             blueprint = self.edit_state.current_blueprint
             target = self.hovered.entity
@@ -86,7 +99,7 @@ class StampTool(WorldEditTool):
         else:
             self.hovered = None
             self.stamp = None
-
+    """
     def compute_stamp_position(self, blueprint, world, target, contact):
         target_space = world.component_for_entity(target, Block)
         target_pos = target_space.position
@@ -94,9 +107,79 @@ class StampTool(WorldEditTool):
 
         size = blueprint.size
 
-        cx = round(contact[0] / CELL_QUARTER_WIDTH) * CELL_QUARTER_WIDTH
-        cy = round(contact[1] / CELL_QUARTER_HEIGHT) * CELL_QUARTER_HEIGHT
-        cz = round(contact[2] / CELL_QUARTER_DEPTH) * CELL_QUARTER_DEPTH
+        snap_width = CELL_QUARTER_WIDTH
+        #snap_width = size[0]
+        snap_height = CELL_QUARTER_HEIGHT
+        #snap_height = size[1]
+        snap_depth = CELL_QUARTER_DEPTH
+        #snap_depth = size[2]
+
+        cx = round(contact[0] / snap_width) * snap_width
+        cy = round(contact[1] / snap_height) * snap_height
+        cz = round(contact[2] / snap_depth) * snap_depth
+
+        return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
+    """
+
+    def compute_stamp_position(self, blueprint, world, target, contact):
+        option = self.edit_state.snap_option
+        if option == SnapOption.NONE:
+            return self.snap_none(blueprint, world, target, contact)
+        elif option == SnapOption.CENTER:
+            return self.snap_center(blueprint, world, target, contact)
+        elif option == SnapOption.SIZE:
+            return self.snap_size(blueprint, world, target, contact)
+        elif option == SnapOption.QUARTER_CELL:
+            return self.snap_quarter(blueprint, world, target, contact)
+
+    def snap_none(self, blueprint, world, target, contact):
+        target_space = world.component_for_entity(target, Block)
+        target_pos = target_space.position
+        target_aabb = target_space.aabb
+
+        size = blueprint.size
+        return glm.vec3(contact.x, target_aabb.maxy + size[1]/2, contact.z)
+
+    def snap_center(self, blueprint, world, target, contact):
+        target_space = world.component_for_entity(target, Block)
+        target_pos = target_space.position
+        target_aabb = target_space.aabb
+
+        size = blueprint.size
+        return glm.vec3(target_pos.x, target_aabb.maxy + size[1]/2, target_pos.z)
+
+
+    def snap_size(self, blueprint, world, target, contact):
+        target_space = world.component_for_entity(target, Block)
+        target_pos = target_space.position
+        target_aabb = target_space.aabb
+
+        size = blueprint.size
+
+        snap_width = size[0]
+        snap_height = size[1]
+        snap_depth = size[2]
+
+        cx = round(contact[0] / snap_width) * snap_width
+        cy = round(contact[1] / snap_height) * snap_height
+        cz = round(contact[2] / snap_depth) * snap_depth
+
+        return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
+
+    def snap_quarter(self, blueprint, world, target, contact):
+        target_space = world.component_for_entity(target, Block)
+        target_pos = target_space.position
+        target_aabb = target_space.aabb
+
+        size = blueprint.size
+
+        snap_width = CELL_QUARTER_WIDTH
+        snap_height = CELL_QUARTER_HEIGHT
+        snap_depth = CELL_QUARTER_DEPTH
+
+        cx = round(contact[0] / snap_width) * snap_width
+        cy = round(contact[1] / snap_height) * snap_height
+        cz = round(contact[2] / snap_depth) * snap_depth
 
         return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
 
@@ -129,11 +212,11 @@ class StampTool(WorldEditTool):
         if self.hovered:
             pos = self.camera.project(self.hovered.position).xy
             arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
-            self.view.draw_aabb(self.hovered.block.aabb)
+            #self.view.draw_aabb(self.hovered.block.aabb)
 
         if self.stamp:
             pos = self.camera.project(self.stamp.position).xy
-            self.view.draw_aabb(self.stamp.aabb, arcade.color.GREEN)
+            self.view.draw_aabb(self.stamp.aabb)
 
         if self.selected:
             self.view.draw_aabb(self.selected.block.aabb, color=arcade.color.RED)
