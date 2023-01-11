@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 
 import glm
-from .data_transfer import DataTransfer
+from .data import Data
 
 
 def decompose(d):
@@ -16,7 +16,7 @@ def decompose(d):
     return a
 
 
-#class Setting(DataTransfer):
+#class Setting(Data):
 @dataclass
 class Setting:
     name: str
