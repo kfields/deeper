@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ValidationError, validator
 import glm
-from .data import Data
+from .data_transfer import DataTransfer
 
 
 def decompose(d):
@@ -14,7 +14,7 @@ def decompose(d):
     return a
 
 
-class Setting(Data):
+class Setting(DataTransfer):
     name: str
     # value: object
     # def __init__(self, name) -> None:
