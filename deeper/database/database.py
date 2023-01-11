@@ -4,7 +4,9 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.orm.scoping import scoped_session
 
+from deeper.blueprints import *
 from deeper.models import Model
+
 from .utils import json_serializer
 
 
@@ -26,16 +28,16 @@ class Database:
 
     def begin(self):
         self.engine = engine = create_engine(
-            "sqlite://", echo=True, json_serializer=json_serializer
+            #"sqlite://", echo=True, json_serializer=json_serializer
+            "sqlite:///./deeper.db", echo=True, json_serializer=json_serializer
+            #sqlite+aiosqlite:///./stattik.db
         )
 
         with engine.begin() as conn:
-            Model.metadata.create_all
+            Model.metadata.create_all(conn)
 
         session_factory = sessionmaker(engine)
-        Database.Session = Session = scoped_session(
-            session_factory, scopefunc=current_task
-        )
+        Database.Session = Session = scoped_session(session_factory)
 
     def end(self):
         self.end_session()

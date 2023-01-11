@@ -62,9 +62,9 @@ class View(arcade.View):
 class WorldView(View):
     def __init__(self, window, world, title=''):
         super().__init__(window, title)
+        self.camera = None
         self.world = world
         self.processors = []
-        self.camera = None
 
     def add_processor(self, processor):
         self.processors.append(processor)
