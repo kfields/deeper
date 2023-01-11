@@ -18,10 +18,10 @@ class Window(arcade.Window):
         self.view_stack = []
         self.ctx_state_stack = []
 
-    def save_ctx_state(self):
+    def push_ctx_state(self):
         self.ctx_state_stack.append(ArcadeContextState(self.ctx))
 
-    def restore_ctx_state(self):
+    def pop_ctx_state(self):
         state = self.ctx_state_stack.pop()
         state.restore(self.ctx)
 

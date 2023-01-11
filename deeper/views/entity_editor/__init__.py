@@ -41,7 +41,7 @@ class EntityEditor(WorldView):
         self.gui.add_child(ComponentWindow(self.blueprint))
 
         pos = self.block.position
-        self.camera = WorldCamera(self, pos, 1)
+        self.camera = WorldCamera(self.window, pos, 1)
 
         self.tile_vu_list = []
         self.tile_list = arcade.SpriteList()
@@ -84,9 +84,9 @@ class EntityEditor(WorldView):
             self.camera.zoom = self.camera.zoom + .1
         elif symbol == key.NUM_SUBTRACT:
             self.camera.zoom = self.camera.zoom - .1
-    """
+
     def draw(self):
-        self.camera.use()  # TODO: This is messing with ImGui on resize...
+        self.camera.use()
         self.tile_list.draw()
 
         # self.draw_aabbs()
@@ -97,9 +97,10 @@ class EntityEditor(WorldView):
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
+
     """
     def draw(self):
-        with self.camera:  # TODO: This is messing with ImGui on resize...
+        with self.camera:
             self.tile_list.draw()
 
             # self.draw_aabbs()
@@ -110,6 +111,7 @@ class EntityEditor(WorldView):
 
             pos = self.camera.project(self.camera.position).xy
             arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
+    """
 
     def draw_aabbs(self):
         for block in self.block.children:

@@ -128,7 +128,3 @@ class WorldEditor(WorldView):
     def draw_aabbs(self):
         for block in self.block.children:
             self.draw_aabb(block.aabb)
-
-    def on_resize(self, width: int, height: int):
-        super().on_resize(width, height)
-        self.camera.resize(width, height)

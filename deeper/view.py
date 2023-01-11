@@ -64,6 +64,7 @@ class WorldView(View):
         super().__init__(window, title)
         self.world = world
         self.processors = []
+        self.camera = None
 
     def add_processor(self, processor):
         self.processors.append(processor)
@@ -73,6 +74,7 @@ class WorldView(View):
 
     def on_show_view(self):
         super().on_show_view()
+        self.camera.resize(self.window.width, self.window.height)
         for processor in self.processors:
             self.world.add_processor(processor)
 
@@ -80,6 +82,10 @@ class WorldView(View):
         super().on_hide_view()
         for processor in self.processors:
             self.world.remove_processor(processor.__class__) #TODO: Weird, why doesn't esper remove by instance?
+
+    def on_resize(self, width: int, height: int):
+        super().on_resize(width, height)
+        self.camera.resize(width, height)
 
     def on_update(self, delta_time: float):
         self.world.process(delta_time)

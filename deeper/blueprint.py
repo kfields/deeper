@@ -1,10 +1,8 @@
 import copy
 
-from sqlalchemy import String
+from sqlalchemy import String, Integer, ForeignKey
 
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, backref
 
 from . import mergedeep
 from .constants import *
@@ -16,6 +14,8 @@ class Blueprint(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(32))
     type: Mapped[str]
+    parent_id = mapped_column(Integer, ForeignKey("Blueprint.id"))
+    children = relationship("Blueprint", backref=backref("parent", remote_side=[id]))
 
     __mapper_args__ = {
         "polymorphic_identity": "Blueprint",
@@ -27,7 +27,7 @@ class Blueprint(Model):
         self.name = name
         self.config = config
         self.category = None
-        self.parent = parent
+        #self.parent = parent
         self.children = []
         self._abstract = False
         self.base = None

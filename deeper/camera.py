@@ -7,15 +7,11 @@ from . import Ray
 """
 class ScreenCamera(arcade.Camera):
     def __enter__(self):
-        self._prev_viewport = self._window.ctx.viewport
-        self._prev_projection_2d_matrix =  self._window.ctx.projection_2d_matrix
-        self._prev_view_matrix_2d = self._window.ctx.view_matrix_2d
+        self.window.push_ctx_state()
         self.use()
 
     def __exit__(self, exc_type, exc_value, exc_tb):
-        self._window.ctx.viewport = self._prev_viewport
-        self._window.ctx.projection_2d_matrix = self._prev_projection_2d_matrix
-        self._window.ctx.view_matrix_2d = self._prev_view_matrix_2d
+        self.window.pop_ctx_state()
 """
 
 class WorldCamera:
@@ -35,11 +31,11 @@ class WorldCamera:
         self.look_at(target, self.distance)
 
     def __enter__(self):
-        self.window.save_ctx_state()
+        self.window.push_ctx_state()
         self.use()
 
     def __exit__(self, exc_type, exc_value, exc_tb):
-        self.window.restore_ctx_state()
+        self.window.pop_ctx_state()
 
     @property
     def zoom(self):
@@ -88,12 +84,12 @@ class WorldCamera:
 
     def mouse_to_ray(self, mx, my):
         viewport = self.camera.viewport
-        print("viewport: ", viewport)
+        #print("viewport: ", viewport)
         viewportWidth = viewport[2]
         viewPortHeight = viewport[3]
 
         projection = self.camera.projection
-        print("projection: ", projection)
+        #print("projection: ", projection)
 
         glOrthoWidth = projection[1]
         glOrthoHeight = projection[3]
