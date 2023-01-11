@@ -122,7 +122,6 @@ class Gui(GuiBase):
     def __init__(self, window, children=[], auto_enable=True):
         self.window = window
         super().__init__(children)
-        self.camera = arcade.Camera()
         self.default_font = None
         self.clipboard = Clipboard()
         self.dropboard = Dropboard()
@@ -179,7 +178,6 @@ class Gui(GuiBase):
 
     def finish_render(self):
         #imgui.set_current_context(self.context)
-        self.camera.use()
         self.draw()
         if self.default_font:
             imgui.pop_font()

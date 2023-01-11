@@ -1,9 +1,19 @@
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
+
 from ...constants import *
 from ...settings.component.sprite_vu_settings import SpriteVuSettings, AnimatedSpriteVuSettings
 from ...blueprint import BlueprintBuilder
 from .component_blueprint import ComponentBlueprint
 
 class SpriteVuBlueprint(ComponentBlueprint):
+    id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
+    __mapper_args__ = {
+        'polymorphic_identity': 'SpriteVuBlueprint',
+        'inherit_condition': (id == ComponentBlueprint.id),
+        
+    }
+
     settings_class = SpriteVuSettings
     offset = [0, 0]
 
@@ -21,6 +31,12 @@ class SpriteVuBlueprintBuilder(BlueprintBuilder):
 
 
 class AnimatedSpriteVuBlueprint(ComponentBlueprint):
+    id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
+    __mapper_args__ = {
+        'polymorphic_identity': 'AnimatedSpriteVuBlueprint',
+        'inherit_condition': (id == ComponentBlueprint.id),
+    }
+
     settings_class = AnimatedSpriteVuSettings
     offset = [0, 0]
 

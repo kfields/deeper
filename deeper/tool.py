@@ -25,7 +25,7 @@ class Tool:
             self._click_count += 1
         else:
             self._click_count = 1
-        print(self._click_count)
+        #print(self._click_count)
         self._click_time = time.time()
 
 class WorldTool(Tool):

@@ -84,7 +84,7 @@ class EntityEditor(WorldView):
             self.camera.zoom = self.camera.zoom + .1
         elif symbol == key.NUM_SUBTRACT:
             self.camera.zoom = self.camera.zoom - .1
-
+    """
     def draw(self):
         self.camera.use()  # TODO: This is messing with ImGui on resize...
         self.tile_list.draw()
@@ -97,6 +97,19 @@ class EntityEditor(WorldView):
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
+    """
+    def draw(self):
+        with self.camera:  # TODO: This is messing with ImGui on resize...
+            self.tile_list.draw()
+
+            # self.draw_aabbs()
+            self.draw_aabb(self.block.aabb)
+
+            pos = self.camera.project(self.camera.target).xy
+            arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
+
+            pos = self.camera.project(self.camera.position).xy
+            arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
 
     def draw_aabbs(self):
         for block in self.block.children:

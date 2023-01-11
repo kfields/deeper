@@ -1,10 +1,27 @@
 import copy
+
+from sqlalchemy import String
+
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
+
 from . import mergedeep
 from .constants import *
 from .builder import Builder
 from .setting import decompose
+from .models import Model
 
-class Blueprint:
+class Blueprint(Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(32))
+    type: Mapped[str]
+
+    __mapper_args__ = {
+        "polymorphic_identity": "Blueprint",
+        "polymorphic_on": "type",
+    }
+
     def __init__(self, catalog, name, config, parent=None):
         self.catalog = catalog
         self.name = name
@@ -68,7 +85,7 @@ class Blueprint:
     def create_settings(self, config):
         decomposed = decompose(config)
         obj = {"name": self.name, "value": decomposed}
-        print(obj)
+        #print(obj)
         return self.settings_class.parse_obj(obj)
 
 

@@ -18,7 +18,7 @@ class GenericWidgetKit(Kit):
             base = cls.__bases__[0]
             if base == object:
                 return None
-            print(base)
+            #print(base)
             return self.find(setting, base) #TODO: What if multiple bases?
 
     def build(self, setting):

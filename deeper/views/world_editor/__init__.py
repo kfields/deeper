@@ -34,7 +34,7 @@ class WorldEditor(WorldView):
         self.catalog = Catalog()
         self.gui.add_child(CatalogWindow(self.catalog, self.on_catalog))
 
-        self.camera = WorldCamera(self, glm.vec3(), 1.5)
+        self.camera = WorldCamera(self.window, glm.vec3(), 1.5)
         self.gui.add_child(CameraWindow(self.camera))
         #self.camera = WorldCamera(self, glm.vec3(4, 0, 4), 1.25)
         # self.camera = WorldCamera(self, glm.vec3(CELL_WIDTH*8, 0, CELL_DEPTH*8), 1)
@@ -100,9 +100,9 @@ class WorldEditor(WorldView):
                     arcade.Sprite(":deeper:tiles/_Grid/GRID.png",)
                 )
                 self.world.create_entity(block, vu, blueprint)
-
+    
     def draw(self):
-        self.camera.use()  # TODO: This is messing with ImGui on resize...
+        self.camera.use()
         self.tile_list.draw()
 
         # self.draw_aabbs()
@@ -112,7 +112,23 @@ class WorldEditor(WorldView):
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
+    """
+    def draw(self):
+        with self.camera:  # TODO: This is messing with ImGui on resize...
+            self.tile_list.draw()
 
+            # self.draw_aabbs()
+
+            pos = self.camera.project(self.camera.target).xy
+            arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
+
+            pos = self.camera.project(self.camera.position).xy
+            arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
+    """
     def draw_aabbs(self):
         for block in self.block.children:
             self.draw_aabb(block.aabb)
+
+    def on_resize(self, width: int, height: int):
+        super().on_resize(width, height)
+        self.camera.resize(width, height)

@@ -195,7 +195,7 @@ class StampTool(WorldEditTool):
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)
-        print("stamp")
+        #print("stamp")
         if self.stamp:
             EntityKit.instance.build(
                 self.edit_state.current_blueprint, self.world, self.stamp.position

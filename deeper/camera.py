@@ -4,6 +4,20 @@ import glm
 from .constants import *
 from . import Ray
 
+"""
+class ScreenCamera(arcade.Camera):
+    def __enter__(self):
+        self._prev_viewport = self._window.ctx.viewport
+        self._prev_projection_2d_matrix =  self._window.ctx.projection_2d_matrix
+        self._prev_view_matrix_2d = self._window.ctx.view_matrix_2d
+        self.use()
+
+    def __exit__(self, exc_type, exc_value, exc_tb):
+        self._window.ctx.viewport = self._prev_viewport
+        self._window.ctx.projection_2d_matrix = self._prev_projection_2d_matrix
+        self._window.ctx.view_matrix_2d = self._prev_view_matrix_2d
+"""
+
 class WorldCamera:
     def __init__(self, window, target, zoom=1.0):
         self.window = window
@@ -15,9 +29,17 @@ class WorldCamera:
         self.inv_world_matrix = glm.inverse(self.world_matrix)
         
         self.camera = arcade.Camera(zoom=zoom)
+        #self.camera = ScreenCamera(zoom=zoom)
 
         self.update_matrices()
         self.look_at(target, self.distance)
+
+    def __enter__(self):
+        self.window.save_ctx_state()
+        self.use()
+
+    def __exit__(self, exc_type, exc_value, exc_tb):
+        self.window.restore_ctx_state()
 
     @property
     def zoom(self):
@@ -42,6 +64,11 @@ class WorldCamera:
     def use(self):
         self.camera.use()
 
+    def resize(self, viewport_width: int, viewport_height: int, *,
+               resize_projection: bool = True) -> None:
+        self.camera.resize(viewport_width, viewport_height, resize_projection=resize_projection)
+        self.look_at(self.target, self.distance)
+
     def project(self, point):
         return glm.vec3(self.view_matrix * point)
 
@@ -53,7 +80,7 @@ class WorldCamera:
         self.position = target + (self.direction * -distance)
 
         focal_point = self.project(target).xy - glm.vec2(
-            SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2
+            self.camera.viewport[2] / 2, self.camera.viewport[3] / 2
         )
         #print("focal_point: ", focal_point)
         self.camera.move(focal_point)
@@ -61,12 +88,12 @@ class WorldCamera:
 
     def mouse_to_ray(self, mx, my):
         viewport = self.camera.viewport
-        #print("viewport: ", viewport)
+        print("viewport: ", viewport)
         viewportWidth = viewport[2]
         viewPortHeight = viewport[3]
 
         projection = self.camera.projection
-        #print("projection: ", projection)
+        print("projection: ", projection)
 
         glOrthoWidth = projection[1]
         glOrthoHeight = projection[3]
@@ -75,6 +102,7 @@ class WorldCamera:
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
 
         inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
+        #inv_view = glm.inverse(glm.mat4(*self.window.ctx._view_matrix_2d))
         mouse_vec = glm.vec3(x, y, 0)
         mouse_vec = self.inv_world_matrix * inv_view * mouse_vec
         x, y = mouse_vec.xy * self.zoom
