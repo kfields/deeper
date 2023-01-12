@@ -8,6 +8,7 @@ catalog = Catalog.instance
 #blueprint = catalog.find('Wagon')
 #print('Wagon: ', blueprint.__dict__)
 
+db.drop_all()
 db.begin()
 
 with db.Session() as session:

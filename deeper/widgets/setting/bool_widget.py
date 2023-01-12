@@ -9,7 +9,9 @@ class BoolWidget(SettingWidget):
         super().__init__(setting)
 
     def draw(self):
-        changed, self.value = imgui.checkbox(self.name, self.value)
+        changed, value = imgui.checkbox(self.name, self.value)
+        if changed:
+            self.value = value
 
 class BoolWidgetBuilder(SettingWidgetBuilder):
     #key = BoolSetting

@@ -62,17 +62,17 @@ TileGnome10:
 
 TileGnome11:
   extends: Gnome
-  size: [.5, .75, .75]
+  size: [.43, .75, .75]
   image: ":deeper:tiles/TileGnome11.png"
 
 TileGnome12:
   extends: Gnome
-  size: [.5, .75, .25]
+  size: [.43, .75, .25]
   image: ":deeper:tiles/TileGnome12.png"
 
 TileGnome13:
   extends: Gnome
-  size: [1, .75, .75]
+  size: [.86, .75, .75]
   image: ":deeper:tiles/TileGnome13.png"
 
 TileGnome14:

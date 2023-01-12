@@ -9,11 +9,13 @@ class StringWidget(SettingWidget):
         super().__init__(setting)
 
     def draw(self):
-        changed, self.value = imgui.input_text(
+        changed, value = imgui.input_text(
             self.name,
             self.value,
             256
         )
+        if changed:
+            self.value = value
         
 
 class StringWidgetBuilder(SettingWidgetBuilder):

@@ -30,7 +30,6 @@ class Database:
         self.engine = engine = create_engine(
             #"sqlite://", echo=True, json_serializer=json_serializer
             "sqlite:///./deeper.db", echo=True, json_serializer=json_serializer
-            #sqlite+aiosqlite:///./stattik.db
         )
 
         with engine.begin() as conn:
@@ -46,7 +45,7 @@ class Database:
         self.Session.commit()
         self.Session.remove()
 
-    async def drop_all(self):
+    def drop_all(self):
         self.begin()
         with self.engine.begin() as conn:
-            Model.metadata.drop_all
+            Model.metadata.drop_all(conn)

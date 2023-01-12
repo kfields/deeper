@@ -39,13 +39,12 @@ class PickTool(WorldEditTool):
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)
-        logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
+        #logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
         if not self.hovered:
             return
         
         self.selected = Selected(self.hovered.entity, self.hovered.block)
         if self._click_count == 2:
-            #self._click_count = 0
             #self.push_entity_editor()
             clock.schedule_once(lambda dt, *args, **kwargs : self.push_entity_editor(), 0)
             return
@@ -54,7 +53,6 @@ class PickTool(WorldEditTool):
     def push_entity_editor(self):
         from deeper.state import EntityEditState
         from deeper.views.entity_editor import EntityEditor
-        #self.window.show_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.entity)))
         self.window.push_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.entity)))
 
     def on_key_press(self, symbol: int, modifiers: int):

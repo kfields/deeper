@@ -66,3 +66,6 @@ print(entity_settings)
 
 vtype = entity_settings.get_vtype()
 print(vtype)
+
+d = entity_settings.to_dict()
+print(d)

@@ -6,11 +6,6 @@ class MetaInfo:
 class Builder:
     _meta = MetaInfo()
 
-"""
-class BlueprintBuilder(Builder):
-    def build(self, catalog, name, config):
-        pass
-"""
 
 class EntityBuilder(Builder):
     def build(self, world, blueprint, target=None):
