@@ -27,6 +27,9 @@ class Setting:
             self.vtype = vtype
         self.subscriptions = []
 
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__} name={self.name} value={self.value}>"
+
     @classmethod
     def parse_obj(cls, obj):
         v = cls.validate(obj["value"])

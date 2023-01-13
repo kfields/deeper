@@ -23,7 +23,8 @@ class DragWrapper(Widget):
     def draw(self):
         self.drag_icon.draw()
         if imgui.begin_drag_drop_source():
-            value = self.wrapped.value
+            #value = self.wrapped.value
+            value = self.wrapped.setting
             self.gui.dropboard.value = value
             imgui.button(value.__repr__())
             imgui.end_drag_drop_source()

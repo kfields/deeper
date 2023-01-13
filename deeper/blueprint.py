@@ -74,18 +74,7 @@ class Blueprint(Model):
         self.derivatives.append(derivative)
 
     def extend(self, config):
-        """
-        xconfig = {}
-        for key, value in blueprint.config.items():
-            if key.startswith('_'):
-                continue
-            xconfig[key] = value
-
-        for key, value in config.items():
-            xconfig[key] = value
-        """
         xconfig = copy.deepcopy(self.base.xconfig)
-        # xconfig = mergedeep.merge(xconfig, config, strategy=mergedeep.Strategy.TYPESAFE_REPLACE)
         xconfig = mergedeep.merge(
             xconfig, config, strategy=mergedeep.Strategy.REPLACE
         )
@@ -104,7 +93,7 @@ class Blueprint(Model):
 
     def apply_settings(self):
         self.config = self.settings.to_dict()
-        print(self.config)
+        #print(self.config)
         self.update()
 
     def apply_setting(self, setting):
