@@ -74,7 +74,13 @@ class Blueprint(Model):
         self.derivatives.append(derivative)
 
     def extend(self, config):
-        xconfig = copy.deepcopy(self.base.xconfig)
+        #xconfig = copy.deepcopy(self.base.xconfig)
+        xconfig = {}
+        for key, value in self.base.xconfig.items():
+            if key.startswith('_'):
+                continue
+            xconfig[key] = copy.deepcopy(value)
+
         xconfig = mergedeep.merge(
             xconfig, config, strategy=mergedeep.Strategy.REPLACE
         )

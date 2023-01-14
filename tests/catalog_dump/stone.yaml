@@ -1,0 +1,39 @@
+Block: !import
+  - block.yaml
+  - Block
+Stone:
+  _abstract: true
+  category: Stone
+  components:
+    SpriteVu:
+      offset: [0, 0]
+  extends: Block
+TileStone0: {extends: Stone, image: ':deeper:tiles/TileStone0.png'}
+TileStone1:
+  extends: Stone
+  image: :deeper:tiles/TileStone1.png
+  size: [0.43, 0.75, 0.5]
+TileStone2: {extends: Stone, image: ':deeper:tiles/TileStone2.png'}
+TileStone3:
+  extends: Stone
+  image: :deeper:tiles/TileStone3.png
+  size: [0.43, 0.5, 0.5]
+TileStone4:
+  extends: Stone
+  image: :deeper:tiles/TileStone4.png
+  size: [0.86, 2, 1]
+TileStone5:
+  extends: Stone
+  image: :deeper:tiles/TileStone5.png
+  size: [0.86, 0.5, 1]
+TileStone6:
+  extends: Stone
+  image: :deeper:tiles/TileStone6.png
+  size: [0.86, 0.5, 1]
+Wagon:
+  components:
+    SpriteVu:
+      offset: [0, 0]
+  extends: Stone
+  image: :deeper:tiles/TileStone7.png
+  size: [0.86, 1.25, 2]

@@ -1,0 +1,172 @@
+Block: !import
+  - block.yaml
+  - Block
+AnimBWheel2:
+  components:
+    AnimatedSpriteVu: {frames: 90, height: 416, image: ':deeper:tiles/AnimBWheel2/AnimBWheel2Frames.png',
+      width: 330}
+  extends: Animated
+  image: :deeper:tiles/AnimBWheel2/AnimBWheel20001.png
+  size: [0.86, 1.5, 1]
+AnimGnome1:
+  components:
+    AnimatedSpriteVu: {frames: 30, height: 382, image: ':deeper:tiles/AnimGnome1/AnimGnome1Frames.png',
+      width: 250}
+  extends: Animated
+  image: :deeper:tiles/AnimGnome1/AnimGnome10001.png
+  size: [0.86, 1.2, 1]
+AnimTree1:
+  components:
+    AnimatedSpriteVu: {frames: 60, height: 309, image: ':deeper:tiles/AnimTree1/AnimTree1Frames.png',
+      width: 262}
+  extends: Animated
+  image: :deeper:tiles/AnimTree1/AnimTree10001.png
+  size: [0.86, 1.25, 1]
+Animated:
+  _abstract: true
+  category: Animated
+  components:
+    AnimatedSpriteVu:
+      offset: [0, 0]
+      rate: 0.5
+  extends: Block
+Boiler1:
+  components:
+    AnimatedSpriteVu: {frames: 15, height: 252, image: ':deeper:tiles/Boiler1/Boiler1Frames.png',
+      width: 238}
+  extends: Animated
+  image: :deeper:tiles/Boiler1/Boiler10001.png
+  size: [0.86, 1, 1]
+BoilerSmoke:
+  components:
+    AnimatedSpriteVu: {frames: 30, height: 498, image: ':deeper:tiles/BoilerSmoke/BoilerSmokeFrames.png',
+      width: 247}
+  extends: Animated
+  image: :deeper:tiles/BoilerSmoke/BoilerSmoke0001.png
+  size: [0.86, 2.25, 1]
+Door:
+  components:
+    AnimatedSpriteVu: {frames: 15, height: 395, image: ':deeper:tiles/Door/DoorFrames.png',
+      width: 237}
+  extends: Animated
+  image: :deeper:tiles/Door/Door0001.png
+  size: [0.86, 1.4, 0.2]
+Door2:
+  components:
+    AnimatedSpriteVu: {frames: 15, height: 322, image: ':deeper:tiles/Door2/Door2Frames.png',
+      width: 157}
+  extends: Animated
+  image: :deeper:tiles/Door2/Door20001.png
+  size: [0.86, 1.4, 0.2]
+Door2Right:
+  components:
+    AnimatedSpriteVu: {frames: 15, height: 376, image: ':deeper:tiles/Door2Right/Door2RightFrames.png',
+      width: 132}
+  extends: Animated
+  image: :deeper:tiles/Door2Right/Door2Right0001.png
+  size: [0.15, 1.4, 1]
+Door3:
+  components:
+    AnimatedSpriteVu: {frames: 5, height: 313, image: ':deeper:tiles/Door3/Door3Frames.png',
+      rate: 0.1, width: 222}
+  extends: Animated
+  image: :deeper:tiles/Door3/Door30001.png
+  size: [0.86, 1.1, 0.2]
+Door3Right:
+  components:
+    AnimatedSpriteVu: {frames: 5, height: 339, image: ':deeper:tiles/Door3Right/Door3RightFrames.png',
+      rate: 0.1, width: 263}
+  extends: Animated
+  image: :deeper:tiles/Door3Right/Door3Right0001.png
+  size: [0.215, 1.4, 1]
+FireSmoke:
+  components:
+    AnimatedSpriteVu: {frames: 30, height: 804, image: ':deeper:tiles/FireSmoke/FireSmokeFrames.png',
+      width: 330}
+  extends: Animated
+  image: :deeper:tiles/FireSmoke/FireSmoke0001.png
+  size: [0.86, 2.25, 1]
+FireSparks:
+  components:
+    AnimatedSpriteVu: {frames: 40, height: 340, image: ':deeper:tiles/FireSparks/FireSparksFrames.png',
+      width: 152}
+  extends: Animated
+  image: :deeper:tiles/FireSparks/FireSparks0001.png
+  size: [0.86, 1.4, 1]
+FireTorch:
+  components:
+    AnimatedSpriteVu: {frames: 8, height: 320, image: ':deeper:tiles/FireTorch/FireTorchFrames.png',
+      width: 296}
+  extends: Animated
+  image: :deeper:tiles/FireTorch/FireTorch0001.png
+  size: [0.86, 1, 1]
+FireTorchSmall:
+  components:
+    AnimatedSpriteVu: {frames: 8, height: 234, image: ':deeper:tiles/FireTorchSmall/FireTorchSmallFrames.png',
+      width: 192}
+  extends: Animated
+  image: :deeper:tiles/FireTorchSmall/FireTorchSmall0001.png
+  size: [0.86, 1, 1]
+FireTorchSmall4:
+  components:
+    AnimatedSpriteVu: {frames: 8, height: 126, image: ':deeper:tiles/FireTorchSmall4/FireTorchSmall4Frames.png',
+      width: 152}
+  extends: Animated
+  image: :deeper:tiles/FireTorchSmall4/FireTorchSmall40001.png
+  size: [0.86, 1, 1]
+FireTorchSmall5:
+  components:
+    AnimatedSpriteVu: {frames: 8, height: 121, image: ':deeper:tiles/FireTorchSmall5/FireTorchSmall5Frames.png',
+      width: 85}
+  extends: Animated
+  image: :deeper:tiles/FireTorchSmall5/FireTorchSmall50001.png
+  size: [0.86, 1, 1]
+Lever1:
+  components:
+    AnimatedSpriteVu: {frames: 10, height: 234, image: ':deeper:tiles/Lever1/Lever1Frames.png',
+      rate: 0.25, width: 227}
+  extends: Animated
+  image: :deeper:tiles/Lever1/Lever10001.png
+  size: [0.86, 0.5, 1]
+Lever2:
+  components:
+    AnimatedSpriteVu: {frames: 10, height: 325, image: ':deeper:tiles/Lever2/Lever2Frames.png',
+      rate: 0.25, width: 243}
+  extends: Animated
+  image: :deeper:tiles/Lever2/Lever20001.png
+  size: [0.86, 1, 1]
+Lever3:
+  components:
+    AnimatedSpriteVu: {frames: 10, height: 300, image: ':deeper:tiles/Lever3/Lever3Frames.png',
+      rate: 0.25, width: 243}
+  extends: Animated
+  image: :deeper:tiles/Lever3/Lever30001.png
+  size: [0.86, 1, 1]
+Lever4:
+  components:
+    AnimatedSpriteVu: {frames: 10, height: 328, image: ':deeper:tiles/Lever4/Lever4Frames.png',
+      rate: 0.25, width: 253}
+  extends: Animated
+  image: :deeper:tiles/Lever4/Lever40001.png
+  size: [0.86, 1, 1]
+Lever5:
+  components:
+    AnimatedSpriteVu: {frames: 10, height: 386, image: ':deeper:tiles/Lever5/Lever5Frames.png',
+      rate: 0.25, width: 188}
+  extends: Animated
+  image: :deeper:tiles/Lever5/Lever50001.png
+  size: [0.86, 1, 1]
+MushroomSparks:
+  components:
+    AnimatedSpriteVu: {frames: 34, height: 212, image: ':deeper:tiles/MushroomSparks/MushroomSparksFrames.png',
+      width: 133}
+  extends: Animated
+  image: :deeper:tiles/MushroomSparks/MushroomSparks0001.png
+  size: [0.43, 0.5, 0.5]
+Spike1:
+  components:
+    AnimatedSpriteVu: {frames: 12, height: 158, image: ':deeper:tiles/Spike1/Spike1Frames.png',
+      rate: 0.25, width: 135}
+  extends: Animated
+  image: :deeper:tiles/Spike1/Spike10001.png
+  size: [0.43, 0.5, 0.5]

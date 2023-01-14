@@ -1,5 +1,4 @@
 Block:
   _abstract: true
   category: Block
-  components:
-    Block:
+  components: {Block: null}

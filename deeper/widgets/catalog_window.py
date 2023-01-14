@@ -30,7 +30,8 @@ class CategoryWidget(Widget):
         self.callback = callback
         self.selection = None
         for blueprint in category.blueprints:
-            self.add_child(BlueprintWidget(blueprint))
+            if not blueprint._abstract:
+                self.add_child(BlueprintWidget(blueprint))
 
     def show(self):
         pass
@@ -57,12 +58,15 @@ class CatalogPanel(Widget):
         super().__init__()
         self.catalog = catalog
         self.callback = callback
+        self.category_names = []
         self.category_widgets = []
         self.current_index = 0
         self.current = None
 
         for category in catalog.categories.values():
-            self.category_widgets.append(CategoryWidget(category, callback))
+            if not category._abstract:
+                self.category_names.append(category.name)
+                self.category_widgets.append(CategoryWidget(category, callback))
 
     def create(self, gui):
         super().create(gui)
@@ -71,7 +75,7 @@ class CatalogPanel(Widget):
 
     def draw(self):
         clicked, self.current_index = imgui.combo(
-            "Category", self.current_index, self.catalog.category_names
+            "Category", self.current_index, self.category_names
         )
         current = self.category_widgets[self.current_index]
         if current != self.current:

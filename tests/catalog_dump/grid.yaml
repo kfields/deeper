@@ -1,0 +1,14 @@
+Block: !import
+  - block.yaml
+  - Block
+Cell:
+  extends: Grid
+  image: :deeper:tiles/_Grid/GRID.png
+  size: [0.86, 0.01, 1]
+Grid:
+  _abstract: true
+  category: Grid
+  components:
+    SpriteVu:
+      offset: [0, 0]
+  extends: Block

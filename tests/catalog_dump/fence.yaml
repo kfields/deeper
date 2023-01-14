@@ -1,0 +1,42 @@
+Block: !import
+  - block.yaml
+  - Block
+Fence:
+  _abstract: true
+  category: Fence
+  components:
+    SpriteVu:
+      offset: [0, 0]
+  extends: Block
+TileFence1:
+  extends: Fence
+  image: :deeper:tiles/TileFence1.png
+  size: [0.86, 1, 0.25]
+TileFence2:
+  extends: Fence
+  image: :deeper:tiles/TileFence2.png
+  size: [0.215, 1, 1]
+TileFence3:
+  extends: Fence
+  image: :deeper:tiles/TileFence3.png
+  size: [0.86, 1, 0.25]
+TileFence3b:
+  extends: Fence
+  image: :deeper:tiles/TileFence3b.png
+  size: [0.86, 1, 0.25]
+TileFence4:
+  extends: Fence
+  image: :deeper:tiles/TileFence4.png
+  size: [0.215, 1, 1]
+TileFence4b:
+  extends: Fence
+  image: :deeper:tiles/TileFence4b.png
+  size: [0.215, 1, 1]
+TileFenceCorner:
+  extends: Fence
+  image: :deeper:tiles/TileFenceCorner.png
+  size: [0.86, 1.25, 1]
+TileFenceCorner2:
+  extends: Fence
+  image: :deeper:tiles/TileFenceCorner2.png
+  size: [0.86, 1.25, 1]

@@ -1,0 +1,18 @@
+Block: !import
+  - block.yaml
+  - Block
+Wheel:
+  _abstract: true
+  category: Wheel
+  components:
+    SpriteVu:
+      offset: [0, 0]
+  extends: Block
+Wheel1:
+  extends: Wheel
+  image: :deeper:tiles/wheel.png
+  size: [0.86, 1.25, 1]
+Wheels:
+  extends: Wheel
+  image: :deeper:tiles/wheels.png
+  size: [1.5, 0.75, 1.5]

@@ -1,0 +1,110 @@
+Block: !import
+  - block.yaml
+  - Block
+Barrel:
+  extends: Object
+  image: :deeper:tiles/Objects/Barrel.png
+  size: [0.43, 0.75, 0.5]
+Barrel2:
+  extends: Object
+  image: :deeper:tiles/Objects/Barrel2.png
+  size: [0.43, 0.75, 0.5]
+BarrelOpen:
+  extends: Object
+  image: :deeper:tiles/Objects/BarrelOpen.png
+  size: [0.43, 0.75, 0.5]
+BlueCrystal:
+  extends: Object
+  image: :deeper:tiles/Objects/BlueCrystal.png
+  size: [0.43, 0.75, 0.5]
+BlueCrystal2:
+  extends: Object
+  image: :deeper:tiles/Objects/BlueCrystal2.png
+  size: [0.43, 0.75, 0.5]
+BlueCrystal3:
+  extends: Object
+  image: :deeper:tiles/Objects/BlueCrystal3.png
+  size: [0.43, 0.75, 0.5]
+Box1:
+  extends: Object
+  image: :deeper:tiles/Objects/Box1.png
+  size: [0.43, 0.75, 0.5]
+Box1b:
+  extends: Object
+  image: :deeper:tiles/Objects/Box1b.png
+  size: [0.43, 0.75, 0.5]
+Box1fun:
+  extends: Object
+  image: :deeper:tiles/Objects/Box1fun.png
+  size: [0.43, 0.75, 0.5]
+Box2:
+  extends: Object
+  image: :deeper:tiles/Objects/Box2.png
+  size: [0.43, 0.75, 0.5]
+Box2b:
+  extends: Object
+  image: :deeper:tiles/Objects/Box2b.png
+  size: [0.43, 1, 0.5]
+Chest:
+  extends: Object
+  image: :deeper:tiles/Objects/Chest.png
+  size: [0.43, 0.5, 0.5]
+ChestOpen:
+  extends: Object
+  image: :deeper:tiles/Objects/ChestOpen.png
+  size: [0.43, 0.5, 0.5]
+GreenCrystal:
+  extends: Object
+  image: :deeper:tiles/Objects/GreenCrystal.png
+  size: [0.43, 0.75, 0.5]
+GreenCrystal2:
+  extends: Object
+  image: :deeper:tiles/Objects/GreenCrystal2.png
+  size: [0.43, 0.75, 0.5]
+Halo:
+  extends: Object
+  image: :deeper:tiles/Objects/Halo.png
+  size: [0.86, 0.01, 1]
+HaloCyan:
+  extends: Object
+  image: :deeper:tiles/Objects/HaloCyan.png
+  size: [0.86, 0.01, 1]
+Light1:
+  extends: Object
+  image: :deeper:tiles/Objects/Light1.png
+  size: [0.43, 0.5, 0.5]
+Light2:
+  extends: Object
+  image: :deeper:tiles/Objects/Light2.png
+  size: [0.43, 0.5, 0.5]
+LightMushroom1:
+  extends: Object
+  image: :deeper:tiles/Objects/LightMushroom1.png
+  size: [0.43, 0.5, 0.5]
+LightMushroom2:
+  extends: Object
+  image: :deeper:tiles/Objects/LightMushroom2.png
+  size: [0.43, 0.5, 0.5]
+LightMushroom3:
+  extends: Object
+  image: :deeper:tiles/Objects/LightMushroom3.png
+  size: [0.43, 0.5, 0.5]
+Object:
+  _abstract: true
+  category: Object
+  components:
+    SpriteVu:
+      offset: [0, 0]
+  extends: Block
+RedCrystal:
+  extends: Object
+  image: :deeper:tiles/Objects/RedCrystal.png
+  size: [0.43, 0.75, 0.5]
+RedCrystal2:
+  extends: Object
+  image: :deeper:tiles/Objects/RedCrystal2.png
+  size: [0.43, 0.75, 0.5]
+RedCrystal4:
+  extends: Object
+  image: :deeper:tiles/Objects/RedCrystal4.png
+  size: [0.43, 0.75, 0.5]
