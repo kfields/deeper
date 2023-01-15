@@ -2,9 +2,12 @@ from pathlib import Path
 import glob
 import re
 
+from sqlalchemy import select
+
 from loguru import logger
 from arcade.resources import resolve_resource_path
 
+from deeper.database import Database
 import deeper.blueprints
 
 from ..kits import Kit
@@ -12,8 +15,10 @@ from ..kits import Kit
 from ..blueprints import EntityBlueprint
 from .yaml import load_yaml, dump_yaml
 
+
 def pascal_to_snake(name):
-    return re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
+    return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
+
 
 class Category:
     def __init__(self, name) -> None:
@@ -31,6 +36,7 @@ class Catalog(Kit):
     builders_path = deeper.blueprints
 
     _instance = None
+
     @classmethod
     @property
     def instance(cls):
@@ -49,9 +55,9 @@ class Catalog(Kit):
     def find_builder(self, name):
         if name in self.builders:
             return self.builders[name]
-
+    
     def build(self, name, config, parent):
-        #print(blueprint.__dict__)
+        # print(blueprint.__dict__)
         if not config:
             config = {}
         builder = self.find_builder(name)
@@ -61,17 +67,53 @@ class Catalog(Kit):
         return self.blueprints[name]
 
     def load(self):
-        self.load_yaml()
+        # self.load_yaml()
+        db = Database.instance
+        session = db.session
+        first = session.query(EntityBlueprint).first()
+        #first = None
+        #with db.Session() as session:
+        #    first = session.query(EntityBlueprint).first()
+        #if not db.has_table("Blueprint"):
+        if not first:
+            self.load_yaml()
+            self.create_database()
+        else:
+            self.load_database()
+
+    def create_database(self):
+        logger.debug("create database")
+        db = Database.instance
+        session = db.session
+        #with db.Session() as session:
+        for bp in self.blueprints.values():
+            session.add(bp)
+
+    def load_database(self):
+        logger.debug("load database")
+        db = Database.instance
+        session = db.session
+        #with db.Session() as session:
+        #blueprints = session.scalars(select(EntityBlueprint)).all()
+        blueprints = session.query(EntityBlueprint).all()
+        #print(blueprints)
+        #exit()
+        for bp in blueprints:
+            #self.blueprints[bp.name] = bp
+            bp.catalog = self
+            #bp.configure(bp.config)
+            bp.update()
+            self.register_blueprint(bp)
 
     def load_yaml(self):
-        root = resolve_resource_path(":deeper:/catalog")
-        #root = resolve_resource_path(":deeper:/catalog_dump")
+        # root = resolve_resource_path(":deeper:/catalog")
+        root = resolve_resource_path(":deeper:/catalog_dump")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
-            #print(path)
+            # print(path)
             with open(path, "r") as file:
                 cat = load_yaml(file)
-                #print(cat)
+                # print(cat)
                 for key, value in cat.items():
                     self.build_blueprint(key, value)
 
@@ -86,18 +128,22 @@ class Catalog(Kit):
                     imports.append(blueprint.base)
             with open(path / f"{pascal_to_snake(category.name)}.yaml", "w") as file:
                 for blueprint in imports:
-                    file.write(f"""{blueprint.name}: !import
+                    file.write(
+                        f"""{blueprint.name}: !import
   - {pascal_to_snake(blueprint.category)}.yaml
-  - {blueprint.name}\n""")
+  - {blueprint.name}\n"""
+                    )
                 dump_yaml(data, file)
 
     def build_blueprint(self, key, value):
         blueprint = EntityBlueprint(self, key, value)
         # print("blueprint: ", blueprint.__dict__)
 
-        #if "_abstract" in value:
+        # if "_abstract" in value:
         #    return self.add_blueprint(key, blueprint)
+        self.register_blueprint(blueprint)
 
+    def register_blueprint(self, blueprint):
         category = None
         if blueprint.category in self.categories:
             category = self.categories[blueprint.category]
@@ -105,7 +151,7 @@ class Catalog(Kit):
             category = Category(blueprint.category)
             self.add_category(category)
         category.add_blueprint(blueprint)
-        self.add_blueprint(key, blueprint)
+        self.add_blueprint(blueprint.name, blueprint)
 
     def add_blueprint(self, key, value):
         self.blueprints[key] = value

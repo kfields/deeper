@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from deeper.catalog import Catalog
 from deeper.database import Database
 
@@ -7,9 +9,9 @@ catalog = Catalog.instance
 
 #blueprint = catalog.find('Wagon')
 #print('Wagon: ', blueprint.__dict__)
-
+dbpath = Path('./deeper.db')
+db.begin(dbpath)
 db.drop_all()
-db.begin()
 
 with db.Session() as session:
     with session.begin():

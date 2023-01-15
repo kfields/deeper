@@ -25,6 +25,9 @@ class Blueprint(Model):
 
     config: Mapped[dict] = mapped_column(JSON)
 
+    _abstract = False
+    settings = None
+    
     __mapper_args__ = {
         "polymorphic_identity": "Blueprint",
         "polymorphic_on": "type",
@@ -40,11 +43,11 @@ class Blueprint(Model):
         if parent:
             parent.add_child(self)
         #self.children = []
-        self._abstract = False
+        #self._abstract = False
         #self.base = None
         #self.xconfig = self.configure(config)
         self.configure(config)
-        self.settings = self.create_settings(config)
+        #self.settings = self.create_settings(config)
         #self.derivatives = []
 
     def __repr__(self) -> str:
@@ -76,12 +79,13 @@ class Blueprint(Model):
             # print("config key, value: ", key, value)
             setattr(self, key, value)
 
-        # if (not self._abstract) and hasattr(self, 'components'):
-        if hasattr(self, "components"):
+        if (not self._abstract) and hasattr(self, 'components'):
+        #if hasattr(self, "components"):
             for key, value in self.components.items():
                 #self.add_child(self.catalog.build(key, value, self))
                 self.catalog.build(key, value, self)
 
+        self.settings = self.create_settings(config)
         return config
 
     def update(self):
@@ -104,6 +108,9 @@ class Blueprint(Model):
         for derivative in self.derivatives:
             derivative.update()
 
+        if not self.settings:
+            self.settings = self.create_settings(config)
+
     def extend(self, config):
         #xconfig = copy.deepcopy(self.base.xconfig)
         xconfig = {}
@@ -123,11 +130,11 @@ class Blueprint(Model):
     def borrow(self, config, parent):
         for name in self.borrowed_settings:
             if not name in config:
-                print(name)
-                print(parent)
+                #print(name)
+                #print(parent)
                 if name in parent.xconfig:
                     value = parent.xconfig[name]
-                    print(value)
+                    #print(value)
                     config[name] = value
         return config
 

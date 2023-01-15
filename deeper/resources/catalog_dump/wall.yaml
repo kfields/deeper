@@ -5,22 +5,22 @@ Wall:
   _abstract: true
   extends: Block
   category: Wall
-  components:
-    SpriteVu:
-
+  components: {SpriteVu: null}
 WallC_Big1:
   extends: Wall
-  size: [0.86, 0.75, 1]
+  size: [0.8600000143051147, 0.75, 1.0]
   image: :deeper:tiles/WallC_Big1.png
-  offset: [0.1, 0.1]
+  offset: [0.09000000357627869, -0.019999999552965164]
 WallC_Tile22d3:
   extends: Wall
-  size: [0.86, 0.75, 1]
+  size: [0.8600000143051147, 0.75, 1.0]
   image: :deeper:tiles/WallC_Tile22d3.png
+  offset: [0.09000000357627869, -0.09000000357627869]
 WallC_Tile22d4:
   extends: Wall
-  size: [0.43, 0.75, 0.5]
+  size: [0.4300000071525574, 0.75, 0.5]
   image: :deeper:tiles/WallC_Tile22d4.png
+  offset: [0.09000000357627869, -0.029999999329447746]
 WallC_Tile22d6:
   extends: Wall
   size: [0.86, 1.5, 1]
@@ -55,8 +55,9 @@ WallH_Tile22b:
   image: :deeper:tiles/WallH_Tile22b.png
 WallH_Tile22b2:
   extends: Wall
-  size: [0.86, 0.75, 0.5]
+  size: [0.8600000143051147, 0.75, 0.5]
   image: :deeper:tiles/WallH_Tile22b2.png
+  offset: [-0.019999999552965164, -0.09000000357627869]
 WallH_Tile22b3:
   extends: Wall
   size: [0.86, 0.75, 0.5]

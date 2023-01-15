@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import arcade
 
 from .window import Window
@@ -6,29 +8,25 @@ from .world import World
 
 from .state import WorldEditState
 from .views import WorldEditor
-
+from .database import Database
 
 class Deeper(Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
         self.world = World()
-        #self.edit_state = WorldEditState(self.world)
-        #view = WorldEditor(self, self.edit_state)
         view = WorldEditor(self, WorldEditState(self.world))
         self.show_view(view)
 
-    """
-    def on_update(self, delta_time: float):
-        self.world.process()
-        return super().on_update(delta_time)
-    """
-
-    def show_view(self, new_view):
-        super().show_view(new_view)
-
 def main():
-    window = Deeper()
-    arcade.run()
+    db = Database.instance
+    dbpath = Path('./deeper.db')
+    db.begin(dbpath)
+    with db.Session() as session:
+        with session.begin():
+            db.session = session
+            window = Deeper()
+            arcade.run()
+    db.end()
 
 
 if __name__ == "__main__":

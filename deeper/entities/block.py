@@ -1,3 +1,5 @@
+from loguru import logger
+
 import arcade
 
 from deeper.constants import *
@@ -10,7 +12,7 @@ class BlockBuilder(EntityBuilder):
 
     def build(self, blueprint, world, position = DEFAULT_VEC3, components=[]):
         #print(blueprint)
-        #print("position: ", position)
+        logger.debug(f"position: {position}")
         block = None
         for component in components:
             if component.__class__ == Block:
