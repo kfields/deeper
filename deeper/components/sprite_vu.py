@@ -17,6 +17,15 @@ class SpriteVuBuilder(ComponentBuilder):
 
     def build(self, blueprint, world, target=None, components=[]):
         offset = glm.vec2(*blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
+        """
+        offset = (
+            glm.vec2(blueprint.offset)
+            if hasattr(blueprint, "offset")
+            else glm.vec2(blueprint.parent.offset)
+            if hasattr(blueprint.parent, "offset")
+            else DEFAULT_VEC2
+        )
+        """
         #return SpriteVu(arcade.Sprite(blueprint.parent.image), offset)
         return SpriteVu(arcade.Sprite(blueprint.image), offset)
 

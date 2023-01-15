@@ -35,6 +35,7 @@ class Toolbar(Widget):
             self.selection = children[0]
 
     def draw(self):
+        imgui.separator()
         for child in self.children:
             if child.draw():
                 if self.selection:

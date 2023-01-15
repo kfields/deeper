@@ -29,6 +29,7 @@ class Blueprint(Model):
         "polymorphic_identity": "Blueprint",
         "polymorphic_on": "type",
     }
+    borrowed_settings = []
 
     def __init__(self, catalog, name, config, parent=None):
         self.catalog = catalog
@@ -47,6 +48,12 @@ class Blueprint(Model):
         return f"<Blueprint name={self.name}>"
         # return f"<Blueprint {self.__dict__}>"
 
+    def add_child(self, child):
+        self.children.append(child)
+
+    def add_derivative(self, derivative):
+        self.derivatives.append(derivative)
+
     def configure(self, config):
         if not config:
             return {}
@@ -55,6 +62,8 @@ class Blueprint(Model):
             self.base = self.catalog.find(config["extends"])
             self.base.add_derivative(self)
             config = self.extend(config)
+
+        #self.xconfig = config = self.borrow(config, self.parent)
 
         for key, value in config.items():
             # print("config key, value: ", key, value)
@@ -67,11 +76,23 @@ class Blueprint(Model):
 
         return config
 
-    def add_child(self, child):
-        self.children.append(child)
+    def update(self):
+        self.xconfig = config = self.extend(self.config) if self.base else self.config
+        if not config:
+            return
+        #config = self.borrow(config, self.parent)
+        for key, value in config.items():
+            #print("config key, value: ", key, value)
+            setattr(self, key, value)
 
-    def add_derivative(self, derivative):
-        self.derivatives.append(derivative)
+        # if (not self._abstract) and hasattr(self, 'components'):
+        if hasattr(self, "components"):
+            for child in self.children:
+                child.config = self.components[child.name]
+                child.update()
+
+        for derivative in self.derivatives:
+            derivative.update()
 
     def extend(self, config):
         #xconfig = copy.deepcopy(self.base.xconfig)
@@ -84,9 +105,23 @@ class Blueprint(Model):
         xconfig = mergedeep.merge(
             xconfig, config, strategy=mergedeep.Strategy.REPLACE
         )
+        #xconfig = self.borrow(xconfig, self.parent)
         # print("xconfig:", xconfig)
 
         return xconfig
+
+    def borrow(self, config, parent):
+        for name in self.borrowed_settings:
+            if not name in config:
+                print(name)
+                print(parent)
+                #if hasattr(parent, name):
+                if name in parent.xconfig:
+                    #value = getattr(parent, name)
+                    value = parent.xconfig[name]
+                    print(value)
+                    config[name] = value
+        return config
 
     def create_settings(self, config):
         decomposed = decompose(config)
@@ -109,24 +144,6 @@ class Blueprint(Model):
     def on_setting(self, setting):
         #self.apply_setting(setting)
         self.apply_settings()
-
-    def update(self):
-        self.xconfig = config = self.extend(self.config) if self.base else self.config
-        if not config:
-            return
-        #self.config = self.settings.to_dict()
-        for key, value in config.items():
-            # print("config key, value: ", key, value)
-            setattr(self, key, value)
-
-        # if (not self._abstract) and hasattr(self, 'components'):
-        if hasattr(self, "components"):
-            for child in self.children:
-                child.config = self.components[child.name]
-                child.update()
-
-        for derivative in self.derivatives:
-            derivative.update()
 
 class BlueprintBuilder(Builder):
     def build(self, catalog, name, config, parent):

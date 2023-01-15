@@ -65,6 +65,7 @@ class Catalog(Kit):
 
     def load_yaml(self):
         root = resolve_resource_path(":deeper:/catalog")
+        #root = resolve_resource_path(":deeper:/catalog_dump")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
             #print(path)
@@ -82,16 +83,12 @@ class Catalog(Kit):
                 data[blueprint.name] = blueprint.config
             for blueprint in category.blueprints:
                 if blueprint.base and not blueprint.base.name in data:
-                    #data[blueprint.base.name] = blueprint.base.config
                     imports.append(blueprint.base)
             with open(path / f"{pascal_to_snake(category.name)}.yaml", "w") as file:
                 for blueprint in imports:
                     file.write(f"""{blueprint.name}: !import
   - {pascal_to_snake(blueprint.category)}.yaml
   - {blueprint.name}\n""")
-                #dump = dump_yaml(data)
-                #print(dump)
-                #file.write(dump)
                 dump_yaml(data, file)
 
     def build_blueprint(self, key, value):

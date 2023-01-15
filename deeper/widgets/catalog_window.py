@@ -3,6 +3,7 @@ import imgui
 from arcade.resources import resolve_resource_path
 
 from deeper.dimgui import Widget, Window
+from .menu import Menubar, Menu, MenuItem
 
 class BlueprintWidget(Widget):
     def __init__(self, blueprint):
@@ -87,5 +88,13 @@ class CatalogPanel(Widget):
 
 class CatalogWindow(Window):
     def __init__(self, catalog, callback):
-        super().__init__("Catalog", [CatalogPanel(catalog, callback)])
+        children = [
+            Menubar([
+                Menu('File', [
+                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(resolve_resource_path(':deeper:/catalog_dump')))
+                ])
+            ]),
+            CatalogPanel(catalog, callback)
+        ]
+        super().__init__("Catalog", children, flags=imgui.WINDOW_MENU_BAR)
         self.catalog = catalog

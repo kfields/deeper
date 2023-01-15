@@ -15,6 +15,7 @@ class BlockBlueprint(ComponentBlueprint):
     }
 
     settings_class = BlockSettings
+    borrowed_settings = ['size']
     size = [CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH]
 
 

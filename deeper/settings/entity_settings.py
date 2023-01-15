@@ -1,4 +1,4 @@
-from deeper.setting import SettingGroup, BoolSetting, StringSetting, Vec3Setting
+from deeper.setting import SettingGroup, BoolSetting, StringSetting, Vec3Setting, Vec2Setting
 from .component import BlockSettings, SpriteVuSettings, AnimatedSpriteVuSettings
 
 class ComponentsGroup(SettingGroup):
@@ -23,5 +23,6 @@ EntitySettings.setting_map = {
     "components": ComponentsGroup,
 
     "size": Vec3Setting,
-    "image": StringSetting
+    "image": StringSetting,
+    "offset": Vec2Setting
 }

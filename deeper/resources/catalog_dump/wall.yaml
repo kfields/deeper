@@ -7,11 +7,12 @@ Wall:
   category: Wall
   components:
     SpriteVu:
-      offset: [0, 0]
+
 WallC_Big1:
   extends: Wall
   size: [0.86, 0.75, 1]
   image: :deeper:tiles/WallC_Big1.png
+  offset: [0.1, 0.1]
 WallC_Tile22d3:
   extends: Wall
   size: [0.86, 0.75, 1]

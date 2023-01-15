@@ -73,5 +73,7 @@ class BlockBuilder(ComponentBuilder):
 
     def build(self, blueprint, world, target=None, components=[]):
         #size = glm.vec3(*blueprint.size) if hasattr(blueprint, 'size') else glm.vec3(CELL_WIDTH, 1, 1)
-        size = glm.vec3(*blueprint.parent.size) if hasattr(blueprint.parent, 'size') else glm.vec3(CELL_WIDTH, 1, 1)
+        #size = glm.vec3(*blueprint.parent.size) if hasattr(blueprint.parent, 'size') else glm.vec3(CELL_WIDTH, 1, 1)
+        # TODO: Shouldn't blueprint size already be a vec3?
+        size = glm.vec3(blueprint.size)
         return Block(size=size, blueprint=blueprint)

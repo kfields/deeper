@@ -15,6 +15,7 @@ class SpriteVuBlueprint(ComponentBlueprint):
     }
 
     settings_class = SpriteVuSettings
+    borrowed_settings = ['image', 'offset']
     offset = [0, 0]
 
 
@@ -23,12 +24,17 @@ class SpriteVuBlueprintBuilder(BlueprintBuilder):
     cls = SpriteVuBlueprint
 
     def build(self, catalog, name, config, parent):
-        # print(config)
+        print(config)
         if not "image" in config:
             if hasattr(parent, "image"):
+                #print(parent.image)
                 config["image"] = parent.image
+        """
+        if not "offset" in config:
+            if hasattr(parent, "offset"):
+                config["offset"] = parent.offset
+        """
         return super().build(catalog, name, config, parent)
-
 
 class AnimatedSpriteVuBlueprint(ComponentBlueprint):
     id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
@@ -39,6 +45,7 @@ class AnimatedSpriteVuBlueprint(ComponentBlueprint):
 
     settings_class = AnimatedSpriteVuSettings
     offset = [0, 0]
+    borrowed_settings = ['image', 'offset']
 
 
 class AnimatedSpriteVuBlueprintBuilder(BlueprintBuilder):

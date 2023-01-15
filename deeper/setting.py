@@ -138,7 +138,9 @@ class Vec2Setting(Setting):
     def validate(cls, v):
         return glm.vec2(*v)
 
-
+    def to_dict(self):
+        return list(self._value)
+        
 Vec3SettingVType = glm.vec3
 
 
@@ -148,3 +150,6 @@ class Vec3Setting(Setting):
     @classmethod
     def validate(cls, v):
         return glm.vec3(*v)
+
+    def to_dict(self):
+        return list(self._value)

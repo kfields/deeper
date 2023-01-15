@@ -3,26 +3,26 @@ import imgui
 from deeper.dimgui import Widget
 
 class Button(Widget):
-    def __init__(self, text, callback, small=False):
+    def __init__(self, label, callback, small=False):
         super().__init__()
-        self.text = text
+        self.label = label
         self.callback = callback
         self.small = small
 
     def draw(self):
-        clicked = imgui.small_button(self.text) if self.small else imgui.button(self.text)
+        clicked = imgui.small_button(self.label) if self.small else imgui.button(self.label)
         if clicked:
             self.callback()
 
 class RadioButton(Widget):
-    def __init__(self, text, callback, active=False):
+    def __init__(self, label, callback, active=False):
         super().__init__()
-        self.text = text
+        self.label = label
         self.callback = callback
         self.active = active
 
     def draw(self):
-        changed = imgui.radio_button(self.text, self.active)
+        changed = imgui.radio_button(self.label, self.active)
         if changed:
             self.active = not self.active
             self.callback()

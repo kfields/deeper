@@ -12,7 +12,7 @@ def load_yaml(file):
     return yaml.load(file, Loader=YamlLoader)
 
 def dump_yaml(data, stream):
-    yaml.dump(data, stream, Dumper=YamlDumper, default_flow_style=None)
+    yaml.dump(data, stream, Dumper=YamlDumper, default_flow_style=None, sort_keys=False)
 
 class YamlLoader(yaml.FullLoader):
     def __init__(self, stream):
