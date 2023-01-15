@@ -97,7 +97,9 @@ class SettingGroup(Setting):
         value = self.value
         value.append(setting)
         self.value = value
-
+        #TODO: Temporary hack until I can figure it out
+        setting.subscriptions = self.subscriptions
+    
     def subscribe(self, callback):
         super().subscribe(callback)
         for setting in self.value:

@@ -136,8 +136,9 @@ class Blueprint(Model):
         obj = {"name": self.name, "value": decomposed}
         #print(obj)
         settings = self.settings_class.parse_obj(obj)
-        for setting in settings.value:
-            setting.subscribe(self.on_setting)
+        settings.subscribe(self.on_setting)
+        #for setting in settings.value:
+        #    setting.subscribe(self.on_setting)
         return settings
 
     def apply_settings(self):
@@ -150,6 +151,7 @@ class Blueprint(Model):
         logger.debug(setting)
 
     def on_setting(self, setting):
+        logger.debug(setting)
         #self.apply_setting(setting)
         self.apply_settings()
 
