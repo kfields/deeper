@@ -22,19 +22,18 @@ class SpriteVuBlueprint(ComponentBlueprint):
 class SpriteVuBlueprintBuilder(BlueprintBuilder):
     key = "SpriteVu"
     cls = SpriteVuBlueprint
-
+    """
     def build(self, catalog, name, config, parent):
         print(config)
         if not "image" in config:
             if hasattr(parent, "image"):
                 #print(parent.image)
                 config["image"] = parent.image
-        """
         if not "offset" in config:
             if hasattr(parent, "offset"):
                 config["offset"] = parent.offset
-        """
         return super().build(catalog, name, config, parent)
+    """
 
 class AnimatedSpriteVuBlueprint(ComponentBlueprint):
     id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
@@ -51,7 +50,7 @@ class AnimatedSpriteVuBlueprint(ComponentBlueprint):
 class AnimatedSpriteVuBlueprintBuilder(BlueprintBuilder):
     key = "AnimatedSpriteVu"
     cls = AnimatedSpriteVuBlueprint
-
+    """
     def build(self, catalog, name, config, parent):
         # print(config)
         if not "image" in config:
@@ -62,3 +61,4 @@ class AnimatedSpriteVuBlueprintBuilder(BlueprintBuilder):
                 config["offset"] = parent.offset
 
         return super().build(catalog, name, config, parent)
+    """

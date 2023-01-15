@@ -37,12 +37,15 @@ class Blueprint(Model):
         self.config = config
         self.category = None
         #self.parent = parent
-        self.children = []
+        if parent:
+            parent.add_child(self)
+        #self.children = []
         self._abstract = False
         #self.base = None
-        self.xconfig = self.configure(config)
+        #self.xconfig = self.configure(config)
+        self.configure(config)
         self.settings = self.create_settings(config)
-        self.derivatives = []
+        #self.derivatives = []
 
     def __repr__(self) -> str:
         return f"<Blueprint name={self.name}>"
@@ -55,15 +58,17 @@ class Blueprint(Model):
         self.derivatives.append(derivative)
 
     def configure(self, config):
+        #if not config:
+        #    return {}
         if not config:
-            return {}
+            config = {}
         # print("config: ", config)
         if "extends" in config:
             self.base = self.catalog.find(config["extends"])
             self.base.add_derivative(self)
             config = self.extend(config)
 
-        #self.xconfig = config = self.borrow(config, self.parent)
+        self.xconfig = config = self.borrow(config, self.parent)
 
         for key, value in config.items():
             # print("config key, value: ", key, value)
@@ -72,15 +77,18 @@ class Blueprint(Model):
         # if (not self._abstract) and hasattr(self, 'components'):
         if hasattr(self, "components"):
             for key, value in self.components.items():
-                self.add_child(self.catalog.build(key, value, self))
+                #self.add_child(self.catalog.build(key, value, self))
+                self.catalog.build(key, value, self)
 
         return config
 
     def update(self):
         self.xconfig = config = self.extend(self.config) if self.base else self.config
+        #if not config:
+        #    return
         if not config:
-            return
-        #config = self.borrow(config, self.parent)
+            config = {}
+        self.xconfig = config = self.borrow(config, self.parent)
         for key, value in config.items():
             #print("config key, value: ", key, value)
             setattr(self, key, value)
@@ -115,9 +123,7 @@ class Blueprint(Model):
             if not name in config:
                 print(name)
                 print(parent)
-                #if hasattr(parent, name):
                 if name in parent.xconfig:
-                    #value = getattr(parent, name)
                     value = parent.xconfig[name]
                     print(value)
                     config[name] = value
