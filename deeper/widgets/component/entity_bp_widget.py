@@ -70,6 +70,7 @@ class EntityBpWidget(ComponentWidget):
         super().create(gui)
         for panel in self.panels:
             panel.create(gui)
+        return self
 
     def draw(self):
         changed, self.current_index = imgui.combo(

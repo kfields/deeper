@@ -18,6 +18,7 @@ class ToolButton(Widget):
         super().create(gui)
         image = self.font.render_to_image(self.text, 32, 32)
         self.texture = image.get_texture()
+        return self
 
     def draw(self):
         if self.selected:

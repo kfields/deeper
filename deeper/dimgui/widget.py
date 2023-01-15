@@ -9,6 +9,7 @@ class Widget:
         self.gui = gui
         for child in self.children:
             child.create(gui)
+        return self
 
     @property
     def parent(self):
@@ -26,6 +27,7 @@ class Widget:
     def add_child(self, child):
         child.parent = self
         self.children.append(child)
+        return child
 
     def remove_child(self, child):
         self.children.remove(child)

@@ -20,6 +20,8 @@ class SpriteVuWidget(ComponentWidget):
     def create(self, gui):
         super().create(gui)
         self.drag_icon.create(gui)
+        return self
+
     """
     def draw(self):
         changed, offset = imgui.drag_float2(

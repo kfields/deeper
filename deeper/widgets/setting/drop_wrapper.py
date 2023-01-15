@@ -19,6 +19,8 @@ class DropWrapper(Widget):
             font = pyglet.font.load("Material Icons")
             DropWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR, font)
             self.drag_icon.create(gui)
+        return self
+
     """
     def draw(self):
         self.drag_icon.draw()

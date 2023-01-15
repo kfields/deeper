@@ -163,6 +163,7 @@ class Gui(GuiBase):
     def add_child(self, child):
         super().add_child(child)
         child.create(self)
+        return child
 
     def load_font(self, font_path, font_pixel_size):
         io = imgui.get_io()

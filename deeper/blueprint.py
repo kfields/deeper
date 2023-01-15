@@ -64,8 +64,10 @@ class Blueprint(Model):
             config = {}
         # print("config: ", config)
         if "extends" in config:
-            self.base = self.catalog.find(config["extends"])
-            self.base.add_derivative(self)
+            #self.base = self.catalog.find(config["extends"])
+            base = self.catalog.find(config["extends"])
+            #self.base.add_derivative(self)
+            base.add_derivative(self)
             config = self.extend(config)
 
         self.xconfig = config = self.borrow(config, self.parent)

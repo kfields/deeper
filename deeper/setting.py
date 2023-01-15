@@ -20,8 +20,10 @@ class Setting:
     _value: object = None
     vtype: object = None
 
-    def __init__(self, name, value, vtype=None) -> None:
+    def __init__(self, name, value=None, vtype=None) -> None:
         self.name = name
+        if not value:
+            value = self.default()
         self._value = value
         if vtype:
             self.vtype = vtype
@@ -88,6 +90,14 @@ class SettingGroup(Setting):
             result.append(cls.setting_map[item["name"]].parse_obj(item))
         return result
 
+    def default(self):
+        return []
+
+    def add_setting(self, setting):
+        value = self.value
+        value.append(setting)
+        self.value = value
+
     def subscribe(self, callback):
         super().subscribe(callback)
         for setting in self.value:
@@ -105,13 +115,16 @@ BoolSettingVType = bool
 
 class BoolSetting(Setting):
     _value: BoolSettingVType
-
+    def default(self):
+        return False
 
 IntSettingVType = int
 
 
 class IntSetting(Setting):
     _value: IntSettingVType
+    def default(self):
+        return 0
 
 
 FloatSettingVType = float
@@ -119,6 +132,8 @@ FloatSettingVType = float
 
 class FloatSetting(Setting):
     _value: FloatSettingVType
+    def default(self):
+        return 0.0
 
 
 StringSettingVType = str
@@ -126,6 +141,8 @@ StringSettingVType = str
 
 class StringSetting(Setting):
     _value: StringSettingVType
+    def default(self):
+        return ""
 
 
 Vec2SettingVType = glm.vec2
@@ -137,6 +154,9 @@ class Vec2Setting(Setting):
     @classmethod
     def validate(cls, v):
         return glm.vec2(*v)
+
+    def default(self):
+        return glm.vec2()
 
     def to_dict(self):
         return list(self._value)
@@ -150,6 +170,9 @@ class Vec3Setting(Setting):
     @classmethod
     def validate(cls, v):
         return glm.vec3(*v)
+
+    def default(self):
+        return glm.vec3()
 
     def to_dict(self):
         return list(self._value)

@@ -12,6 +12,7 @@ class Icon(Widget):
         super().create(gui)
         image = self.font.render_to_image(self.text, 32, 32)
         self.texture = image.get_texture()
+        return self
 
     def draw(self):
         imgui.image(self.texture.id, self.texture.width, self.texture.height, (0,1), (1,0))
@@ -27,6 +28,7 @@ class IconButton(Widget):
         super().create(gui)
         image = self.font.render_to_image(self.text, 32, 32)
         self.texture = image.get_texture()
+        return self
 
     def draw(self):
         if imgui.image_button(self.texture.id, self.texture.width, self.texture.height, (0,1), (1,0)):

@@ -17,6 +17,7 @@ class BlueprintWidget(Widget):
         with Image.open(resolve_resource_path(self.blueprint.image)) as image:
             image.thumbnail((64, 64))
             self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert("RGB").tobytes())
+        return self
 
     def draw(self):
         _, selected = imgui.selectable(self.blueprint.name, self.selected)
@@ -73,6 +74,7 @@ class CatalogPanel(Widget):
         super().create(gui)
         for widget in self.category_widgets:
             widget.create(gui)
+        return self
 
     def draw(self):
         clicked, self.current_index = imgui.combo(
