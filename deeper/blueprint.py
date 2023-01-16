@@ -39,16 +39,9 @@ class Blueprint(Model):
         self.name = name
         self.config = config
         self.category = None
-        #self.parent = parent
         if parent:
             parent.add_child(self)
-        #self.children = []
-        #self._abstract = False
-        #self.base = None
-        #self.xconfig = self.configure(config)
         self.configure(config)
-        #self.settings = self.create_settings(config)
-        #self.derivatives = []
 
     def __repr__(self) -> str:
         return f"<Blueprint name={self.name}>"
@@ -80,9 +73,7 @@ class Blueprint(Model):
             setattr(self, key, value)
 
         if (not self._abstract) and hasattr(self, 'components'):
-        #if hasattr(self, "components"):
             for key, value in self.components.items():
-                #self.add_child(self.catalog.build(key, value, self))
                 self.catalog.build(key, value, self)
 
         self.settings = self.create_settings(config)

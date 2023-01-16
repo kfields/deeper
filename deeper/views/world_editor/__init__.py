@@ -93,6 +93,7 @@ class WorldEditor(WorldView):
         for ty in range(0, 8):
             for tx in range(0, 8):
                 position = glm.vec3(tx * CELL_WIDTH, 0, ty)
+                #position = glm.vec3(tx * CELL_WIDTH - CELL_HALF_WIDTH, 0, ty - CELL_HALF_DEPTH)
                 # print("position: ", position)
                 block = Block(position, size)
                 self.block.add_child(block)
@@ -112,19 +113,7 @@ class WorldEditor(WorldView):
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-    """
-    def draw(self):
-        with self.camera:  # TODO: This is messing with ImGui on resize...
-            self.tile_list.draw()
 
-            # self.draw_aabbs()
-
-            pos = self.camera.project(self.camera.target).xy
-            arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
-
-            pos = self.camera.project(self.camera.position).xy
-            arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-    """
     def draw_aabbs(self):
         for block in self.block.children:
             self.draw_aabb(block.aabb)

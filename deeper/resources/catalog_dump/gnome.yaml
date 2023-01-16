@@ -13,13 +13,27 @@ TileGnome1:
   size: [0.86, 0.75, 1]
   image: :deeper:tiles/TileGnome1.png
 TileGnome2:
+  category: Gnome
+  components:
+    Block: {}
+    SpriteVu:
+      offset: [0.0, 0.0]
+      image: :deeper:tiles/TileGnome2.png
   extends: Gnome
-  size: [0.215, 0.75, 1]
+  size: [0.2150000035762787, 0.75, 1.0]
   image: :deeper:tiles/TileGnome2.png
+  offset: [0.10000000149011612, -0.05999999865889549]
 TileGnome3:
+  category: Gnome
+  components:
+    Block: {}
+    SpriteVu:
+      offset: [0.0, 0.0]
+      image: :deeper:tiles/TileGnome3.png
   extends: Gnome
-  size: [0.215, 0.75, 1]
+  size: [0.2150000035762787, 0.75, 1.0]
   image: :deeper:tiles/TileGnome3.png
+  offset: [0.1599999964237213, 0.0]
 TileGnome4:
   extends: Gnome
   size: [0.215, 0.75, 1]
@@ -69,6 +83,12 @@ TileGnome15:
   size: [0.645, 0.75, 0.75]
   image: :deeper:tiles/TileGnome15.png
 TileGnome16:
+  category: Gnome
+  components:
+    Block: {}
+    SpriteVu:
+      offset: [0.0, 0.0]
+      image: :deeper:tiles/TileGnome16.png
   extends: Gnome
-  size: [0.645, 0.75, 0.25]
+  size: [0.4300000071525574, 0.75, 0.25]
   image: :deeper:tiles/TileGnome16.png

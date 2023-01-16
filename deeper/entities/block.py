@@ -11,8 +11,8 @@ class BlockBuilder(EntityBuilder):
     key = 'Block'
 
     def build(self, blueprint, world, position = DEFAULT_VEC3, components=[]):
-        #print(blueprint)
-        logger.debug(f"position: {position}")
+        #logger.debug(blueprint)
+        #logger.debug(f"position: {position}")
         block = None
         for component in components:
             if component.__class__ == Block:
