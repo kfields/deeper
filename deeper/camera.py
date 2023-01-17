@@ -71,6 +71,13 @@ class WorldCamera:
     def unproject(self, point):
         return glm.vec3(self.inv_view * point)
 
+    def pan(self, dx, dy):
+        camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
+        camera_up = glm.normalize(glm.cross(camera_right, self.direction))
+        vector = (camera_right * dx) + (camera_up * dy)
+        target = self.target + vector / self.distance
+        self.look_at(target, self.distance)
+
     def look_at(self, target, distance):
         self.target = target
         self.position = target + (self.direction * -distance)
@@ -98,14 +105,14 @@ class WorldCamera:
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
 
         inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
-        #inv_view = glm.inverse(glm.mat4(*self.window.ctx._view_matrix_2d))
         mouse_vec = glm.vec3(x, y, 0)
         mouse_vec = self.inv_world_matrix * inv_view * mouse_vec
         x, y = mouse_vec.xy * self.zoom
 
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
-        ray_origin = (self.position + (camera_right * x) + (camera_up * y))
+        #ray_origin = (self.position + (camera_right * x) + (camera_up * y))
+        ray_origin = self.position + (camera_right * x) + (camera_up * y)
         ray_direction = self.direction
 
         #print("viewport: ", self.camera.viewport)

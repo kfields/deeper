@@ -80,6 +80,9 @@ class GuiBase(Widget):
         if button == mouse.MIDDLE:
             self.io.mouse_down[2] = 1
 
+        if self.io.want_capture_mouse:
+            return event.EVENT_HANDLED
+
     def on_mouse_press(self, x, y, button, modifiers):
         self.io.mouse_pos = x, self.io.display_size.y - y
 
@@ -112,6 +115,8 @@ class GuiBase(Widget):
 
     def on_mouse_scroll(self, x, y, mods, scroll):
         self.io.mouse_wheel = scroll
+        if self.io.want_capture_mouse:
+            return event.EVENT_HANDLED
 
     def on_resize(self, width, height):
         self.io.display_size = width, height

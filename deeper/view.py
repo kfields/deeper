@@ -91,6 +91,12 @@ class WorldView(View):
         self.world.process(delta_time)
         return super().on_update(delta_time)
 
+    def on_mouse_drag(self, x: int, y: int, dx: int, dy: int, buttons: int, modifiers: int):
+        self.camera.pan(dx, dy)
+
+    def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
+        self.camera.zoom = self.camera.zoom + scroll_y * .1
+
     def draw_aabb(self, aabb, color=arcade.color.YELLOW):
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
         bbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz))
