@@ -28,7 +28,7 @@ class WorldCamera:
         #self.camera = ScreenCamera(zoom=zoom)
 
         self.update_matrices()
-        self.look_at(target, self.distance)
+        self.look_at(target)
 
     def __enter__(self):
         self.window.push_ctx_state()
@@ -44,7 +44,9 @@ class WorldCamera:
     @zoom.setter
     def zoom(self, zoom):
         self._zoom = zoom
+        self.distance = zoom * 10
         self.camera.zoom = zoom
+        self.look_at(self.target)
 
     def update_matrices(self):
         self.view_matrix = glm.rotate(glm.mat4(1), WORLD_TILT, WORLD_AXIS_X)
@@ -63,7 +65,7 @@ class WorldCamera:
     def resize(self, viewport_width: int, viewport_height: int, *,
                resize_projection: bool = True) -> None:
         self.camera.resize(viewport_width, viewport_height, resize_projection=resize_projection)
-        self.look_at(self.target, self.distance)
+        self.look_at(self.target)
 
     def project(self, point):
         return glm.vec3(self.view_matrix * point)
@@ -76,18 +78,15 @@ class WorldCamera:
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
         vector = (camera_right * dx) + (camera_up * dy)
         target = self.target + vector / self.distance
-        self.look_at(target, self.distance)
+        self.look_at(target)
 
-    def look_at(self, target, distance):
+    def look_at(self, target):
         self.target = target
-        self.position = target + (self.direction * -distance)
-
-        focal_point = self.project(target).xy - glm.vec2(
-            self.camera.viewport[2] / 2, self.camera.viewport[3] / 2
-        )
-        #print("focal_point: ", focal_point)
-        self.camera.move(focal_point)
+        self.position = target + (self.direction * -self.distance)
         self.update_matrices()
+        focal_point = self.project(target).xy * 1/self.zoom
+        #print("focal_point: ", focal_point)
+        self.camera.center(focal_point)
 
     def mouse_to_ray(self, mx, my):
         viewport = self.camera.viewport
@@ -111,7 +110,6 @@ class WorldCamera:
 
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
-        #ray_origin = (self.position + (camera_right * x) + (camera_up * y))
         ray_origin = self.position + (camera_right * x) + (camera_up * y)
         ray_direction = self.direction
 

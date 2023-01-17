@@ -80,13 +80,6 @@ class WorldEditor(WorldView):
         # exit()
         self.edit_state.current_blueprint = blueprint
 
-    def on_key_press(self, symbol, modifiers):
-        super().on_key_press(symbol, modifiers)
-        if symbol == key.NUM_ADD:
-            self.camera.zoom = self.camera.zoom + .1
-        elif symbol == key.NUM_SUBTRACT:
-            self.camera.zoom = self.camera.zoom - .1
-
     def create_blocks(self):
         blueprint = self.catalog.find('Cell')
         size = glm.vec3(CELL_WIDTH, .01, 1)

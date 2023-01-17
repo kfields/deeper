@@ -1,5 +1,7 @@
 import glm
+import pyglet.window.mouse as mouse
 import arcade
+from arcade import key
 from arcade.gui import UIManager
 
 from .dimgui import ViewGui
@@ -91,8 +93,16 @@ class WorldView(View):
         self.world.process(delta_time)
         return super().on_update(delta_time)
 
+    def on_key_press(self, symbol, modifiers):
+        super().on_key_press(symbol, modifiers)
+        if symbol == key.NUM_ADD:
+            self.camera.zoom = self.camera.zoom + .1
+        elif symbol == key.NUM_SUBTRACT:
+            self.camera.zoom = self.camera.zoom - .1
+
     def on_mouse_drag(self, x: int, y: int, dx: int, dy: int, buttons: int, modifiers: int):
-        self.camera.pan(dx, dy)
+        if buttons == mouse.RIGHT:
+            self.camera.pan(dx, dy)
 
     def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
         self.camera.zoom = self.camera.zoom + scroll_y * .1
