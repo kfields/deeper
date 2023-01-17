@@ -7,7 +7,7 @@ Wall:
   extends: Block
   category: Wall
   components:
-    SpriteVu:
+    SpriteVu: {}
 
 WallC_Big1:
   extends: Wall

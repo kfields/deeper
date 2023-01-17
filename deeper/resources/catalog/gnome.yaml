@@ -7,8 +7,7 @@ Gnome:
   extends: Block
   category: Gnome
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 
 TileGnome1:
   extends: Gnome

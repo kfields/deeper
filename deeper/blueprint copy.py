@@ -54,10 +54,40 @@ class Blueprint(Model):
         self.derivatives.append(derivative)
 
     def configure(self, config):
-        pass
+        #logger.debug(f"config: {config}")
+        if "extends" in config:
+            base = self.catalog.find(config["extends"])
+            base.add_derivative(self)
+            config = self.extend(config)
+
+        self.xconfig = config = self.borrow(config, self.parent)
+
+        for key, value in config.items():
+            setattr(self, key, value)
+
+        if (not self._abstract) and hasattr(self, 'components'):
+            for key, value in self.components.items():
+                self.catalog.build(key, value, self)
+
+        self.settings = self.create_settings(config)
 
     def update(self):
-        pass
+        self.xconfig = config = self.extend(self.config) if self.base else self.config
+        self.xconfig = config = self.borrow(config, self.parent)
+        for key, value in config.items():
+            setattr(self, key, value)
+
+        # if (not self._abstract) and hasattr(self, 'components'):
+        if hasattr(self, "components"):
+            for child in self.children:
+                child.config = self.components[child.name]
+                child.update()
+
+        for derivative in self.derivatives:
+            derivative.update()
+
+        if not self.settings:
+            self.settings = self.create_settings(config)
 
     def extend(self, config):
         #xconfig = copy.deepcopy(self.base.xconfig)
@@ -98,15 +128,15 @@ class Blueprint(Model):
 
     def apply_settings(self):
         self.config = self.settings.to_dict()
-        #logger.debug(self.config)
+        #print(self.config)
         self.update()
 
     def apply_setting(self, setting):
         setattr(self, setting.name, setting.value)
-        #logger.debug(setting)
+        logger.debug(setting)
 
     def on_setting(self, setting):
-        #logger.debug(setting)
+        logger.debug(setting)
         #self.apply_setting(setting)
         self.apply_settings()
 

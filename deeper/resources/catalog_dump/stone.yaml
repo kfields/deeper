@@ -6,8 +6,7 @@ Stone:
   extends: Block
   category: Stone
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 TileStone0: {extends: Stone, image: ':deeper:tiles/TileStone0.png'}
 TileStone1:
   extends: Stone

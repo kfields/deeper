@@ -7,8 +7,7 @@ Gray:
   extends: Block
   category: Gray
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 
 TileGray1:
   extends: Gray

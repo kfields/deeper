@@ -7,8 +7,7 @@ Fence:
   extends: Block
   category: Fence
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 
 TileFence1:
   extends: Fence

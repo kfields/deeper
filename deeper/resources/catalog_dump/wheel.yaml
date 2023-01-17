@@ -6,8 +6,7 @@ Wheel:
   extends: Block
   category: Wheel
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 Wheel1:
   extends: Wheel
   size: [0.86, 1.25, 1]

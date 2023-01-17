@@ -7,8 +7,7 @@ Grid:
   extends: Block
   category: Grid
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
       
 Cell:
   extends: Grid

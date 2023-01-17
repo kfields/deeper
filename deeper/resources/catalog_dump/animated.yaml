@@ -6,9 +6,7 @@ Animated:
   extends: Block
   category: Animated
   components:
-    AnimatedSpriteVu:
-      offset: [0, 0]
-      rate: 0.5
+    AnimatedSpriteVu: {rate: 0.5}
 AnimBWheel2:
   extends: Animated
   size: [0.86, 1.5, 1]

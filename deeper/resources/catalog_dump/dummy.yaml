@@ -6,8 +6,7 @@ Dummy:
   extends: Block
   category: Dummy
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 DummyDoll: {extends: Dummy, image: ':deeper:tiles/Dummy/DummyDoll.png'}
 DummyDoll2:
   extends: Dummy

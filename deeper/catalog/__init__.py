@@ -57,9 +57,6 @@ class Catalog(Kit):
             return self.builders[name]
     
     def build(self, name, config, parent):
-        # print(blueprint.__dict__)
-        if not config:
-            config = {}
         builder = self.find_builder(name)
         return builder.build(self, name, config, parent)
 
@@ -67,7 +64,10 @@ class Catalog(Kit):
         return self.blueprints[name]
 
     def load(self):
-        # self.load_yaml()
+        #root = resolve_resource_path(":deeper:/catalog")
+        root = resolve_resource_path(":deeper:/catalog_dump")
+        #self.load_yaml(root)
+        #return
         db = Database.instance
         session = db.session
         first = session.query(EntityBlueprint).first()
@@ -76,7 +76,7 @@ class Catalog(Kit):
         #    first = session.query(EntityBlueprint).first()
         #if not db.has_table("Blueprint"):
         if not first:
-            self.load_yaml()
+            self.load_yaml(root)
             self.create_database()
         else:
             self.load_database()
@@ -105,9 +105,7 @@ class Catalog(Kit):
             bp.update()
             self.register_blueprint(bp)
 
-    def load_yaml(self):
-        # root = resolve_resource_path(":deeper:/catalog")
-        root = resolve_resource_path(":deeper:/catalog_dump")
+    def load_yaml(self, root):
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
             # print(path)

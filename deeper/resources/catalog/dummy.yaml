@@ -7,8 +7,7 @@ Dummy:
   extends: Block
   category: Dummy
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 
 DummyDoll:
   extends: Dummy

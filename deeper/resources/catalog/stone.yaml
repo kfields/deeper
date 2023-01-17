@@ -7,8 +7,7 @@ Stone:
   extends: Block
   category: Stone
   components:
-    SpriteVu:
-      offset: [0, 0]
+    SpriteVu: {}
 
 TileStone0:
   extends: Stone
