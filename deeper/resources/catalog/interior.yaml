@@ -1,0 +1,125 @@
+Block: !import
+  - block.yaml
+  - Block
+
+Interior:
+  _abstract: true
+  extends: Block
+  category: Interior
+  components:
+    SpriteVu: {}
+
+Flag1:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Flag1.png"
+
+Flag2c:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Flag2c.png"
+
+Flag3:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Flag3.png"
+
+Flag3b:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Flag3b.png"
+
+Interior1:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior1.png"
+
+Interior2:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior2.png"
+
+Interior3:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior3.png"
+
+Interior4:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior4.png"
+
+Interior5:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior5.png"
+
+Interior6:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior6.png"
+
+Interior7:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior7.png"
+
+Interior8:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior8.png"
+
+Interior9:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior9.png"
+
+Interior10:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior10.png"
+
+Interior11:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior11.png"
+
+Interior12:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior12.png"
+
+Interior13:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior13.png"
+
+Interior14:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior14.png"
+
+Interior15:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/Interior15.png"
+
+WallC_Tile23flag:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/WallC_Tile23flag.png"
+
+WallC_Tile31flag:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/WallC_Tile31flag.png"
+
+WallH_Tile22flag:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/WallH_Tile22flag.png"
+
+WallV_Tile32flag:
+  extends: Interior
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Interior/WallV_Tile32flag.png"

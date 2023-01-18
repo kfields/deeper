@@ -21,8 +21,9 @@ TileGray2:
   image: :deeper:tiles/TileGray2.png
 TileGray2b:
   extends: Gray
-  size: [0.215, 1.5, 1]
+  size: [0.2150000035762787, 1.5, 1.0]
   image: :deeper:tiles/TileGray2b.png
+  offset: [-0.05999999865889549, -0.009999999776482582]
 TileGray3:
   extends: Gray
   size: [0.43, 1.25, 0.5]

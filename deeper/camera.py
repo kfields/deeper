@@ -48,6 +48,14 @@ class WorldCamera:
         self.camera.zoom = zoom
         self.look_at(self.target)
 
+    @property
+    def zoom_pct(self):
+        return  1 / self._zoom * 100
+
+    @zoom_pct.setter
+    def zoom_pct(self, pct):
+        self.zoom = 100 / pct
+
     def update_matrices(self):
         self.view_matrix = glm.rotate(glm.mat4(1), WORLD_TILT, WORLD_AXIS_X)
         self.view_matrix = glm.rotate(

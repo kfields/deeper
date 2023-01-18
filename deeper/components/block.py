@@ -3,7 +3,7 @@ import glm
 from ..constants import *
 from .. import Isometry, Cuboid
 from .. import Component
-from ..builder import ComponentBuilder
+from .component_builder import ComponentBuilder
 
 class Block(Component):
     def __init__(
@@ -30,8 +30,6 @@ class Block(Component):
     def position(self, position):
         self._position = position
         self.isometry = Isometry(*position, *self.rotation)
-        # if self.shape:
-        #    self.aabb = self.shape.aabb(self.isometry)
 
     @property
     def size(self):
@@ -42,7 +40,6 @@ class Block(Component):
         self._size = size
         if self.solid:
             self.shape = Cuboid(size.x, size.y, size.z)
-            # self.aabb = self.shape.aabb(self.isometry)
 
     @property
     def shape(self):
@@ -50,8 +47,6 @@ class Block(Component):
 
     @shape.setter
     def shape(self, shape):
-        # if shape:
-        #    self.aabb = shape.aabb(self.isometry)
         self._shape = shape
 
     @property
@@ -71,9 +66,7 @@ class Block(Component):
 class BlockBuilder(ComponentBuilder):
     key = 'Block'
 
-    def build(self, blueprint, world, target=None, components=[]):
-        #size = glm.vec3(*blueprint.size) if hasattr(blueprint, 'size') else glm.vec3(CELL_WIDTH, 1, 1)
-        #size = glm.vec3(*blueprint.parent.size) if hasattr(blueprint.parent, 'size') else glm.vec3(CELL_WIDTH, 1, 1)
+    def build(self, blueprint, world):
         # TODO: Shouldn't blueprint size already be a vec3?
         size = glm.vec3(blueprint.size)
         return Block(size=size, blueprint=blueprint)

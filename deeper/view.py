@@ -102,10 +102,12 @@ class WorldView(View):
 
     def on_mouse_drag(self, x: int, y: int, dx: int, dy: int, buttons: int, modifiers: int):
         if buttons == mouse.RIGHT:
-            self.camera.pan(dx, dy)
+            #self.camera.pan(dx, dy)
+            self.camera.pan(-dx, -dy)
 
     def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
-        self.camera.zoom = self.camera.zoom + scroll_y * .1
+        #self.camera.zoom = self.camera.zoom + scroll_y * .1
+        self.camera.zoom_pct = self.camera.zoom_pct + scroll_y * 10
 
     def draw_aabb(self, aabb, color=arcade.color.YELLOW):
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))

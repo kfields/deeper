@@ -12,8 +12,11 @@ class ToolButton(Widget):
         self.selected = False
 
     def select(self):
+        if self.selected:
+            return False
         self.selected = True
         self.callback()
+        return True
 
     def create(self, gui):
         super().create(gui)
@@ -38,8 +41,7 @@ class ToolButton(Widget):
             #border_color,
             #frame_padding,
         ):
-            self.select()
-            return True
+            return self.select()
 
 
 class Toolbar(Widget):

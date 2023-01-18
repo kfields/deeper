@@ -1,6 +1,6 @@
-import math
 import glm
 
+import pyglet.window.mouse as mouse
 import arcade
 from arcade import key
 
@@ -99,27 +99,6 @@ class StampTool(WorldEditTool):
         else:
             self.hovered = None
             self.stamp = None
-    """
-    def compute_stamp_position(self, blueprint, world, target, contact):
-        target_space = world.component_for_entity(target, Block)
-        target_pos = target_space.position
-        target_aabb = target_space.aabb
-
-        size = blueprint.size
-
-        snap_width = CELL_QUARTER_WIDTH
-        #snap_width = size[0]
-        snap_height = CELL_QUARTER_HEIGHT
-        #snap_height = size[1]
-        snap_depth = CELL_QUARTER_DEPTH
-        #snap_depth = size[2]
-
-        cx = round(contact[0] / snap_width) * snap_width
-        cy = round(contact[1] / snap_height) * snap_height
-        cz = round(contact[2] / snap_depth) * snap_depth
-
-        return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
-    """
 
     def compute_stamp_position(self, blueprint, world, target, contact):
         option = self.edit_state.snap_option
@@ -196,7 +175,7 @@ class StampTool(WorldEditTool):
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)
         #print("stamp")
-        if self.stamp:
+        if button == mouse.LEFT and self.stamp:
             EntityKit.instance.build(
                 self.edit_state.current_blueprint, self.world, self.stamp.position
             )

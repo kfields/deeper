@@ -13,11 +13,11 @@ class ComponentKit(Kit):
         if hasattr(blueprint, 'extends'):
             return self.find(blueprint.catalog.find(blueprint.extends))
 
-    def build(self, blueprint, world, target=None):
-        #print(blueprint.__dict__)
+    def build(self, blueprint, world):
+        #logger.debug(blueprint.__dict__)
         builder = self.find(blueprint)
         components = []
         for child in blueprint.children:
-            #print(child.__dict__)
+            #logger.debug(child.__dict__)
             components.append(self.build(child, world))
-        return builder.build(blueprint, world, target, components)
+        return builder.build(blueprint, world)

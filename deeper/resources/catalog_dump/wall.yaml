@@ -29,20 +29,23 @@ WallC_Tile22d6:
   offset: [0.09000000357627869, -0.07999999821186066]
 WallC_Tile22d7:
   extends: Wall
-  size: [0.43, 1.5, 0.5]
+  size: [0.4300000071525574, 1.5, 0.5]
   image: :deeper:tiles/WallC_Tile22d7.png
+  offset: [0.0, 0.0]
 WallC_Tile61:
   extends: Wall
   size: [0.43, 0.75, 0.5]
   image: :deeper:tiles/WallC_Tile61.png
 WallC_Tile71bCorner2:
   extends: Wall
-  size: [0.86, 0.75, 1]
+  size: [0.8600000143051147, 0.75, 1.0]
   image: :deeper:tiles/WallC_Tile71bCorner2.png
+  offset: [0.10999999940395355, -0.05999999865889549]
 WallC_TileStair3b:
   extends: Wall
-  size: [0.86, 0.75, 1]
+  size: [0.8600000143051147, 0.75, 1.0]
   image: :deeper:tiles/WallC_TileStair3b.png
+  offset: [-0.09000000357627869, 0.0]
 WallC_TileStair4b:
   extends: Wall
   size: [0.86, 0.75, 1]
@@ -110,8 +113,9 @@ WallH_TileStair5:
   image: :deeper:tiles/WallH_TileStair5.png
 WallV_Tile31b:
   extends: Wall
-  size: [0.43, 1, 1]
+  size: [0.4300000071525574, 0.75, 1.0]
   image: :deeper:tiles/WallV_Tile31b.png
+  offset: [0.09000000357627869, 0.0]
 WallV_Tile31blight:
   extends: Wall
   size: [0.43, 1, 1]
