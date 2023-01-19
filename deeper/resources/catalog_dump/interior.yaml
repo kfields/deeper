@@ -77,12 +77,13 @@ Interior13:
   image: :deeper:tiles/Interior/Interior13.png
 Interior14:
   extends: Interior
-  size: [0.86, 0.75, 1]
+  size: [0.4300000071525574, 0.75, 0.5]
   image: :deeper:tiles/Interior/Interior14.png
 Interior15:
   extends: Interior
-  size: [0.86, 0.75, 1]
+  size: [0.2150000035762787, 0.75, 0.25]
   image: :deeper:tiles/Interior/Interior15.png
+  offset: [0.009999999776482582, -0.10000000149011612]
 WallC_Tile23flag:
   extends: Interior
   size: [0.86, 0.75, 1]

@@ -25,12 +25,14 @@ Floor3c:
   image: :deeper:tiles/Floor3c.png
 Floor3Cracked1:
   extends: Floor
-  size: [0.86, 0.6, 1]
+  size: [0.8600000143051147, 0.6000000238418579, 1.0]
   image: :deeper:tiles/Floor3Cracked1.png
+  offset: [0.05999999865889549, 0.11999999731779099]
 Floor3Cracked2:
   extends: Floor
-  size: [0.86, 0.6, 1]
+  size: [0.8600000143051147, 0.6000000238418579, 1.0]
   image: :deeper:tiles/Floor3Cracked2.png
+  offset: [-0.05000000074505806, -0.029999999329447746]
 Floor3d:
   extends: Floor
   size: [0.86, 0.6, 1]
@@ -41,12 +43,14 @@ Floor3e:
   image: :deeper:tiles/Floor3e.png
 Floor3g:
   extends: Floor
-  size: [0.86, 0.6, 1]
+  size: [0.8600000143051147, 0.6000000238418579, 1.0]
   image: :deeper:tiles/Floor3g.png
+  offset: [-0.019999999552965164, 0.0]
 Floor3h:
   extends: Floor
-  size: [0.86, 0.6, 1]
+  size: [0.8600000143051147, 0.6000000238418579, 1.0]
   image: :deeper:tiles/Floor3h.png
+  offset: [0.03999999910593033, 0.0]
 Floor4a1:
   extends: Floor
   size: [0.86, 0.15, 1]

@@ -1,2 +1,2 @@
-from .world_editor import WorldEditor
+from .level_editor import LevelEditor
 from .entity_editor import EntityEditor

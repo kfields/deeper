@@ -71,10 +71,7 @@ class Catalog(Kit):
         db = Database.instance
         session = db.session
         first = session.query(EntityBlueprint).first()
-        #first = None
-        #with db.Session() as session:
-        #    first = session.query(EntityBlueprint).first()
-        #if not db.has_table("Blueprint"):
+
         if not first:
             self.load_yaml(root)
             self.create_database()
@@ -85,7 +82,6 @@ class Catalog(Kit):
         logger.debug("create database")
         db = Database.instance
         session = db.session
-        #with db.Session() as session:
         for bp in self.blueprints.values():
             session.add(bp)
 
@@ -93,15 +89,11 @@ class Catalog(Kit):
         logger.debug("load database")
         db = Database.instance
         session = db.session
-        #with db.Session() as session:
-        #blueprints = session.scalars(select(EntityBlueprint)).all()
+
         blueprints = session.query(EntityBlueprint).all()
         #print(blueprints)
-        #exit()
         for bp in blueprints:
-            #self.blueprints[bp.name] = bp
             bp.catalog = self
-            #bp.configure(bp.config)
             bp.update()
             self.register_blueprint(bp)
 
@@ -136,9 +128,6 @@ class Catalog(Kit):
     def build_blueprint(self, key, value):
         blueprint = EntityBlueprint(self, key, value)
         # print("blueprint: ", blueprint.__dict__)
-
-        # if "_abstract" in value:
-        #    return self.add_blueprint(key, blueprint)
         self.register_blueprint(blueprint)
 
     def register_blueprint(self, blueprint):

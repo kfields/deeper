@@ -21,11 +21,11 @@ BarrelOpen:
   image: :deeper:tiles/Objects/BarrelOpen.png
 BlueCrystal:
   extends: Object
-  size: [0.43, 0.75, 0.5]
+  size: [0.8600000143051147, 0.75, 1.0]
   image: :deeper:tiles/Objects/BlueCrystal.png
 BlueCrystal2:
   extends: Object
-  size: [0.43, 0.75, 0.5]
+  size: [0.8600000143051147, 0.75, 1.0]
   image: :deeper:tiles/Objects/BlueCrystal2.png
 BlueCrystal3:
   extends: Object

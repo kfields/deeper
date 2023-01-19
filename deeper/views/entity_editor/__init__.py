@@ -5,7 +5,7 @@ import arcade
 from arcade.resources import resolve_resource_path
 from arcade import key
 
-from deeper.view import WorldView
+from deeper.scene import Scene
 from deeper import Block
 from deeper.blueprints import EntityBlueprint
 from deeper.constants import *
@@ -18,10 +18,9 @@ from deeper.tools.pick import PickTool
 
 from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.entity_window import EntityWindow
-#from deeper.widgets.blueprint_window import BlueprintWindow
 from deeper.widgets.component.component_window import ComponentWindow
 
-class EntityEditor(WorldView):
+class EntityEditor(Scene):
     def __init__(self, window, edit_state):
         super().__init__(window, edit_state.world, 'Entity Editor')
         self.edit_state = edit_state
@@ -37,7 +36,6 @@ class EntityEditor(WorldView):
         self.block = self.world.component_for_entity(edit_state.entity, Block)
 
         self.blueprint = self.world.component_for_entity(edit_state.entity, EntityBlueprint)
-        #self.gui.add_child(BlueprintWindow(self.blueprint))
         self.gui.add_child(ComponentWindow(self.blueprint))
 
         pos = self.block.position
@@ -97,21 +95,6 @@ class EntityEditor(WorldView):
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-
-    """
-    def draw(self):
-        with self.camera:
-            self.tile_list.draw()
-
-            # self.draw_aabbs()
-            self.draw_aabb(self.block.aabb)
-
-            pos = self.camera.project(self.camera.target).xy
-            arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
-
-            pos = self.camera.project(self.camera.position).xy
-            arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-    """
 
     def draw_aabbs(self):
         for block in self.block.children:

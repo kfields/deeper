@@ -9,7 +9,7 @@ Rail:
     SpriteVu: {}
 BottomRails:
   extends: Rail
-  size: [0.86, 0.75, 1]
+  size: [0.4300000071525574, 1.0, 0.5]
   image: :deeper:tiles/Rails/BottomRails.png
 PlatformRails1:
   extends: Rail
