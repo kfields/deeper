@@ -6,8 +6,8 @@ from .entity_builder import EntityBuilder
 class BlockBuilder(EntityBuilder):
     key = 'Block'
 
-    def build(self, blueprint, world, position = DEFAULT_VEC3):
-        ent = super().build(blueprint, world, position)
+    def build(self, blueprint, world, components=[], position = DEFAULT_VEC3):
+        ent = super().build(blueprint, world, components)
         block = world.component_for_entity(ent, Block)
         block.position = position
         return ent

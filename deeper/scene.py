@@ -4,7 +4,7 @@ import arcade
 from arcade import key
 
 from .view import View
-
+from .layer import Layer
 
 class Scene(View):
     def __init__(self, window, world, title=''):
@@ -14,11 +14,20 @@ class Scene(View):
         self.processors = []
         self.layers = []
 
+        for group in world.layer_groups:
+            self.create_layer(group)
+
+
     def add_processor(self, processor):
         self.processors.append(processor)
 
     def remove_processor(self, processor):
         self.processors.remove(processor)
+
+    def create_layer(self, group):
+        layer = Layer(self, group.name, group)
+        self.add_layer(layer)
+        return layer
 
     def add_layer(self, layer):
         self.layers.append(layer)
@@ -60,6 +69,11 @@ class Scene(View):
     def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
         #self.camera.zoom = self.camera.zoom + scroll_y * .1
         self.camera.zoom_pct = self.camera.zoom_pct + scroll_y * 10
+
+    def draw(self):
+        for layer in self.layers:
+            layer.draw()
+        super().draw()
 
     def draw_aabb(self, aabb, color=arcade.color.YELLOW):
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))

@@ -4,9 +4,10 @@ from deeper.constants import *
 from deeper.effect import EffectList
 
 class Layer:
-    def __init__(self, scene, name):
+    def __init__(self, scene, name, group):
         self.scene = scene
         self.name = name
+        self.group = group
         self.sprites = arcade.SpriteList()
         self.effects = EffectList()
 

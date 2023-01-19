@@ -5,7 +5,6 @@ from deeper.widgets.button import RadioButton, RadioButtonGroup
 
 class SnapOptionWidget(Widget):
     def __init__(self, edit_state, children=...):
-        # children = [RadioButton('Test', lambda: None, True)]
         children = [
             RadioButtonGroup(
                 [

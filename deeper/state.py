@@ -13,6 +13,7 @@ class WorldEditState:
         self.world = world
         self.current_blueprint = None
         self.snap_option = SnapOption.CENTER
+        self.current_layer_group = None
 
 class BlueprintEditState:
     def __init__(self, world) -> None:

@@ -41,8 +41,8 @@ class EntityEditor(Scene):
         pos = self.block.position
         self.camera = WorldCamera(self.window, pos, 1)
 
-        self.tile_vu_list = []
-        self.tile_list = arcade.SpriteList()
+        #self.tile_vu_list = []
+        #self.tile_list = arcade.SpriteList()
 
         self.add_processor(RenderingProcessor(self))
 
@@ -85,7 +85,8 @@ class EntityEditor(Scene):
 
     def draw(self):
         self.camera.use()
-        self.tile_list.draw()
+        #self.tile_list.draw()
+        super().draw()
 
         # self.draw_aabbs()
         self.draw_aabb(self.block.aabb)

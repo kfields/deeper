@@ -11,7 +11,7 @@ from deeper.scene import Scene
 from deeper.camera import WorldCamera
 from deeper.processors.rendering import RenderingProcessor
 from deeper.catalog import Catalog
-from deeper.widgets import MainMenu, CatalogWindow
+from deeper.widgets import MainMenu, CatalogWindow, LayersWindow
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
@@ -22,12 +22,14 @@ from deeper.widgets.camera_window import CameraWindow
 
 class LevelEditor(Scene):
     def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.world, 'World Editor')
+        super().__init__(window, edit_state.world, 'Level Editor')
         self.edit_state = edit_state
 
         self.gui.default_font = self.gui.load_font(
             resolve_resource_path(f":deeper:fonts/Roboto-Regular.ttf"), 16
         )
+
+        self.gui.add_child(LayersWindow(self, lambda layer: self.select_layer(layer)))
 
         self.catalog = Catalog()
         self.gui.add_child(CatalogWindow(self.catalog, self.on_catalog))
@@ -35,8 +37,8 @@ class LevelEditor(Scene):
         self.camera = WorldCamera(self.window, glm.vec3(), 1.5)
         self.gui.add_child(CameraWindow(self.camera))
 
-        self.tile_vu_list = []
-        self.tile_list = arcade.SpriteList()
+        #self.tile_vu_list = []
+        #self.tile_list = arcade.SpriteList()
 
         self.add_processor(RenderingProcessor(self))
 
@@ -63,6 +65,9 @@ class LevelEditor(Scene):
             )
         )
 
+    def select_layer(self, layer):
+        self.edit_state.current_layer_group = layer.group
+
     def use_pick(self):
         self.use_tool(self.pick_tool)
 
@@ -75,7 +80,8 @@ class LevelEditor(Scene):
 
     def draw(self):
         self.camera.use()
-        self.tile_list.draw()
+        #self.tile_list.draw()
+        super().draw()
 
         # self.draw_aabbs()
 

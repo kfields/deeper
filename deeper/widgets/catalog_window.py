@@ -20,10 +20,10 @@ class BlueprintWidget(Widget):
         return self
 
     def draw(self):
-        _, selected = imgui.selectable(self.blueprint.name, self.selected)
+        clicked, selected = imgui.selectable(self.blueprint.name, self.selected)
         imgui.same_line()
         imgui.image(self.texture.glo, *self.texture.size)
-        return selected
+        return clicked
 
 class CategoryWidget(Widget):
     def __init__(self, category, callback):
@@ -46,12 +46,12 @@ class CategoryWidget(Widget):
     def draw(self):
         imgui.begin_child("entities", -1, -1, border=True)
         for widget in self.children:
-            selected = widget.draw()
-            if selected:
+            clicked = widget.draw()
+            if clicked:
                 if self.selection:
                     self.selection.selected = False
                 self.selection = widget
-                widget.selected = selected
+                widget.selected = True
                 self.callback(widget.blueprint)
         imgui.end_child()
 

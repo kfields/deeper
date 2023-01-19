@@ -8,10 +8,22 @@ from .kit import Kit
 class ComponentWidgetKit(Kit):
     builders_path = deeper.widgets.component
     #builder_type = Builder
-
+    """
     def find(self, component):
         if component.__class__ in self.builders:
             return self.builders[component.__class__]
+    """
+    def find(self, component, cls=None):
+        if not cls:
+            cls = component.__class__
+        if cls in self.builders:
+            return self.builders[cls]
+        else:
+            base = cls.__bases__[0]
+            if base == object:
+                return None
+            #print(base)
+            return self.find(component, base) #TODO: What if multiple bases?
 
     def build(self, component):
         #print(component.__dict__)

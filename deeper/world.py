@@ -2,7 +2,8 @@ import glm
 import esper
 
 from . import Block
-from .group import LayerGroup
+from .components.group import LayerGroup
+
 
 class World(esper.World):
     def __init__(self, timed=False):
@@ -21,13 +22,17 @@ class World(esper.World):
             return results[0]
 
         origin = ray.origin
-        sorted_results = sorted(results, key=lambda result: glm.distance(result[1].position, origin))
+        sorted_results = sorted(
+            results, key=lambda result: glm.distance(result[1].position, origin)
+        )
         return sorted_results[0]
 
     def create_layer_group(self, name):
         cls_name = f"{name}Layer"
-        cls = type(cls_name, (LayerGroup))
-        return cls(name)
+        cls = type(cls_name, (LayerGroup,), {})
+        group = cls(name)
+        self.add_layer_group(group)
+        return group
 
     def add_layer_group(self, group):
         self.layer_groups.append(group)
