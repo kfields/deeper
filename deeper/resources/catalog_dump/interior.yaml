@@ -79,6 +79,7 @@ Interior14:
   extends: Interior
   size: [0.4300000071525574, 0.75, 0.5]
   image: :deeper:tiles/Interior/Interior14.png
+  offset: [0.0, 0.10000000149011612]
 Interior15:
   extends: Interior
   size: [0.2150000035762787, 0.75, 0.25]

@@ -84,7 +84,7 @@ class WorldCamera:
     def pan(self, dx, dy):
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
-        vector = (camera_right * dx) + (camera_up * dy)
+        vector = (camera_right * dx) + (camera_up * dy) * self.zoom
         target = self.target + vector / self.distance
         self.look_at(target)
 

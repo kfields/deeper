@@ -37,9 +37,6 @@ class LevelEditor(Scene):
         self.camera = WorldCamera(self.window, glm.vec3(), 1.5)
         self.gui.add_child(CameraWindow(self.camera))
 
-        #self.tile_vu_list = []
-        #self.tile_list = arcade.SpriteList()
-
         self.add_processor(RenderingProcessor(self))
 
         self.current_tool = self.pick_tool = PickTool(self, edit_state)
@@ -66,7 +63,7 @@ class LevelEditor(Scene):
         )
 
     def select_layer(self, layer):
-        self.edit_state.current_layer_group = layer.group
+        self.edit_state.current_layer = layer.group
 
     def use_pick(self):
         self.use_tool(self.pick_tool)
@@ -80,17 +77,12 @@ class LevelEditor(Scene):
 
     def draw(self):
         self.camera.use()
-        #self.tile_list.draw()
         super().draw()
 
-        # self.draw_aabbs()
-
+        """
         pos = self.camera.project(self.camera.target).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
 
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-
-    def draw_aabbs(self):
-        for block in self.block.children:
-            self.draw_aabb(block.aabb)
+        """

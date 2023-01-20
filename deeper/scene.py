@@ -14,7 +14,7 @@ class Scene(View):
         self.processors = []
         self.layers = []
 
-        for group in world.layer_groups:
+        for group in world.layers:
             self.create_layer(group)
 
 
@@ -40,11 +40,15 @@ class Scene(View):
         self.camera.resize(self.window.width, self.window.height)
         for processor in self.processors:
             self.world.add_processor(processor)
+        for layer in self.layers:
+            layer.enable()
 
     def on_hide_view(self):
         super().on_hide_view()
         for processor in self.processors:
             self.world.remove_processor(processor.__class__) #TODO: Weird, why doesn't esper remove by instance?
+        for layer in self.layers:
+            layer.disable()
 
     def on_resize(self, width: int, height: int):
         super().on_resize(width, height)

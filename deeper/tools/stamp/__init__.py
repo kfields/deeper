@@ -177,7 +177,7 @@ class StampTool(WorldEditTool):
         #print("stamp")
         if button == mouse.LEFT and self.stamp:
             EntityKit.instance.build(
-                self.edit_state.current_blueprint, self.world, [self.edit_state.current_layer_group], self.stamp.position
+                self.edit_state.current_blueprint, self.world, self.edit_state.current_layer, self.stamp.position
             )
 
     def on_key_press(self, symbol: int, modifiers: int):

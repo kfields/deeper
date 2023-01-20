@@ -10,14 +10,14 @@ class TestLevel(Level):
     def __init__(self, timed=False):
         super().__init__(timed)
         self.create_grid()
-        self.create_layer_group('Floor')
-        self.create_layer_group('Default')
+        self.create_layer('Floor')
+        self.create_layer('Default')
 
     def create_grid(self):
         catalog = Catalog.instance
         blueprint = catalog.find("Cell")
         size = glm.vec3(CELL_WIDTH, 0.01, 1)
-        group = self.create_layer_group('Grid')
+        group = self.create_layer('Grid')
         for ty in range(0, 16):
             for tx in range(0, 16):
                 position = glm.vec3(tx * CELL_WIDTH, 0, ty)

@@ -16,8 +16,9 @@ class SpriteVuBuilder(ComponentBuilder):
     key = 'SpriteVu'
 
     def build(self, blueprint, world):
-        offset = glm.vec2(*blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
-        return SpriteVu(arcade.Sprite(blueprint.image), offset)
+        offset = glm.vec2(blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
+        #return SpriteVu(arcade.Sprite(blueprint.image), offset)
+        return SpriteVu(arcade.Sprite(texture=blueprint.texture), offset)
 
 
 class AnimatedSpriteVu(Vu):
@@ -30,7 +31,7 @@ class AnimatedSpriteVuBuilder(ComponentBuilder):
     key = 'AnimatedSpriteVu'
 
     def build(self, blueprint, world):
-        offset = glm.vec2(*blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
+        offset = glm.vec2(blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
         return AnimatedSpriteVu(
             AnimatedSprite(
                 blueprint.image,

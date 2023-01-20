@@ -2,17 +2,22 @@ import glm
 import esper
 
 from . import Block
-from .components.group import LayerGroup
+from .components.entity_group import EntityLayer
 
 
 class World(esper.World):
     def __init__(self, timed=False):
         super().__init__(timed)
-        self.layer_groups = []
+        self.layers = []
+
+    def delete_entity(self, entity: int, immediate: bool = False) -> None:
+        block = self.component_for_entity(entity, Block)
+        block.layer.mark()
+        super().delete_entity(entity, immediate)
 
     def cast_ray(self, ray):
         results = []
-        for entity, (block,) in self.get_components(Block):
+        for entity, block in self.get_component(Block):
             result = block.cast_ray(ray, entity)
             if result:
                 results.append(result)
@@ -27,12 +32,12 @@ class World(esper.World):
         )
         return sorted_results[0]
 
-    def create_layer_group(self, name):
+    def create_layer(self, name):
         cls_name = f"{name}Layer"
-        cls = type(cls_name, (LayerGroup,), {})
-        group = cls(name)
-        self.add_layer_group(group)
-        return group
+        cls = type(cls_name, (EntityLayer,), {})
+        layer = cls(name)
+        self.add_layer(layer)
+        return layer
 
-    def add_layer_group(self, group):
-        self.layer_groups.append(group)
+    def add_layer(self, layer):
+        self.layers.append(layer)

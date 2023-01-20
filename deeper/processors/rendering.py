@@ -1,3 +1,5 @@
+from loguru import logger
+
 import arcade
 
 from ..constants import *
@@ -15,16 +17,18 @@ class RenderingProcessor(Processor):
             self.process_layer(layer, delta_time)
 
     def process_layer(self, layer, delta_time: float):
+        if not layer.dirty:
+            return
+        logger.debug(f"processing {layer.name}")
         layer_group = layer.group
-        layer.sprites = arcade.SpriteList()
         vu_list = []
+
+        layer.clear()
 
         for ent, (_, block, vu) in self.world.get_components(layer_group.__class__, Block, SpriteVu):
             position = self.scene.camera.project(block.position)
             vu.position = position
-            vu.aabb = block.aabb
             #print("position: ", position)
-            #sprite_position = position.xy + vu.offset
             sprite_position = position.xy + (vu.offset * WORLD_SCALE)
             vu.sprite.set_position(*sprite_position)
             vu_list.append(vu)
@@ -32,9 +36,8 @@ class RenderingProcessor(Processor):
         for ent, (_, block, vu) in self.world.get_components(layer_group.__class__, Block, AnimatedSpriteVu):
             position = self.scene.camera.project(block.position)
             vu.position = position
-            vu.aabb = block.aabb
             #print("position: ", position)
-            sprite_position = position.xy + vu.offset
+            sprite_position = position.xy + (vu.offset * WORLD_SCALE)
             vu.sprite.set_position(*sprite_position)
             vu.sprite.update_animation(delta_time)
             vu_list.append(vu)
@@ -43,6 +46,8 @@ class RenderingProcessor(Processor):
 
         for vu in vu_list:
             layer.sprites.append(vu.sprite)
+
+        layer.unmark()
 
     """
     def process(self, delta_time: float):

@@ -1,6 +1,9 @@
+from loguru import logger
+
 import arcade
 
 from deeper.constants import *
+from deeper.event import DirtyEvent
 from deeper.effect import EffectList
 
 class Layer:
@@ -8,9 +11,33 @@ class Layer:
         self.scene = scene
         self.name = name
         self.group = group
+        self.group_subscription = None
         self.sprites = arcade.SpriteList()
         self.effects = EffectList()
+        self.dirty = True
 
+    def enable(self):
+        self.group_subscription = self.group.events.subscribe(self.on_group_event)
+
+    def disable(self):
+        self.group.events.unsubscribe(self.group_subscription)
+
+    def on_group_event(self, event):
+        logger.debug(event)
+        match type(event):
+            case DirtyEvent:
+                self.mark()
+
+    def mark(self):
+        logger.debug('dirty')
+        self.dirty = True
+
+    def unmark(self):
+        self.dirty = False
+
+    def clear(self):
+        self.sprites.clear()
+        
     def add_sprite(self, sprite):
         self.sprites.append(sprite)
         return sprite

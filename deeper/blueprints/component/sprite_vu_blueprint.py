@@ -1,5 +1,7 @@
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, reconstructor
+
+import arcade
 
 from ...constants import *
 from ...settings.component.sprite_vu_settings import SpriteVuSettings, AnimatedSpriteVuSettings
@@ -18,22 +20,26 @@ class SpriteVuBlueprint(ComponentBlueprint):
     borrowed_settings = ['image', 'offset']
     offset = [0, 0]
 
+    def __init__(self, catalog, name, config, parent):
+        super().__init__(catalog, name, config, parent)
+        self._texture = None
+
+    @reconstructor
+    def reconstruct(self):
+        self._texture = None
+
+    @property
+    def texture(self):
+        if not self._texture:
+            self._texture = arcade.load_texture(self.image)
+        return self._texture
+
+    #@texture.setter
+    #def texture(self, texture):
 
 class SpriteVuBlueprintBuilder(BlueprintBuilder):
     key = "SpriteVu"
     cls = SpriteVuBlueprint
-    """
-    def build(self, catalog, name, config, parent):
-        print(config)
-        if not "image" in config:
-            if hasattr(parent, "image"):
-                #print(parent.image)
-                config["image"] = parent.image
-        if not "offset" in config:
-            if hasattr(parent, "offset"):
-                config["offset"] = parent.offset
-        return super().build(catalog, name, config, parent)
-    """
 
 class AnimatedSpriteVuBlueprint(ComponentBlueprint):
     id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
@@ -50,15 +56,3 @@ class AnimatedSpriteVuBlueprint(ComponentBlueprint):
 class AnimatedSpriteVuBlueprintBuilder(BlueprintBuilder):
     key = "AnimatedSpriteVu"
     cls = AnimatedSpriteVuBlueprint
-    """
-    def build(self, catalog, name, config, parent):
-        # print(config)
-        if not "image" in config:
-            if hasattr(parent, "image"):
-                config["image"] = parent.image
-        if not "offset" in config:
-            if hasattr(parent, "offset"):
-                config["offset"] = parent.offset
-
-        return super().build(catalog, name, config, parent)
-    """

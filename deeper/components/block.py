@@ -21,6 +21,7 @@ class Block(Component):
         self.shape = None
         self.size = size
         self.children = []
+        self.layer = None
 
     @property
     def position(self):
@@ -30,6 +31,7 @@ class Block(Component):
     def position(self, position):
         self._position = position
         self.isometry = Isometry(*position, *self.rotation)
+        self.layer.mark()
 
     @property
     def size(self):

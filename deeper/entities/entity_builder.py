@@ -6,11 +6,11 @@ from ..kits.component_kit import ComponentKit
 
 
 class EntityBuilder(Builder):
-    def build(self, blueprint, world, components=[]):
+    def build(self, blueprint, world, layer):
         #logger.debug(blueprint)
         #logger.debug(f"position: {position}")
-
-        components = [blueprint, *components]
+        layer.mark()
+        components = [blueprint, layer]
         for child in blueprint.children:
             #logger.debug(child.__dict__)
             components.append(ComponentKit.instance.build(child, world))
