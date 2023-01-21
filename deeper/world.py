@@ -3,12 +3,21 @@ import esper
 
 from . import Block
 from .components.entity_group import EntityLayer
-
+from .component import Component
 
 class World(esper.World):
     def __init__(self, timed=False):
         super().__init__(timed)
         self.layers = []
+    
+    def create_entity(self, *components: object) -> int:
+        layer = components[0]
+        entity = super().create_entity(*components)
+        for component_instance in components:
+            if not isinstance(component_instance, Component):
+                continue
+            component_instance.create(self, entity, layer)
+        return entity
 
     def delete_entity(self, entity: int, immediate: bool = False) -> None:
         block = self.component_for_entity(entity, Block)

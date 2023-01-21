@@ -9,7 +9,7 @@ from arcade import key
 from deeper.constants import *
 from deeper.scene import Scene
 from deeper.camera import WorldCamera
-from deeper.processors.rendering import RenderingProcessor
+from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.catalog import Catalog
 from deeper.widgets import MainMenu, CatalogWindow, LayersWindow
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
@@ -20,9 +20,10 @@ from deeper.tools.stamp import StampTool
 from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.camera_window import CameraWindow
 
+
 class LevelEditor(Scene):
     def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.world, 'Level Editor')
+        super().__init__(window, edit_state.world, "Level Editor")
         self.edit_state = edit_state
 
         self.gui.default_font = self.gui.load_font(
@@ -37,7 +38,7 @@ class LevelEditor(Scene):
         self.camera = WorldCamera(self.window, glm.vec3(), 1.5)
         self.gui.add_child(CameraWindow(self.camera))
 
-        self.add_processor(RenderingProcessor(self))
+        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
 
         self.current_tool = self.pick_tool = PickTool(self, edit_state)
         self.stamp_tool = StampTool(self, edit_state)
@@ -54,8 +55,12 @@ class LevelEditor(Scene):
                 children=[
                     Toolbar(
                         [
-                            ToolButton(IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick),
-                            ToolButton(IconsMaterialDesign.ICON_APPROVAL, font, self.use_stamp),
+                            ToolButton(
+                                IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick
+                            ),
+                            ToolButton(
+                                IconsMaterialDesign.ICON_APPROVAL, font, self.use_stamp
+                            ),
                         ]
                     )
                 ]

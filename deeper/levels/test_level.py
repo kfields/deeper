@@ -2,7 +2,7 @@ import arcade
 
 from ..constants import *
 from ..level import Level
-from deeper import Block
+from deeper import Entity, Block
 from deeper.components.sprite_vu import SpriteVu
 from deeper.catalog import Catalog
 
@@ -17,7 +17,7 @@ class TestLevel(Level):
         catalog = Catalog.instance
         blueprint = catalog.find("Cell")
         size = glm.vec3(CELL_WIDTH, 0.01, 1)
-        group = self.create_layer('Grid')
+        layer = self.create_layer('Grid')
         for ty in range(0, 16):
             for tx in range(0, 16):
                 position = glm.vec3(tx * CELL_WIDTH, 0, ty)
@@ -29,4 +29,4 @@ class TestLevel(Level):
                         ":deeper:tiles/_Grid/GRID.png",
                     )
                 )
-                self.create_entity(block, vu, blueprint, group)
+                self.create_entity(Entity(layer), layer, blueprint, block, vu)

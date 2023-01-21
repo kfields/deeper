@@ -33,15 +33,6 @@ class RenderingProcessor(Processor):
             vu.sprite.set_position(*sprite_position)
             vu_list.append(vu)
 
-        for ent, (_, block, vu) in self.world.get_components(layer_group.__class__, Block, AnimatedSpriteVu):
-            position = self.scene.camera.project(block.position)
-            vu.position = position
-            #print("position: ", position)
-            sprite_position = position.xy + (vu.offset * WORLD_SCALE)
-            vu.sprite.set_position(*sprite_position)
-            vu.sprite.update_animation(delta_time)
-            vu_list.append(vu)
-
         vu_list = sorted(vu_list, key=lambda vu: vu.position.z)
 
         for vu in vu_list:

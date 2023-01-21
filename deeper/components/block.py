@@ -10,10 +10,9 @@ class Block(Component):
         self,
         position=DEFAULT_VEC3,
         size=glm.vec3(CELL_WIDTH, 1, 1),
-        solid=True,
-        blueprint=None,
+        solid=True
     ) -> None:
-        super().__init__(blueprint)
+        super().__init__()
         self._position = position
         self.solid = solid
         self.rotation = DEFAULT_VEC3
@@ -22,6 +21,9 @@ class Block(Component):
         self.size = size
         self.children = []
         self.layer = None
+
+    def create(self, world, entity, layer):
+        self.layer = layer
 
     @property
     def position(self):
@@ -71,4 +73,4 @@ class BlockBuilder(ComponentBuilder):
     def build(self, blueprint, world):
         # TODO: Shouldn't blueprint size already be a vec3?
         size = glm.vec3(blueprint.size)
-        return Block(size=size, blueprint=blueprint)
+        return Block(size=size)

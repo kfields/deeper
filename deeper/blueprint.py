@@ -35,6 +35,7 @@ class Blueprint(Model):
     borrowed_settings = []
 
     def __init__(self, catalog, name, config, parent=None):
+        super().__init__()
         self.catalog = catalog
         self.name = name
         self.config = config

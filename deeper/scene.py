@@ -17,6 +17,13 @@ class Scene(View):
         for group in world.layers:
             self.create_layer(group)
 
+    def add_processors(self, processors):
+        for processor in processors:
+            self.add_processor(processor)
+
+    def remove_processors(self, processors):
+        for processor in processors:
+            self.remove_processor(processor)
 
     def add_processor(self, processor):
         self.processors.append(processor)

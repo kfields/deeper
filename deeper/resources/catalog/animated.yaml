@@ -7,7 +7,8 @@ Animated:
   extends: Block
   category: Animated
   components:
-    AnimatedSpriteVu:
+    SpriteVu: {}
+    SpriteAnimation:
       rate: .5
 
 AnimBWheel2:
@@ -15,7 +16,7 @@ AnimBWheel2:
   size: [0.86, 1.5, 1]
   image: ":deeper:tiles/AnimBWheel2/AnimBWheel20001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/AnimBWheel2/AnimBWheel2Frames.png"
       width: 330
       height: 416
@@ -26,7 +27,7 @@ AnimGnome1:
   size: [0.86, 1.20, 1]
   image: ":deeper:tiles/AnimGnome1/AnimGnome10001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/AnimGnome1/AnimGnome1Frames.png"
       width: 250
       height: 382
@@ -37,7 +38,7 @@ AnimTree1:
   size: [0.86, 1.25, 1]
   image: ":deeper:tiles/AnimTree1/AnimTree10001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/AnimTree1/AnimTree1Frames.png"
       width: 262
       height: 309
@@ -48,7 +49,7 @@ Boiler1:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/Boiler1/Boiler10001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Boiler1/Boiler1Frames.png"
       width: 238
       height: 252
@@ -59,7 +60,7 @@ BoilerSmoke:
   size: [0.86, 2.25, 1]
   image: ":deeper:tiles/BoilerSmoke/BoilerSmoke0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/BoilerSmoke/BoilerSmokeFrames.png"
       width: 247
       height: 498
@@ -70,7 +71,7 @@ Door:
   size: [0.86, 1.40, .20]
   image: ":deeper:tiles/Door/Door0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Door/DoorFrames.png"
       width: 237
       height: 395
@@ -81,7 +82,7 @@ Door2:
   size: [0.86, 1.40, .20]
   image: ":deeper:tiles/Door2/Door20001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Door2/Door2Frames.png"
       width: 157
       height: 322
@@ -92,7 +93,7 @@ Door2Right:
   size: [.15, 1.40, 1]
   image: ":deeper:tiles/Door2Right/Door2Right0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Door2Right/Door2RightFrames.png"
       width: 132
       height: 376
@@ -103,7 +104,7 @@ Door3:
   size: [0.86, 1.1, .20]
   image: ":deeper:tiles/Door3/Door30001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Door3/Door3Frames.png"
       width: 222
       height: 313
@@ -115,7 +116,7 @@ Door3Right:
   size: [0.215, 1.40, 1]
   image: ":deeper:tiles/Door3Right/Door3Right0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Door3Right/Door3RightFrames.png"
       width: 263
       height: 339
@@ -127,7 +128,7 @@ FireSmoke:
   size: [0.86, 2.25, 1]
   image: ":deeper:tiles/FireSmoke/FireSmoke0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/FireSmoke/FireSmokeFrames.png"
       width: 330
       height: 804
@@ -138,7 +139,7 @@ FireSparks:
   size: [0.86, 1.40, 1]
   image: ":deeper:tiles/FireSparks/FireSparks0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/FireSparks/FireSparksFrames.png"
       width: 152
       height: 340
@@ -149,7 +150,7 @@ FireTorch:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorch/FireTorch0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/FireTorch/FireTorchFrames.png"
       width: 296
       height: 320
@@ -160,7 +161,7 @@ FireTorchSmall:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorchSmall/FireTorchSmall0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/FireTorchSmall/FireTorchSmallFrames.png"
       width: 192
       height: 234
@@ -171,7 +172,7 @@ FireTorchSmall4:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorchSmall4/FireTorchSmall40001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/FireTorchSmall4/FireTorchSmall4Frames.png"
       width: 152
       height: 126
@@ -182,7 +183,7 @@ FireTorchSmall5:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/FireTorchSmall5/FireTorchSmall50001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/FireTorchSmall5/FireTorchSmall5Frames.png"
       width: 85
       height: 121
@@ -193,7 +194,7 @@ Lever1:
   size: [0.86, .5, 1]
   image: ":deeper:tiles/Lever1/Lever10001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Lever1/Lever1Frames.png"
       width: 227
       height: 234
@@ -205,7 +206,7 @@ Lever2:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/Lever2/Lever20001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Lever2/Lever2Frames.png"
       width: 243
       height: 325
@@ -217,7 +218,7 @@ Lever3:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/Lever3/Lever30001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Lever3/Lever3Frames.png"
       width: 243
       height: 300
@@ -229,7 +230,7 @@ Lever4:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/Lever4/Lever40001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Lever4/Lever4Frames.png"
       width: 253
       height: 328
@@ -241,7 +242,7 @@ Lever5:
   size: [0.86, 1, 1]
   image: ":deeper:tiles/Lever5/Lever50001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Lever5/Lever5Frames.png"
       width: 188
       height: 386
@@ -253,7 +254,7 @@ MushroomSparks:
   size: [0.43, .5, .5]
   image: ":deeper:tiles/MushroomSparks/MushroomSparks0001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/MushroomSparks/MushroomSparksFrames.png"
       width: 133
       height: 212
@@ -264,7 +265,7 @@ Spike1:
   size: [0.43, .5, .5]
   image: ":deeper:tiles/Spike1/Spike10001.png"
   components:
-    AnimatedSpriteVu:
+    SpriteAnimation:
       image: ":deeper:tiles/Spike1/Spike1Frames.png"
       width: 135
       height: 158

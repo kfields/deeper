@@ -58,16 +58,20 @@ class Catalog(Kit):
     
     def build(self, name, config, parent):
         builder = self.find_builder(name)
+        if not builder:
+            print(name)
         return builder.build(self, name, config, parent)
 
     def find(self, name):
         return self.blueprints[name]
 
     def load(self):
-        #root = resolve_resource_path(":deeper:/catalog")
+        """
+        root = resolve_resource_path(":deeper:/catalog")
+        self.load_yaml(root)
+        return
+        """
         root = resolve_resource_path(":deeper:/catalog_dump")
-        #self.load_yaml(root)
-        #return
         db = Database.instance
         session = db.session
         first = session.query(EntityBlueprint).first()

@@ -10,7 +10,7 @@ from deeper import Block
 from deeper.blueprints import EntityBlueprint
 from deeper.constants import *
 from deeper.camera import WorldCamera
-from deeper.processors.rendering import RenderingProcessor
+from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.widgets import MainMenu
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
@@ -41,7 +41,7 @@ class EntityEditor(Scene):
         pos = self.block.position
         self.camera = WorldCamera(self.window, pos, 1)
 
-        self.add_processor(RenderingProcessor(self))
+        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
 
         self.current_tool = self.pick_tool = PickTool(self, edit_state)
 

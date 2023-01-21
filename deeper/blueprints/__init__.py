@@ -1,3 +1,4 @@
 from .entity_blueprint import EntityBlueprint
 from .component.block_blueprint import BlockBlueprintBuilder
 from .component.sprite_vu_blueprint import SpriteVuBlueprintBuilder, AnimatedSpriteVuBlueprintBuilder
+from .component.sprite_animation_blueprint import SpriteAnimationBlueprintBuilder

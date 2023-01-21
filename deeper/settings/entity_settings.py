@@ -1,5 +1,5 @@
 from deeper.setting import SettingGroup, BoolSetting, StringSetting, Vec3Setting, Vec2Setting
-from .component import BlockSettings, SpriteVuSettings, AnimatedSpriteVuSettings
+from .component import BlockSettings, SpriteVuSettings, AnimatedSpriteVuSettings, SpriteAnimationSettings
 
 class ComponentsGroup(SettingGroup):
     pass
@@ -8,7 +8,8 @@ class ComponentsGroup(SettingGroup):
 ComponentsGroup.setting_map = {
     "Block": BlockSettings,
     "SpriteVu": SpriteVuSettings,
-    "AnimatedSpriteVu": AnimatedSpriteVuSettings
+    "AnimatedSpriteVu": AnimatedSpriteVuSettings,
+    "SpriteAnimation": SpriteAnimationSettings
 }
 
 class EntitySettings(SettingGroup):
