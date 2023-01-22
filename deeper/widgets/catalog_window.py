@@ -65,7 +65,7 @@ class CatalogPanel(Widget):
         self.current_index = 0
         self.current = None
 
-        for category in catalog.categories.values():
+        for category in sorted(catalog.categories.values(), key=lambda category: category.name):
             if not category._abstract:
                 self.category_names.append(category.name)
                 self.category_widgets.append(CategoryWidget(category, callback))

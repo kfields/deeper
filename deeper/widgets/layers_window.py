@@ -24,18 +24,25 @@ class LayersPanel(Widget):
         children = []
         for layer in scene.layers:
             children.append(LayerWidget(layer))
+        self.select(children[0])
         super().__init__(children)
+
+    def select(self, widget):
+        if self.selection == widget:
+            return
+        if self.selection:
+            self.selection.selected = False
+        self.selection = widget
+        widget.selected = True
+        self.callback(widget.layer)
+
 
     def draw(self):
         imgui.begin_child("layers", -1, -1, border=True)
         for widget in self.children:
             clicked = widget.draw()
             if clicked:
-                if self.selection:
-                    self.selection.selected = False
-                self.selection = widget
-                widget.selected = True
-                self.callback(widget.layer)
+                self.select(widget)
         imgui.end_child()
 
 
