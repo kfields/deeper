@@ -67,11 +67,11 @@ class Catalog(Kit):
 
     def load(self):
         """
-        root = resolve_resource_path(":deeper:/catalog")
+        root = resolve_resource_path(":deeper:/catalog_original")
         self.load_yaml(root)
         return
         """
-        root = resolve_resource_path(":deeper:/catalog_dump")
+        root = resolve_resource_path(":deeper:/catalog")
         db = Database.instance
         session = db.session
         first = session.query(EntityBlueprint).first()

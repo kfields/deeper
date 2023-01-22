@@ -1,0 +1,50 @@
+Block: !import
+  - block.yaml
+  - Block
+
+Gray:
+  _abstract: true
+  extends: Block
+  category: Gray
+  components:
+    SpriteVu: {}
+
+TileGray1:
+  extends: Gray
+  size: [0.43, 1.25, .5]
+  image: ":deeper:tiles/TileGray1.png"
+
+TileGray1b:
+  extends: Gray
+  size: [0.43, 1.25, .5]
+  image: ":deeper:tiles/TileGray1b.png"
+
+TileGray2:
+  extends: Gray
+  size: [0.86, 1.5, .25]
+  image: ":deeper:tiles/TileGray2.png"
+
+TileGray2b:
+  extends: Gray
+  size: [0.215, 1.5, 1]
+  image: ":deeper:tiles/TileGray2b.png"
+
+TileGray3:
+  extends: Gray
+  size: [0.43, 1.25, .5]
+  image: ":deeper:tiles/TileGray3.png"
+
+TileGray3Corner:
+  extends: Gray
+  size: [0.86, 1.5, 1]
+  image: ":deeper:tiles/TileGray3Corner.png"
+
+TileGray3Corner2:
+  extends: Gray
+  size: [0.43, 1.5, 1]
+  image: ":deeper:tiles/TileGray3Corner2.png"
+
+TileGray3Corner3:
+  extends: Gray
+  size: [0.86, 1.5, .5]
+  image: ":deeper:tiles/TileGray3Corner3.png"

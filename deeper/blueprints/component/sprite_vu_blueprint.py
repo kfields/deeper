@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, reconstructor
 import arcade
 
 from ...constants import *
-from ...settings.component.sprite_vu_settings import SpriteVuSettings, AnimatedSpriteVuSettings
+from ...settings.component.sprite_vu_settings import SpriteVuSettings
 from ...blueprint import BlueprintBuilder
 from .component_blueprint import ComponentBlueprint
 
@@ -40,19 +40,3 @@ class SpriteVuBlueprint(ComponentBlueprint):
 class SpriteVuBlueprintBuilder(BlueprintBuilder):
     key = "SpriteVu"
     cls = SpriteVuBlueprint
-
-class AnimatedSpriteVuBlueprint(ComponentBlueprint):
-    id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
-    __mapper_args__ = {
-        'polymorphic_identity': 'AnimatedSpriteVuBlueprint',
-        'inherit_condition': (id == ComponentBlueprint.id),
-    }
-
-    settings_class = AnimatedSpriteVuSettings
-    offset = [0, 0]
-    borrowed_settings = ['image', 'offset']
-
-
-class AnimatedSpriteVuBlueprintBuilder(BlueprintBuilder):
-    key = "AnimatedSpriteVu"
-    cls = AnimatedSpriteVuBlueprint

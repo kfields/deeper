@@ -1,0 +1,110 @@
+Block: !import
+  - block.yaml
+  - Block
+
+Rail:
+  _abstract: true
+  extends: Block
+  category: Rail
+  components:
+    SpriteVu: {}
+
+BottomRails:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/BottomRails.png"
+
+PlatformRails1:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails1.png"
+
+PlatformRails1Bottom:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails1Bottom.png"
+
+PlatformRails1End:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails1End.png"
+
+PlatformRails1EndB:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails1EndB.png"
+
+PlatformRails1EndShort:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails1EndShort.png"
+
+PlatformRails2:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails2.png"
+
+PlatformRails2Bottom:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails2Bottom.png"
+
+PlatformRails2End:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails2End.png"
+
+PlatformRails2EndB:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails2EndB.png"
+
+PlatformRails2EndShort:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails2EndShort.png"
+
+PlatformRails3:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails3.png"
+
+PlatformRails3End:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails3End.png"
+
+PlatformRails3End2:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails3End2.png"
+
+PlatformRails4:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails4.png"
+
+PlatformRails4End:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails4End.png"
+
+PlatformRails5:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails5.png"
+
+PlatformRails5End:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails5End.png"
+
+PlatformRails6:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRails6.png"
+
+PlatformRailsCross:
+  extends: Rail
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/Rails/PlatformRailsCross.png"

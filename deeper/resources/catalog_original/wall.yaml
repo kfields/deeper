@@ -1,0 +1,207 @@
+Block: !import
+  - block.yaml
+  - Block
+
+Wall:
+  _abstract: true
+  extends: Block
+  category: Wall
+  components:
+    SpriteVu: {}
+
+WallC_Big1:
+  extends: Wall
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/WallC_Big1.png"
+  offset: [0, 0]
+
+WallC_Tile22d3:
+  extends: Wall
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/WallC_Tile22d3.png"
+
+WallC_Tile22d4:
+  extends: Wall
+  size: [0.43, .75, .5]
+  image: ":deeper:tiles/WallC_Tile22d4.png"
+
+WallC_Tile22d6:
+  extends: Wall
+  size: [0.86, 1.5, 1]
+  image: ":deeper:tiles/WallC_Tile22d6.png"
+
+WallC_Tile22d7:
+  extends: Wall
+  size: [0.43, 1.5, .5]
+  image: ":deeper:tiles/WallC_Tile22d7.png"
+
+WallC_Tile61:
+  extends: Wall
+  size: [0.43, .75, .5]
+  image: ":deeper:tiles/WallC_Tile61.png"
+
+WallC_Tile71bCorner2:
+  extends: Wall
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/WallC_Tile71bCorner2.png"
+
+WallC_TileStair3b:
+  extends: Wall
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/WallC_TileStair3b.png"
+
+WallC_TileStair4b:
+  extends: Wall
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/WallC_TileStair4b.png"
+
+WallH_Tile22:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22.png"
+
+WallH_Tile22b:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22b.png"
+
+WallH_Tile22b2:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22b2.png"
+
+WallH_Tile22b3:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22b3.png"
+
+WallH_Tile22d:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22d.png"
+
+WallH_Tile22d2:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22d2.png"
+
+WallH_Tile22d4:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22d4.png"
+
+WallH_Tile22d5:
+  extends: Wall
+  size: [0.86, 1.5, .5]
+  image: ":deeper:tiles/WallH_Tile22d5.png"
+
+WallH_Tile22d6:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22d6.png"
+
+WallH_Tile22d7:
+  extends: Wall
+  size: [0.86, 1.2, .5]
+  image: ":deeper:tiles/WallH_Tile22d7.png"
+
+WallH_Tile22d8:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_Tile22d8.png"
+
+WallH_Tile22d9:
+  extends: Wall
+  size: [0.86, 1.5, .5]
+  image: ":deeper:tiles/WallH_Tile22d9.png"
+
+WallH_Tile22window:
+  extends: Wall
+  size: [0.86, 1.5, .5]
+  image: ":deeper:tiles/WallH_Tile22window.png"
+
+WallH_Tile24a:
+  description: Gate
+  extends: Wall
+  size: [0.86, 1.40, .20]
+  image: ":deeper:tiles/WallH_Tile24a.png"
+
+WallH_TileStair5:
+  extends: Wall
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/WallH_TileStair5.png"
+
+WallV_Tile31b:
+  extends: Wall
+  size: [0.43, 1, 1]
+  image: ":deeper:tiles/WallV_Tile31b.png"
+
+WallV_Tile31blight:
+  extends: Wall
+  size: [0.43, 1, 1]
+  image: ":deeper:tiles/WallV_Tile31blight.png"
+
+WallV_Tile31bwindow:
+  extends: Wall
+  size: [0.43, 1.5, 1]
+  image: ":deeper:tiles/WallV_Tile31bwindow.png"
+
+WallV_Tile31c:
+  extends: Wall
+  size: [0.43, 1, 1]
+  image: ":deeper:tiles/WallV_Tile31c.png"
+
+WallV_Tile31d:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_Tile31d.png"
+
+WallV_Tile31d2:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_Tile31d2.png"
+
+WallV_Tile31d3:
+  extends: Wall
+  size: [0.43, 1.5, 1]
+  image: ":deeper:tiles/WallV_Tile31d3.png"
+
+WallV_Tile31d4:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_Tile31d4.png"
+
+WallV_Tile31d5:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_Tile31d5.png"
+
+WallV_Tile31d6:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_Tile31d6.png"
+
+WallV_Tile31d7:
+  extends: Wall
+  size: [0.43, 1.5, 1]
+  image: ":deeper:tiles/WallV_Tile31d7.png"
+
+WallV_TileStair1:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_TileStair1.png"
+
+WallV_TileStair2:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_TileStair2.png"
+
+WallV_TileStair3:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_TileStair3.png"
+
+WallV_TileStair4:
+  extends: Wall
+  size: [0.43, .75, 1]
+  image: ":deeper:tiles/WallV_TileStair4.png"

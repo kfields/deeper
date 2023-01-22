@@ -1,50 +1,42 @@
 Block: !import
   - block.yaml
   - Block
-
 Gray:
   _abstract: true
   extends: Block
   category: Gray
   components:
     SpriteVu: {}
-
 TileGray1:
   extends: Gray
-  size: [0.43, 1.25, .5]
-  image: ":deeper:tiles/TileGray1.png"
-
+  size: [0.43, 1.25, 0.5]
+  image: :deeper:tiles/TileGray1.png
 TileGray1b:
   extends: Gray
-  size: [0.43, 1.25, .5]
-  image: ":deeper:tiles/TileGray1b.png"
-
+  size: [0.43, 1.25, 0.5]
+  image: :deeper:tiles/TileGray1b.png
 TileGray2:
   extends: Gray
-  size: [0.86, 1.5, .25]
-  image: ":deeper:tiles/TileGray2.png"
-
+  size: [0.86, 1.5, 0.25]
+  image: :deeper:tiles/TileGray2.png
 TileGray2b:
   extends: Gray
-  size: [0.215, 1.5, 1]
-  image: ":deeper:tiles/TileGray2b.png"
-
+  size: [0.2150000035762787, 1.5, 1.0]
+  image: :deeper:tiles/TileGray2b.png
+  offset: [-0.05999999865889549, -0.009999999776482582]
 TileGray3:
   extends: Gray
-  size: [0.43, 1.25, .5]
-  image: ":deeper:tiles/TileGray3.png"
-
+  size: [0.43, 1.25, 0.5]
+  image: :deeper:tiles/TileGray3.png
 TileGray3Corner:
   extends: Gray
   size: [0.86, 1.5, 1]
-  image: ":deeper:tiles/TileGray3Corner.png"
-
+  image: :deeper:tiles/TileGray3Corner.png
 TileGray3Corner2:
   extends: Gray
   size: [0.43, 1.5, 1]
-  image: ":deeper:tiles/TileGray3Corner2.png"
-
+  image: :deeper:tiles/TileGray3Corner2.png
 TileGray3Corner3:
   extends: Gray
-  size: [0.86, 1.5, .5]
-  image: ":deeper:tiles/TileGray3Corner3.png"
+  size: [0.86, 1.5, 0.5]
+  image: :deeper:tiles/TileGray3Corner3.png

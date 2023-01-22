@@ -29,4 +29,5 @@ class TestLevel(Level):
                         ":deeper:tiles/_Grid/GRID.png",
                     )
                 )
-                self.create_entity(Entity(layer), layer, blueprint, block, vu)
+                self.create_entity(layer, blueprint, block, vu)
+                #self.create_entity(Entity(layer), layer, blueprint, block, vu)

@@ -1,0 +1,90 @@
+Block: !import
+  - block.yaml
+  - Block
+
+Gnome:
+  _abstract: true
+  extends: Block
+  category: Gnome
+  components:
+    SpriteVu: {}
+
+TileGnome1:
+  extends: Gnome
+  size: [0.86, .75, 1]
+  image: ":deeper:tiles/TileGnome1.png"
+
+TileGnome2:
+  extends: Gnome
+  size: [0.215, .75, 1]
+  image: ":deeper:tiles/TileGnome2.png"
+
+TileGnome3:
+  extends: Gnome
+  size: [0.215, .75, 1]
+  image: ":deeper:tiles/TileGnome3.png"
+
+TileGnome4:
+  extends: Gnome
+  size: [0.215, .75, 1]
+  image: ":deeper:tiles/TileGnome4.png"
+
+TileGnome5:
+  extends: Gnome
+  size: [0.86, .75, .25]
+  image: ":deeper:tiles/TileGnome5.png"
+
+TileGnome6:
+  extends: Gnome
+  size: [.645, .75, .5]
+  image: ":deeper:tiles/TileGnome6.png"
+
+TileGnome7:
+  extends: Gnome
+  size: [.43, .75, .5]
+  image: ":deeper:tiles/TileGnome7.png"
+
+TileGnome8:
+  extends: Gnome
+  size: [.43, .75, .5]
+  image: ":deeper:tiles/TileGnome8.png"
+
+TileGnome9:
+  extends: Gnome
+  size: [.43, .75, .5]
+  image: ":deeper:tiles/TileGnome9.png"
+
+TileGnome10:
+  extends: Gnome
+  size: [0.86, .75, .5]
+  image: ":deeper:tiles/TileGnome10.png"
+
+TileGnome11:
+  extends: Gnome
+  size: [.43, .75, .75]
+  image: ":deeper:tiles/TileGnome11.png"
+
+TileGnome12:
+  extends: Gnome
+  size: [.43, .75, .25]
+  image: ":deeper:tiles/TileGnome12.png"
+
+TileGnome13:
+  extends: Gnome
+  size: [.86, .75, .75]
+  image: ":deeper:tiles/TileGnome13.png"
+
+TileGnome14:
+  extends: Gnome
+  size: [0.645, .75, .75]
+  image: ":deeper:tiles/TileGnome14.png"
+
+TileGnome15:
+  extends: Gnome
+  size: [0.645, .75, .75]
+  image: ":deeper:tiles/TileGnome15.png"
+
+TileGnome16:
+  extends: Gnome
+  size: [0.645, .75, .25]
+  image: ":deeper:tiles/TileGnome16.png"

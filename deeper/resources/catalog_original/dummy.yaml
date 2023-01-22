@@ -1,0 +1,49 @@
+Block: !import
+  - block.yaml
+  - Block
+
+Dummy:
+  _abstract: true
+  extends: Block
+  category: Dummy
+  components:
+    SpriteVu: {}
+
+DummyDoll:
+  extends: Dummy
+  image: ":deeper:tiles/Dummy/DummyDoll.png"
+
+DummyDoll2:
+  extends: Dummy
+  size: [0.86, 1.5, 1]
+  image: ":deeper:tiles/Dummy/DummyDoll2.png"
+
+DummyDoll3:
+  extends: Dummy
+  image: ":deeper:tiles/Dummy/DummyDoll3.png"
+
+DummyDoll4:
+  extends: Dummy
+  size: [0.86, 1.5, 1]
+  image: ":deeper:tiles/Dummy/DummyDoll4.png"
+
+DummyDoll5:
+  extends: Dummy
+  image: ":deeper:tiles/Dummy/DummyDoll5.png"
+
+DummyDoll6:
+  extends: Dummy
+  image: ":deeper:tiles/Dummy/DummyDoll6.png"
+
+DummyDoll7:
+  extends: Dummy
+  image: ":deeper:tiles/Dummy/DummyDoll7.png"
+
+DummySkeleton:
+  extends: Dummy
+  size: [0.86, 1.5, 1]
+  image: ":deeper:tiles/Dummy/DummySkeleton.png"
+
+DummySkeleton2:
+  extends: Dummy
+  image: ":deeper:tiles/Dummy/DummySkeleton2.png"

@@ -1,0 +1,725 @@
+Block: !import
+  - block.yaml
+  - Block
+
+Floor:
+  _abstract: true
+  extends: Block
+  category: Floor
+  size: [0.86, .1, 1]
+  components:
+    SpriteVu: {}
+
+Floor1:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/Floor1.png"
+
+Floor1e:
+  extends: Floor
+  image: ":deeper:tiles/Floor1e.png"
+
+Floor1f:
+  extends: Floor
+  image: ":deeper:tiles/Floor1f.png"
+
+Floor1g:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/Floor1g.png"
+
+Floor2:
+  extends: Floor
+  image: ":deeper:tiles/Floor2.png"
+
+Floor3c:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3c.png"
+
+Floor3Cracked1:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3Cracked1.png"
+
+Floor3Cracked2:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3Cracked2.png"
+
+Floor3d:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3d.png"
+
+Floor3e:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3e.png"
+
+Floor3g:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3g.png"
+
+Floor3h:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor3h.png"
+
+Floor4a1:
+  extends: Floor
+  size: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a1.png"
+
+Floor4a2:
+  extends: Floor
+  size: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a2.png"
+
+Floor4a3:
+  extends: Floor
+  size: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a3.png"
+
+Floor4a4:
+  extends: Floor
+  size: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a4.png"
+
+Floor4a4:
+  extends: Floor
+  size: [0.86, .15, 1]
+  image: ":deeper:tiles/Floor4a4.png"
+
+Floor4b:
+  extends: Floor
+  image: ":deeper:tiles/Floor4b.png"
+
+Floor6a:
+  extends: Floor
+  image: ":deeper:tiles/Floor6a.png"
+
+Floor6b:
+  extends: Floor
+  image: ":deeper:tiles/Floor6b.png"
+
+Floor7a:
+  extends: Floor
+  image: ":deeper:tiles/Floor7a.png"
+
+Floor7b:
+  extends: Floor
+  image: ":deeper:tiles/Floor7b.png"
+
+Floor7borderBackLeft:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderBackLeft.png"
+
+Floor7borderBackRight:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderBackRight.png"
+
+Floor7borderCornerBackRight:
+  extends: Floor
+  size: [0.43, .6, .5]
+  image: ":deeper:tiles/Floor7borderCornerBackRight.png"
+
+Floor7borderCornerDouble1:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderCornerDouble1.png"
+
+Floor7borderCornerDouble2:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderCornerDouble2.png"
+
+Floor7borderCornerFrontLeft:
+  extends: Floor
+  size: [0.43, .6, .5]
+  image: ":deeper:tiles/Floor7borderCornerFrontLeft.png"
+
+Floor7borderCornerFrontRight:
+  extends: Floor
+  size: [0.43, .6, .5]
+  image: ":deeper:tiles/Floor7borderCornerFrontRight.png"
+
+Floor7borderFront1:
+  extends: Floor
+  size: [0.86, .6, .5]
+  image: ":deeper:tiles/Floor7borderFront1.png"
+
+Floor7borderFront2:
+  extends: Floor
+  size: [0.86, .6, .5]
+  image: ":deeper:tiles/Floor7borderFront2.png"
+
+Floor7borderFront2Bridge:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderFront2Bridge.png"
+  components:
+    SpriteVu:
+      offset: [0, .1]
+
+Floor7borderFrontLeft:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderFrontLeft.png"
+
+Floor7borderFrontRight:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderFrontRight.png"
+
+Floor7borderLeft:
+  extends: Floor
+  size: [0.43, .6, 1]
+  image: ":deeper:tiles/Floor7borderLeft.png"
+
+Floor7borderRight:
+  extends: Floor
+  size: [0.43, .6, 1]
+  image: ":deeper:tiles/Floor7borderRight.png"
+
+Floor7borderRight2:
+  extends: Floor
+  size: [0.43, .6, 1]
+  image: ":deeper:tiles/Floor7borderRight2.png"
+
+Floor7borderRight2Bridge:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/Floor7borderRight2Bridge.png"
+  components:
+    SpriteVu:
+      offset: [0, .1]
+
+Floor7borderRightCracked:
+  extends: Floor
+  size: [0.43, .6, 1]
+  image: ":deeper:tiles/Floor7borderRightCracked.png"
+
+Floor7borderRightCracked2:
+  extends: Floor
+  size: [0.43, .6, 1]
+  image: ":deeper:tiles/Floor7borderRightCracked2.png"
+
+Floor7c:
+  extends: Floor
+  image: ":deeper:tiles/Floor7c.png"
+
+Floor7c3:
+  extends: Floor
+  image: ":deeper:tiles/Floor7c3.png"
+
+Floor7c4:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/Floor7c4.png"
+
+Floor7c5:
+  extends: Floor
+  size: [0.86, .08, 1]
+  image: ":deeper:tiles/Floor7c5.png"
+
+Floor7cOld:
+  extends: Floor
+  image: ":deeper:tiles/Floor7cOld.png"
+
+Floor7d:
+  extends: Floor
+  image: ":deeper:tiles/Floor7d.png"
+
+Floor8a:
+  extends: Floor
+  image: ":deeper:tiles/Floor8a.png"
+
+Floor8b:
+  extends: Floor
+  image: ":deeper:tiles/Floor8b.png"
+
+Floor8c:
+  extends: Floor
+  image: ":deeper:tiles/Floor8c.png"
+
+Floor8d:
+  extends: Floor
+  image: ":deeper:tiles/Floor8d.png"
+
+Floor8e:
+  extends: Floor
+  image: ":deeper:tiles/Floor8e.png"
+
+Floor8f:
+  extends: Floor
+  image: ":deeper:tiles/Floor8f.png"
+
+Floor8g:
+  extends: Floor
+  image: ":deeper:tiles/Floor8g.png"
+
+Floor8h:
+  extends: Floor
+  image: ":deeper:tiles/Floor8h.png"
+
+FloorABorder0:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorABorder0.png"
+
+FloorABorder9:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorABorder9.png"
+
+FloorB1:
+  extends: Floor
+  image: ":deeper:tiles/FloorB1.png"
+
+FloorB2:
+  extends: Floor
+  image: ":deeper:tiles/FloorB2.png"
+
+FloorB3:
+  extends: Floor
+  image: ":deeper:tiles/FloorB3.png"
+
+FloorB22:
+  extends: Floor
+  image: ":deeper:tiles/FloorB22.png"
+
+FloorB32:
+  extends: Floor
+  image: ":deeper:tiles/FloorB32.png"
+
+FloorB41:
+  extends: Floor
+  image: ":deeper:tiles/FloorB41.png"
+
+FloorB42:
+  extends: Floor
+  image: ":deeper:tiles/FloorB42.png"
+
+FloorB43:
+  extends: Floor
+  image: ":deeper:tiles/FloorB43.png"
+
+FloorB44:
+  extends: Floor
+  image: ":deeper:tiles/FloorB44.png"
+
+FloorB45:
+  extends: Floor
+  image: ":deeper:tiles/FloorB45.png"
+
+FloorB46:
+  extends: Floor
+  image: ":deeper:tiles/FloorB46.png"
+
+FloorB47:
+  extends: Floor
+  image: ":deeper:tiles/FloorB47.png"
+
+FloorB48:
+  extends: Floor
+  image: ":deeper:tiles/FloorB48.png"
+
+FloorB49:
+  extends: Floor
+  image: ":deeper:tiles/FloorB49.png"
+
+FloorC1:
+  extends: Floor
+  image: ":deeper:tiles/FloorC1.png"
+
+FloorC2:
+  extends: Floor
+  image: ":deeper:tiles/FloorC2.png"
+
+FloorC3:
+  extends: Floor
+  image: ":deeper:tiles/FloorC3.png"
+
+FloorC22:
+  extends: Floor
+  image: ":deeper:tiles/FloorC22.png"
+
+FloorC32:
+  extends: Floor
+  image: ":deeper:tiles/FloorC32.png"
+
+FloorC41:
+  extends: Floor
+  image: ":deeper:tiles/FloorC41.png"
+
+FloorC42:
+  extends: Floor
+  image: ":deeper:tiles/FloorC42.png"
+
+FloorC43:
+  extends: Floor
+  image: ":deeper:tiles/FloorC43.png"
+
+FloorC44:
+  extends: Floor
+  image: ":deeper:tiles/FloorC44.png"
+
+FloorC45:
+  extends: Floor
+  image: ":deeper:tiles/FloorC45.png"
+
+FloorC46:
+  extends: Floor
+  image: ":deeper:tiles/FloorC46.png"
+
+FloorC47:
+  extends: Floor
+  image: ":deeper:tiles/FloorC47.png"
+
+FloorC48:
+  extends: Floor
+  image: ":deeper:tiles/FloorC48.png"
+
+FloorC49:
+  extends: Floor
+  image: ":deeper:tiles/FloorC49.png"
+
+FloorC50:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorC50.png"
+
+FloorC51:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorC51.png"
+
+FloorC52:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorC52.png"
+
+FloorC53:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorC53.png"
+
+FloorC54:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorC54.png"
+
+FloorC55:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorC55.png"
+
+FloorCBorder0:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorCBorder0.png"
+
+FloorCBorder9:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorCBorder9.png"
+
+FloorCBorder10:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorCBorder10.png"
+
+FloorCBorder11:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorCBorder11.png"
+
+FloorD:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorD.png"
+
+FloorD2:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorD2.png"
+
+FloorD3:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorD3.png"
+
+FloorD4:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorD4.png"
+
+FloorE:
+  extends: Floor
+  size: [0.86, .05, 1]
+  image: ":deeper:tiles/FloorE.png"
+
+FloorEBorder0:
+  extends: Floor
+  size: [0.86, .05, 1]
+  image: ":deeper:tiles/FloorEBorder0.png"
+
+FloorEBorder9:
+  extends: Floor
+  size: [0.86, .05, 1]
+  image: ":deeper:tiles/FloorEBorder9.png"
+
+FloorEBorder10:
+  extends: Floor
+  size: [0.86, .05, 1]
+  image: ":deeper:tiles/FloorEBorder10.png"
+
+FloorF:
+  extends: Floor
+  image: ":deeper:tiles/FloorF.png"
+
+FloorF1:
+  extends: Floor
+  image: ":deeper:tiles/FloorF1.png"
+
+FloorG1:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/FloorG1.png"
+
+FloorG2:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/FloorG2.png"
+
+FloorGreen1:
+  extends: Floor
+  image: ":deeper:tiles/FloorGreen1.png"
+
+FloorGreen2:
+  extends: Floor
+  image: ":deeper:tiles/FloorGreen2.png"
+
+FloorGreen3:
+  extends: Floor
+  image: ":deeper:tiles/FloorGreen3.png"
+
+FloorGreen4:
+  extends: Floor
+  image: ":deeper:tiles/FloorGreen4.png"
+
+FloorGrid1:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid1.png"
+
+FloorGrid2:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid2.png"
+
+FloorGrid3:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid3.png"
+
+FloorGrid4:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid4.png"
+
+FloorGrid5:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid5.png"
+
+FloorGrid6:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid6.png"
+
+FloorGrid7:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid7.png"
+
+FloorGrid8:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid8.png"
+
+FloorGrid9:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid9.png"
+
+FloorGrid10:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid10.png"
+
+FloorGrid11:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid11.png"
+
+FloorGrid12:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid12.png"
+
+FloorGrid13:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid13.png"
+
+FloorGrid14:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid14.png"
+
+FloorGrid15:
+  extends: Floor
+  image: ":deeper:tiles/FloorGrid15.png"
+
+FloorGridB1:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB1.png"
+
+FloorGridB2:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB2.png"
+
+FloorGridB3:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB3.png"
+
+FloorGridB4:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB4.png"
+
+FloorGridB5:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB5.png"
+
+FloorGridB6:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB6.png"
+
+FloorGridB7:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB7.png"
+
+FloorGridB8:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB8.png"
+
+FloorGridB9:
+  extends: Floor
+  image: ":deeper:tiles/FloorGridB9.png"
+
+FloorI1:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI1.png"
+
+FloorI2:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI2.png"
+
+FloorI3:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI3.png"
+
+FloorI4:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI4.png"
+
+FloorI5:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI5.png"
+
+FloorI6:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI6.png"
+
+FloorI7:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI7.png"
+
+FloorI8:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI8.png"
+
+FloorI9:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI9.png"
+
+FloorI9:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorI9.png"
+
+FloorJ1:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorJ1.png"
+
+FloorJ2:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorJ2.png"
+
+FloorJ3:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorJ3.png"
+
+FloorJ4:
+  extends: Floor
+  size: [0.86, .01, 1]
+  image: ":deeper:tiles/FloorJ4.png"
+
+FloorRailsEnd1:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/FloorRailsEnd1.png"
+
+FloorRailsEnd2:
+  extends: Floor
+  size: [0.86, .6, 1]
+  image: ":deeper:tiles/FloorRailsEnd2.png"
+
+FloorStair:
+  extends: Floor
+  image: ":deeper:tiles/FloorStair.png"
+
+FloorStair2:
+  extends: Floor
+  image: ":deeper:tiles/FloorStair2.png"
+
+FloorStairB:
+  extends: Floor
+  image: ":deeper:tiles/FloorStairB.png"
+
+FloorStairB2:
+  extends: Floor
+  image: ":deeper:tiles/FloorStairB2.png"
+
+OmniLight1Floor:
+  extends: Floor
+  image: ":deeper:tiles/OmniLight1Floor.png"
+
+OmniLight2Floor:
+  extends: Floor
+  image: ":deeper:tiles/OmniLight2Floor.png"
+
+OmniLightOrange:
+  extends: Floor
+  image: ":deeper:tiles/OmniLightOrange.png"
+
+OrangefloorH:
+  extends: Floor
+  image: ":deeper:tiles/OrangefloorH.png"
+
+OrangefloorV:
+  extends: Floor
+  image: ":deeper:tiles/OrangefloorV.png"

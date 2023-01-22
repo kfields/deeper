@@ -4,7 +4,7 @@ import pyglet
 
 from deeper.setting import AttrSetting
 from deeper.widgets.setting import DropWrapper
-from deeper.components.sprite_vu import SpriteVu, AnimatedSpriteVu
+from deeper.components.sprite_vu import SpriteVu
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
 from .. import IconButton
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
@@ -50,21 +50,3 @@ class SpriteVuWidget(ComponentWidget):
 class SpriteVuWidgetBuilder(ComponentWidgetBuilder):
     key = SpriteVu
     cls = SpriteVuWidget
-
-
-class AnimatedSpriteVuWidget(ComponentWidget):
-    def __init__(self, vu):
-        super().__init__(vu)
-        self.vu = vu
-
-    def draw(self):
-        changed, offset = imgui.drag_float2(
-            "Offset", *self.vu.offset, change_speed=0.1
-        )
-        if changed:
-            self.vu.offset = glm.vec2(*offset)
-
-
-class AnimatedSpriteVuWidgetBuilder(ComponentWidgetBuilder):
-    key = AnimatedSpriteVu
-    cls = AnimatedSpriteVuWidget

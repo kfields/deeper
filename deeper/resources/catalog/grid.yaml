@@ -1,15 +1,13 @@
 Block: !import
   - block.yaml
   - Block
-
 Grid:
   _abstract: true
   extends: Block
   category: Grid
   components:
     SpriteVu: {}
-      
 Cell:
   extends: Grid
-  size: [0.86, .01, 1]
-  image: ":deeper:tiles/_Grid/GRID.png"
+  size: [0.86, 0.01, 1]
+  image: :deeper:tiles/_Grid/GRID.png
