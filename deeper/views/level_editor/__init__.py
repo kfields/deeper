@@ -12,7 +12,7 @@ from deeper.camera import WorldCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.catalog import Catalog
 from deeper.widgets import MainMenu, CatalogWindow, LayersWindow
-from deeper.resources.icons.icons_material_design import IconsMaterialDesign
+from deeper.resources.icons import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
 from deeper.tools.stamp import StampTool
@@ -46,9 +46,6 @@ class LevelEditor(Scene):
         # TODO:Need glyph range which pyimgui does not support. :(
         # self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
 
-        arcade.text.load_font(
-            f":deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"
-        )
         font = pyglet.font.load("Material Icons")
         self.gui.add_child(
             MainMenu(

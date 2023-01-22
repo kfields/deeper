@@ -34,5 +34,8 @@ class Widget:
 
     def draw(self):
         for child in self.children:
-            child.draw()
+            self.draw_child(child)
         return True
+
+    def draw_child(self, child):
+        child.draw()

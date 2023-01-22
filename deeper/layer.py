@@ -14,7 +14,12 @@ class Layer:
         self.group_subscription = None
         self.sprites = arcade.SpriteList()
         self.effects = EffectList()
+        self.visible = True
+        self.locked = False
         self.dirty = True
+
+    def set_visible(self, value):
+        self.visible = value
 
     def enable(self):
         self.group_subscription = self.group.events.subscribe(self.on_group_event)
@@ -54,5 +59,7 @@ class Layer:
         self.sprites.update_animation(delta_time)
 
     def draw(self):
+        if not self.visible:
+            return
         self.sprites.draw()
         self.effects.draw()

@@ -1,0 +1,1 @@
+from .icons_material_design import IconsMaterialDesign

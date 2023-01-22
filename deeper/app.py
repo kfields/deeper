@@ -11,6 +11,8 @@ from .state import WorldEditState
 from .views import LevelEditor
 from .database import Database
 
+from deeper.resources.icons import IconsMaterialDesign
+
 class Deeper(Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
@@ -20,6 +22,10 @@ class Deeper(Window):
         self.show_view(view)
 
 def main():
+    arcade.text.load_font(
+        f":deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"
+    )
+
     db = Database.instance
     dbpath = Path('./deeper.db')
     db.begin(dbpath)

@@ -4,7 +4,7 @@ import imgui
 from deeper.dimgui import Widget
 
 from .. import Icon, IconButton
-from deeper.resources.icons.icons_material_design import IconsMaterialDesign
+from deeper.resources.icons import IconsMaterialDesign
 
 class DragWrapper(Widget):
     drag_icon = None

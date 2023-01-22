@@ -1,14 +1,11 @@
 import imgui
 
 from deeper.dimgui import Widget
+from .icon import IconButton
 
-
-class ToolButton(Widget):
+class ToolButton(IconButton):
     def __init__(self, text, font, callback):
-        super().__init__()
-        self.text = text
-        self.font = font
-        self.callback = callback
+        super().__init__(text, font, callback)
         self.selected = False
 
     def select(self):
@@ -17,12 +14,6 @@ class ToolButton(Widget):
         self.selected = True
         self.callback()
         return True
-
-    def create(self, gui):
-        super().create(gui)
-        image = self.font.render_to_image(self.text, 32, 32)
-        self.texture = image.get_texture()
-        return self
 
     def draw(self):
         tint_color = (1, 1, 1, 0.6)
