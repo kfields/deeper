@@ -1,3 +1,5 @@
+from loguru import logger
+
 import imgui
 
 from deeper.dimgui import Window
@@ -25,12 +27,12 @@ class SettingGroupWidget(SettingWidget):
     def draw(self):
         if imgui.tree_node(self.name):
             if imgui.begin_popup_context_item(self.name):
-                _, selected = imgui.selectable("Add Setting")
-                if selected:
+                clicked, selected = imgui.selectable("Add Setting")
+                if clicked:
                     selectables = []
                     for name, cls in self.setting.setting_map.items():
                         selectables.append(
-                            Selectable(name, lambda: self.add_setting(name, cls))
+                            Selectable(name, lambda name=name, cls=cls: self.add_setting(name, cls))
                         )
                     win = self.gui.add_child(
                         Window(
@@ -49,7 +51,6 @@ class SettingGroupWidget(SettingWidget):
 
     def add_setting(self, name, cls):
         from ...kits.setting_widget_kit import SettingWidgetKit
-
         setting = cls(name)
         self.setting.add_setting(setting)
         if isinstance(setting, SettingGroup):

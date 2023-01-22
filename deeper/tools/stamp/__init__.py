@@ -108,6 +108,8 @@ class StampTool(WorldEditTool):
             return self.snap_center(blueprint, world, target, contact)
         elif option == SnapOption.SIZE:
             return self.snap_size(blueprint, world, target, contact)
+        elif option == SnapOption.HALF_CELL:
+            return self.snap_half(blueprint, world, target, contact)
         elif option == SnapOption.QUARTER_CELL:
             return self.snap_quarter(blueprint, world, target, contact)
 
@@ -145,6 +147,23 @@ class StampTool(WorldEditTool):
 
         return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
 
+    def snap_half(self, blueprint, world, target, contact):
+        target_space = world.component_for_entity(target, Block)
+        target_pos = target_space.position
+        target_aabb = target_space.aabb
+
+        size = blueprint.size
+
+        snap_width = CELL_HALF_WIDTH
+        snap_height = CELL_HALF_HEIGHT
+        snap_depth = CELL_HALF_DEPTH
+
+        cx = round(contact[0] / snap_width) * snap_width
+        cy = round(contact[1] / snap_height) * snap_height
+        cz = round(contact[2] / snap_depth) * snap_depth
+
+        return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
+
     def snap_quarter(self, blueprint, world, target, contact):
         target_space = world.component_for_entity(target, Block)
         target_pos = target_space.position
@@ -161,16 +180,6 @@ class StampTool(WorldEditTool):
         cz = round(contact[2] / snap_depth) * snap_depth
 
         return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
-
-    """
-    def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
-        super().on_mouse_press(x, y, button, modifiers)
-        print("stamp")
-        if self.hovered and self.edit_state.current_blueprint:
-            EntityKit.instance.build(
-                self.edit_state.current_blueprint, self.world, self.hovered.entity
-            )
-    """
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)

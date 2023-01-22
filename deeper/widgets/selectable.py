@@ -16,7 +16,7 @@ class Selectable(Widget):
             self.callback()
 
 class SelectableGroup(Widget):
-    def __init__(self, children=..., callback=lambda: None):
+    def __init__(self, children, callback=lambda: None):
         super().__init__(children)
         self.callback = callback
 
