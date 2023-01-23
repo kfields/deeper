@@ -18,7 +18,10 @@ Floor1g:
   extends: Floor
   size: [0.86, 0.01, 1]
   image: :deeper:tiles/Floor1g.png
-Floor2: {extends: Floor, image: ':deeper:tiles/Floor2.png'}
+Floor2:
+  extends: Floor
+  image: :deeper:tiles/Floor2.png
+  offset: [0.0, 0.0]
 Floor3c:
   extends: Floor
   size: [0.86, 0.6, 1]
@@ -385,7 +388,10 @@ FloorStair: {extends: Floor, image: ':deeper:tiles/FloorStair.png'}
 FloorStair2: {extends: Floor, image: ':deeper:tiles/FloorStair2.png'}
 FloorStairB: {extends: Floor, image: ':deeper:tiles/FloorStairB.png'}
 FloorStairB2: {extends: Floor, image: ':deeper:tiles/FloorStairB2.png'}
-OmniLight1Floor: {extends: Floor, image: ':deeper:tiles/OmniLight1Floor.png'}
+OmniLight1Floor:
+  extends: Floor
+  image: :deeper:tiles/OmniLight1Floor.png
+  offset: [0.0, 0.0]
 OmniLight2Floor: {extends: Floor, image: ':deeper:tiles/OmniLight2Floor.png'}
 OmniLightOrange: {extends: Floor, image: ':deeper:tiles/OmniLightOrange.png'}
 OrangefloorH: {extends: Floor, image: ':deeper:tiles/OrangefloorH.png'}

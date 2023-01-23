@@ -9,8 +9,10 @@ Wheel:
     SpriteVu: {}
 Wheel1:
   extends: Wheel
-  size: [0.86, 1.25, 1]
+  size: [0.8600000143051147, 1.25, 1.0]
   image: :deeper:tiles/wheel.png
+  offset: [0.0, 0.0]
+  description: ''
 Wheels:
   extends: Wheel
   size: [1.5, 0.75, 1.5]

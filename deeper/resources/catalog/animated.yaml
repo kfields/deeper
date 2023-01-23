@@ -94,7 +94,7 @@ FireSparks:
       height: 340, frames: 40}
 FireTorch:
   extends: Animated
-  size: [0.86, 1, 1]
+  size: [0.8600000143051147, 0.5, 1.0]
   image: :deeper:tiles/FireTorch/FireTorch0001.png
   components:
     SpriteAnimation: {image: ':deeper:tiles/FireTorch/FireTorchFrames.png', width: 296,
@@ -108,11 +108,12 @@ FireTorchSmall:
       width: 192, height: 234, frames: 8}
 FireTorchSmall4:
   extends: Animated
-  size: [0.86, 1, 1]
+  size: [0.4300000071525574, 0.25, 0.5]
   image: :deeper:tiles/FireTorchSmall4/FireTorchSmall40001.png
   components:
     SpriteAnimation: {image: ':deeper:tiles/FireTorchSmall4/FireTorchSmall4Frames.png',
       width: 152, height: 126, frames: 8}
+  offset: [-0.029999999329447746, 0.0]
 FireTorchSmall5:
   extends: Animated
   size: [0.86, 1, 1]

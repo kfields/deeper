@@ -9,20 +9,10 @@ class CameraPanel(Widget):
         self.camera = camera
 
     def draw(self):
-        changed, position = imgui.drag_float3(
-            "Position", *self.camera.position, change_speed=0.1
+        imgui.input_float3(
+            "Position", *self.camera.position, flags=imgui.INPUT_TEXT_READ_ONLY
         )
-        if changed:
-            self.camera.position = glm.vec3(*position)
-        """
-        changed, zoom = imgui.drag_float(
-            "Zoom", self.camera.zoom, change_speed=0.01
-        )
-        if changed:
-            self.camera.zoom = zoom
-        """
         changed, pct = imgui.drag_float(
-            #"Zoom", self.camera.zoom, change_speed=0.01
             "Zoom", self.camera.zoom_pct, change_speed=10
         )
         if changed:

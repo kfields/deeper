@@ -7,20 +7,17 @@ from deeper.dimgui import Widget, Window
 from deeper.resources.icons import IconsMaterialDesign
 from .icon import IconToggleButton
 from .menu import Menubar, Menu, MenuItem
-from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, EditableSelectable
 
 
-class LayerWidget(SelectableBase):
-    def __init__(self, layer, callback):
+class LayerWidget(Widget):
+    def __init__(self, layer):
         self.layer = layer
+        self.selected = False
 
         font = pyglet.font.load("Material Icons")
+
         super().__init__(
-            layer.name,
-            callback,
-            selected=False,
-            children=[
-                EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child)),
+            [
                 IconToggleButton(
                     IconsMaterialDesign.ICON_VISIBILITY,
                     IconsMaterialDesign.ICON_VISIBILITY_OFF,
@@ -31,43 +28,50 @@ class LayerWidget(SelectableBase):
             ]
         )
 
-    def on_child_selected(self, child):
-        self.callback(self)
-
-    def select(self, selected=True):
-        self.children[0].select(selected)
-        
-    @property
-    def selected(self):
-        return self.children[0].selected
-
-    @selected.setter
-    def selected(self, value):
-        self.children[0].selected = value
-
     def set_visible(self, value):
         logger.debug(value)
         self.layer.visible = value
 
+    def draw(self):
+        clicked, selected = imgui.selectable(self.layer.name, self.selected)
+        imgui.next_column()
+        super().draw()
+        return clicked
+
     def draw_child(self, child):
+        #imgui.same_line()
         super().draw_child(child)
         imgui.next_column()
 
 
-class LayersPanel(ExclusiveSelectableGroup):
+class LayersPanel(Widget):
     def __init__(self, scene, callback):
         self.scene = scene
+        self.callback = callback
+        self.selection = None
         children = []
         for layer in scene.layers:
-            children.append(LayerWidget(layer, callback))
-        super().__init__(children, callback)
-        children[0].select()
-    
+            children.append(LayerWidget(layer))
+        self.select(children[0])
+        super().__init__(children)
+
+    def select(self, widget):
+        if self.selection == widget:
+            return
+        if self.selection:
+            self.selection.selected = False
+        self.selection = widget
+        widget.selected = True
+        self.callback(widget.layer)
+
     def draw(self):
         imgui.begin_child("layers", -1, -1, border=True)
         imgui.columns(2, 'layeritems')
         imgui.push_style_color(imgui.COLOR_BUTTON, 0.0, 0.0, 0.0)
-        super().draw()
+        for widget in self.children:
+            clicked = widget.draw()
+            if clicked:
+                self.select(widget)
         imgui.pop_style_color(1)
         imgui.end_child()
 
@@ -80,7 +84,7 @@ class LayersWindow(Window):
                     MenuItem('Layer', lambda: None)
                 ])
             ]),
-            LayersPanel(scene, lambda child: callback(child.layer))
+            LayersPanel(scene, callback)
         ]
 
         super().__init__("Layers", children, flags=imgui.WINDOW_MENU_BAR)

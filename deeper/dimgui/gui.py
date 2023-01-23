@@ -52,16 +52,26 @@ class GuiBase(Widget):
             self.io.keys_down[self.REVERSE_KEY_MAP[key_pressed]] = True
         self._on_mods_change(mods)
 
+        if self.io.want_capture_keyboard:
+            return event.EVENT_HANDLED
+
     def on_key_release(self, key_released, mods):
         if key_released in self.REVERSE_KEY_MAP:
             self.io.keys_down[self.REVERSE_KEY_MAP[key_released]] = False
         self._on_mods_change(mods)
+
+        if self.io.want_capture_keyboard:
+            return event.EVENT_HANDLED
 
     def on_text(self, text):
         io = imgui.get_io()
 
         for char in text:
             io.add_input_character(ord(char))
+
+        if self.io.want_text_input:
+        #if self.io.want_text_input or self.io.want_capture_keyboard:
+            return event.EVENT_HANDLED
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.io.mouse_pos = x, self.io.display_size.y - y
@@ -112,6 +122,9 @@ class GuiBase(Widget):
         def set_mouse(delta_time):
             self.io.mouse_down[code] = 0
         clock.schedule_once(set_mouse, delay)
+
+        if self.io.want_capture_mouse:
+            return event.EVENT_HANDLED
 
     def on_mouse_scroll(self, x, y, mods, scroll):
         self.io.mouse_wheel = scroll

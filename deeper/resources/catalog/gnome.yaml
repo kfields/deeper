@@ -30,7 +30,7 @@ TileGnome5:
   extends: Gnome
   size: [0.8600000143051147, 0.75, 0.25]
   image: :deeper:tiles/TileGnome5.png
-  offset: [-0.07000000029802322, -0.05000000074505806]
+  offset: [-0.07999999821186066, -0.03999999910593033]
 TileGnome6:
   extends: Gnome
   size: [0.645, 0.75, 0.5]
@@ -41,8 +41,9 @@ TileGnome7:
   image: :deeper:tiles/TileGnome7.png
 TileGnome8:
   extends: Gnome
-  size: [0.43, 0.75, 0.5]
+  size: [0.4300000071525574, 0.75, 0.5]
   image: :deeper:tiles/TileGnome8.png
+  offset: [-0.03999999910593033, -0.23000000417232513]
 TileGnome9:
   extends: Gnome
   size: [0.43, 0.75, 0.5]
@@ -57,8 +58,9 @@ TileGnome11:
   image: :deeper:tiles/TileGnome11.png
 TileGnome12:
   extends: Gnome
-  size: [0.43, 0.75, 0.25]
+  size: [0.8600000143051147, 0.75, 0.25]
   image: :deeper:tiles/TileGnome12.png
+  offset: [-0.05999999865889549, -0.07000000029802322]
 TileGnome13:
   extends: Gnome
   size: [0.8600000143051147, 0.75, 0.75]

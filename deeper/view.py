@@ -11,7 +11,7 @@ class View(arcade.View):
     def __init__(self, window, title=''):
         super().__init__(window)
         self.title = title
-        self.ui_manager = UIManager(window)
+        #self.ui_manager = UIManager(window)
         self.gui = ViewGui(self, auto_enable=False)
         self.current_tool: Tool = None
         
@@ -34,7 +34,7 @@ class View(arcade.View):
         arcade.start_render()
         self.gui.start_render()
 
-        self.ui_manager.draw()
+        #self.ui_manager.draw()
 
         self.draw()
 
@@ -47,7 +47,7 @@ class View(arcade.View):
 
     def on_show_view(self):
         super().on_show_view()
-        self.ui_manager.enable()
+        #self.ui_manager.enable()
         self.gui.show()
         if self.current_tool:
             self.current_tool.enable()
@@ -55,7 +55,7 @@ class View(arcade.View):
 
     def on_hide_view(self):
         super().on_hide_view()
-        self.ui_manager.disable()
+        #self.ui_manager.disable()
         if self.current_tool:
             self.current_tool.disable()
         self.gui.disable()

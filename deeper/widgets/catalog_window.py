@@ -90,13 +90,13 @@ class CatalogPanel(Widget):
 
 class CatalogWindow(Window):
     def __init__(self, catalog, callback):
+        self.catalog = catalog
         children = [
             Menubar([
                 Menu('File', [
-                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(resolve_resource_path(':deeper:/catalog_dump')))
+                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(resolve_resource_path(':deeper:/catalog')))
                 ])
             ]),
             CatalogPanel(catalog, callback)
         ]
         super().__init__("Catalog", children, flags=imgui.WINDOW_MENU_BAR)
-        self.catalog = catalog
