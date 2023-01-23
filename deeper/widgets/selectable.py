@@ -54,8 +54,16 @@ class EditableSelectable(SelectableBase):
                 32
             )
             if changed:
+                logger.debug(changed)
+                logger.debug(value)
                 self.label = value
-
+            
+            #TODO: need to detect escape key and other loss of focus ...
+            """
+            if not imgui.is_item_focused():
+            #if not imgui.is_item_active():
+                self.mode = SelectableMode.SELECT
+            """
 
 class SelectableGroup(Widget):
     def __init__(self, children, callback=lambda: None):

@@ -152,6 +152,7 @@ class Gui(GuiBase):
             Gui.context = imgui.get_current_context()
 
         self.io = imgui.get_io()
+        self._map_keys()
 
         if not self.renderer:
             Gui.renderer = GuiRenderer(window)
