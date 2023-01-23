@@ -134,6 +134,10 @@ class GuiBase(Widget):
     def on_resize(self, width, height):
         self.io.display_size = width, height
 
+    #Helpers
+    def is_key_down(self, key):
+        return self.io.keys_down[key]
+
 class Gui(GuiBase):
     context = None
     renderer = None

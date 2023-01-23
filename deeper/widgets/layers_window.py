@@ -36,7 +36,7 @@ class LayerWidget(SelectableBase):
 
     def select(self, selected=True):
         self.children[0].select(selected)
-        
+
     @property
     def selected(self):
         return self.children[0].selected
@@ -63,6 +63,9 @@ class LayersPanel(ExclusiveSelectableGroup):
         super().__init__(children, callback)
         children[0].select()
     
+    def create_child(self, layer, callback):
+        return LayerWidget(layer, callback).create(self.gui)
+
     def draw(self):
         imgui.begin_child("layers", -1, -1, border=True)
         imgui.columns(2, 'layeritems')
@@ -74,14 +77,21 @@ class LayersPanel(ExclusiveSelectableGroup):
 
 class LayersWindow(Window):
     def __init__(self, scene, callback):
+        self.scene = scene
+        self.callback = callback
+        self.panel = LayersPanel(scene, lambda child: callback(child.layer))
         children = [
             Menubar([
                 Menu('New', [
-                    MenuItem('Layer', lambda: None)
+                    MenuItem('Layer', lambda: self.new_layer())
                 ])
             ]),
-            LayersPanel(scene, lambda child: callback(child.layer))
+            self.panel
         ]
 
         super().__init__("Layers", children, flags=imgui.WINDOW_MENU_BAR)
         self.scene = scene
+
+    def new_layer(self):
+        layer = self.scene.new_layer()
+        self.panel.add_child(self.panel.create_child(layer, lambda child: self.callback(child.layer)))

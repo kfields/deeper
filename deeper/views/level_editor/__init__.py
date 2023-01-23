@@ -1,3 +1,5 @@
+from loguru import logger
+
 import glm
 import pyglet
 from pyglet import clock
@@ -65,6 +67,7 @@ class LevelEditor(Scene):
         )
 
     def select_layer(self, layer):
+        logger.debug(layer.group)
         self.edit_state.current_layer = layer.group
 
     def use_pick(self):

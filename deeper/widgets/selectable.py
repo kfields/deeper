@@ -48,7 +48,6 @@ class EditableSelectable(SelectableBase):
                 self.select(selected)
         else:
             changed, value = imgui.input_text(
-                #f"##{self.label}",
                 f"##{id(self)}",
                 self.label,
                 32
@@ -59,6 +58,8 @@ class EditableSelectable(SelectableBase):
                 self.label = value
             
             #TODO: need to detect escape key and other loss of focus ...
+            if self.gui.is_key_down(imgui.KEY_ESCAPE):
+                self.mode = SelectableMode.SELECT
             """
             if not imgui.is_item_focused():
             #if not imgui.is_item_active():

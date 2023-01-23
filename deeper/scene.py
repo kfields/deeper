@@ -31,6 +31,12 @@ class Scene(View):
     def remove_processor(self, processor):
         self.processors.remove(processor)
 
+    def new_layer(self):
+        group = self.world.create_layer('Unnamed')
+        layer = self.create_layer(group)
+        layer.enable()
+        return layer
+
     def create_layer(self, group):
         layer = Layer(self, group.name, group)
         self.add_layer(layer)
