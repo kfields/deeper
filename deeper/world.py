@@ -1,9 +1,11 @@
+from typing import Type as _Type
 from uuid import uuid4
 
 import glm
 import esper
 
 from . import Block
+from .processors import Processor
 from .components.entity_group import EntityLayer
 from .component import Component
 
@@ -26,6 +28,15 @@ class World(esper.World):
         block.layer.mark()
         super().delete_entity(entity, immediate)
 
+    def add_processor(self, processor: Processor, priority=0) -> None:
+        processor.priority = priority
+        #processor_instance.world = self
+        self._processors.append(processor)
+        self._processors.sort(key=lambda proc: proc.priority, reverse=True)
+
+    def remove_processor(self, processor: Processor) -> None:
+        self._processors.remove(processor)
+
     def cast_ray(self, ray):
         results = []
         for entity, block in self.get_component(Block):
@@ -44,8 +55,8 @@ class World(esper.World):
         return sorted_results[0]
 
     def create_layer(self, name):
-        uid = uuid4()
         #cls_name = f"{name}Layer"
+        uid = uuid4()
         cls_name = f"Layer#{uid}"
         cls = type(cls_name, (EntityLayer,), {})
         layer = cls(name)

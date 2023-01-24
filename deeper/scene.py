@@ -48,18 +48,24 @@ class Scene(View):
     def remove_layer(self, layer):
         self.layers.remove(layer)
 
+    def mark(self):
+        for layer in self.layers:
+            layer.mark()
+
     def on_show_view(self):
         super().on_show_view()
-        self.camera.resize(self.window.width, self.window.height)
+        self.mark()
         for processor in self.processors:
-            self.world.add_processor(processor)
+            #self.world.add_processor(processor)
+            processor.enable()
         for layer in self.layers:
             layer.enable()
 
     def on_hide_view(self):
         super().on_hide_view()
         for processor in self.processors:
-            self.world.remove_processor(processor.__class__) #TODO: Weird, why doesn't esper remove by instance?
+            #self.world.remove_processor(processor.__class__) #TODO: Weird, why doesn't esper remove by instance?
+            processor.disable()
         for layer in self.layers:
             layer.disable()
 
