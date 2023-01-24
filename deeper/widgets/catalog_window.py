@@ -20,7 +20,7 @@ class BlueprintWidget(Widget):
         return self
 
     def draw(self):
-        clicked, selected = imgui.selectable(self.blueprint.name, self.selected)
+        clicked, selected = imgui.selectable(self.blueprint.name, self.selected, width=128)
         imgui.same_line()
         imgui.image(self.texture.glo, *self.texture.size)
         return clicked

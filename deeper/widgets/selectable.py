@@ -5,16 +5,20 @@ import imgui
 
 from deeper.dimgui import Widget
 
+
 class SelectableMode(Enum):
-    SELECT = 0,
+    SELECT = (0,)
     EDIT = 1
 
+
 class SelectableBase(Widget):
-    def __init__(self, label, callback, selected=False, children=[]):
+    def __init__(self, label, callback, selected=False, children=[], width=0, height=0):
         super().__init__(children)
         self.label = label
         self.callback = callback
         self.selected = selected
+        self.width = width
+        self.height = height
 
     def select(self, selected=True):
         self.selected = selected
@@ -24,15 +28,27 @@ class SelectableBase(Widget):
     def on_select(self, selected):
         pass
 
+
 class Selectable(SelectableBase):
     def draw(self):
-        clicked, selected = imgui.selectable(self.label, self.selected)
+        clicked, selected = imgui.selectable(
+            self.label, self.selected, width=self.width, height=self.height
+        )
         if clicked:
             self.select(selected)
 
+
 class EditableSelectable(SelectableBase):
-    def __init__(self, label, callback, selected=False, mode=SelectableMode.SELECT):
-        super().__init__(label, callback, selected)
+    def __init__(
+        self,
+        label,
+        callback,
+        selected=False,
+        mode=SelectableMode.SELECT,
+        width=0,
+        height=0,
+    ):
+        super().__init__(label, callback, selected, width=width, height=height)
         self.mode = mode
 
     def on_select(self, selected):
@@ -41,23 +57,25 @@ class EditableSelectable(SelectableBase):
 
     def draw(self):
         if self.mode == SelectableMode.SELECT:
-            clicked, selected = imgui.selectable(self.label, self.selected, flags=imgui.SELECTABLE_ALLOW_DOUBLE_CLICK)
-            if  imgui.is_item_hovered() and imgui.is_mouse_double_clicked():
+            clicked, selected = imgui.selectable(
+                self.label,
+                self.selected,
+                flags=imgui.SELECTABLE_ALLOW_DOUBLE_CLICK,
+                width=self.width,
+                height=self.height,
+            )
+            if imgui.is_item_hovered() and imgui.is_mouse_double_clicked():
                 self.mode = SelectableMode.EDIT
             elif clicked:
                 self.select(selected)
         else:
-            changed, value = imgui.input_text(
-                f"##{id(self)}",
-                self.label,
-                32
-            )
+            changed, value = imgui.input_text(f"##{id(self)}", self.label, 32)
             if changed:
                 logger.debug(changed)
                 logger.debug(value)
                 self.label = value
-            
-            #TODO: need to detect escape key and other loss of focus ...
+
+            # TODO: need to detect escape key and other loss of focus ...
             if self.gui.is_key_down(imgui.KEY_ESCAPE):
                 self.mode = SelectableMode.SELECT
             """
@@ -65,6 +83,7 @@ class EditableSelectable(SelectableBase):
             #if not imgui.is_item_active():
                 self.mode = SelectableMode.SELECT
             """
+
 
 class SelectableGroup(Widget):
     def __init__(self, children, callback=lambda: None):
@@ -81,6 +100,7 @@ class SelectableGroup(Widget):
         child_callback()
         self.callback()
 
+
 class ExclusiveSelectableGroup(SelectableGroup):
     def __init__(self, children, callback=lambda: None):
         super().__init__(children, callback)
@@ -92,7 +112,7 @@ class ExclusiveSelectableGroup(SelectableGroup):
             return
         if self.selection:
             logger.debug(self.selection)
-            #self.selection.selected = False
+            # self.selection.selected = False
             self.selection.select(False)
         self.selection = child
         child.selected = True

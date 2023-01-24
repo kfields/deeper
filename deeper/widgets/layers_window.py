@@ -5,7 +5,7 @@ import pyglet
 
 from deeper.dimgui import Widget, Window
 from deeper.resources.icons import IconsMaterialDesign
-from .icon import IconToggleButton
+from .icon import IconToggleButton, Icon
 from .menu import Menubar, Menu, MenuItem
 from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, EditableSelectable
 
@@ -13,14 +13,15 @@ from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, Ed
 class LayerWidget(SelectableBase):
     def __init__(self, layer, callback):
         self.layer = layer
-
+        self.selectable = EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child), width=128)
         font = pyglet.font.load("Material Icons")
         super().__init__(
             layer.name,
             callback,
             selected=False,
             children=[
-                EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child)),
+                Icon(IconsMaterialDesign.ICON_GRID_ON, font),
+                self.selectable,
                 IconToggleButton(
                     IconsMaterialDesign.ICON_VISIBILITY,
                     IconsMaterialDesign.ICON_VISIBILITY_OFF,
@@ -35,15 +36,15 @@ class LayerWidget(SelectableBase):
         self.callback(self)
 
     def select(self, selected=True):
-        self.children[0].select(selected)
+        self.selectable.select(selected)
 
     @property
     def selected(self):
-        return self.children[0].selected
+        return self.selectable.selected
 
     @selected.setter
     def selected(self, value):
-        self.children[0].selected = value
+        self.selectable.selected = value
 
     def set_visible(self, value):
         logger.debug(value)
@@ -51,7 +52,8 @@ class LayerWidget(SelectableBase):
 
     def draw_child(self, child):
         super().draw_child(child)
-        imgui.next_column()
+        if child != self.children[-1]:
+            imgui.same_line()
 
 
 class LayersPanel(ExclusiveSelectableGroup):
@@ -67,8 +69,7 @@ class LayersPanel(ExclusiveSelectableGroup):
         return LayerWidget(layer, callback).create(self.gui)
 
     def draw(self):
-        imgui.begin_child("layers", -1, -1, border=True)
-        imgui.columns(2, 'layeritems')
+        imgui.begin_child("layers", -1, -1)
         imgui.push_style_color(imgui.COLOR_BUTTON, 0.0, 0.0, 0.0)
         super().draw()
         imgui.pop_style_color(1)

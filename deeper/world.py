@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 import glm
 import esper
 
@@ -42,7 +44,9 @@ class World(esper.World):
         return sorted_results[0]
 
     def create_layer(self, name):
-        cls_name = f"{name}Layer"
+        uid = uuid4()
+        #cls_name = f"{name}Layer"
+        cls_name = f"Layer#{uid}"
         cls = type(cls_name, (EntityLayer,), {})
         layer = cls(name)
         self.add_layer(layer)
