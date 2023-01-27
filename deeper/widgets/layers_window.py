@@ -5,7 +5,8 @@ import pyglet
 
 from deeper.dimgui import Widget, Window
 from deeper.resources.icons import IconsMaterialDesign
-from .icon import IconToggleButton, Icon
+from .dragger import Dragger
+from .icon import IconToggleButton, Icon, IconButton
 from .menu import Menubar, Menu, MenuItem
 from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, EditableSelectable
 
@@ -20,7 +21,8 @@ class LayerWidget(SelectableBase):
             callback,
             selected=False,
             children=[
-                Icon(IconsMaterialDesign.ICON_GRID_ON, font),
+                IconButton(IconsMaterialDesign.ICON_GRID_ON, font),
+                #Dragger(IconButton(IconsMaterialDesign.ICON_GRID_ON, font), self.on_drag),
                 self.selectable,
                 IconToggleButton(
                     IconsMaterialDesign.ICON_VISIBILITY,
@@ -31,6 +33,26 @@ class LayerWidget(SelectableBase):
                 )
             ]
         )
+
+    def on_drag(self):
+        self.gui.dropboard.value = self
+        imgui.button(str(self))
+
+    def on_drop(self):
+        if imgui.begin_drag_drop_target():
+            payload = imgui.accept_drag_drop_payload('itemtype')
+            if payload is not None:
+                print('Received:', payload)
+                #self.wrapped.value = self.gui.dropboard.value.value
+                if imgui.begin_popup("drop-popup"):
+                    imgui.text("Select one")
+                    imgui.separator()
+                    imgui.selectable("One")
+                    imgui.selectable("Two")
+                    imgui.selectable("Three")
+                    imgui.end_popup()
+
+            imgui.end_drag_drop_target()
 
     def on_child_selected(self, child):
         self.callback(self)
@@ -49,6 +71,12 @@ class LayerWidget(SelectableBase):
     def set_visible(self, value):
         logger.debug(value)
         self.layer.visible = value
+
+    def draw(self):
+        imgui.begin_group()
+        super().draw()
+        imgui.end_group()
+        #self.on_drop()
 
     def draw_child(self, child):
         super().draw_child(child)
@@ -71,7 +99,8 @@ class LayersPanel(ExclusiveSelectableGroup):
     def draw(self):
         imgui.begin_child("layers", -1, -1)
         imgui.push_style_color(imgui.COLOR_BUTTON, 0.0, 0.0, 0.0)
-        super().draw()
+        #super().draw()
+        self.draw_sortable()
         imgui.pop_style_color(1)
         imgui.end_child()
 

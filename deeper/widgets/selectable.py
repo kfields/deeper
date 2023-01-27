@@ -3,7 +3,7 @@ from enum import Enum
 from loguru import logger
 import imgui
 
-from deeper.dimgui import Widget
+from deeper.dimgui import Widget, WidgetGroup
 
 
 class SelectableMode(Enum):
@@ -78,14 +78,9 @@ class EditableSelectable(SelectableBase):
             # TODO: need to detect escape key and other loss of focus ...
             if self.gui.is_key_down(imgui.KEY_ESCAPE):
                 self.mode = SelectableMode.SELECT
-            """
-            if not imgui.is_item_focused():
-            #if not imgui.is_item_active():
-                self.mode = SelectableMode.SELECT
-            """
 
 
-class SelectableGroup(Widget):
+class SelectableGroup(WidgetGroup):
     def __init__(self, children, callback=lambda: None):
         super().__init__(children)
         self.callback = callback

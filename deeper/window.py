@@ -1,5 +1,7 @@
 import arcade
 
+from .dimgui import Gui
+
 class ArcadeContextState:
     def __init__(self, ctx: arcade.ArcadeContext) -> None:
         self.viewport = ctx.viewport
@@ -36,3 +38,17 @@ class Window(arcade.Window):
     def pop_view(self):
         #print('pop_view')
         self.show_view(self.view_stack.pop())
+
+
+class GuiWindow(Window):
+    def __init__(self, widgets, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.gui = Gui(self, widgets)
+
+    def on_draw(self):
+        super().on_draw()
+        arcade.start_render()
+        self.gui.start_render()
+
+        self.gui.finish_render()
+        arcade.finish_render()

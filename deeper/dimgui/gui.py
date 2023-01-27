@@ -3,7 +3,6 @@ import imgui
 from pyglet import clock
 from pyglet import event
 from pyglet.window import key, mouse
-import arcade
 
 from .renderer import GuiRenderer
 from .widget import Widget
