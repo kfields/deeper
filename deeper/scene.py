@@ -47,6 +47,12 @@ class Scene(View):
 
     def remove_layer(self, layer):
         self.layers.remove(layer)
+        self.world.remove_layer(layer.group)
+
+    def swap_layers(self, i, j):
+        self.layers[i].mark()
+        self.layers[j].mark()
+        self.layers[i], self.layers[j] = self.layers[j], self.layers[i]
 
     def mark(self):
         for layer in self.layers:

@@ -1,4 +1,3 @@
-import glm
 import pyglet.window.mouse as mouse
 import arcade
 from arcade import key

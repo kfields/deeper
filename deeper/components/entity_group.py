@@ -1,4 +1,4 @@
-from deeper.event import DirtyEvent, EventSource
+from deeper.event import LayerDirtyEvent, EventSource
 
 class EntityGroup:
     def __init__(self, name) -> None:
@@ -10,4 +10,4 @@ class EntityLayer(EntityGroup):
         self.events = EventSource()
 
     def mark(self):
-        self.events.publish(DirtyEvent())
+        self.events.publish(LayerDirtyEvent())

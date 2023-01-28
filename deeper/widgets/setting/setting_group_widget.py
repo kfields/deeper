@@ -26,6 +26,11 @@ class SettingGroupWidget(SettingWidget):
 
     def draw(self):
         if imgui.tree_node(self.name):
+            self.draw_context_popup()
+            super().draw()
+            imgui.tree_pop()
+
+    def draw_context_popup(self):
             if imgui.begin_popup_context_item(self.name):
                 clicked, selected = imgui.selectable("Add Setting")
                 if clicked:
@@ -45,9 +50,6 @@ class SettingGroupWidget(SettingWidget):
                         )
                     )
                 imgui.end_popup()
-
-            super().draw()
-            imgui.tree_pop()
 
     def add_setting(self, name, cls):
         from ...kits.setting_widget_kit import SettingWidgetKit

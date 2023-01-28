@@ -11,29 +11,18 @@ class WidgetGroup(Widget):
         self.drag_index = -1
         self.dragging = None
 
-    def draw_sortable(self):
+    def draw_sortable(self, callback=lambda i, j: None):
         hovered_index = -1
         for i, child in enumerate(self.children):
             self.draw_child(child)
             if imgui.is_item_hovered(imgui.HOVERED_RECT_ONLY):
                 hovered_index = i
-        """
-        if hovered_index > -1 and self.dragging:
-            if imgui.is_mouse_dragging():
-                if hovered_index != self.drag_index:
-                    self.swap(self.drag_index, hovered_index)
-                    self.drag_index = hovered_index
 
-        elif hovered_index > -1 and imgui.is_mouse_down(0):
-            logger.debug(hovered_index)
-            self.drag_index = hovered_index
-            #self.dragging = True
-            self.dragging = self.children[hovered_index]
-        """
         if hovered_index > -1:
             if self.dragging and imgui.is_mouse_dragging():
                 if hovered_index != self.drag_index:
                     self.swap(self.drag_index, hovered_index)
+                    callback(self.drag_index, hovered_index)
                     self.drag_index = hovered_index
 
             elif imgui.is_mouse_down(0):

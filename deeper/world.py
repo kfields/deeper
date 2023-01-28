@@ -1,10 +1,10 @@
-from typing import Type as _Type
 from uuid import uuid4
 
 import glm
 import esper
 
 from . import Block
+from .event import EventSource, LayerDeletedEvent
 from .processors import Processor
 from .components.entity_group import EntityLayer
 from .component import Component
@@ -12,6 +12,7 @@ from .component import Component
 class World(esper.World):
     def __init__(self, timed=False):
         super().__init__(timed)
+        self.events = EventSource()
         self.layers = []
     
     def create_entity(self, *components: object) -> int:
@@ -65,3 +66,8 @@ class World(esper.World):
 
     def add_layer(self, layer):
         self.layers.append(layer)
+
+    def remove_layer(self, layer):
+        self.events.publish(LayerDeletedEvent(layer))
+        print(layer)
+        self.layers.remove(layer)

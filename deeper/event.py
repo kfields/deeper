@@ -1,8 +1,13 @@
 class Event:
     pass
 
-class DirtyEvent(Event):
+class LayerDirtyEvent(Event):
     pass
+
+class LayerDeletedEvent(Event):
+    def __init__(self, layer) -> None:
+        super().__init__()
+        self.layer = layer
 
 class Subscription:
     def __init__(self, callback) -> None:

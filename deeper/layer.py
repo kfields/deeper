@@ -3,7 +3,7 @@ from loguru import logger
 import arcade
 
 from deeper.constants import *
-from deeper.event import DirtyEvent
+from deeper.event import LayerDirtyEvent
 from deeper.effect import EffectList
 
 class Layer:
@@ -30,7 +30,7 @@ class Layer:
     def on_group_event(self, event):
         logger.debug(event)
         match type(event):
-            case DirtyEvent:
+            case LayerDirtyEvent:
                 self.mark()
 
     def mark(self):

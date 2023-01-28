@@ -76,13 +76,19 @@ class LayerWidget(SelectableBase):
         imgui.begin_group()
         super().draw()
         imgui.end_group()
+        #self.draw_context_popup()
         #self.on_drop()
 
     def draw_child(self, child):
         super().draw_child(child)
         if child != self.children[-1]:
             imgui.same_line()
-
+    """
+    def draw_context_popup(self):
+        if imgui.begin_popup_context_item(str(id(self))):
+            clicked, selected = imgui.selectable("Delete")
+            imgui.end_popup()
+    """
 
 class LayersPanel(ExclusiveSelectableGroup):
     def __init__(self, scene, callback):
@@ -96,14 +102,28 @@ class LayersPanel(ExclusiveSelectableGroup):
     def create_child(self, layer, callback):
         return LayerWidget(layer, callback).create(self.gui)
 
+    def on_swap(self, i, j):
+        self.scene.swap_layers(i, j)
+
     def draw(self):
         imgui.begin_child("layers", -1, -1)
         imgui.push_style_color(imgui.COLOR_BUTTON, 0.0, 0.0, 0.0)
         #super().draw()
-        self.draw_sortable()
+        self.draw_sortable(self.on_swap)
         imgui.pop_style_color(1)
         imgui.end_child()
 
+    def draw_child(self, child):
+        super().draw_child(child)
+        self.draw_child_context_popup(child)
+
+    def draw_child_context_popup(self, child):
+        if imgui.begin_popup_context_item(str(id(child))):
+            clicked, selected = imgui.selectable("Delete")
+            if clicked:
+                self.scene.remove_layer(child.layer)
+                self.remove_child(child)
+            imgui.end_popup()
 
 class LayersWindow(Window):
     def __init__(self, scene, callback):
