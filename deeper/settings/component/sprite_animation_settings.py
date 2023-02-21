@@ -1,4 +1,4 @@
-from ...setting import Setting, SettingGroup, StringSetting, IntSetting, FloatSetting, Vec2Setting
+from ...setting import Setting, SettingGroup, BoolSetting, StringSetting, IntSetting, FloatSetting, Vec2Setting
 
 
 class SpriteAnimationSettings(SettingGroup):
@@ -11,5 +11,6 @@ SpriteAnimationSettings.setting_map = {
     "width": IntSetting,
     "height": IntSetting,
     "frames": IntSetting,
-    "rate": FloatSetting
+    "rate": FloatSetting,
+    "pingpong": BoolSetting, # Play forwards then backwards
 }

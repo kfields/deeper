@@ -19,6 +19,7 @@ class SpriteAnimationBlueprint(ComponentBlueprint):
     settings_class = SpriteAnimationSettings
     borrowed_settings = ['image', 'offset']
     offset = [0, 0]
+    pingpong = False
 
     def __init__(self, catalog, name, config, parent):
         super().__init__(catalog, name, config, parent)
@@ -33,9 +34,6 @@ class SpriteAnimationBlueprint(ComponentBlueprint):
         if not self._texture:
             self._texture = arcade.load_texture(self.image)
         return self._texture
-
-    #@texture.setter
-    #def texture(self, texture):
 
 class SpriteAnimationBlueprintBuilder(BlueprintBuilder):
     key = "SpriteAnimation"
