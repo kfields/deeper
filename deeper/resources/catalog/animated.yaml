@@ -31,11 +31,12 @@ AnimTree1:
       height: 309, frames: 60}
 Boiler1:
   extends: Animated
-  size: [0.86, 1, 1]
+  size: [0.8600000143051147, 1.0, 1.0]
   image: :deeper:tiles/Boiler1/Boiler10001.png
   components:
     SpriteAnimation: {image: ':deeper:tiles/Boiler1/Boiler1Frames.png', width: 238,
       height: 252, frames: 15}
+  offset: [0.0, 0.0]
 BoilerSmoke:
   extends: Animated
   size: [0.86, 2.25, 1]

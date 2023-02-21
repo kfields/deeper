@@ -127,8 +127,9 @@ WallV_Tile31bwindow:
   image: :deeper:tiles/WallV_Tile31bwindow.png
 WallV_Tile31c:
   extends: Wall
-  size: [0.43, 1, 1]
+  size: [0.4300000071525574, 1.0, 1.0]
   image: :deeper:tiles/WallV_Tile31c.png
+  offset: [0.10000000149011612, -0.15000000596046448]
 WallV_Tile31d:
   extends: Wall
   size: [0.43, 0.75, 1]
