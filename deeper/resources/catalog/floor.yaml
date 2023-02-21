@@ -122,9 +122,9 @@ Floor7borderFront2Bridge:
       offset: [0, 0.1]
 Floor7borderFrontLeft:
   extends: Floor
-  size: [0.8600000143051147, 0.6000000238418579, 1.0]
+  size: [0.8600000143051147, 0.699999988079071, 1.0]
   image: :deeper:tiles/Floor7borderFrontLeft.png
-  offset: [0.11999999731779099, 0.029999999329447746]
+  offset: [0.11999999731779099, -0.03999999910593033]
 Floor7borderFrontRight:
   extends: Floor
   size: [0.8600000143051147, 0.699999988079071, 1.0]
@@ -136,7 +136,7 @@ Floor7borderLeft:
   image: :deeper:tiles/Floor7borderLeft.png
 Floor7borderRight:
   extends: Floor
-  size: [0.43, 0.6, 1]
+  size: [0.4300000071525574, 0.699999988079071, 1.0]
   image: :deeper:tiles/Floor7borderRight.png
 Floor7borderRight2:
   extends: Floor

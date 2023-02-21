@@ -70,7 +70,7 @@ class PickTool(WorldEditTool):
             pos = self.camera.project(self.hovered.position)
             #print("self.hovered.position: ", self.hovered.position)
             #print("pos: ", pos)
-            arcade.draw_circle_outline(*pos.xy, 18, arcade.color.RED, 3)
+            #arcade.draw_circle_outline(*pos.xy, 18, arcade.color.RED, 3)
             self.view.draw_aabb(self.hovered.block.aabb)
 
         if self.selected:

@@ -27,8 +27,8 @@ python -m deeper
 
 :link:[Maturin Action](https://github.com/messense/maturin-action)
 
-# Screen Shots
+## Screen Shots
 
-![alt text ](images/deeper1.png "Text which shows when mouseover")
+![Level Editor Screen Shot](images/deeper1.png "Level Editor")
 
-![alt text ](images/deeper2.png "Text which shows when mouseover")
+![Entity Editor Screen Shot](images/deeper2.png "Entity Editor")
