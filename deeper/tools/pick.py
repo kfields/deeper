@@ -2,6 +2,7 @@ from loguru import logger
 
 import glm
 from pyglet import clock
+import pyglet.window.mouse as mouse
 import arcade
 from arcade import key
 
@@ -40,7 +41,7 @@ class PickTool(WorldEditTool):
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)
         #logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
-        if not self.hovered:
+        if button != mouse.LEFT or not self.hovered:
             return
         
         self.selected = Selected(self.hovered.entity, self.hovered.block)

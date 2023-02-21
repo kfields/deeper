@@ -3,10 +3,10 @@ import pyglet.window.mouse as mouse
 import arcade
 from arcade import key
 
-from .view import View
-from .layer import Layer
+from ..view import View
+from ..layer import Layer
 
-class Scene(View):
+class SceneView(View):
     def __init__(self, window, world, title=''):
         super().__init__(window, title)
         self.camera = None
@@ -81,6 +81,7 @@ class Scene(View):
 
     def on_update(self, delta_time: float):
         self.world.process(delta_time)
+        self.camera.update()
         return super().on_update(delta_time)
 
     def on_key_press(self, symbol, modifiers):

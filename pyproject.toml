@@ -6,20 +6,21 @@ authors = ["Kurtis Fields <kurtisfields@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.8, <3.12"
-arcade = "^2.7.1.dev9"
-PyGLM = "^2.6.0"
+arcade = "^3.0.0.dev12"
+PyGLM = "^2.7.0"
 bbox = "^0.9.2"
 imgui = "^1.4.1"
-toml = "^0.10.2"
+#toml = "^0.10.2"
 pyyaml = "^6.0"
-esper = "^2.4.1"
+#esper = "^2.4.1"
 loguru = "^0.6.0"
 pydantic = "^1.10.2"
-sqlalchemy = {version = "^2.0.0rc2", allow-prereleases = true}
+#sqlalchemy = {version = "^2.0.0rc2", allow-prereleases = true}
+sqlalchemy = "^2.0.4"
 
 [tool.poetry.group.dev.dependencies]
 maturin = "^0.14.7"
-pytest = "^7.2.0"
+pytest = "^7.2.1"
 pytest-benchmark = "^3.4.1"
 py = "^1.11.0"
 black = "^22.12.0"

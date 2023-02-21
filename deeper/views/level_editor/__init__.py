@@ -9,7 +9,6 @@ from arcade import key
 
 
 from deeper.constants import *
-from deeper.scene import Scene
 from deeper.camera import WorldCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.catalog import Catalog
@@ -22,8 +21,9 @@ from deeper.tools.stamp import StampTool
 from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.camera_window import CameraWindow
 
+from ..scene_view import SceneView
 
-class LevelEditor(Scene):
+class LevelEditor(SceneView):
     def __init__(self, window, edit_state):
         super().__init__(window, edit_state.world, "Level Editor")
         self.edit_state = edit_state
@@ -37,7 +37,7 @@ class LevelEditor(Scene):
         self.catalog = Catalog()
         self.gui.add_child(CatalogWindow(self.catalog, self.on_catalog))
 
-        self.camera = WorldCamera(self.window, glm.vec3(), 1.5)
+        self.camera = WorldCamera(self.window, glm.vec3(), 1)
         self.gui.add_child(CameraWindow(self.camera))
 
         self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])

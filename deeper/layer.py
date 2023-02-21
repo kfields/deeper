@@ -4,7 +4,7 @@ import arcade
 
 from deeper.constants import *
 from deeper.event import LayerDirtyEvent
-from deeper.effect import EffectList
+#from deeper.effect import EffectList
 
 class Layer:
     def __init__(self, scene, name, group):
@@ -13,7 +13,7 @@ class Layer:
         self.group = group
         self.group_subscription = None
         self.sprites = arcade.SpriteList()
-        self.effects = EffectList()
+        #self.effects = EffectList()
         self.visible = True
         self.locked = False
         self.dirty = True
@@ -52,7 +52,7 @@ class Layer:
         return effect
 
     def update(self, delta_time):
-        self.effects.update(delta_time)
+        #self.effects.update(delta_time)
         self.sprites.on_update(delta_time)
 
     def update_animation(self, delta_time):
@@ -62,4 +62,4 @@ class Layer:
         if not self.visible:
             return
         self.sprites.draw()
-        self.effects.draw()
+        #self.effects.draw()

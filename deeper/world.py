@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 import glm
-import esper
+from . import ecs
 
 from . import Block
 from .event import EventSource, LayerDeletedEvent
@@ -9,7 +9,7 @@ from .processors import Processor
 from .components.entity_group import EntityLayer
 from .component import Component
 
-class World(esper.World):
+class World(ecs.World):
     def __init__(self, timed=False):
         super().__init__(timed)
         self.events = EventSource()

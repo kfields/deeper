@@ -5,7 +5,6 @@ import arcade
 from arcade.resources import resolve_resource_path
 from arcade import key
 
-from deeper.scene import Scene
 from deeper import Block
 from deeper.blueprints import EntityBlueprint
 from deeper.constants import *
@@ -20,7 +19,9 @@ from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.entity_window import EntityWindow
 from deeper.widgets.component.component_window import ComponentWindow
 
-class EntityEditor(Scene):
+from ..scene_view import SceneView
+
+class EntityEditor(SceneView):
     def __init__(self, window, edit_state):
         super().__init__(window, edit_state.world, 'Entity Editor')
         self.edit_state = edit_state

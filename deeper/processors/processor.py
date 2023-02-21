@@ -1,7 +1,7 @@
-import esper
+from .. import ecs
 
 
-class Processor(esper.Processor):
+class Processor(ecs.Processor):
     def __init__(self, world) -> None:
         super().__init__()
         self.world = world

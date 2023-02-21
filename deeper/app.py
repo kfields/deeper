@@ -18,6 +18,10 @@ class Deeper(Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
         #self.world = World()
         self.world = TestLevel()
+        #view = LevelEditor(self, WorldEditState(self.world))
+        #self.show_view(view)
+    
+    def setup(self):
         view = LevelEditor(self, WorldEditState(self.world))
         self.show_view(view)
 
@@ -33,6 +37,7 @@ def main():
         with session.begin():
             db.session = session
             window = Deeper()
+            window.setup()
             arcade.run()
     db.end()
 

@@ -1,31 +1,22 @@
+from loguru import logger
 import arcade
 import glm
 
 from .constants import *
 from . import Ray
 
-"""
-class ScreenCamera(arcade.Camera):
-    def __enter__(self):
-        self.window.push_ctx_state()
-        self.use()
-
-    def __exit__(self, exc_type, exc_value, exc_tb):
-        self.window.pop_ctx_state()
-"""
 
 class WorldCamera:
     def __init__(self, window, target, zoom=1.0):
         self.window = window
-        self.distance = zoom * 10
         self.target = target
+        self.distance = zoom * 10
         self._zoom = zoom
 
         self.world_matrix = glm.scale(glm.mat4(1), glm.vec3(WORLD_SCALE, WORLD_SCALE, WORLD_SCALE))
         self.inv_world_matrix = glm.inverse(self.world_matrix)
         
         self.camera = arcade.Camera(zoom=zoom)
-        #self.camera = ScreenCamera(zoom=zoom)
 
         self.update_matrices()
         self.look_at(target)
@@ -54,6 +45,8 @@ class WorldCamera:
 
     @zoom_pct.setter
     def zoom_pct(self, pct):
+        if pct <= 0:
+            pct = 10
         self.zoom = 100 / pct
 
     def update_matrices(self):
@@ -70,6 +63,9 @@ class WorldCamera:
     def use(self):
         self.camera.use()
 
+    def update(self):
+        self.camera.update()
+
     def resize(self, viewport_width: int, viewport_height: int, *,
                resize_projection: bool = True) -> None:
         self.camera.resize(viewport_width, viewport_height, resize_projection=resize_projection)
@@ -84,7 +80,8 @@ class WorldCamera:
     def pan(self, dx, dy):
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
-        vector = (camera_right * dx) + (camera_up * dy) * self.zoom
+        #vector = (camera_right * dx) + (camera_up * dy) * self.zoom
+        vector = (camera_right * dx) + (camera_up * dy)
         target = self.target + vector / self.distance
         self.look_at(target)
 
@@ -92,7 +89,8 @@ class WorldCamera:
         self.target = target
         self.position = target + (self.direction * -self.distance)
         self.update_matrices()
-        focal_point = self.project(target).xy * 1/self.zoom
+        #focal_point = self.project(target).xy * 1/self.zoom
+        focal_point = self.project(target).xy
         #print("focal_point: ", focal_point)
         self.camera.center(focal_point)
 
@@ -114,7 +112,8 @@ class WorldCamera:
         inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
         mouse_vec = glm.vec3(x, y, 0)
         mouse_vec = self.inv_world_matrix * inv_view * mouse_vec
-        x, y = mouse_vec.xy * self.zoom
+        #x, y = mouse_vec.xy * self.zoom
+        x, y = mouse_vec.xy
 
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
