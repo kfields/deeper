@@ -8,11 +8,7 @@ from .kit import Kit
 class ComponentWidgetKit(Kit):
     builders_path = deeper.widgets.component
     #builder_type = Builder
-    """
-    def find(self, component):
-        if component.__class__ in self.builders:
-            return self.builders[component.__class__]
-    """
+
     def find(self, component, cls=None):
         if not cls:
             cls = component.__class__

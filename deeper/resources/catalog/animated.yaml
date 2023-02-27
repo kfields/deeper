@@ -103,7 +103,7 @@ FireTorch:
       height: 320, frames: 8}
 FireTorchSmall:
   extends: Animated
-  size: [0.86, 1, 1]
+  size: [0.4300000071525574, 0.5, 0.5]
   image: :deeper:tiles/FireTorchSmall/FireTorchSmall0001.png
   components:
     SpriteAnimation: {image: ':deeper:tiles/FireTorchSmall/FireTorchSmallFrames.png',

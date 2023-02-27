@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "deeper-doc"
+version = "0.1.0"
+description = ""
+authors = ["Kurtis Fields <kurtisfields@gmail.com>"]
+readme = "README.md"
+packages = [{include = "deeper_doc"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sphinx = "^6.1.3"
+sphinx-rtd-theme = "^1.2.0"
+sphinxcontrib-apidoc = "^0.3.0"
+sphinxemoji = "^0.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

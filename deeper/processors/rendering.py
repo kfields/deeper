@@ -27,7 +27,7 @@ class RenderingProcessor(SceneProcessor):
             vu.position = position
             #print("position: ", position)
             sprite_position = position.xy + (vu.offset * WORLD_SCALE)
-            vu.sprite.set_position(*sprite_position)
+            vu.sprite.position = sprite_position.xy
             vu_list.append(vu)
 
         vu_list = sorted(vu_list, key=lambda vu: vu.position.z)
