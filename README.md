@@ -35,6 +35,6 @@ python -m deeper
 
 ## Screen Shots
 
-![Level Editor Screen Shot](images/deeper1.png "Level Editor")
+![Level Editor Screen Shot](https://kfields.github.io/deeper/images/deeper1.png "Level Editor")
 
-![Entity Editor Screen Shot](images/deeper2.png "Entity Editor")
+![Entity Editor Screen Shot](https://kfields.github.io/deeper/images/deeper2.png "Entity Editor")
