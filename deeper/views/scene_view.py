@@ -6,6 +6,7 @@ from arcade import key
 from ..view import View
 from ..layer import Layer
 
+
 class SceneView(View):
     def __init__(self, window, world, title=''):
         super().__init__(window, title)
@@ -93,11 +94,9 @@ class SceneView(View):
 
     def on_mouse_drag(self, x: int, y: int, dx: int, dy: int, buttons: int, modifiers: int):
         if buttons == mouse.RIGHT:
-            #self.camera.pan(dx, dy)
             self.camera.pan(-dx, -dy)
 
     def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
-        #self.camera.zoom = self.camera.zoom + scroll_y * .1
         self.camera.zoom_pct = self.camera.zoom_pct + scroll_y * 10
 
     def draw(self):

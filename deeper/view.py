@@ -7,12 +7,14 @@ from .dimgui import ViewGui
 from .tool import Tool
 
 class View(arcade.View):
+    current_tool: Tool = None
+    title: str = None
+
     def __init__(self, window, title=''):
         super().__init__(window)
         self.title = title
         #self.ui_manager = UIManager(window)
         self.gui = ViewGui(self, auto_enable=False)
-        self.current_tool: Tool = None
         
     def use_tool(self, tool: Tool):
         if tool == self.current_tool:

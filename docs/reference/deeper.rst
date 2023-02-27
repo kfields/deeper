@@ -9,6 +9,7 @@ Subpackages
 
    deeper.blueprints
    deeper.catalog
+   deeper.cli
    deeper.components
    deeper.data
    deeper.database

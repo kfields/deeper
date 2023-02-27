@@ -29,6 +29,7 @@ Submodules
    deeper.widgets.layers_window
    deeper.widgets.main_menu
    deeper.widgets.menu
+   deeper.widgets.metrics
    deeper.widgets.selectable
    deeper.widgets.toolbar
 

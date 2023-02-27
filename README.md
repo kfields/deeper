@@ -4,6 +4,12 @@ Dungeon RPG using [The Python Arcade Library](https://arcade.academy/)
 
 Tiles courtesy of [Dragosha](https://dragosha.com/free/dungeon-part-1-tiles.html)
 
+## Links
+
+:notebook: [Documentation](https://kfields.github.io/deeper/)
+
+:package: [Package](https://pypi.org/project/deeper-rpg/)
+
 ## Development
 
 You need to have [Rust](https://www.rust-lang.org/tools/install) installed

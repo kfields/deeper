@@ -106,18 +106,6 @@
 		margin-bottom: 5px;
 	}
 
-    li.toctree-l1.current {
-        background: #3c3c3c;
-	}
-
-    li.toctree-l2.current {
-        background: #3c3c3c;
-	}
-
-    li.toctree-l3.current {
-        background: #3c3c3c;
-	}
-
 	.wy-menu-vertical li code {
 		color: #E74C3C;
 	}
