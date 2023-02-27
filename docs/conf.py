@@ -13,8 +13,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('..'))
-sys.path.insert(0, os.path.abspath('../deeper'))
+sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
@@ -23,7 +22,7 @@ copyright = '2023, Kurtis Fields'
 author = 'Kurtis Fields'
 
 # The full version, including alpha/beta/rc tags
-from __version__ import __version__
+__version__ = "0.1.4"
 release = __version__
 
 

@@ -12,7 +12,7 @@ TLDR - do this at your own risk
 
 .. code:: bash
 
-    pip install deeper
+    pip install deeper-rpg
 
 Recommended - pipX
 ------------------
@@ -21,14 +21,14 @@ If you don't already have it installed go to https://pypi.org/project/pipx/ for 
 
 .. code:: bash
 
-    pipx install deeper
+    pipx install deeper-rpg
 
 And then run it!
 ----------------
 
 .. code:: bash
 
-    deeper run
+    deeper
 
 
 From GitHub
@@ -46,29 +46,39 @@ Navigate to the new directory which contains the repository
 
         cd deeper
 
-Create a Python 3 virtual environment called `env`
+If you don't have Poetry, learn to install it at: https://python-poetry.org/docs/
+
+TLDR:  (Use Git Bash if your running Windows)
 
 .. code:: bash
 
-        python3 -m venv env
-        
+        curl -sSL https://install.python-poetry.org | python3 -
+
 Activate the environment
 
 .. code:: bash
 
-        source env/bin/activate
-        
+        poetry shell
+
 Install required packages
 
 .. code:: bash
 
-        pip install -r requirements.txt
+        poetry install
+
+Build the Rust Extension
+
+You need to have Rust installed: https://www.rust-lang.org/tools/install
+
+.. code:: bash
+
+        maturin develop
 
 
-And then run the game!
+And then run the app!
 ----------------------
 
 .. code:: bash
 
-    python run_game.py
+    deeper
 

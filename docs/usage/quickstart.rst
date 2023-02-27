@@ -5,17 +5,10 @@ Quickstart
 Controls
 ========
 
-Movement
---------
+Pan: Right click drag with the mouse
 
-WASD + cursor keys
+Zoom: Scroll with the mouse wheel
 
-Press down to mount/dismount
+Pick: Click on a block
 
-Press up to do an Ollie! :)
-
-
-Pause/Menu
-----------
-
-Escape key
+Stamp: Select the item you want to stamp in the catalog and then click on a block

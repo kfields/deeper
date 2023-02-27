@@ -1,10 +1,9 @@
 [tool.poetry]
-name = "deeper-doc"
-version = "0.1.0"
+name = "deeper-docs"
+version = "0.1.4"
 description = ""
 authors = ["Kurtis Fields <kurtisfields@gmail.com>"]
 readme = "README.md"
-packages = [{include = "deeper_doc"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
