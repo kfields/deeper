@@ -23,8 +23,8 @@ copyright = '2023, Kurtis Fields'
 author = 'Kurtis Fields'
 
 # The full version, including alpha/beta/rc tags
-from deeper import __version__
-release = __version__
+import deeper
+release = deeper.__version__
 
 
 # -- General configuration ---------------------------------------------------

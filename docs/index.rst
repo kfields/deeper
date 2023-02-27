@@ -6,7 +6,7 @@
 Deeper |:skull:|
 =====================
 
-Dungeon RPG using Arcade & Parry
+Dungeon RPG with Python Arcade and Rust
 
 .. toctree::
    :maxdepth: 2
