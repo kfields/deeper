@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "deeper-rpg"
-version = "0.1.0"
+version = "0.1.2"
 description = "Dungeon RPG with Python Arcade and Rust"
 authors = ["Kurtis Fields <kurtisfields@gmail.com>"]
 packages = [
