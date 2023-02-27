@@ -14,7 +14,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('..'))
-
+sys.path.insert(0, os.path.abspath('../deeper'))
 
 # -- Project information -----------------------------------------------------
 
@@ -23,8 +23,8 @@ copyright = '2023, Kurtis Fields'
 author = 'Kurtis Fields'
 
 # The full version, including alpha/beta/rc tags
-import deeper
-release = deeper.__version__
+from __version__ import __version__
+release = __version__
 
 
 # -- General configuration ---------------------------------------------------

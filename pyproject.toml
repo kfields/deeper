@@ -34,7 +34,7 @@ build-backend = "maturin"
 
 [project]
 name = "deeper-rpg"
-version = "0.1.0"
+version = "0.1.1"
 description = "Dungeon RPG with Python Arcade and Rust"
 authors = [ {name = "kfields", email = "kurtisfields@gmail.com"} ]
 requires-python = ">=3.8"
