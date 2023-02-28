@@ -20,13 +20,9 @@ jobs:
       - name: Setup Virtual Environment
         run: |
           pip install --upgrade pip
-          python3.10 -m venv .venv
-          source .venv/bin/activate
-          echo "VIRTUAL ENV:" $VIRTUAL_ENV
-
-      - uses: messense/maturin-action@v1
-        with:
-          command: develop
+          pip install hatch
+          hatch shell
+          maturin develop
 
       - name: Install dependencies
         run: |
