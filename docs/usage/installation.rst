@@ -46,7 +46,7 @@ Navigate to the new directory which contains the repository
 
         cd deeper
 
-If you don't have Poetry, learn to install it at: https://python-poetry.org/docs/
+If you don't have Hatch, learn to install it at: https://python-poetry.org/docs/
 
 TLDR:  (Use Git Bash if your running Windows)
 

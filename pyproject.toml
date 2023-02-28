@@ -61,8 +61,20 @@ path = "deeper/__about__.py"
 dependencies = ["maturin", "pytest", "pytest-cov"]
 
 [tool.hatch.envs.default.scripts]
+develop = "maturin develop"
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=deeper --cov=tests {args}"
 no-cov = "cov --no-cov {args}"
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "sphinx",
+  "sphinx_rtd_theme",
+  "sphinxcontrib-apidoc",
+  "sphinxemoji"
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "sphinx-build docs docs/_build"
 
 [[tool.hatch.envs.test.matrix]]
 python = ["37", "38", "39", "310", "311"]
