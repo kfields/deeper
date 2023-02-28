@@ -1,5 +1,7 @@
 # Deeper :skull:
 
+[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
+
 Dungeon RPG using [The Python Arcade Library](https://arcade.academy/)
 
 Tiles courtesy of [Dragosha](https://dragosha.com/free/dungeon-part-1-tiles.html)
@@ -12,13 +14,14 @@ Tiles courtesy of [Dragosha](https://dragosha.com/free/dungeon-part-1-tiles.html
 
 ## Development
 
+You need to have [Hatch](https://hatch.pypa.io/latest/install/) installed
+
 You need to have [Rust](https://www.rust-lang.org/tools/install) installed
 
 ```bash
 git clone https://github.com/kfields/deeper.git
 cd deeper
-poetry shell
-poetry install
+hatch shell
 maturin develop
 python -m deeper
 ```
@@ -35,6 +38,6 @@ python -m deeper
 
 ## Screen Shots
 
-![Level Editor Screen Shot](https://kfields.github.io/deeper/images/deeper1.png "Level Editor")
+![Level Editor Screen Shot](https://github.com/kfields/deeper/blob/main/images/deeper1.png?raw=true "Level Editor")
 
-![Entity Editor Screen Shot](https://kfields.github.io/deeper/images/deeper2.png "Entity Editor")
+![Entity Editor Screen Shot](https://github.com/kfields/deeper/blob/main/images/deeper2.png?raw=true "Entity Editor")

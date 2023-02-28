@@ -22,7 +22,7 @@ copyright = '2023, Kurtis Fields'
 author = 'Kurtis Fields'
 
 # The full version, including alpha/beta/rc tags
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 release = __version__
 
 
