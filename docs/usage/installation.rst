@@ -48,23 +48,17 @@ Navigate to the new directory which contains the repository
 
 If you don't have Hatch, learn to install it at: https://python-poetry.org/docs/
 
-TLDR:  (Use Git Bash if your running Windows)
+TLDR:
 
 .. code:: bash
 
-        curl -sSL https://install.python-poetry.org | python3 -
+        pipx install hatch
 
-Activate the environment
-
-.. code:: bash
-
-        poetry shell
-
-Install required packages
+Activate the environment and install dependencies
 
 .. code:: bash
 
-        poetry install
+        hatch shell
 
 Build the Rust Extension
 
@@ -72,7 +66,7 @@ You need to have Rust installed: https://www.rust-lang.org/tools/install
 
 .. code:: bash
 
-        maturin develop
+        hatch run develop
 
 
 And then run the app!

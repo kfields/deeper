@@ -7,6 +7,7 @@ Dungeon RPG using [The Python Arcade Library](https://arcade.academy/)
 Tiles courtesy of [Dragosha](https://dragosha.com/free/dungeon-part-1-tiles.html)
 
 ## Links
+:skull_and_crossbones: [Discord](https://discord.gg/VZnZ26fhqF)
 
 :notebook: [Documentation](https://kfields.github.io/deeper/)
 
@@ -22,19 +23,19 @@ You need to have [Rust](https://www.rust-lang.org/tools/install) installed
 git clone https://github.com/kfields/deeper.git
 cd deeper
 hatch shell
-maturin develop
+hatch run develop
 python -m deeper
 ```
 
 ## Resources
-
-:link:[Parry](https://parry.rs/)
 
 :link:[PyO3](https://github.com/PyO3/pyo3)
 
 :link:[Maturin](https://github.com/PyO3/maturin)
 
 :link:[Maturin Action](https://github.com/messense/maturin-action)
+
+:link:[Parry](https://parry.rs/)
 
 ## Screen Shots
 

@@ -2,17 +2,8 @@
 
 ## To manually build the documentation:
 
-Change to this directory
-```bash
-cd ./docs
-```
+From the repo root:
 
-Install the necessary tools
 ```bash
-poetry install
-```
-
-Generate the HTML
-```bash
-make html
+hatch run docs:build
 ```
