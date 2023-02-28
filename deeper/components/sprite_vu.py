@@ -3,9 +3,7 @@ from loguru import logger
 import arcade
 
 from deeper.constants import *
-from deeper.sprite import AnimatedSprite
 from .vu import Vu
-from .block import Block
 from .component_builder import ComponentBuilder
 
 class SpriteVu(Vu):
