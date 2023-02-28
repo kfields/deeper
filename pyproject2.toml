@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "deeper-rpg"
+version = "0.1.6"
+description = "Dungeon RPG with Python Arcade and Rust"
+authors = ["Kurtis Fields <kurtisfields@gmail.com>"]
+packages = [
+    {include = "deeper"},
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8, <3.12"
+arcade = "^3.0.0.dev15"
+PyGLM = "^2.7.0"
+imgui = "^1.4.1"
+pyyaml = "^6.0"
+loguru = "^0.6.0"
+pydantic = "^1.10.2"
+sqlalchemy = "^2.0.4"
+click = "^8.1.3"
+
+[tool.poetry.scripts]
+deeper = 'deeper.cli:cli'
+
+[tool.poetry.group.dev.dependencies]
+maturin = "^0.14.7"
+pytest = "^7.2.1"
+pytest-benchmark = "^3.4.1"
+py = "^1.11.0"
+black = "^22.12.0"
+
+[build-system]
+requires = ["maturin>=0.14,<0.15"]
+build-backend = "maturin"
+
+[project]
+name = "deeper-rpg"
+version = "0.1.6"
+description = "Dungeon RPG with Python Arcade and Rust"
+authors = [ {name = "kfields", email = "kurtisfields@gmail.com"} ]
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+    "arcade ~=3.0.0.dev15",
+    "PyGLM ~=2.7.0",
+    "imgui ~=1.4.1",
+    "pyyaml ~=6.0",
+    "loguru ~=0.6.0",
+    "pydantic ~=1.10.2",
+    "sqlalchemy ~=2.0.4",
+    "click ~=8.1.3",
+]
+
+[project.urls]
+homepage = "https://github.com/kfields/deeper"
+documentation = "https://kfields.github.io/deeper/"
+repository = "https://github.com/kfields/deeper"
+changelog = "https://github.com/kfields/deeper/blob/main/CHANGELOG.md"
