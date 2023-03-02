@@ -19,6 +19,6 @@ class CameraPanel(Widget):
             self.camera.zoom_pct = pct
 
 class CameraWindow(Window):
-    def __init__(self, camera):
-        super().__init__("Camera", [CameraPanel(camera)])
+    def __init__(self, camera, on_close:callable=None):
+        super().__init__("Camera", [CameraPanel(camera)], on_close=on_close)
         self.camera = camera

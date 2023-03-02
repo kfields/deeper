@@ -66,11 +66,6 @@ class Catalog(Kit):
         return self.blueprints[name]
 
     def load(self):
-        """
-        root = resolve_resource_path(":deeper:/catalog_original")
-        self.load_yaml(root)
-        return
-        """
         root = resolve_resource_path(":deeper:/catalog")
         db = Database.instance
         session = db.session

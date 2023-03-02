@@ -1,6 +1,8 @@
 from pathlib import Path
+import shutil
 
 import arcade
+from arcade.resources import resolve_resource_path
 
 from .window import Window
 from .constants import *
@@ -18,12 +20,25 @@ class Deeper(Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
         #self.world = World()
         self.world = TestLevel()
-        #view = LevelEditor(self, WorldEditState(self.world))
-        #self.show_view(view)
     
-    def setup(self):
+    def create(self):
+        self.load_settings()
         view = LevelEditor(self, WorldEditState(self.world))
         self.show_view(view)
+
+    def destroy(self):
+        self.save_settings()
+
+    def load_settings(self):
+        dst = Path('imgui.ini')
+        if not dst.exists():
+            src = resolve_resource_path(":deeper:/settings/imgui.ini")
+            shutil.copyfile(src, dst)
+
+    def save_settings(self):
+        src = Path('imgui.ini')
+        dst = resolve_resource_path(":deeper:/settings/imgui.ini")
+        shutil.copyfile(src, dst)
 
 def main():
     arcade.text.load_font(
@@ -36,9 +51,10 @@ def main():
     with db.Session() as session:
         with session.begin():
             db.session = session
-            window = Deeper()
-            window.setup()
+            app = Deeper()
+            app.create()
             arcade.run()
+            app.destroy()
     db.end()
 
 

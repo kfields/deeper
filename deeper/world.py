@@ -38,12 +38,34 @@ class World(ecs.World):
     def remove_processor(self, processor: Processor) -> None:
         self._processors.remove(processor)
 
+    """
     def cast_ray(self, ray):
         results = []
         for entity, block in self.get_component(Block):
             result = block.cast_ray(ray, entity)
             if result:
                 results.append(result)
+        if len(results) == 0:
+            return None
+        if len(results) == 1:
+            return results[0]
+
+        origin = ray.origin
+        sorted_results = sorted(
+            results, key=lambda result: glm.distance(result[1].position, origin)
+        )
+        return sorted_results[0]
+    """
+
+    def cast_ray(self, ray):
+        results = []
+        for layer in self.layers:
+            if not layer.visible:
+                continue
+            for entity, (_, block) in self.get_components(layer.__class__, Block):
+                result = block.cast_ray(ray, entity)
+                if result:
+                    results.append(result)
         if len(results) == 0:
             return None
         if len(results) == 1:

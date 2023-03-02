@@ -126,7 +126,7 @@ class LayersPanel(ExclusiveSelectableGroup):
             imgui.end_popup()
 
 class LayersWindow(Window):
-    def __init__(self, scene, callback):
+    def __init__(self, scene, callback, on_close:callable=None):
         self.scene = scene
         self.callback = callback
         self.panel = LayersPanel(scene, lambda child: callback(child.layer))
@@ -139,7 +139,7 @@ class LayersWindow(Window):
             self.panel
         ]
 
-        super().__init__("Layers", children, flags=imgui.WINDOW_MENU_BAR)
+        super().__init__("Layers", children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)
         self.scene = scene
 
     def new_layer(self):

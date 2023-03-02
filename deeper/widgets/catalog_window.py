@@ -89,7 +89,8 @@ class CatalogPanel(Widget):
         self.current.draw()
 
 class CatalogWindow(Window):
-    def __init__(self, catalog, callback):
+
+    def __init__(self, catalog, callback, on_close:callable=None):
         self.catalog = catalog
         children = [
             Menubar([
@@ -99,4 +100,4 @@ class CatalogWindow(Window):
             ]),
             CatalogPanel(catalog, callback)
         ]
-        super().__init__("Catalog", children, flags=imgui.WINDOW_MENU_BAR)
+        super().__init__("Catalog", children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)

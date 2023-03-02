@@ -8,6 +8,7 @@ class EntityLayer(EntityGroup):
     def __init__(self, name) -> None:
         super().__init__(name)
         self.events = EventSource()
+        self.visible = True
 
     def mark(self):
         self.events.publish(LayerDirtyEvent())

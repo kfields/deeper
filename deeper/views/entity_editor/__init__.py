@@ -10,7 +10,6 @@ from deeper.blueprints import EntityBlueprint
 from deeper.constants import *
 from deeper.camera import WorldCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
-from deeper.widgets import MainMenu
 from deeper.resources.icons import IconsMaterialDesign
 
 from deeper.tools.pick import PickTool
@@ -19,20 +18,14 @@ from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.entity_window import EntityWindow
 from deeper.widgets.component.component_window import ComponentWindow
 
-from ..scene_view import SceneView
+from ..scene_editor import SceneEditor
 
-class EntityEditor(SceneView):
+class EntityEditor(SceneEditor):
     def __init__(self, window, edit_state):
         super().__init__(window, edit_state.world, 'Entity Editor')
         self.edit_state = edit_state
 
-        #TODO: Make helper method inside gui?
-        self.gui.default_font = self.gui.load_font(
-            resolve_resource_path(f":deeper:fonts/Roboto-Regular.ttf"), 16
-        )
-
         self.gui.add_child(EntityWindow(self.world, edit_state.entity))
-
 
         self.block = self.world.component_for_entity(edit_state.entity, Block)
 
@@ -52,7 +45,7 @@ class EntityEditor(SceneView):
 
         font = pyglet.font.load("Material Icons")
         self.gui.add_child(
-            MainMenu(
+            self.create_menubar(
                 children=[
                     Toolbar(
                         [

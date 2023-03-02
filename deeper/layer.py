@@ -14,12 +14,18 @@ class Layer:
         self.group_subscription = None
         self.sprites = arcade.SpriteList()
         #self.effects = EffectList()
-        self.visible = True
+        self._visible = True
         self.locked = False
         self.dirty = True
 
-    def set_visible(self, value):
-        self.visible = value
+    @property
+    def visible(self):
+        return self._visible
+    
+    @visible.setter
+    def visible(self, value):
+        self._visible = value
+        self.group.visible = value
 
     def enable(self):
         self.group_subscription = self.group.events.subscribe(self.on_group_event)

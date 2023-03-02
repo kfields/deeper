@@ -2,7 +2,7 @@ import arcade
 
 from ..constants import *
 from ..level import Level
-from deeper import Entity, Block
+from deeper import Block
 from deeper.components.sprite_vu import SpriteVu
 from deeper.catalog import Catalog
 
@@ -30,4 +30,3 @@ class TestLevel(Level):
                     )
                 )
                 self.create_entity(layer, blueprint, block, vu)
-                #self.create_entity(Entity(layer), layer, blueprint, block, vu)
