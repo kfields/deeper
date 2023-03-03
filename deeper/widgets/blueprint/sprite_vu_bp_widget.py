@@ -11,7 +11,7 @@ class SpriteVuBpWidget(BlueprintWidget):
 
     def draw(self):
         changed, offset = imgui.drag_float2(
-            "Offset", *self.blueprint.offset, change_speed=0.1
+            'Offset', *self.blueprint.offset, change_speed=0.1
         )
         if changed:
             self.blueprint.offset = glm.vec2(*offset)

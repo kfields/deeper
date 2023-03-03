@@ -74,7 +74,7 @@ class SpriteAnimation(Animation):
 
 
 class SpriteAnimationBuilder(ComponentBuilder):
-    key = "SpriteAnimation"
+    key = 'SpriteAnimation'
 
     def build(self, blueprint, world):
         return SpriteAnimation(

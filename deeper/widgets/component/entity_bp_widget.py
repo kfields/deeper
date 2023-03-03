@@ -1,4 +1,3 @@
-import glm
 import imgui
 
 from deeper.dimgui import Widget
@@ -31,15 +30,15 @@ class BlueprintsPanel(Widget):
         super().__init__(children)
 
     def draw(self):
-        imgui.text("name: ")
+        imgui.text('name: ')
         imgui.same_line()
         imgui.text(self.blueprint.name)
 
-        imgui.text("extends: ")
+        imgui.text('extends: ')
         imgui.same_line()
         imgui.text(self.blueprint.extends)
 
-        imgui.text("category: ")
+        imgui.text('category: ')
         imgui.same_line()
         imgui.text(self.blueprint.category)
 
@@ -67,7 +66,7 @@ class EntityBpWidget(ComponentWidget):
 
     def draw(self):
         changed, self.current_index = imgui.combo(
-            "View", self.current_index, self.panel_names
+            'View', self.current_index, self.panel_names
         )
         current = self.panels[self.current_index]
         self.current = current

@@ -34,9 +34,6 @@ class GuiBase(Widget):
 
     def _map_keys(self):
         key_map = self.io.key_map
-
-        # note: we cannot use default mechanism of mapping keys
-        #       because pyglet uses weird key translation scheme
         for value in self.REVERSE_KEY_MAP.values():
             key_map[value] = value
 
@@ -69,7 +66,6 @@ class GuiBase(Widget):
             io.add_input_character(ord(char))
 
         if self.io.want_text_input:
-        #if self.io.want_text_input or self.io.want_capture_keyboard:
             return event.EVENT_HANDLED
 
     def on_mouse_motion(self, x, y, dx, dy):
@@ -165,18 +161,13 @@ class Gui(GuiBase):
         else:
             window.push_handlers(self.on_resize)
 
-    #def __del__(self):
-    #    imgui.destroy_context(self.context)
-
     def enable(self):
-        #imgui.set_current_context(self.context)
         self.window.push_handlers(self)
 
     def disable(self):
         self.window.remove_handlers(self)
 
     def show(self):
-        #imgui.set_current_context(self.context)
         pass
 
     def hide(self):
@@ -194,13 +185,11 @@ class Gui(GuiBase):
         return font
 
     def start_render(self):
-        #imgui.set_current_context(self.context)
         imgui.new_frame()
         if self.default_font:
             imgui.push_font(self.default_font)
 
     def finish_render(self):
-        #imgui.set_current_context(self.context)
         self.draw()
         if self.default_font:
             imgui.pop_font()

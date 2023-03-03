@@ -8,7 +8,7 @@ def decompose(d):
             value = []
         elif type(value) is dict:
             value = decompose(value)
-        a.append({"name": key, "value": value})
+        a.append({'name': key, 'value': value})
     return a
 
 class Subscription:
@@ -30,15 +30,15 @@ class Setting:
         self.subscriptions = []
 
     def __repr__(self) -> str:
-        return f"<{self.__class__.__name__} name={self.name} value={self.value}>"
+        return f'<{self.__class__.__name__} name={self.name} value={self.value}>'
 
     @classmethod
     def parse_obj(cls, obj):
-        v = cls.validate(obj["value"])
+        v = cls.validate(obj['value'])
         return cls(obj["name"], v)
 
     def get_vtype(self):
-        return self.__annotations__["_value"]
+        return self.__annotations__['_value']
 
     @classmethod
     def validate(cls, value):
@@ -87,7 +87,7 @@ class SettingGroup(Setting):
     def validate(cls, v):
         result = []
         for item in v:
-            result.append(cls.setting_map[item["name"]].parse_obj(item))
+            result.append(cls.setting_map[item['name']].parse_obj(item))
         return result
 
     def default(self):

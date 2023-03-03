@@ -15,7 +15,7 @@ class TestLevel(Level):
 
     def create_grid(self):
         catalog = Catalog.instance
-        blueprint = catalog.find("Cell")
+        blueprint = catalog.find('Cell')
         size = glm.vec3(CELL_WIDTH, 0.01, 1)
         layer = self.create_layer('Grid')
         for ty in range(0, 16):
@@ -26,7 +26,7 @@ class TestLevel(Level):
                 block = Block(position, size)
                 vu = SpriteVu(
                     arcade.Sprite(
-                        ":deeper:tiles/_Grid/GRID.png",
+                        ':deeper:tiles/_Grid/GRID.png',
                     )
                 )
                 self.create_entity(layer, blueprint, block, vu)

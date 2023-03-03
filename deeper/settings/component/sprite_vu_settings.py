@@ -1,10 +1,10 @@
-from ...setting import Setting, SettingGroup, StringSetting, IntSetting, FloatSetting, Vec2Setting
+from ...setting import SettingGroup, StringSetting, Vec2Setting
 
 class SpriteVuSettings(SettingGroup):
     pass
 
 
 SpriteVuSettings.setting_map = {
-    "image": StringSetting,
-    "offset": Vec2Setting
+    'image': StringSetting,
+    'offset': Vec2Setting
 }

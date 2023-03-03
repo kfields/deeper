@@ -8,11 +8,11 @@ class SnapOptionWidget(Widget):
         children = [
             RadioButtonGroup(
                 [
-                    RadioButton("None", lambda: self.set_snap(SnapOption.NONE)),
-                    RadioButton("Center", lambda: self.set_snap(SnapOption.CENTER), True),
-                    RadioButton("Size", lambda: self.set_snap(SnapOption.SIZE)),
-                    RadioButton("1/2 Cell", lambda: self.set_snap(SnapOption.HALF_CELL)),
-                    RadioButton("1/4 Cell", lambda: self.set_snap(SnapOption.QUARTER_CELL)),
+                    RadioButton('None', lambda: self.set_snap(SnapOption.NONE)),
+                    RadioButton('Center', lambda: self.set_snap(SnapOption.CENTER), True),
+                    RadioButton('Size', lambda: self.set_snap(SnapOption.SIZE)),
+                    RadioButton('1/2 Cell', lambda: self.set_snap(SnapOption.HALF_CELL)),
+                    RadioButton('1/4 Cell', lambda: self.set_snap(SnapOption.QUARTER_CELL)),
                 ]
             )
         ]

@@ -16,7 +16,7 @@ class BlueprintWidget(Widget):
         super().create(gui)
         with Image.open(resolve_resource_path(self.blueprint.image)) as image:
             image.thumbnail((64, 64))
-            self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert("RGB").tobytes())
+            self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
         return self
 
     def draw(self):
@@ -44,7 +44,7 @@ class CategoryWidget(Widget):
         self.selection = None
 
     def draw(self):
-        imgui.begin_child("entities", -1, -1, border=True)
+        imgui.begin_child('entities', -1, -1, border=True)
         for widget in self.children:
             clicked = widget.draw()
             if clicked:
@@ -78,7 +78,7 @@ class CatalogPanel(Widget):
 
     def draw(self):
         clicked, self.current_index = imgui.combo(
-            "Category", self.current_index, self.category_names
+            'Category', self.current_index, self.category_names
         )
         current = self.category_widgets[self.current_index]
         if current != self.current:
@@ -100,4 +100,4 @@ class CatalogWindow(Window):
             ]),
             CatalogPanel(catalog, callback)
         ]
-        super().__init__("Catalog", children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)
+        super().__init__('Catalog', children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)

@@ -43,7 +43,7 @@ class Kit:
             except ImportError:
                 raise RuntimeError(f'Module "{builders_path}" not found')
         discovered_builders = []
-        possible_builders = getattr(module, "__builders__", None)
+        possible_builders = getattr(module, '__builders__', None)
         try:
             possible_builders = [*possible_builders]  # type:ignore
         except TypeError:

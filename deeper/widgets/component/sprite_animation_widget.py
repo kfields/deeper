@@ -1,6 +1,4 @@
-import glm
 import imgui
-import pyglet
 
 from deeper.setting import AttrSetting, Vec2SettingVType
 from deeper.widgets.setting import DragWrapper
@@ -19,7 +17,7 @@ class SpriteAnimationWidget(ComponentWidget):
 
     def draw(self):
         changed, rate = imgui.drag_float(
-            "Rate",
+            'Rate',
             self.animation.rate,
             change_speed=0.01,
             min_value=0.01,

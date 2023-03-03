@@ -17,4 +17,4 @@ class Model(metaclass=DeclarativeMeta):
     metadata = mapper_registry.metadata
 
     __init__ = mapper_registry.constructor
-    __mapper_args__ = {"eager_defaults": True}
+    __mapper_args__ = {'eager_defaults': True}

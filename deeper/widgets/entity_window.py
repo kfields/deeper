@@ -23,5 +23,4 @@ class EntityWindow(Window):
         children = []
         for component in components:
             children.append(ComponentWidgetKit.instance.build(component))
-        #super().__init__("Entity", children)
         super().__init__("Entity", children=[EntityPanel(children)])

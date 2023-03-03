@@ -28,11 +28,10 @@ class Database:
         self.engine = None
 
     def begin(self, path):
-        conn_string = f"sqlite:///{str(path)}"
+        conn_string = f'sqlite:///{str(path)}'
         self.engine = engine = create_engine(
-            #"sqlite://", echo=True, json_serializer=json_serializer
             #"sqlite:///./deeper.db", echo=True, json_serializer=json_serializer
-            "sqlite:///./deeper.db", json_serializer=json_serializer
+            conn_string, json_serializer=json_serializer
         )
 
         with engine.begin() as conn:
@@ -49,7 +48,6 @@ class Database:
         self.Session.remove()
 
     def drop_all(self):
-        #self.begin()
         with self.engine.begin() as conn:
             Model.metadata.drop_all(conn)
 

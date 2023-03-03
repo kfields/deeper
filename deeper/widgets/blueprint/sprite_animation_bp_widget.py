@@ -12,7 +12,7 @@ class SpriteAnimationBpWidget(BlueprintWidget):
 
     def draw(self):
         changed, rate = imgui.drag_float(
-            "Rate", self.blueprint.rate, change_speed=0.1
+            'Rate', self.blueprint.rate, change_speed=0.1
         )
         if changed:
             self.blueprint.rate = rate

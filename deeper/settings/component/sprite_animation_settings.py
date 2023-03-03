@@ -6,11 +6,11 @@ class SpriteAnimationSettings(SettingGroup):
 
 
 SpriteAnimationSettings.setting_map = {
-    "image": StringSetting,
-    "offset": Vec2Setting,
-    "width": IntSetting,
-    "height": IntSetting,
-    "frames": IntSetting,
-    "rate": FloatSetting,
-    "pingpong": BoolSetting, # Play forwards then backwards
+    'image': StringSetting,
+    'offset': Vec2Setting,
+    'width': IntSetting,
+    'height': IntSetting,
+    'frames': IntSetting,
+    'rate': FloatSetting,
+    'pingpong': BoolSetting, # Play forwards then backwards
 }

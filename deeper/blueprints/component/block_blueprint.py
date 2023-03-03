@@ -8,7 +8,7 @@ from .component_blueprint import ComponentBlueprint
 
 
 class BlockBlueprint(ComponentBlueprint):
-    id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
+    id: Mapped[int] = mapped_column(ForeignKey('ComponentBlueprint.id'), primary_key=True)
     __mapper_args__ = {
         'polymorphic_identity': 'BlockBlueprint',
         'inherit_condition': (id == ComponentBlueprint.id),
@@ -20,12 +20,12 @@ class BlockBlueprint(ComponentBlueprint):
 
 
 class BlockBlueprintBuilder(BlueprintBuilder):
-    key = "Block"
+    key = 'Block'
     cls = BlockBlueprint
 
     def build(self, catalog, name, config, parent):
         # print(config)
-        if not "size" in config:
-            if hasattr(parent, "size"):
-                config["size"] = parent.size
+        if not 'size' in config:
+            if hasattr(parent, 'size'):
+                config['size'] = parent.size
         return super().build(catalog, name, config, parent)

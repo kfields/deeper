@@ -1,6 +1,5 @@
 from loguru import logger
 
-import glm
 from pyglet import clock
 import pyglet.window.mouse as mouse
 import arcade

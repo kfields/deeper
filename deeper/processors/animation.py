@@ -1,9 +1,6 @@
 from loguru import logger
 
-import arcade
-
 from ..constants import *
-from deeper import Block
 from deeper.components.sprite_animation import SpriteAnimation
 from . import SceneProcessor
 

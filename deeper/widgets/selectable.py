@@ -69,7 +69,7 @@ class EditableSelectable(SelectableBase):
             elif clicked:
                 self.select(selected)
         else:
-            changed, value = imgui.input_text(f"##{id(self)}", self.label, 32)
+            changed, value = imgui.input_text(f'##{id(self)}', self.label, 32)
             if changed:
                 logger.debug(changed)
                 logger.debug(value)

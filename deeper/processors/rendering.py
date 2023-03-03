@@ -13,10 +13,9 @@ class RenderingProcessor(SceneProcessor):
             self.process_layer(layer, delta_time)
 
     def process_layer(self, layer, delta_time: float):
-        # if not layer.dirty or not layer.visible:
         if not layer.dirty:
             return
-        logger.debug(f"processing {layer.name}")
+        logger.debug(f'processing {layer.name}')
         layer_group = layer.group
         vu_list = []
 

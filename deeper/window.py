@@ -2,30 +2,11 @@ import arcade
 
 from .dimgui import Gui
 
-class ArcadeContextState:
-    def __init__(self, ctx: arcade.ArcadeContext) -> None:
-        self.viewport = ctx.viewport
-        self.projection_2d_matrix =  ctx.projection_2d_matrix
-        self.view_matrix_2d = ctx.view_matrix_2d
-
-    def restore(self, ctx: arcade.ArcadeContext) -> None:
-        ctx.viewport = self.viewport
-        ctx.projection_2d_matrix = self.projection_2d_matrix
-        if self.view_matrix_2d:
-            ctx.view_matrix_2d = self.view_matrix_2d
 
 class Window(arcade.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.view_stack = []
-        self.ctx_state_stack = []
-
-    def push_ctx_state(self):
-        self.ctx_state_stack.append(ArcadeContextState(self.ctx))
-
-    def pop_ctx_state(self):
-        state = self.ctx_state_stack.pop()
-        state.restore(self.ctx)
 
     def show_view(self, new_view):
         super().show_view(new_view)

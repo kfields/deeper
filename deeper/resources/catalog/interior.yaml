@@ -41,12 +41,13 @@ Interior4:
   image: :deeper:tiles/Interior/Interior4.png
 Interior5:
   extends: Interior
-  size: [0.86, 0.75, 1]
+  size: [0.4300000071525574, 0.5, 0.5]
   image: :deeper:tiles/Interior/Interior5.png
 Interior6:
   extends: Interior
-  size: [0.86, 0.75, 1]
+  size: [0.4300000071525574, 0.5, 0.5]
   image: :deeper:tiles/Interior/Interior6.png
+  offset: [0.09000000357627869, 0.0]
 Interior7:
   extends: Interior
   size: [0.86, 0.75, 1]

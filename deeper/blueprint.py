@@ -17,11 +17,11 @@ class Blueprint(Model):
     name: Mapped[str] = mapped_column(String(32))
     type: Mapped[str]
 
-    parent_id = mapped_column(Integer, ForeignKey("Blueprint.id"))
-    children = relationship("Blueprint", backref=backref("parent", remote_side=[id]), foreign_keys=[parent_id])
+    parent_id = mapped_column(Integer, ForeignKey('Blueprint.id'))
+    children = relationship('Blueprint', backref=backref('parent', remote_side=[id]), foreign_keys=[parent_id])
 
-    base_id = mapped_column(Integer, ForeignKey("Blueprint.id"))
-    derivatives = relationship("Blueprint", backref=backref("base", remote_side=[id]), foreign_keys=[base_id])
+    base_id = mapped_column(Integer, ForeignKey('Blueprint.id'))
+    derivatives = relationship('Blueprint', backref=backref('base', remote_side=[id]), foreign_keys=[base_id])
 
     config: Mapped[dict] = mapped_column(JSON)
 
@@ -29,8 +29,8 @@ class Blueprint(Model):
     settings = None
     
     __mapper_args__ = {
-        "polymorphic_identity": "Blueprint",
-        "polymorphic_on": "type",
+        'polymorphic_identity': 'Blueprint',
+        'polymorphic_on': 'type',
     }
     borrowed_settings = []
 
@@ -45,7 +45,7 @@ class Blueprint(Model):
         self.configure(config)
 
     def __repr__(self) -> str:
-        return f"<Blueprint name={self.name}>"
+        return f'<Blueprint name={self.name}>'
         # return f"<Blueprint {self.__dict__}>"
 
     def add_child(self, child):
@@ -89,7 +89,7 @@ class Blueprint(Model):
 
     def create_settings(self, config):
         decomposed = decompose(config)
-        obj = {"name": self.name, "value": decomposed}
+        obj = {'name': self.name, 'value': decomposed}
         #print(obj)
         settings = self.settings_class.parse_obj(obj)
         settings.subscribe(self.on_setting)

@@ -5,7 +5,6 @@ import pyglet
 
 from deeper.dimgui import Widget, Window
 from deeper.resources.icons import IconsMaterialDesign
-from .dragger import Dragger
 from .icon import IconToggleButton, Icon, IconButton
 from .menu import Menubar, Menu, MenuItem
 from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, EditableSelectable
@@ -15,14 +14,13 @@ class LayerWidget(SelectableBase):
     def __init__(self, layer, callback):
         self.layer = layer
         self.selectable = EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child), width=128)
-        font = pyglet.font.load("Material Icons")
+        font = pyglet.font.load('Material Icons')
         super().__init__(
             layer.name,
             callback,
             selected=False,
             children=[
                 IconButton(IconsMaterialDesign.ICON_GRID_ON, font),
-                #Dragger(IconButton(IconsMaterialDesign.ICON_GRID_ON, font), self.on_drag),
                 self.selectable,
                 IconToggleButton(
                     IconsMaterialDesign.ICON_VISIBILITY,
@@ -33,26 +31,6 @@ class LayerWidget(SelectableBase):
                 )
             ]
         )
-
-    def on_drag(self):
-        self.gui.dropboard.value = self
-        imgui.button(str(self))
-
-    def on_drop(self):
-        if imgui.begin_drag_drop_target():
-            payload = imgui.accept_drag_drop_payload('itemtype')
-            if payload is not None:
-                print('Received:', payload)
-                #self.wrapped.value = self.gui.dropboard.value.value
-                if imgui.begin_popup("drop-popup"):
-                    imgui.text("Select one")
-                    imgui.separator()
-                    imgui.selectable("One")
-                    imgui.selectable("Two")
-                    imgui.selectable("Three")
-                    imgui.end_popup()
-
-            imgui.end_drag_drop_target()
 
     def on_child_selected(self, child):
         self.callback(self)
@@ -76,19 +54,11 @@ class LayerWidget(SelectableBase):
         imgui.begin_group()
         super().draw()
         imgui.end_group()
-        #self.draw_context_popup()
-        #self.on_drop()
 
     def draw_child(self, child):
         super().draw_child(child)
         if child != self.children[-1]:
             imgui.same_line()
-    """
-    def draw_context_popup(self):
-        if imgui.begin_popup_context_item(str(id(self))):
-            clicked, selected = imgui.selectable("Delete")
-            imgui.end_popup()
-    """
 
 class LayersPanel(ExclusiveSelectableGroup):
     def __init__(self, scene, callback):
@@ -106,7 +76,7 @@ class LayersPanel(ExclusiveSelectableGroup):
         self.scene.swap_layers(i, j)
 
     def draw(self):
-        imgui.begin_child("layers", -1, -1)
+        imgui.begin_child('layers', -1, -1)
         imgui.push_style_color(imgui.COLOR_BUTTON, 0.0, 0.0, 0.0)
         #super().draw()
         self.draw_sortable(self.on_swap)
@@ -119,7 +89,7 @@ class LayersPanel(ExclusiveSelectableGroup):
 
     def draw_child_context_popup(self, child):
         if imgui.begin_popup_context_item(str(id(child))):
-            clicked, selected = imgui.selectable("Delete")
+            clicked, selected = imgui.selectable('Delete')
             if clicked:
                 self.scene.remove_layer(child.layer)
                 self.remove_child(child)
@@ -139,7 +109,7 @@ class LayersWindow(Window):
             self.panel
         ]
 
-        super().__init__("Layers", children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)
+        super().__init__('Layers', children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)
         self.scene = scene
 
     def new_layer(self):

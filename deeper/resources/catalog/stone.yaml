@@ -10,9 +10,12 @@ Stone:
 TileStone0: {extends: Stone, image: ':deeper:tiles/TileStone0.png'}
 TileStone1:
   extends: Stone
-  size: [0.43, 0.75, 0.5]
+  size: [0.4300000071525574, 0.5, 0.5]
   image: :deeper:tiles/TileStone1.png
-TileStone2: {extends: Stone, image: ':deeper:tiles/TileStone2.png'}
+TileStone2:
+  extends: Stone
+  image: :deeper:tiles/TileStone2.png
+  size: [0.4300000071525574, 0.75, 0.5]
 TileStone3:
   extends: Stone
   size: [0.43, 0.5, 0.5]

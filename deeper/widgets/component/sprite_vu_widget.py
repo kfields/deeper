@@ -1,15 +1,9 @@
-import glm
-import imgui
-import pyglet
-
 from deeper.setting import AttrSetting, Vec2SettingVType
 from deeper.widgets.setting import DragWrapper
 from ...kits.setting_widget_kit import SettingWidgetKit
 
 from deeper.components.sprite_vu import SpriteVu
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
-from .. import IconButton
-from deeper.resources.icons.icons_material_design import IconsMaterialDesign
 
 
 class SpriteVuWidget(ComponentWidget):
@@ -19,7 +13,7 @@ class SpriteVuWidget(ComponentWidget):
         children.append(
             DragWrapper(
                 SettingWidgetKit.instance.build(
-                    AttrSetting("offset", self.vu, Vec2SettingVType), change_speed=0.01
+                    AttrSetting('offset', self.vu, Vec2SettingVType), change_speed=0.01
                 )
             )
         )

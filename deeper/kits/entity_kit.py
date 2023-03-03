@@ -11,7 +11,7 @@ class EntityKit(Kit):
     def find(self, blueprint):
         if blueprint.name in self.builders:
             return self.builders[blueprint.name]
-        if hasattr(blueprint, "extends"):
+        if hasattr(blueprint, 'extends'):
             return self.find(blueprint.catalog.find(blueprint.extends))
 
     def build(self, blueprint, world, layer, position=DEFAULT_VEC3):

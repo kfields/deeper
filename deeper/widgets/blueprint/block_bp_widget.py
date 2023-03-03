@@ -12,7 +12,7 @@ class BlockBpWidget(BlueprintWidget):
 
     def draw(self):
         changed, size = imgui.drag_float3(
-            "Size", *self.block.size, change_speed=0.1
+            'Size', *self.block.size, change_speed=0.1
         )
         if changed:
             self.block.size = glm.vec3(*size)

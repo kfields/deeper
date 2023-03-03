@@ -9,7 +9,7 @@ from ...blueprint import BlueprintBuilder
 from .component_blueprint import ComponentBlueprint
 
 class SpriteAnimationBlueprint(ComponentBlueprint):
-    id: Mapped[int] = mapped_column(ForeignKey("ComponentBlueprint.id"), primary_key=True)
+    id: Mapped[int] = mapped_column(ForeignKey('ComponentBlueprint.id'), primary_key=True)
     __mapper_args__ = {
         'polymorphic_identity': 'SpriteAnimationBlueprint',
         'inherit_condition': (id == ComponentBlueprint.id),
@@ -36,5 +36,5 @@ class SpriteAnimationBlueprint(ComponentBlueprint):
         return self._texture
 
 class SpriteAnimationBlueprintBuilder(BlueprintBuilder):
-    key = "SpriteAnimation"
+    key = 'SpriteAnimation'
     cls = SpriteAnimationBlueprint

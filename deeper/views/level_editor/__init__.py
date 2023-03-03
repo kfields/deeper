@@ -2,10 +2,6 @@ from loguru import logger
 
 import glm
 import pyglet
-from pyglet import clock
-import arcade
-from arcade.resources import resolve_resource_path
-from arcade import key
 
 
 from deeper.constants import *
@@ -27,11 +23,9 @@ class LevelEditor(SceneEditor):
         super().__init__(window, edit_state.world, 'Level Editor')
         self.edit_state = edit_state
 
-        #self.gui.add_child(LayersWindow(self, lambda layer: self.select_layer(layer)))
         self.open_window('Layers')
 
         self.catalog = Catalog()
-        #self.gui.add_child(CatalogWindow(self.catalog, self.on_catalog))
         self.open_window('Catalog')
 
         self.camera = WorldCamera(self.window, glm.vec3(), 1)
@@ -40,9 +34,6 @@ class LevelEditor(SceneEditor):
 
         self.current_tool = self.pick_tool = PickTool(self, edit_state)
         self.stamp_tool = StampTool(self, edit_state)
-
-        # TODO:Need glyph range which pyimgui does not support. :(
-        # self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
 
         font = pyglet.font.load('Material Icons')
         self.gui.add_child(
@@ -103,9 +94,9 @@ class LevelEditor(SceneEditor):
             return
         on_close = lambda: self.close_window(title)
         window = None
-        if title == "Catalog":
+        if title == 'Catalog':
             window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close)
-        elif title == "Layers":
+        elif title == 'Layers':
             window = LayersWindow(self, lambda layer: self.select_layer(layer), on_close=on_close)
         else:
             return super().open_window(title)

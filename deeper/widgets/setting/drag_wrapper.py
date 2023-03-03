@@ -16,7 +16,7 @@ class DragWrapper(Widget):
     def create(self, gui):
         super().create(gui)
         if not DragWrapper.drag_icon:
-            font = pyglet.font.load("Material Icons")
+            font = pyglet.font.load('Material Icons')
             DragWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR, font)
             self.drag_icon.create(gui)
         return self

@@ -13,5 +13,5 @@ class BlueprintPanel(Widget):
 
 class BlueprintWindow(Window):
     def __init__(self, blueprint):
-        super().__init__("Blueprint", [BlueprintPanel(blueprint)])
+        super().__init__('Blueprint', [BlueprintPanel(blueprint)])
         self.blueprint = blueprint

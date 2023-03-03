@@ -1,12 +1,6 @@
 import os
 import yaml
 
-'''
-try:
-    from yaml import CLoader as Loader, CDumper as Dumper
-except ImportError:
-    from yaml import Loader, Dumper
-'''
 
 def load_yaml(file):
     return yaml.load(file, Loader=YamlLoader)

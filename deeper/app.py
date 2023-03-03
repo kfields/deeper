@@ -17,7 +17,7 @@ from deeper.resources.icons import IconsMaterialDesign
 
 class Deeper(Window):
     def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Deeper", resizable=True)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, 'Deeper', resizable=True)
         #self.world = World()
         self.world = TestLevel()
     
@@ -32,17 +32,17 @@ class Deeper(Window):
     def load_settings(self):
         dst = Path('imgui.ini')
         if not dst.exists():
-            src = resolve_resource_path(":deeper:/settings/imgui.ini")
+            src = resolve_resource_path(':deeper:/settings/imgui.ini')
             shutil.copyfile(src, dst)
 
     def save_settings(self):
         src = Path('imgui.ini')
-        dst = resolve_resource_path(":deeper:/settings/imgui.ini")
+        dst = resolve_resource_path(':deeper:/settings/imgui.ini')
         shutil.copyfile(src, dst)
 
 def main():
     arcade.text.load_font(
-        f":deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"
+        f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'
     )
 
     db = Database.instance

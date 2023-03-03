@@ -1,4 +1,4 @@
-from ...setting import Setting, SettingGroup, Vec3Setting, Vec2Setting
+from ...setting import SettingGroup, Vec3Setting
 
 
 class BlockSettings(SettingGroup):
@@ -6,6 +6,6 @@ class BlockSettings(SettingGroup):
 
 
 BlockSettings.setting_map = {
-    "size": Vec3Setting,
-    "position": Vec3Setting
+    'size': Vec3Setting,
+    'position': Vec3Setting
 }

@@ -6,9 +6,9 @@ class ComponentsGroup(SettingGroup):
 
 
 ComponentsGroup.setting_map = {
-    "Block": BlockSettings,
-    "SpriteVu": SpriteVuSettings,
-    "SpriteAnimation": SpriteAnimationSettings
+    'Block': BlockSettings,
+    'SpriteVu': SpriteVuSettings,
+    'SpriteAnimation': SpriteAnimationSettings
 }
 
 class EntitySettings(SettingGroup):
@@ -16,13 +16,13 @@ class EntitySettings(SettingGroup):
 
 
 EntitySettings.setting_map = {
-    "_abstract": BoolSetting,
-    "extends": StringSetting,
-    "category": StringSetting,
-    "description": StringSetting,
-    "components": ComponentsGroup,
+    '_abstract': BoolSetting,
+    'extends': StringSetting,
+    'category': StringSetting,
+    'description': StringSetting,
+    'components': ComponentsGroup,
 
-    "size": Vec3Setting,
-    "image": StringSetting,
-    "offset": Vec2Setting
+    'size': Vec3Setting,
+    'image': StringSetting,
+    'offset': Vec2Setting
 }

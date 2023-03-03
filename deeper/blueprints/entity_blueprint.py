@@ -9,7 +9,7 @@ from ..blueprint import Blueprint
 
 
 class EntityBlueprint(Blueprint):
-    id: Mapped[int] = mapped_column(ForeignKey("Blueprint.id"), primary_key=True)
+    id: Mapped[int] = mapped_column(ForeignKey('Blueprint.id'), primary_key=True)
     category: Mapped[str] = mapped_column(String(32), default='')
     __mapper_args__ = {
         'polymorphic_identity': 'EntityBlueprint',
@@ -26,8 +26,8 @@ class EntityBlueprint(Blueprint):
 
     def configure(self, config):
         #logger.debug(f"config: {config}")
-        if "extends" in config:
-            base = self.catalog.find(config["extends"])
+        if 'extends' in config:
+            base = self.catalog.find(config['extends'])
             base.add_derivative(self)
             config = self.extend(config)
 
@@ -50,7 +50,7 @@ class EntityBlueprint(Blueprint):
             setattr(self, key, value)
 
         # if (not self._abstract) and hasattr(self, 'components'):
-        if hasattr(self, "components"):
+        if hasattr(self, 'components'):
             for child in self.children:
                 child.config = self.components[child.name]
                 #logger.debug(child.config)

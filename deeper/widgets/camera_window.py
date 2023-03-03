@@ -10,15 +10,15 @@ class CameraPanel(Widget):
 
     def draw(self):
         imgui.input_float3(
-            "Position", *self.camera.position, flags=imgui.INPUT_TEXT_READ_ONLY
+            'Position', *self.camera.position, flags=imgui.INPUT_TEXT_READ_ONLY
         )
         changed, pct = imgui.drag_float(
-            "Zoom", self.camera.zoom_pct, change_speed=10
+            'Zoom', self.camera.zoom_pct, change_speed=10
         )
         if changed:
             self.camera.zoom_pct = pct
 
 class CameraWindow(Window):
     def __init__(self, camera, on_close:callable=None):
-        super().__init__("Camera", [CameraPanel(camera)], on_close=on_close)
+        super().__init__('Camera', [CameraPanel(camera)], on_close=on_close)
         self.camera = camera

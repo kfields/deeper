@@ -1,9 +1,5 @@
-import glm
 import pyglet
 from pyglet import clock
-import arcade
-from arcade.resources import resolve_resource_path
-from arcade import key
 
 from deeper import Block
 from deeper.blueprints import EntityBlueprint
@@ -39,11 +35,7 @@ class EntityEditor(SceneEditor):
 
         self.current_tool = self.pick_tool = PickTool(self, edit_state)
 
-
-        # TODO:Need glyph range which pyimgui does not support. :(
-        # self.gui.load_font(resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'))
-
-        font = pyglet.font.load("Material Icons")
+        font = pyglet.font.load('Material Icons')
         self.gui.add_child(
             self.create_menubar(
                 children=[
