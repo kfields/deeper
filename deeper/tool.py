@@ -27,9 +27,3 @@ class Tool:
             self._click_count = 1
         #print(self._click_count)
         self._click_time = time.time()
-
-class WorldTool(Tool):
-    def __init__(self, view, title='') -> None:
-        super().__init__(view, title)
-        self.world = view.world
-        self.camera = view.camera

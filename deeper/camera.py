@@ -7,7 +7,7 @@ from . import Ray
 
 
 class WorldCamera:
-    def __init__(self, window, target, zoom=1.0):
+    def __init__(self, window:arcade.Window, target:glm.vec3=glm.vec3(), zoom=1.0):
         self.window = window
         self.target = target
         self.distance = zoom * 10
@@ -20,13 +20,6 @@ class WorldCamera:
 
         self.update_matrices()
         self.look_at(target)
-
-    def __enter__(self):
-        self.window.push_ctx_state()
-        self.use()
-
-    def __exit__(self, exc_type, exc_value, exc_tb):
-        self.window.pop_ctx_state()
 
     @property
     def zoom(self):

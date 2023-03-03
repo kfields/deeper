@@ -7,7 +7,7 @@ from arcade import key
 from deeper import Isometry, Cuboid, Block
 from deeper.constants import *
 from deeper.kits import EntityKit
-from ..tool import WorldEditTool
+from ..scene_tool import SceneEditTool
 
 from deeper.dimgui import Window
 from .stamp_widget import StampToolWidget
@@ -60,7 +60,7 @@ class Stamp:
         return self.shape.aabb(self.isometry)
 
 
-class StampTool(WorldEditTool):
+class StampTool(SceneEditTool):
     def __init__(self, view, edit_state) -> None:
         super().__init__(view, edit_state, "Stamp")
         self.hovered = None
@@ -80,7 +80,8 @@ class StampTool(WorldEditTool):
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         # print("mouse: ", x, y)
         ray = self.camera.mouse_to_ray(x, y)
-        result = self.world.cast_ray(ray)
+        #result = self.world.cast_ray(ray)
+        result = self.scene.cast_ray(ray)
         # print(result)
         if result:
             entity, block, contact = result
@@ -204,7 +205,7 @@ class StampTool(WorldEditTool):
 
         if self.stamp:
             pos = self.camera.project(self.stamp.position).xy
-            self.view.draw_aabb(self.stamp.aabb)
+            self.scene.draw_aabb(self.stamp.aabb)
 
         if self.selected:
-            self.view.draw_aabb(self.selected.block.aabb, color=arcade.color.RED)
+            self.scene.draw_aabb(self.selected.block.aabb, color=arcade.color.RED)

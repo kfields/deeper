@@ -16,8 +16,14 @@ from deeper.tools.stamp import StampTool
 
 from deeper.widgets.toolbar import Toolbar, ToolButton
 
+from ...scene import Scene
 from ..scene_editor import SceneEditor
 
+class LevelEditorScene(Scene):
+    def __init__(self, world, camera):
+        super().__init__(world, camera)
+        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
+    
 class LevelEditor(SceneEditor):
     def __init__(self, window, edit_state):
         super().__init__(window, edit_state.world, 'Level Editor')
@@ -27,10 +33,6 @@ class LevelEditor(SceneEditor):
 
         self.catalog = Catalog()
         self.open_window('Catalog')
-
-        self.camera = WorldCamera(self.window, glm.vec3(), 1)
-
-        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
 
         self.current_tool = self.pick_tool = PickTool(self, edit_state)
         self.stamp_tool = StampTool(self, edit_state)
@@ -53,6 +55,10 @@ class LevelEditor(SceneEditor):
             )
         )
 
+    def create_scene(self):
+        self.camera = WorldCamera(self.window)
+        self.scene = LevelEditorScene(self.world, self.camera)
+
     def select_layer(self, layer):
         logger.debug(layer.group)
         self.edit_state.current_layer = layer.group
@@ -68,16 +74,7 @@ class LevelEditor(SceneEditor):
         self.edit_state.current_blueprint = blueprint
 
     def draw(self):
-        self.camera.use()
         super().draw()
-
-        """
-        pos = self.camera.project(self.camera.target).xy
-        arcade.draw_circle_outline(*pos, 18, arcade.color.TURQUOISE, 3)
-
-        pos = self.camera.project(self.camera.position).xy
-        arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
-        """
 
     def create_view_menu(self, children=[]):
         menu = super().create_view_menu(
@@ -97,7 +94,7 @@ class LevelEditor(SceneEditor):
         if title == 'Catalog':
             window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close)
         elif title == 'Layers':
-            window = LayersWindow(self, lambda layer: self.select_layer(layer), on_close=on_close)
+            window = LayersWindow(self.scene, lambda layer: self.select_layer(layer), on_close=on_close)
         else:
             return super().open_window(title)
 

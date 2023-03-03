@@ -31,54 +31,13 @@ class World(ecs.World):
 
     def add_processor(self, processor: Processor, priority=0) -> None:
         processor.priority = priority
-        #processor_instance.world = self
         self._processors.append(processor)
         self._processors.sort(key=lambda proc: proc.priority, reverse=True)
 
     def remove_processor(self, processor: Processor) -> None:
         self._processors.remove(processor)
 
-    """
-    def cast_ray(self, ray):
-        results = []
-        for entity, block in self.get_component(Block):
-            result = block.cast_ray(ray, entity)
-            if result:
-                results.append(result)
-        if len(results) == 0:
-            return None
-        if len(results) == 1:
-            return results[0]
-
-        origin = ray.origin
-        sorted_results = sorted(
-            results, key=lambda result: glm.distance(result[1].position, origin)
-        )
-        return sorted_results[0]
-    """
-
-    def cast_ray(self, ray):
-        results = []
-        for layer in self.layers:
-            if not layer.visible:
-                continue
-            for entity, (_, block) in self.get_components(layer.__class__, Block):
-                result = block.cast_ray(ray, entity)
-                if result:
-                    results.append(result)
-        if len(results) == 0:
-            return None
-        if len(results) == 1:
-            return results[0]
-
-        origin = ray.origin
-        sorted_results = sorted(
-            results, key=lambda result: glm.distance(result[1].position, origin)
-        )
-        return sorted_results[0]
-
     def create_layer(self, name):
-        #cls_name = f"{name}Layer"
         uid = uuid4()
         cls_name = f"Layer#{uid}"
         cls = type(cls_name, (EntityLayer,), {})
@@ -91,5 +50,7 @@ class World(ecs.World):
 
     def remove_layer(self, layer):
         self.events.publish(LayerDeletedEvent(layer))
-        print(layer)
         self.layers.remove(layer)
+
+    def swap_layers(self, i, j):
+        self.layers[i], self.layers[j] = self.layers[j], self.layers[i]
