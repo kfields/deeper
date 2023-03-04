@@ -382,8 +382,9 @@ FloorRailsEnd1:
   image: :deeper:tiles/FloorRailsEnd1.png
 FloorRailsEnd2:
   extends: Floor
-  size: [0.86, 0.6, 1]
+  size: [0.8600000143051147, 0.6000000238418579, 1.0]
   image: :deeper:tiles/FloorRailsEnd2.png
+  offset: [0.03999999910593033, 0.0]
 FloorStair: {extends: Floor, image: ':deeper:tiles/FloorStair.png'}
 FloorStair2: {extends: Floor, image: ':deeper:tiles/FloorStair2.png'}
 FloorStairB: {extends: Floor, image: ':deeper:tiles/FloorStairB.png'}

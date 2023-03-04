@@ -13,7 +13,7 @@ BottomRails:
   image: :deeper:tiles/Rails/BottomRails.png
 PlatformRails1:
   extends: Rail
-  size: [0.86, 0.75, 1]
+  size: [0.8600000143051147, 0.6000000238418579, 0.2150000035762787]
   image: :deeper:tiles/Rails/PlatformRails1.png
 PlatformRails1Bottom:
   extends: Rail

@@ -10,7 +10,7 @@ Dungeon RPG with Python Arcade and Rust
    usage/installation
    usage/quickstart
    usage/cli
-   reference/modules
+   api/modules
 
 
 Indices and tables

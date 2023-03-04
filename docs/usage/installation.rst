@@ -23,6 +23,13 @@ If you don't already have it installed go to https://pypi.org/project/pipx/ for 
 
     pipx install deeper-rpg
 
+Create a project directory
+--------------------------
+.. code:: bash
+
+    mkdir deeper
+    cd deeper
+
 And then run it!
 ----------------
 
@@ -74,5 +81,5 @@ And then run the app!
 
 .. code:: bash
 
-    deeper
+    python -m deeper
 
