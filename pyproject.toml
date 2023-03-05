@@ -11,7 +11,7 @@ python-packages = ["deeper"]
 
 [project]
 name = "deeper-rpg"
-version = "0.1.7"
+version = "0.1.8"
 description = 'Dungeon RPG with Python Arcade and Rust'
 readme = "README.md"
 requires-python = ">=3.8"
