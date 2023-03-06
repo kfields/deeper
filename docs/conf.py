@@ -23,7 +23,7 @@ author = 'Kurtis Fields'
 
 # The full version, including alpha/beta/rc tags
 
-__version__ = "0.1.8"
+__version__ = "0.1.9"
 release = __version__
 
 

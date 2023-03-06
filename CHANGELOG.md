@@ -1,4 +1,4 @@
-# DeeperRPG release 0.1.8 (2023-02-28)
+# DeeperRPG release 0.1.9 (2023-02-28)
 
 ## Bug fixes
 
