@@ -95,16 +95,18 @@ Light2:
   image: :deeper:tiles/Objects/Light2.png
 LightMushroom1:
   extends: Object
-  size: [0.43, 0.5, 0.5]
+  size: [0.4300000071525574, 0.5, 0.5]
   image: :deeper:tiles/Objects/LightMushroom1.png
+  offset: [0.0, -0.14000000059604645]
 LightMushroom2:
   extends: Object
   size: [0.43, 0.5, 0.5]
   image: :deeper:tiles/Objects/LightMushroom2.png
 LightMushroom3:
   extends: Object
-  size: [0.43, 0.5, 0.5]
+  size: [0.4300000071525574, 0.5, 0.5]
   image: :deeper:tiles/Objects/LightMushroom3.png
+  offset: [-0.03999999910593033, -0.11999999731779099]
 RedCrystal:
   extends: Object
   size: [0.43, 0.75, 0.5]

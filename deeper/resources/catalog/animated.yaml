@@ -36,14 +36,15 @@ Boiler1:
   components:
     SpriteAnimation: {image: ':deeper:tiles/Boiler1/Boiler1Frames.png', width: 238,
       height: 252, frames: 15}
-  offset: [0.0, 0.0]
+  offset: [0.11999999731779099, -0.14000000059604645]
 BoilerSmoke:
   extends: Animated
-  size: [0.86, 2.25, 1]
+  size: [0.8600000143051147, 2.25, 1.0]
   image: :deeper:tiles/BoilerSmoke/BoilerSmoke0001.png
   components:
     SpriteAnimation: {image: ':deeper:tiles/BoilerSmoke/BoilerSmokeFrames.png', width: 247,
       height: 498, frames: 30}
+  offset: [0.10000000149011612, 0.0]
 Door:
   extends: Animated
   size: [0.8600000143051147, 1.399999976158142, 0.20000000298023224]

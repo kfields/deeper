@@ -12,6 +12,7 @@ from typing import TypeVar as _TypeVar
 from weakref import ref as _ref
 from weakref import WeakMethod as _WeakMethod
 
+from .entity import Entity
 
 version = '2.4'
 
@@ -119,7 +120,6 @@ class Processor:
     def process(self, *args, **kwargs):
         raise NotImplementedError
 
-
 class World:
     """A World object keeps track of all Entities, Components, and Processors.
 
@@ -128,9 +128,13 @@ class World:
     frame of your game.
     """
 
+    _components: dict[_C, set[Entity]]
+    _entities: dict[Entity, Entity]
+    _dead_entities: set[Entity]
+    _processors: list[Processor]
+
     def __init__(self, timed=False):
-        self._processors = []
-        self._next_entity_id = 0
+        #self._next_entity_id = 0
         self._components = {}
         self._entities = {}
         self._dead_entities = set()
@@ -138,9 +142,231 @@ class World:
         self._get_component_cache = {}
         self._get_components_cache = {}
 
+        self._processors = []
+
         if timed:
             self.process_times = {}
             self._process = self._timed_process
+
+    def create_entity(self, *components: _C) -> Entity:
+        """Create a new Entity, with optional Components.
+
+        This method returns an Entity.
+        You can optionally pass one or more Component instances to be
+        assigned to the Entity on creation. Components can be also be
+        added later with the :py:meth:`esper.World.add_component` method.
+        """
+        #self._next_entity_id += 1
+
+        #entity = self._next_entity_id
+        #entity = Entity()
+        entity = None
+        for component_instance in components:
+            if isinstance(component_instance, Entity):
+                entity = component_instance
+
+        for component_instance in components:
+
+            component_type = type(component_instance)
+
+            if component_type not in self._components:
+                self._components[component_type] = set()
+
+            self._components[component_type].add(entity)
+
+            if entity not in self._entities:
+                #self._entities[entity] = {}
+                self._entities[entity] = entity
+
+            #self._entities[entity][component_type] = component_instance
+            entity.components[component_type] = component_instance
+            self.clear_cache()
+
+        return entity
+
+    def delete_entity(self, entity: Entity, immediate: bool = False) -> None:
+        """Delete an Entity from the World.
+
+        Delete an Entity and all of it's assigned Component instances from
+        the world. By default, Entity deletion is delayed until the next call
+        to :py:meth:`esper.World.process`. You can, however, request immediate
+        deletion by passing the `immediate=True` parameter. Note that immediate
+        deletion may cause issues, such as when done during Entity iteration
+        (calls to World.get_component/s).
+
+        Raises a KeyError if the given entity does not exist in the database.
+        """
+        if immediate:
+            #for component_type in self._entities[entity].components:
+            for component_type in entity.components:
+                self._components[component_type].discard(entity)
+
+                if not self._components[component_type]:
+                    del self._components[component_type]
+
+            del self._entities[entity]
+            self.clear_cache()
+
+        else:
+            self._dead_entities.add(entity)
+
+    def entity_exists(self, entity: Entity) -> bool:
+        """Check if a specific Entity exists.
+
+        Empty Entities (with no components) and dead Entities (destroyed
+        by delete_entity) will not count as existent ones.
+        """
+        return entity in self._entities and entity not in self._dead_entities
+
+    def component_for_entity(self, entity: Entity, component_type: _Type[_C]) -> _C:
+        """Retrieve a Component instance for a specific Entity.
+
+        Retrieve a Component instance for a specific Entity. In some cases,
+        it may be necessary to access a specific Component instance.
+        For example: directly modifying a Component to handle user input.
+
+        Raises a KeyError if the given Entity and Component do not exist.
+        """
+        #return self._entities[entity][component_type]
+        return entity.components[component_type]
+
+    def components_for_entity(self, entity: Entity) -> _Tuple[_C, ...]:
+        """Retrieve all Components for a specific Entity, as a Tuple.
+
+        Retrieve all Components for a specific Entity. The method is probably
+        not appropriate to use in your Processors, but might be useful for
+        saving state, or passing specific Components between World instances.
+        Unlike most other methods, this returns all the Components as a
+        Tuple in one batch, instead of returning a Generator for iteration.
+
+        Raises a KeyError if the given entity does not exist in the database.
+        """
+        #return tuple(self._entities[entity].values())
+        return tuple(entity.components.values())
+
+    def has_component(self, entity: Entity, component_type: _Type[_C]) -> bool:
+        """Check if an Entity has a specific Component type."""
+        #return component_type in self._entities[entity]
+        return component_type in entity.components
+
+    def has_components(self, entity: Entity, *component_types: _Type[_C]) -> bool:
+        """Check if an Entity has all the specified Component types."""
+        #return all(comp_type in self._entities[entity] for comp_type in component_types)
+        return all(comp_type in entity.components for comp_type in component_types)
+
+    def add_component(self, entity: Entity, component_instance: _C, type_alias: _Optional[_Type[_C]] = None) -> None:
+        """Add a new Component instance to an Entity.
+
+        Add a Component instance to an Entiy. If a Component of the same type
+        is already assigned to the Entity, it will be replaced.
+
+        A `type_alias` can also be provided. This can be useful if you're using
+        subclasses to organize your Components, but would like to query them
+        later by some common parent type.
+        """
+        component_type = type_alias or type(component_instance)
+
+        if component_type not in self._components:
+            self._components[component_type] = set()
+
+        self._components[component_type].add(entity)
+
+        if entity not in self._entities:
+            #self._entities[entity] = {}
+            self._entities[entity] = entity
+
+        #self._entities[entity][component_type] = component_instance
+        entity.components[component_type] = component_instance
+        self.clear_cache()
+
+    def remove_component(self, entity: Entity, component_type: _Type[_C]) -> Entity:
+        """Remove a Component instance from an Entity, by type.
+
+        A Component instance can be removed by providing its type.
+        For example: world.delete_component(enemy_a, Velocity) will remove
+        the Velocity instance from the Entity enemy_a.
+
+        Raises a KeyError if either the given entity or Component type does
+        not exist in the database.
+        """
+        self._components[component_type].discard(entity)
+
+        if not self._components[component_type]:
+            del self._components[component_type]
+
+        #del self._entities[entity][component_type]
+        del entity.components[component_type]
+
+        #TODO: not? should be just if ...
+        if not self._entities[entity]:
+            del self._entities[entity]
+
+        self.clear_cache()
+        return entity
+
+    def _get_component(self, component_type: _Type[_C]) -> _Iterable[_Tuple[Entity, _C]]:
+        #entity_db = self._entities
+
+        for entity in self._components.get(component_type, []):
+            #yield entity, entity_db[entity][component_type]
+            yield entity, entity.components[component_type]
+
+    def _get_components(self, *component_types: _Type[_C]) -> _Iterable[_Tuple[Entity, _List[_C]]]:
+        #entity_db = self._entities
+        comp_db = self._components
+
+        try:
+            for entity in set.intersection(*[comp_db[ct] for ct in component_types]):
+                #yield entity, [entity_db[entity][ct] for ct in component_types]
+                yield entity, [entity.components[ct] for ct in component_types]
+        except KeyError:
+            pass
+
+    def get_component(self, component_type: _Type[_C]) -> _List[_Tuple[Entity, _C]]:
+        """Get an iterator for Entity, Component pairs."""
+        try:
+            return self._get_component_cache[component_type]
+        except KeyError:
+            return self._get_component_cache.setdefault(
+                component_type, list(self._get_component(component_type))
+            )
+
+    def get_components(self, *component_types: _Type[_C]) -> _List[_Tuple[Entity, _List[_C]]]:
+        """Get an iterator for Entity and multiple Component sets."""
+        try:
+            return self._get_components_cache[component_types]
+        except KeyError:
+            return self._get_components_cache.setdefault(
+                component_types, list(self._get_components(*component_types))
+            )
+
+    def try_component(self, entity: Entity, component_type: _Type[_C]) -> _Optional[_C]:
+        """Try to get a single component type for an Entity.
+
+        This method will return the requested Component if it exists,
+        or None if it does not. This allows a way to access optional Components
+        that may or may not exist, without having to first query if the Entity
+        has the Component type.
+        """
+        #if component_type in self._entities[entity]:
+        if component_type in entity.components:
+            #return self._entities[entity][component_type]
+            return entity.components[component_type]
+        return None
+
+    def try_components(self, entity: Entity, *component_types: _Type[_C]) -> _Optional[_List[_List[_C]]]:
+        """Try to get a multiple component types for an Entity.
+
+        This method will return the requested Components if they exist,
+        or None if they do not. This allows a way to access optional Components
+        that may or may not exist, without first having to query if the Entity
+        has the Component types.
+        """
+        #if all(comp_type in self._entities[entity] for comp_type in component_types):
+        if all(comp_type in entity.components for comp_type in component_types):
+            #return [self._entities[entity][comp_type] for comp_type in component_types]
+            return [entity.components[comp_type] for comp_type in component_types]
+        return None
 
     def clear_cache(self) -> None:
         """Manually clear the internal cache."""
@@ -152,7 +378,7 @@ class World:
         self._dead_entities.clear()
         self._entities.clear()
         self._components.clear()
-        self._next_entity_id = 0
+        #self._next_entity_id = 0
         self.clear_cache()
 
     def add_processor(self, processor_instance: Processor, priority=0) -> None:
@@ -198,204 +424,6 @@ class World:
         else:
             return None
 
-    def create_entity(self, *components: _C) -> int:
-        """Create a new Entity, with optional Components.
-
-        This method returns an Entity ID, which is a plain integer.
-        You can optionally pass one or more Component instances to be
-        assigned to the Entity on creation. Components can be also be
-        added later with the :py:meth:`esper.World.add_component` method.
-        """
-        self._next_entity_id += 1
-
-        entity = self._next_entity_id
-
-        for component_instance in components:
-
-            component_type = type(component_instance)
-
-            if component_type not in self._components:
-                self._components[component_type] = set()
-
-            self._components[component_type].add(entity)
-
-            if entity not in self._entities:
-                self._entities[entity] = {}
-
-            self._entities[entity][component_type] = component_instance
-            self.clear_cache()
-
-        return entity
-
-    def delete_entity(self, entity: int, immediate: bool = False) -> None:
-        """Delete an Entity from the World.
-
-        Delete an Entity and all of it's assigned Component instances from
-        the world. By default, Entity deletion is delayed until the next call
-        to :py:meth:`esper.World.process`. You can, however, request immediate
-        deletion by passing the `immediate=True` parameter. Note that immediate
-        deletion may cause issues, such as when done during Entity iteration
-        (calls to World.get_component/s).
-
-        Raises a KeyError if the given entity does not exist in the database.
-        """
-        if immediate:
-            for component_type in self._entities[entity]:
-                self._components[component_type].discard(entity)
-
-                if not self._components[component_type]:
-                    del self._components[component_type]
-
-            del self._entities[entity]
-            self.clear_cache()
-
-        else:
-            self._dead_entities.add(entity)
-
-    def entity_exists(self, entity: int) -> bool:
-        """Check if a specific Entity exists.
-
-        Empty Entities (with no components) and dead Entities (destroyed
-        by delete_entity) will not count as existent ones.
-        """
-        return entity in self._entities and entity not in self._dead_entities
-
-    def component_for_entity(self, entity: int, component_type: _Type[_C]) -> _C:
-        """Retrieve a Component instance for a specific Entity.
-
-        Retrieve a Component instance for a specific Entity. In some cases,
-        it may be necessary to access a specific Component instance.
-        For example: directly modifying a Component to handle user input.
-
-        Raises a KeyError if the given Entity and Component do not exist.
-        """
-        return self._entities[entity][component_type]
-
-    def components_for_entity(self, entity: int) -> _Tuple[_C, ...]:
-        """Retrieve all Components for a specific Entity, as a Tuple.
-
-        Retrieve all Components for a specific Entity. The method is probably
-        not appropriate to use in your Processors, but might be useful for
-        saving state, or passing specific Components between World instances.
-        Unlike most other methods, this returns all the Components as a
-        Tuple in one batch, instead of returning a Generator for iteration.
-
-        Raises a KeyError if the given entity does not exist in the database.
-        """
-        return tuple(self._entities[entity].values())
-
-    def has_component(self, entity: int, component_type: _Type[_C]) -> bool:
-        """Check if an Entity has a specific Component type."""
-        return component_type in self._entities[entity]
-
-    def has_components(self, entity: int, *component_types: _Type[_C]) -> bool:
-        """Check if an Entity has all the specified Component types."""
-        return all(comp_type in self._entities[entity] for comp_type in component_types)
-
-    def add_component(self, entity: int, component_instance: _C, type_alias: _Optional[_Type[_C]] = None) -> None:
-        """Add a new Component instance to an Entity.
-
-        Add a Component instance to an Entiy. If a Component of the same type
-        is already assigned to the Entity, it will be replaced.
-
-        A `type_alias` can also be provided. This can be useful if you're using
-        subclasses to organize your Components, but would like to query them
-        later by some common parent type.
-        """
-        component_type = type_alias or type(component_instance)
-
-        if component_type not in self._components:
-            self._components[component_type] = set()
-
-        self._components[component_type].add(entity)
-
-        if entity not in self._entities:
-            self._entities[entity] = {}
-
-        self._entities[entity][component_type] = component_instance
-        self.clear_cache()
-
-    def remove_component(self, entity: int, component_type: _Type[_C]) -> int:
-        """Remove a Component instance from an Entity, by type.
-
-        A Component instance can be removed by providing its type.
-        For example: world.delete_component(enemy_a, Velocity) will remove
-        the Velocity instance from the Entity enemy_a.
-
-        Raises a KeyError if either the given entity or Component type does
-        not exist in the database.
-        """
-        self._components[component_type].discard(entity)
-
-        if not self._components[component_type]:
-            del self._components[component_type]
-
-        del self._entities[entity][component_type]
-
-        if not self._entities[entity]:
-            del self._entities[entity]
-
-        self.clear_cache()
-        return entity
-
-    def _get_component(self, component_type: _Type[_C]) -> _Iterable[_Tuple[int, _C]]:
-        entity_db = self._entities
-
-        for entity in self._components.get(component_type, []):
-            yield entity, entity_db[entity][component_type]
-
-    def _get_components(self, *component_types: _Type[_C]) -> _Iterable[_Tuple[int, _List[_C]]]:
-        entity_db = self._entities
-        comp_db = self._components
-
-        try:
-            for entity in set.intersection(*[comp_db[ct] for ct in component_types]):
-                yield entity, [entity_db[entity][ct] for ct in component_types]
-        except KeyError:
-            pass
-
-    def get_component(self, component_type: _Type[_C]) -> _List[_Tuple[int, _C]]:
-        """Get an iterator for Entity, Component pairs."""
-        try:
-            return self._get_component_cache[component_type]
-        except KeyError:
-            return self._get_component_cache.setdefault(
-                component_type, list(self._get_component(component_type))
-            )
-
-    def get_components(self, *component_types: _Type[_C]) -> _List[_Tuple[int, _List[_C]]]:
-        """Get an iterator for Entity and multiple Component sets."""
-        try:
-            return self._get_components_cache[component_types]
-        except KeyError:
-            return self._get_components_cache.setdefault(
-                component_types, list(self._get_components(*component_types))
-            )
-
-    def try_component(self, entity: int, component_type: _Type[_C]) -> _Optional[_C]:
-        """Try to get a single component type for an Entity.
-
-        This method will return the requested Component if it exists,
-        or None if it does not. This allows a way to access optional Components
-        that may or may not exist, without having to first query if the Entity
-        has the Component type.
-        """
-        if component_type in self._entities[entity]:
-            return self._entities[entity][component_type]
-        return None
-
-    def try_components(self, entity: int, *component_types: _Type[_C]) -> _Optional[_List[_List[_C]]]:
-        """Try to get a multiple component types for an Entity.
-
-        This method will return the requested Components if they exist,
-        or None if they do not. This allows a way to access optional Components
-        that may or may not exist, without first having to query if the Entity
-        has the Component types.
-        """
-        if all(comp_type in self._entities[entity] for comp_type in component_types):
-            return [self._entities[entity][comp_type] for comp_type in component_types]
-        return None
-
     def _clear_dead_entities(self):
         """Finalize deletion of any Entities that are marked as dead.
 
@@ -405,7 +433,8 @@ class World:
         """
         for entity in self._dead_entities:
 
-            for component_type in self._entities[entity]:
+            #for component_type in self._entities[entity]:
+            for component_type in entity.components:
                 self._components[component_type].discard(entity)
 
                 if not self._components[component_type]:

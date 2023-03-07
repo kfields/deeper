@@ -7,7 +7,7 @@ from . import Block
 from .event import EventSource, LayerDeletedEvent
 from .processors import Processor
 from .components.entity_group import EntityLayer
-from .component import Component
+from .ecs.component import Component
 
 class World(ecs.World):
     def __init__(self, timed=False):
