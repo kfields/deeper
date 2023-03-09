@@ -23,9 +23,9 @@ class BlockBlueprintBuilder(BlueprintBuilder):
     key = 'Block'
     cls = BlockBlueprint
 
-    def build(self, catalog, name, config, parent):
+    def build(self, catalog, name, config, entity, parent):
         # print(config)
         if not 'size' in config:
-            if hasattr(parent, 'size'):
-                config['size'] = parent.size
-        return super().build(catalog, name, config, parent)
+            if hasattr(entity, 'size'):
+                config['size'] = entity.size
+        return super().build(catalog, name, config, entity, parent)

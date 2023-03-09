@@ -1,8 +1,5 @@
-from pathlib import Path
 import glob
 import re
-
-from sqlalchemy import select
 
 from loguru import logger
 from arcade.resources import resolve_resource_path
@@ -21,20 +18,24 @@ def pascal_to_snake(name):
 
 
 class Category:
+    blueprints: list[EntityBlueprint]
+
     def __init__(self, name) -> None:
         self.name = name
         self.blueprints = []
         self._abstract = True
 
-    def add_blueprint(self, blueprint):
+    def add_blueprint(self, blueprint: EntityBlueprint):
         if not blueprint._abstract:
             self._abstract = False
         self.blueprints.append(blueprint)
 
 
 class Catalog(Kit):
-    builders_path = deeper.blueprints
+    categories: dict[str, Category]
+    blueprints: dict[str, EntityBlueprint]
 
+    builders_path = deeper.blueprints
     _instance = None
 
     @classmethod
@@ -52,15 +53,16 @@ class Catalog(Kit):
         self.blueprints = {}
         self.load()
 
-    def find_builder(self, name):
+    def find_builder(self, name: str):
         if name in self.builders:
             return self.builders[name]
     
-    def build(self, name, config, parent):
+    def build(self, name, config, entity, parent=None):
         builder = self.find_builder(name)
         if not builder:
             print(name)
-        return builder.build(self, name, config, parent)
+            #exit()
+        return builder.build(self, name, config, entity, parent)
 
     def find(self, name):
         return self.blueprints[name]
@@ -129,7 +131,7 @@ class Catalog(Kit):
         # print("blueprint: ", blueprint.__dict__)
         self.register_blueprint(blueprint)
 
-    def register_blueprint(self, blueprint):
+    def register_blueprint(self, blueprint: EntityBlueprint):
         category = None
         if blueprint.category in self.categories:
             category = self.categories[blueprint.category]

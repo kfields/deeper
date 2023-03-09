@@ -21,8 +21,8 @@ class SpriteAnimationBlueprint(ComponentBlueprint):
     offset = [0, 0]
     pingpong = False
 
-    def __init__(self, catalog, name, config, parent):
-        super().__init__(catalog, name, config, parent)
+    def __init__(self, catalog, name, config, entity, parent):
+        super().__init__(catalog, name, config, entity, parent)
         self._texture = None
 
     @reconstructor

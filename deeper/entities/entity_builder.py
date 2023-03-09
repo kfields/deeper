@@ -8,10 +8,10 @@ from ..kits.component_kit import ComponentKit
 class EntityBuilder(Builder):
     def build(self, blueprint, world, layer):
         #logger.debug(blueprint)
-        #logger.debug(f"position: {position}")
         layer.mark()
         components = [layer, blueprint]
-        for child in blueprint.children:
-            #logger.debug(child.__dict__)
-            components.append(ComponentKit.instance.build(child, world))
+
+        for component in blueprint.components:
+            logger.debug(component.__dict__)
+            components.append(ComponentKit.instance.build(component, world))
         return world.create_entity(*components)

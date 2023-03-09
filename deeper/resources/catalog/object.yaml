@@ -32,8 +32,9 @@ BlueCrystal2:
   image: :deeper:tiles/Objects/BlueCrystal2.png
 BlueCrystal3:
   extends: Object
-  size: [0.43, 0.75, 0.5]
+  size: [0.6449999809265137, 0.75, 0.75]
   image: :deeper:tiles/Objects/BlueCrystal3.png
+  offset: [0.009999999776482582, -0.14000000059604645]
 Box1:
   extends: Object
   size: [0.6449999809265137, 0.5, 0.75]

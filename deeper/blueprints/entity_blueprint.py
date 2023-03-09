@@ -26,35 +26,44 @@ class EntityBlueprint(Blueprint):
 
     def configure(self, config):
         #logger.debug(f"config: {config}")
+        xconfig = config
         if 'extends' in config:
             base = self.catalog.find(config['extends'])
             base.add_derivative(self)
-            config = self.extend(config)
+            xconfig = self.extend(config)
 
-        self.xconfig = config = self.borrow(config, self.parent)
+        #xconfig = self.borrow(config, self.parent)
+        self.xconfig = xconfig
+        #logger.debug(f"xconfig: {xconfig}")
 
-        for key, value in config.items():
+        for key, value in xconfig.items():
+            if key == 'components':
+                continue
             setattr(self, key, value)
 
-        if (not self._abstract) and hasattr(self, 'components'):
-            for key, value in self.components.items():
+        if (not self._abstract) and 'components' in xconfig:
+            for key, value in xconfig['components'].items():
                 self.catalog.build(key, value, self)
 
         self.settings = self.create_settings(self.config)
 
     def update(self):
         #logger.debug('update')
-        self.xconfig = config = self.extend(self.config) if self.base else self.config
-        self.xconfig = config = self.borrow(config, self.parent)
-        for key, value in config.items():
+        xconfig = self.extend(self.config) if self.base else self.config
+        self.xconfig = xconfig
+        #self.xconfig = config = self.borrow(config, self.parent)
+        #logger.debug(f"xconfig: {config}")
+
+        for key, value in xconfig.items():
+            if key == 'components':
+                continue
             setattr(self, key, value)
 
-        # if (not self._abstract) and hasattr(self, 'components'):
-        if hasattr(self, 'components'):
-            for child in self.children:
-                child.config = self.components[child.name]
-                #logger.debug(child.config)
-                child.update()
+        if 'components' in xconfig:
+            for component in self.components:
+                component.config = xconfig['components'][component.name]
+                #logger.debug(component.config)
+                component.update()
 
         for derivative in self.derivatives:
             derivative.update()

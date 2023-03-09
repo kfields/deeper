@@ -12,18 +12,20 @@ class ComponentBlueprint(Blueprint):
         'inherit_condition': (id == Blueprint.id),
     }
 
-    def __init__(self, catalog, name, config, parent):
-        super().__init__(catalog, name, config, parent)
+    def __init__(self, catalog, name, config, entity, parent):
+        super().__init__(catalog, name, config, entity, parent)
 
     def configure(self, config):
-        self.xconfig = config = self.borrow(config, self.parent)
+        xconfig = self.borrow(config, self.entity)
+        self.xconfig = xconfig
 
-        for key, value in config.items():
+        for key, value in xconfig.items():
             setattr(self, key, value)
 
     def update(self):
-        self.xconfig = config = self.extend(self.config) if self.base else self.config
-        self.xconfig = config = self.borrow(config, self.parent)
+        xconfig = self.extend(self.config) if self.base else self.config
+        xconfig = self.borrow(xconfig, self.entity)
+        self.xconfig = xconfig
         #logger.debug(config)
-        for key, value in config.items():
+        for key, value in xconfig.items():
             setattr(self, key, value)

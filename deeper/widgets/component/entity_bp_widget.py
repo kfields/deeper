@@ -25,8 +25,8 @@ class BlueprintsPanel(Widget):
         self.blueprint = blueprint
 
         children = []
-        for child in blueprint.children:
-            children.append(BlueprintWidgetKit.instance.build(child))
+        for component in blueprint.components:
+            children.append(BlueprintWidgetKit.instance.build(component))
         super().__init__(children)
 
     def draw(self):

@@ -17,7 +17,8 @@ class ComponentKit(Kit):
         #logger.debug(blueprint.__dict__)
         builder = self.find(blueprint)
         components = []
-        for child in blueprint.children:
-            #logger.debug(child.__dict__)
-            components.append(self.build(child, world))
+
+        for component in blueprint.components:
+            components.append(self.build(component, world))
+
         return builder.build(blueprint, world)
