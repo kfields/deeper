@@ -1,7 +1,7 @@
 from loguru import logger
 
 from sqlalchemy import ForeignKey, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, reconstructor
 
 from ..constants import *
 from ..settings import EntitySettings
@@ -25,6 +25,15 @@ class EntityBlueprint(Blueprint):
     def __init__(self, catalog, name, config):
         super().__init__(catalog, name, config)
 
+    #TODO:  Find a way to reconstruct the Catalog properly.  This was close but it can't find it's base ...
+    """
+    @reconstructor
+    def reconstruct(self):
+        from ..catalog import Catalog
+        self.catalog = Catalog.instance
+        self.configure(self.config)
+    """
+
     def configure(self, config):
         #logger.debug(f"config: {config}")
         xconfig = config
@@ -46,6 +55,12 @@ class EntityBlueprint(Blueprint):
             for key, value in xconfig['components'].items():
                 self.catalog.build(key, value, self)
 
+        if (not self._abstract) and 'children' in xconfig:
+            for key, value in xconfig['children'].items():
+                #self.catalog.build(key, value, None, self)
+                child = EntityBlueprint(self.catalog, key, value)
+                self.add_child(child)
+
         self.settings = self.create_settings(self.config)
 
     def update(self):
@@ -65,6 +80,15 @@ class EntityBlueprint(Blueprint):
                 component.config = xconfig['components'][component.name]
                 #logger.debug(component.config)
                 component.update()
+
+        #TODO:  Need to reconstruct
+        """
+        if 'children' in xconfig:
+            for child in self.children:
+                child.config = xconfig['children'][child.name]
+                #logger.debug(child.config)
+                child.update()
+        """
 
         for derivative in self.derivatives:
             derivative.update()

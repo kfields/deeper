@@ -12,6 +12,11 @@ class EntityBuilder(Builder):
         components = [layer, blueprint]
 
         for component in blueprint.components:
-            logger.debug(component.__dict__)
+            #logger.debug(component.__dict__)
             components.append(ComponentKit.instance.build(component, world))
+
+        for child in blueprint.children:
+            #logger.debug(child.__dict__)
+            self.build(child, world, layer)
+
         return world.create_entity(*components)

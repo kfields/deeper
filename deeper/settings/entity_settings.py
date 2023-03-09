@@ -24,6 +24,7 @@ EntitySettings.setting_map = {
     'components': ComponentsGroup,
     'children': DictSetting,
 
+    'transform': Vec3Setting,
     'size': Vec3Setting,
     'image': StringSetting,
     'offset': Vec2Setting

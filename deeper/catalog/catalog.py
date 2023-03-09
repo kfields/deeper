@@ -36,6 +36,14 @@ class Catalog(Kit):
     blueprints: dict[str, EntityBlueprint]
 
     builders_path = deeper.blueprints
+
+    """
+    def __new__(cls):
+        if not hasattr(cls, '_instance'):
+            cls._instance = super(Catalog, cls).__new__(cls)
+        return cls._instance
+    """
+
     _instance = None
 
     @classmethod
@@ -43,7 +51,9 @@ class Catalog(Kit):
     def instance(cls):
         if cls._instance:
             return cls._instance
-        cls._instance = cls()
+        catalog = cls()
+        cls._instance = catalog
+        catalog.load()
         return cls._instance
 
     def __init__(self) -> None:
@@ -51,7 +61,7 @@ class Catalog(Kit):
         self.categories = {}
         self.category_names = []
         self.blueprints = {}
-        self.load()
+        #self.load()
 
     def find_builder(self, name: str):
         if name in self.builders:
@@ -130,6 +140,7 @@ class Catalog(Kit):
         blueprint = EntityBlueprint(self, key, value)
         # print("blueprint: ", blueprint.__dict__)
         self.register_blueprint(blueprint)
+        return blueprint
 
     def register_blueprint(self, blueprint: EntityBlueprint):
         category = None
