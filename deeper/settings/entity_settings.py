@@ -1,11 +1,12 @@
-from deeper.setting import SettingGroup, BoolSetting, StringSetting, Vec3Setting, Vec2Setting
-from .component import BlockSettings, SpriteVuSettings, SpriteAnimationSettings
+from deeper.setting import SettingGroup, BoolSetting, StringSetting, DictSetting, Vec3Setting, Vec2Setting
+from .component import NodeSettings, BlockSettings, SpriteVuSettings, SpriteAnimationSettings
 
 class ComponentsGroup(SettingGroup):
     pass
 
 
 ComponentsGroup.setting_map = {
+    'Node': NodeSettings,
     'Block': BlockSettings,
     'SpriteVu': SpriteVuSettings,
     'SpriteAnimation': SpriteAnimationSettings
@@ -21,6 +22,7 @@ EntitySettings.setting_map = {
     'category': StringSetting,
     'description': StringSetting,
     'components': ComponentsGroup,
+    'children': DictSetting,
 
     'size': Vec3Setting,
     'image': StringSetting,

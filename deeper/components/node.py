@@ -2,10 +2,11 @@ import glm
 
 from ..constants import *
 from .. import Isometry, Cuboid
-from .. import Component
+from ..ecs.entity import Entity
+
 from .component_builder import ComponentBuilder
 
-class Block(Component):
+class Node(Entity):
     def __init__(
         self,
         position=DEFAULT_VEC3,
@@ -67,10 +68,10 @@ class Block(Component):
                 return entity, self, glm.vec3(contact)
             return None
 
-class BlockBuilder(ComponentBuilder):
-    key = 'Block'
+class NodeBuilder(ComponentBuilder):
+    key = 'Node'
 
     def build(self, blueprint, world):
         # TODO: Shouldn't blueprint size already be a vec3?
         size = glm.vec3(blueprint.size)
-        return Block(size=size)
+        return Node(size=size)

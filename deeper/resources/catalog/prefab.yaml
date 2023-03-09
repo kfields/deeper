@@ -5,12 +5,16 @@ Node: !import
   - Node
 
 Floor3c: !import
-  - block.yaml
+  - floor.yaml
   - Floor3c
 
-TwoBlocks:
+Prefab:
+  _abstract: true
   extends: Node
-  #size: [0.86, 0.6, 1]
+  category: Prefab
+
+TwoBlocks:
+  extends: Prefab
   image: :deeper:tiles/Floor3c.png
   children:
     Block1:

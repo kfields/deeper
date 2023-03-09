@@ -7,6 +7,7 @@ from ..constants import *
 from ..settings import EntitySettings
 from ..blueprint import Blueprint
 
+skip_set = set(['components', 'children'])
 
 class EntityBlueprint(Blueprint):
     id: Mapped[int] = mapped_column(ForeignKey('Blueprint.id'), primary_key=True)
@@ -37,7 +38,7 @@ class EntityBlueprint(Blueprint):
         #logger.debug(f"xconfig: {xconfig}")
 
         for key, value in xconfig.items():
-            if key == 'components':
+            if key in skip_set:
                 continue
             setattr(self, key, value)
 
@@ -55,7 +56,7 @@ class EntityBlueprint(Blueprint):
         #logger.debug(f"xconfig: {config}")
 
         for key, value in xconfig.items():
-            if key == 'components':
+            if key in skip_set:
                 continue
             setattr(self, key, value)
 

@@ -1,6 +1,6 @@
 import glm
 
-from .. import Node
+from .node import Node
 from .component_builder import ComponentBuilder
 
 class Block(Node):
