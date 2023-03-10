@@ -118,6 +118,13 @@ class Catalog(Kit):
                 for key, value in cat.items():
                     self.build_blueprint(key, value)
 
+    def gather_imports(self, blueprint, imports, data):
+        base = blueprint.base
+        if base and not base.name in data and not base in imports:
+            imports.append(base)
+        for child in blueprint.children:
+            self.gather_imports(child, imports, data)
+
     def save_yaml(self, path):
         for category in self.categories.values():
             data = {}
@@ -125,8 +132,14 @@ class Catalog(Kit):
             for blueprint in category.blueprints:
                 data[blueprint.name] = blueprint.config
             for blueprint in category.blueprints:
+                self.gather_imports(blueprint, imports, data)
+                """
                 if blueprint.base and not blueprint.base.name in data:
                     imports.append(blueprint.base)
+                for child in blueprint.children:
+                    if child.base and not child.base.name in data:
+                        imports.append(child.base)
+                """
             with open(path / f'{pascal_to_snake(category.name)}.yaml', 'w') as file:
                 for blueprint in imports:
                     file.write(

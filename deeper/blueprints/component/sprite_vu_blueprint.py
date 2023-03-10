@@ -34,9 +34,6 @@ class SpriteVuBlueprint(ComponentBlueprint):
             self._texture = arcade.load_texture(self.image)
         return self._texture
 
-    #@texture.setter
-    #def texture(self, texture):
-
 class SpriteVuBlueprintBuilder(BlueprintBuilder):
     key = 'SpriteVu'
     cls = SpriteVuBlueprint

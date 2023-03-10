@@ -1,10 +1,18 @@
+#TODO: This import stuff looks weak ...
+
 Node: !import
   - node.yaml
   - Node
+
 Floor3c: !import
   - floor.yaml
   - Floor3c
-Prefab: {_abstract: true, extends: Node, category: Prefab}
+
+Prefab:
+  _abstract: true
+  extends: Node
+  category: Prefab
+
 TwoBlocks:
   extends: Prefab
   size: [0.86, 1.2, 1]

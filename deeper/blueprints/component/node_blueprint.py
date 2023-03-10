@@ -15,17 +15,11 @@ class NodeBlueprint(ComponentBlueprint):
     }
 
     settings_class = NodeSettings
-    borrowed_settings = ['size']
+    borrowed_settings = ['size', 'transform']
     size = [CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH]
+    transform = [0, 0, 0]
 
 
 class NodeBlueprintBuilder(BlueprintBuilder):
     key = 'Node'
     cls = NodeBlueprint
-
-    def build(self, catalog, name, config, entity, parent):
-        # print(config)
-        if not 'size' in config:
-            if hasattr(entity, 'size'):
-                config['size'] = entity.size
-        return super().build(catalog, name, config, entity, parent)
