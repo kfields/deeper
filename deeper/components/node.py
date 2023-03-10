@@ -11,11 +11,11 @@ class Node(Entity):
         self,
         position=DEFAULT_VEC3,
         size=glm.vec3(CELL_WIDTH, 1, 1),
-        solid=True
+        transform=DEFAULT_VEC3
     ) -> None:
         super().__init__()
         self._position = position
-        self.solid = solid
+        self.transform = transform
         self.rotation = DEFAULT_VEC3
         self.isometry = Isometry(*position, *self.rotation)
         self.shape = None
@@ -35,6 +35,8 @@ class Node(Entity):
         self._position = position
         self.isometry = Isometry(*position, *self.rotation)
         self.layer.mark()
+        for child in self.children:
+            child.position = position + child.transform
 
     @property
     def size(self):
@@ -43,16 +45,7 @@ class Node(Entity):
     @size.setter
     def size(self, size):
         self._size = size
-        if self.solid:
-            self.shape = Cuboid(size.x, size.y, size.z)
-
-    @property
-    def shape(self):
-        return self._shape
-
-    @shape.setter
-    def shape(self, shape):
-        self._shape = shape
+        self.shape = Cuboid(size.x, size.y, size.z)
 
     @property
     def aabb(self):
@@ -61,11 +54,11 @@ class Node(Entity):
     def add_child(self, child):
         self.children.append(child)
 
-    def cast_ray(self, ray, entity=0):
+    def cast_ray(self, ray):
         if self.shape:
             contact = self.shape.cast_ray(self.isometry, ray)
             if contact:
-                return entity, self, glm.vec3(contact)
+                return self, glm.vec3(contact)
             return None
 
 class NodeBuilder(ComponentBuilder):

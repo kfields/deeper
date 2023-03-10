@@ -7,5 +7,6 @@ class NodeSettings(SettingGroup):
 
 NodeSettings.setting_map = {
     'size': Vec3Setting,
-    'position': Vec3Setting
+    'position': Vec3Setting,
+    'transform': Vec3Setting
 }

@@ -9,7 +9,7 @@ class NodeBuilder(EntityBuilder):
     def build(self, blueprint, world, layer, position = DEFAULT_VEC3):
         #ent = super().build(blueprint, world, layer)
         #block = world.component_for_entity(ent, Block)
-        block = super().build(blueprint, world, layer)
-        block.position = position
+        node = super().build(blueprint, world, layer)
+        node.position = position
         #return ent
-        return block
+        return node

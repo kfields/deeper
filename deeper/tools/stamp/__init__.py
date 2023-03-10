@@ -14,15 +14,13 @@ from .stamp_widget import StampToolWidget
 from deeper.state import SnapOption
 
 class Hovered:
-    def __init__(self, entity, block, position):
-        self.entity = entity
+    def __init__(self, block, position):
         self.block = block
         self.position = position
 
 
 class Selected:
-    def __init__(self, entity, block):
-        self.entity = entity
+    def __init__(self, block):
         self.block = block
 
 
@@ -80,16 +78,15 @@ class StampTool(SceneEditTool):
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         # print("mouse: ", x, y)
         ray = self.camera.mouse_to_ray(x, y)
-        #result = self.world.cast_ray(ray)
         result = self.scene.cast_ray(ray)
         # print(result)
         if result:
-            entity, block, contact = result
+            block, contact = result
             # print("contact: ", contact)
-            self.hovered = Hovered(entity, block, contact)
+            self.hovered = Hovered(block, contact)
 
             blueprint = self.edit_state.current_blueprint
-            target = self.hovered.entity
+            target = self.hovered.block
             if blueprint:
                 position = self.compute_stamp_position(
                     blueprint, self.world, target, contact
@@ -189,13 +186,6 @@ class StampTool(SceneEditTool):
             EntityKit.instance.build(
                 self.edit_state.current_blueprint, self.world, self.edit_state.current_layer, self.stamp.position
             )
-
-    def on_key_press(self, symbol: int, modifiers: int):
-        if symbol == key.DELETE:
-            self.world.delete_entity(self.selected.entity)
-            if self.hovered.entity == self.selected.entity:
-                self.hovered = None
-            self.selected = None
 
     def draw(self):
         if self.hovered:
