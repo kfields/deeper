@@ -20,7 +20,6 @@ class Node(Entity):
         self.isometry = Isometry(*position, *self.rotation)
         self.shape = None
         self.size = size
-        self.children = []
         self.layer = None
 
     def create(self, world, entity, layer):
@@ -50,9 +49,6 @@ class Node(Entity):
     @property
     def aabb(self):
         return self.shape.aabb(self.isometry)
-
-    def add_child(self, child):
-        self.children.append(child)
 
     def cast_ray(self, ray):
         if self.shape:
