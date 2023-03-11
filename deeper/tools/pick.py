@@ -9,14 +9,12 @@ from .scene_tool import SceneEditTool
 
 
 class Hovered:
-    def __init__(self, entity, block, position):
-        self.entity = entity
+    def __init__(self, block, position):
         self.block = block
         self.position = position
 
 class Selected:
-    def __init__(self, entity, block):
-        self.entity = entity
+    def __init__(self, block):
         self.block = block
 
 class PickTool(SceneEditTool):
@@ -28,13 +26,12 @@ class PickTool(SceneEditTool):
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         #print("mouse: ", x, y)
         ray = self.camera.mouse_to_ray(x, y)
-        #result = self.world.cast_ray(ray)
         result = self.scene.cast_ray(ray)
         #print(result)
         if result:
-            entity, block, contact = result
+            block, contact = result
             #print("contact: ", contact)
-            self.hovered = Hovered(entity, block, contact)
+            self.hovered = Hovered(block, contact)
         else:
             self.hovered = None
 
@@ -44,7 +41,7 @@ class PickTool(SceneEditTool):
         if button != mouse.LEFT or not self.hovered:
             return
         
-        self.selected = Selected(self.hovered.entity, self.hovered.block)
+        self.selected = Selected(self.hovered.block)
         if self._click_count == 2:
             #self.push_entity_editor()
             clock.schedule_once(lambda dt, *args, **kwargs : self.push_entity_editor(), 0)
@@ -54,12 +51,12 @@ class PickTool(SceneEditTool):
     def push_entity_editor(self):
         from deeper.state import EntityEditState
         from deeper.views.entity_editor import EntityEditor
-        self.window.push_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.entity)))
+        self.window.push_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.block)))
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.DELETE and self.selected:
-            self.world.delete_entity(self.selected.entity)
-            if self.hovered and self.hovered.entity == self.selected.entity:
+            self.world.delete_entity(self.selected.block)
+            if self.hovered and self.hovered.block == self.selected.block:
                 self.hovered = None
             self.selected = None
         elif symbol == key.ESCAPE:

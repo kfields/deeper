@@ -83,7 +83,7 @@ class Scene:
             if not layer.visible:
                 continue
             for entity, (_, block) in self.world.get_components(layer.group.__class__, Block):
-                result = block.cast_ray(ray, entity)
+                result = block.cast_ray(ray)
                 if result:
                     results.append(result)
         if len(results) == 0:
@@ -93,7 +93,7 @@ class Scene:
 
         origin = ray.origin
         sorted_results = sorted(
-            results, key=lambda result: glm.distance(result[1].position, origin)
+            results, key=lambda result: glm.distance(result[0].position, origin)
         )
         return sorted_results[0]
 

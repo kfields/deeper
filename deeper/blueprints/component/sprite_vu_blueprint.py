@@ -20,8 +20,8 @@ class SpriteVuBlueprint(ComponentBlueprint):
     borrowed_settings = ['image', 'offset']
     offset = [0, 0]
 
-    def __init__(self, catalog, name, config, parent):
-        super().__init__(catalog, name, config, parent)
+    def __init__(self, catalog, name, config, entity, parent):
+        super().__init__(catalog, name, config, entity, parent)
         self._texture = None
 
     @reconstructor
@@ -33,9 +33,6 @@ class SpriteVuBlueprint(ComponentBlueprint):
         if not self._texture:
             self._texture = arcade.load_texture(self.image)
         return self._texture
-
-    #@texture.setter
-    #def texture(self, texture):
 
 class SpriteVuBlueprintBuilder(BlueprintBuilder):
     key = 'SpriteVu'

@@ -397,3 +397,9 @@ OmniLight2Floor: {extends: Floor, image: ':deeper:tiles/OmniLight2Floor.png'}
 OmniLightOrange: {extends: Floor, image: ':deeper:tiles/OmniLightOrange.png'}
 OrangefloorH: {extends: Floor, image: ':deeper:tiles/OrangefloorH.png'}
 OrangefloorV: {extends: Floor, image: ':deeper:tiles/OrangefloorV.png'}
+Block1:
+  extends: Floor3c
+  transform: [0, 0.3, 0]
+Block2:
+  extends: Floor3c
+  transform: [0, -0.3, 0]

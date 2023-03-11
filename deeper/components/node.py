@@ -2,24 +2,24 @@ import glm
 
 from ..constants import *
 from .. import Isometry, Cuboid
-from .. import Component
+from ..ecs.entity import Entity
+
 from .component_builder import ComponentBuilder
 
-class Block(Component):
+class Node(Entity):
     def __init__(
         self,
         position=DEFAULT_VEC3,
         size=glm.vec3(CELL_WIDTH, 1, 1),
-        solid=True
+        transform=DEFAULT_VEC3
     ) -> None:
         super().__init__()
         self._position = position
-        self.solid = solid
+        self.transform = transform
         self.rotation = DEFAULT_VEC3
         self.isometry = Isometry(*position, *self.rotation)
         self.shape = None
         self.size = size
-        self.children = []
         self.layer = None
 
     def create(self, world, entity, layer):
@@ -34,6 +34,8 @@ class Block(Component):
         self._position = position
         self.isometry = Isometry(*position, *self.rotation)
         self.layer.mark()
+        for child in self.children:
+            child.position = position + child.transform
 
     @property
     def size(self):
@@ -42,35 +44,23 @@ class Block(Component):
     @size.setter
     def size(self, size):
         self._size = size
-        if self.solid:
-            self.shape = Cuboid(size.x, size.y, size.z)
-
-    @property
-    def shape(self):
-        return self._shape
-
-    @shape.setter
-    def shape(self, shape):
-        self._shape = shape
+        self.shape = Cuboid(size.x, size.y, size.z)
 
     @property
     def aabb(self):
         return self.shape.aabb(self.isometry)
 
-    def add_child(self, child):
-        self.children.append(child)
-
-    def cast_ray(self, ray, entity=0):
+    def cast_ray(self, ray):
         if self.shape:
             contact = self.shape.cast_ray(self.isometry, ray)
             if contact:
-                return entity, self, glm.vec3(contact)
+                return self, glm.vec3(contact)
             return None
 
-class BlockBuilder(ComponentBuilder):
-    key = 'Block'
+class NodeBuilder(ComponentBuilder):
+    key = 'Node'
 
     def build(self, blueprint, world):
         # TODO: Shouldn't blueprint size already be a vec3?
         size = glm.vec3(blueprint.size)
-        return Block(size=size)
+        return Node(size=size)

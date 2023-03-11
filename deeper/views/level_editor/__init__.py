@@ -31,7 +31,7 @@ class LevelEditor(SceneEditor):
 
         self.open_window('Layers')
 
-        self.catalog = Catalog()
+        self.catalog = Catalog.instance
         self.open_window('Catalog')
 
         self.current_tool = self.pick_tool = PickTool(self, edit_state)

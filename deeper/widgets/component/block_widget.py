@@ -23,6 +23,12 @@ class BlockWidget(ComponentWidget):
         if changed:
             self.block.size = glm.vec3(*size)
 
+        changed, transform = imgui.drag_float3(
+            'Transform', *self.block.transform, change_speed=0.1
+        )
+        if changed:
+            self.block.transform = glm.vec3(*transform)
+
 
 class BlockWidgetBuilder(ComponentWidgetBuilder):
     key = Block

@@ -17,6 +17,9 @@ class Blueprint(Model):
     name: Mapped[str] = mapped_column(String(32))
     type: Mapped[str]
 
+    entity_id = mapped_column(Integer, ForeignKey('Blueprint.id'))
+    components = relationship('Blueprint', backref=backref('entity', remote_side=[id]), foreign_keys=[entity_id])
+
     parent_id = mapped_column(Integer, ForeignKey('Blueprint.id'))
     children = relationship('Blueprint', backref=backref('parent', remote_side=[id]), foreign_keys=[parent_id])
 
@@ -34,12 +37,14 @@ class Blueprint(Model):
     }
     borrowed_settings = []
 
-    def __init__(self, catalog, name, config, parent=None):
+    def __init__(self, catalog, name, config, entity=None, parent=None):
         super().__init__()
         self.catalog = catalog
         self.name = name
         self.config = config
         self.category = None
+        if entity:
+            entity.add_component(self)
         if parent:
             parent.add_child(self)
         self.configure(config)
@@ -47,6 +52,9 @@ class Blueprint(Model):
     def __repr__(self) -> str:
         return f'<Blueprint name={self.name}>'
         # return f"<Blueprint {self.__dict__}>"
+
+    def add_component(self, component):
+        self.components.append(component)
 
     def add_child(self, child):
         self.children.append(child)
@@ -71,18 +79,16 @@ class Blueprint(Model):
         xconfig = mergedeep.merge(
             xconfig, config, strategy=mergedeep.Strategy.REPLACE
         )
-        #xconfig = self.borrow(xconfig, self.parent)
-        # print("xconfig:", xconfig)
 
         return xconfig
 
-    def borrow(self, config, parent):
+    def borrow(self, config, blueprint):
         for name in self.borrowed_settings:
             if not name in config:
                 #print(name)
                 #print(parent)
-                if name in parent.xconfig:
-                    value = parent.xconfig[name]
+                if name in blueprint.xconfig:
+                    value = blueprint.xconfig[name]
                     #print(value)
                     config[name] = value
         return config
@@ -112,5 +118,5 @@ class Blueprint(Model):
         self.apply_settings()
 
 class BlueprintBuilder(Builder):
-    def build(self, catalog, name, config, parent):
-        return self.cls(catalog, name, config, parent)
+    def build(self, catalog, name, config, entity, parent=None):
+        return self.cls(catalog, name, config, entity, parent)

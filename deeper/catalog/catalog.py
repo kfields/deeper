@@ -1,8 +1,5 @@
-from pathlib import Path
 import glob
 import re
-
-from sqlalchemy import select
 
 from loguru import logger
 from arcade.resources import resolve_resource_path
@@ -21,19 +18,31 @@ def pascal_to_snake(name):
 
 
 class Category:
+    blueprints: list[EntityBlueprint]
+
     def __init__(self, name) -> None:
         self.name = name
         self.blueprints = []
         self._abstract = True
 
-    def add_blueprint(self, blueprint):
+    def add_blueprint(self, blueprint: EntityBlueprint):
         if not blueprint._abstract:
             self._abstract = False
         self.blueprints.append(blueprint)
 
 
 class Catalog(Kit):
+    categories: dict[str, Category]
+    blueprints: dict[str, EntityBlueprint]
+
     builders_path = deeper.blueprints
+
+    """
+    def __new__(cls):
+        if not hasattr(cls, '_instance'):
+            cls._instance = super(Catalog, cls).__new__(cls)
+        return cls._instance
+    """
 
     _instance = None
 
@@ -42,7 +51,9 @@ class Catalog(Kit):
     def instance(cls):
         if cls._instance:
             return cls._instance
-        cls._instance = cls()
+        catalog = cls()
+        cls._instance = catalog
+        catalog.load()
         return cls._instance
 
     def __init__(self) -> None:
@@ -50,17 +61,18 @@ class Catalog(Kit):
         self.categories = {}
         self.category_names = []
         self.blueprints = {}
-        self.load()
+        #self.load()
 
-    def find_builder(self, name):
+    def find_builder(self, name: str):
         if name in self.builders:
             return self.builders[name]
     
-    def build(self, name, config, parent):
+    def build(self, name, config, entity, parent=None):
         builder = self.find_builder(name)
         if not builder:
             print(name)
-        return builder.build(self, name, config, parent)
+            #exit()
+        return builder.build(self, name, config, entity, parent)
 
     def find(self, name):
         return self.blueprints[name]
@@ -106,6 +118,13 @@ class Catalog(Kit):
                 for key, value in cat.items():
                     self.build_blueprint(key, value)
 
+    def gather_imports(self, blueprint, imports, data):
+        base = blueprint.base
+        if base and not base.name in data and not base in imports:
+            imports.append(base)
+        for child in blueprint.children:
+            self.gather_imports(child, imports, data)
+
     def save_yaml(self, path):
         for category in self.categories.values():
             data = {}
@@ -113,8 +132,14 @@ class Catalog(Kit):
             for blueprint in category.blueprints:
                 data[blueprint.name] = blueprint.config
             for blueprint in category.blueprints:
+                self.gather_imports(blueprint, imports, data)
+                """
                 if blueprint.base and not blueprint.base.name in data:
                     imports.append(blueprint.base)
+                for child in blueprint.children:
+                    if child.base and not child.base.name in data:
+                        imports.append(child.base)
+                """
             with open(path / f'{pascal_to_snake(category.name)}.yaml', 'w') as file:
                 for blueprint in imports:
                     file.write(
@@ -128,8 +153,9 @@ class Catalog(Kit):
         blueprint = EntityBlueprint(self, key, value)
         # print("blueprint: ", blueprint.__dict__)
         self.register_blueprint(blueprint)
+        return blueprint
 
-    def register_blueprint(self, blueprint):
+    def register_blueprint(self, blueprint: EntityBlueprint):
         category = None
         if blueprint.category in self.categories:
             category = self.categories[blueprint.category]

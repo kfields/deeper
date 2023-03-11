@@ -1,0 +1,5 @@
+Node:
+  _abstract: true
+  category: Node
+  components:
+    Node: {}

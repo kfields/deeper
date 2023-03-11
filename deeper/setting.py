@@ -8,12 +8,14 @@ def decompose(d):
             value = []
         elif type(value) is dict:
             value = decompose(value)
-        a.append({'name': key, 'value': value})
+        a.append({"name": key, "value": value})
     return a
+
 
 class Subscription:
     def __init__(self, callback) -> None:
         self.callback = callback
+
 
 class Setting:
     name: str
@@ -30,15 +32,15 @@ class Setting:
         self.subscriptions = []
 
     def __repr__(self) -> str:
-        return f'<{self.__class__.__name__} name={self.name} value={self.value}>'
+        return f"<{self.__class__.__name__} name={self.name} value={self.value}>"
 
     @classmethod
     def parse_obj(cls, obj):
-        v = cls.validate(obj['value'])
+        v = cls.validate(obj["value"])
         return cls(obj["name"], v)
 
     def get_vtype(self):
-        return self.__annotations__['_value']
+        return self.__annotations__["_value"]
 
     @classmethod
     def validate(cls, value):
@@ -61,8 +63,9 @@ class Setting:
         self.subscriptions.remove(subscription)
 
     def to_dict(self):
-        #return { self.name, self.value }
+        # return { self.name, self.value }
         return self.value
+
 
 class AttrSetting(Setting):
     def get_vtype(self):
@@ -87,7 +90,7 @@ class SettingGroup(Setting):
     def validate(cls, v):
         result = []
         for item in v:
-            result.append(cls.setting_map[item['name']].parse_obj(item))
+            result.append(cls.setting_map[item["name"]].parse_obj(item))
         return result
 
     def default(self):
@@ -97,9 +100,9 @@ class SettingGroup(Setting):
         value = self.value
         value.append(setting)
         self.value = value
-        #TODO: Temporary hack until I can figure it out
+        # TODO: Temporary hack until I can figure it out
         setting.subscriptions = self.subscriptions
-    
+
     def subscribe(self, callback):
         super().subscribe(callback)
         for setting in self.value:
@@ -108,23 +111,27 @@ class SettingGroup(Setting):
     def to_dict(self):
         d = {}
         for setting in self.value:
-            #d[setting.name] = setting.value
+            # d[setting.name] = setting.value
             d[setting.name] = setting.to_dict()
         return d
+
 
 BoolSettingVType = bool
 
 
 class BoolSetting(Setting):
     _value: BoolSettingVType
+
     def default(self):
         return False
+
 
 IntSettingVType = int
 
 
 class IntSetting(Setting):
     _value: IntSettingVType
+
     def default(self):
         return 0
 
@@ -134,6 +141,7 @@ FloatSettingVType = float
 
 class FloatSetting(Setting):
     _value: FloatSettingVType
+
     def default(self):
         return 0.0
 
@@ -143,8 +151,18 @@ StringSettingVType = str
 
 class StringSetting(Setting):
     _value: StringSettingVType
+
     def default(self):
         return ""
+
+DictSettingVType = dict
+
+
+class DictSetting(Setting):
+    _value: DictSettingVType
+
+    def default(self):
+        return {}
 
 
 Vec2SettingVType = glm.vec2
@@ -162,7 +180,8 @@ class Vec2Setting(Setting):
 
     def to_dict(self):
         return list(self._value)
-        
+
+
 Vec3SettingVType = glm.vec3
 
 
