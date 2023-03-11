@@ -8,7 +8,7 @@ from deeper.catalog import Catalog
 
 class TestLevel(Level):
     def __init__(self, timed=False):
-        super().__init__(timed)
+        super().__init__('test', timed)
         self.create_grid()
         self.create_layer('Floor')
         self.create_layer('Default')

@@ -14,7 +14,7 @@ class ComponentKit(Kit):
             return self.find(blueprint.catalog.find(blueprint.extends))
 
     def build(self, blueprint, world):
-        logger.debug(blueprint.__dict__)
+        #logger.debug(blueprint.__dict__)
         builder = self.find(blueprint)
         components = []
 

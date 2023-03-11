@@ -69,7 +69,6 @@ class Blueprint(Model):
         pass
 
     def extend(self, config):
-        #xconfig = copy.deepcopy(self.base.xconfig)
         xconfig = {}
         for key, value in self.base.xconfig.items():
             if key.startswith('_'):

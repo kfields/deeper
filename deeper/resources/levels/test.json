@@ -1,0 +1,2148 @@
+{
+  "name": "test",
+  "layers": [
+    {
+      "name": "Grid",
+      "entities": [
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            8.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            6.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            4.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            15.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            2.5799999237060547,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            13.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            3.440000057220459,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            4.300000190734863,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            7.739999771118164,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            9.460000038146973,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            11.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.8600000143051147,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            5.159999847412109,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            8.600000381469727,
+            0.0,
+            5.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.880000114440918,
+            0.0,
+            3.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            10.319999694824219,
+            0.0,
+            7.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.039999961853027,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            0.0,
+            0.0,
+            12.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            1.7200000286102295,
+            0.0,
+            14.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            6.019999980926514,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            12.899999618530273,
+            0.0,
+            9.0
+          ]
+        },
+        {
+          "blueprint": "Cell",
+          "position": [
+            11.180000305175781,
+            0.0,
+            7.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Floor",
+      "entities": [
+        {
+          "blueprint": "Floor2",
+          "position": [
+            0.0,
+            0.054999999701976776,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            1.7200000286102295,
+            0.054999999701976776,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            0.8600000143051147,
+            0.054999999701976776,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            0.8600000143051147,
+            0.054999999701976776,
+            1.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            1.7200000286102295,
+            0.054999999701976776,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            0.0,
+            0.054999999701976776,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            0.0,
+            0.054999999701976776,
+            0.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            1.7200000286102295,
+            0.054999999701976776,
+            2.0
+          ]
+        },
+        {
+          "blueprint": "Floor2",
+          "position": [
+            0.8600000143051147,
+            0.054999999701976776,
+            2.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Default",
+      "entities": [
+        {
+          "blueprint": "AnimBWheel2",
+          "position": [
+            0.8600000143051147,
+            0.8550000190734863,
+            1.0
+          ]
+        }
+      ]
+    }
+  ]
+}

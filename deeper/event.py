@@ -15,7 +15,7 @@ class Subscription:
 
 class EventSource:
     def __init__(self) -> None:
-        self.subscriptions = []
+        self.subscriptions: list[Subscription] = []
 
     def subscribe(self, callback):
         subscription = Subscription(callback)

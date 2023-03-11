@@ -1,15 +1,17 @@
 import webbrowser
 
 from loguru import logger
+from pyglet import clock
 from arcade.resources import resolve_resource_path
 
 from deeper.constants import *
 
 from .scene_view import SceneView
+from ..level import Level
 from ..widgets import MetricsWindow, CameraWindow, MainMenubar, Menu, MenuItem
 
 
-doc_url = 'https://kfields.github.io/deeper/index.html'
+doc_url = "https://kfields.github.io/deeper/index.html"
 
 
 class SceneEditor(SceneView):
@@ -18,18 +20,38 @@ class SceneEditor(SceneView):
         self.windows = {}
 
         self.gui.default_font = self.gui.load_font(
-            resolve_resource_path(':deeper:fonts/Roboto-Regular.ttf'), 16
+            resolve_resource_path(":deeper:fonts/Roboto-Regular.ttf"), 16
         )
+
+    def save(self):
+        self.world.save(resolve_resource_path(":deeper:levels/"))
+
+    def load(self):
+        clock.schedule_once(lambda dt, *args, **kwargs : self._load(), 0)
+
+    def _load(self):
+        from .level_editor import LevelEditor
+        from ..state import WorldEditState
+        level = Level.load(resolve_resource_path(":deeper:levels/test.json"))
+        view = LevelEditor(self.window, WorldEditState(level))
+        self.window.show_view(view)
 
     def create_menubar(self, children):
         children = [
-            Menu('File', [MenuItem('Quit', lambda: exit(1))]),
+            Menu(
+                "File",
+                [
+                    MenuItem("Save", lambda: self.save()),
+                    MenuItem("Load", lambda: self.load()),
+                    MenuItem("Exit", lambda: exit(1)),
+                ],
+            ),
             self.create_view_menu(),
             Menu(
-                'Help',
+                "Help",
                 [
                     MenuItem(
-                        'Documentation',
+                        "Documentation",
                         lambda: webbrowser.open(doc_url, new=2, autoraise=True),
                     )
                 ],
@@ -41,10 +63,10 @@ class SceneEditor(SceneView):
 
     def create_view_menu(self, children=[]):
         menu = Menu(
-            'View',
+            "View",
             [
-                MenuItem('Metrics', lambda: self.open_window('Metrics')),
-                MenuItem('Camera', lambda: self.open_window('Camera')),
+                MenuItem("Metrics", lambda: self.open_window("Metrics")),
+                MenuItem("Camera", lambda: self.open_window("Camera")),
                 *children,
             ],
         )
@@ -60,9 +82,9 @@ class SceneEditor(SceneView):
             return
         on_close = lambda: self.close_window(title)
         window = None
-        if title == 'Metrics':
+        if title == "Metrics":
             window = MetricsWindow(on_close=on_close)
-        elif title == 'Camera':
+        elif title == "Camera":
             window = CameraWindow(self.camera, on_close=on_close)
         self.windows[title] = window
         self.gui.add_child(window)

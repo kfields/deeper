@@ -74,3 +74,4 @@ docs/api/
 
 # Deeper Stuff
 .envrc
+deeper.db

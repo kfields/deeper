@@ -35,7 +35,7 @@ dependencies = [
     "pyyaml ~=6.0",
     "loguru ~=0.6.0",
     "pydantic ~=1.10.2",
-    "sqlalchemy ~=2.0.4",
+    "sqlalchemy ~=2.0.5.post1",
     "click ~=8.1.3",
 ]
 

@@ -10,10 +10,10 @@ from .components.entity_group import EntityLayer
 from .ecs.component import Component
 
 class World(ecs.World):
-    def __init__(self, timed=False):
+    def __init__(self, timed:bool=False):
         super().__init__(timed)
         self.events = EventSource()
-        self.layers = []
+        self.layers: list[EntityLayer] = []
     
     def create_entity(self, *components: object) -> int:
         layer = components[0]
