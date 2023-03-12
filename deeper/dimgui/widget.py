@@ -4,6 +4,7 @@ class Widget:
         self.children = []
         self.add_children(children)
         self.gui = None
+        self.visible = True
 
     def create(self, gui):
         self.gui = gui

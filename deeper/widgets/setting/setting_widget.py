@@ -5,7 +5,6 @@ class SettingWidget(Widget):
     def __init__(self, setting, children=[]):
         super().__init__(children)
         self.setting = setting
-        self.visible = True
 
     @property
     def name(self):

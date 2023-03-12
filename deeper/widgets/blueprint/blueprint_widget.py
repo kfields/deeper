@@ -5,7 +5,6 @@ class BlueprintWidget(Widget):
     def __init__(self, blueprint):
         super().__init__()
         self.blueprint = blueprint
-        self.visible = True
 
 class BlueprintWidgetBuilder(Builder):
     def build(self, blueprint):

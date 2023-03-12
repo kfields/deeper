@@ -27,6 +27,7 @@ class Blueprint(Model):
     derivatives = relationship('Blueprint', backref=backref('base', remote_side=[id]), foreign_keys=[base_id])
 
     config: Mapped[dict] = mapped_column(JSON)
+    xconfig: Mapped[dict] = mapped_column(JSON)
 
     _abstract = False
     settings = None
