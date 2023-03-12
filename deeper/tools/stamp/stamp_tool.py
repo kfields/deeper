@@ -69,10 +69,12 @@ class StampTool(SceneEditTool):
 
     def enable(self):
         super().enable()
+        #self.view.open_window('Catalog')
         self.gui.add_child(self.widget)
 
     def disable(self):
         super().disable()
+        #self.view.close_window('Catalog')
         self.gui.remove_child(self.widget)
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):

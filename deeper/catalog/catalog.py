@@ -18,11 +18,9 @@ def pascal_to_snake(name):
 
 
 class Category:
-    blueprints: list[EntityBlueprint]
-
     def __init__(self, name) -> None:
         self.name = name
-        self.blueprints = []
+        self.blueprints: list[EntityBlueprint] = []
         self._abstract = True
 
     def add_blueprint(self, blueprint: EntityBlueprint):
@@ -32,10 +30,9 @@ class Category:
 
 
 class Catalog(Kit):
-    categories: dict[str, Category]
-    blueprints: dict[str, EntityBlueprint]
-
     builders_path = deeper.blueprints
+
+    _instance = None
 
     """
     def __new__(cls):
@@ -44,8 +41,6 @@ class Catalog(Kit):
         return cls._instance
     """
 
-    _instance = None
-
     @classmethod
     @property
     def instance(cls):
@@ -53,15 +48,15 @@ class Catalog(Kit):
             return cls._instance
         catalog = cls()
         cls._instance = catalog
-        catalog.load()
+        #catalog.load()
         return cls._instance
 
     def __init__(self) -> None:
         super().__init__()
-        self.categories = {}
-        self.category_names = []
-        self.blueprints = {}
-        #self.load()
+        self.categories: dict[str, Category] = {}
+        self.category_names: list[str] = []
+        self.blueprints: dict[str, EntityBlueprint] = {}
+        self.load()
 
     def find_builder(self, name: str):
         if name in self.builders:
@@ -78,7 +73,7 @@ class Catalog(Kit):
         return self.blueprints[name]
 
     def load(self):
-        root = resolve_resource_path(':deeper:/catalog')
+        root = resolve_resource_path(':deeper:catalog')
         db = Database.instance
         session = db.session
         first = session.query(EntityBlueprint).first()

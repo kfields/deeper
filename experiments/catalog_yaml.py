@@ -63,7 +63,7 @@ class Catalog:
         self.build()
 
     def build(self):
-        root = resolve_resource_path(":deeper:/catalog")
+        root = resolve_resource_path(":deeper:catalog")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
             print(path)
@@ -80,9 +80,7 @@ class Catalog:
 
     def build_item(self, key, value):
         item = Item(self, key, value)
-        #if 'extends' in value:
-        #    item.extend(self.definitions[value['extends']])
-        print("item: ", item.__dict__)
+        #print("item: ", item.__dict__)
         category = None
         if item.category in self.category_map:
             category = self.category_map[item.category]
@@ -124,7 +122,6 @@ class BasicExample(arcade.Window):
             "Category", self.current, self.catalog.category_names
         )
         for item in self.catalog.categories[self.current].items:
-            #_, item.selected = imgui.selectable(item.text, item.selected)
             _, selected = imgui.selectable(item.name, item.selected)
             if selected:
                 if self.selection:

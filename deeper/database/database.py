@@ -5,8 +5,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.orm.scoping import scoped_session
 
-from deeper.blueprints import *
-from deeper.models import Model
+from ..blueprints import *
+from ..model import Model
 
 from .utils import json_serializer
 

@@ -19,6 +19,7 @@ TileFence3:
   extends: Fence
   size: [0.8600000143051147, 1.0, 0.30000001192092896]
   image: :deeper:tiles/TileFence3.png
+  offset: [0.0, -0.019999999552965164]
 TileFence3b:
   extends: Fence
   size: [0.8600000143051147, 1.0, 0.30000001192092896]

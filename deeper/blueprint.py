@@ -10,7 +10,7 @@ from . import mergedeep
 from .constants import *
 from .builder import Builder
 from .setting import decompose
-from .models import Model
+from .model import Model
 
 class Blueprint(Model):
     id: Mapped[int] = mapped_column(primary_key=True)

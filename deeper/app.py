@@ -7,7 +7,7 @@ from arcade.resources import resolve_resource_path
 from .window import Window
 from .constants import *
 #from .world import World
-from .levels.test_level import TestLevel
+from .levels.basic_level import BasicLevel
 from .level import Level
 
 from .state import WorldEditState
@@ -20,7 +20,7 @@ class Deeper(Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, 'Deeper', resizable=True)
         #self.world = World()
-        self.world = TestLevel()
+        self.world = BasicLevel()
         #self.world = Level.load(resolve_resource_path(":deeper:levels/test.json"))
     
     def create(self):
@@ -34,12 +34,12 @@ class Deeper(Window):
     def load_settings(self):
         dst = Path('imgui.ini')
         if not dst.exists():
-            src = resolve_resource_path(':deeper:/settings/imgui.ini')
+            src = resolve_resource_path(':deeper:settings/imgui.ini')
             shutil.copyfile(src, dst)
 
     def save_settings(self):
         src = Path('imgui.ini')
-        dst = resolve_resource_path(':deeper:/settings/imgui.ini')
+        dst = resolve_resource_path(':deeper:settings/imgui.ini')
         shutil.copyfile(src, dst)
 
 def main():

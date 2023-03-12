@@ -102,7 +102,7 @@ class CatalogWindow(Window):
         children = [
             Menubar([
                 Menu('File', [
-                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(resolve_resource_path(':deeper:/catalog')))
+                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(resolve_resource_path(':deeper:catalog')))
                 ])
             ]),
             CatalogPanel(catalog, callback)

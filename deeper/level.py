@@ -22,7 +22,7 @@ class Level(World):
             'name': self.name,
             'layers': layers
         }
-        print(data)
+        #print(data)
         with open(path / f'{self.name}.json', "w") as out_file:
             json.dump(data, out_file, indent = 2)
 
