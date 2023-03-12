@@ -1,7 +1,12 @@
+from pathlib import Path
+
 from loguru import logger
 
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, reconstructor
+
+from arcade.resources import resolve_resource_path
+from PIL import Image
 
 from ..constants import *
 from ..settings import EntitySettings
@@ -24,6 +29,7 @@ class EntityBlueprint(Blueprint):
 
     def __init__(self, catalog, name, config):
         super().__init__(catalog, name, config)
+        self._thumbnail = None
 
     #TODO:  Find a way to reconstruct the Catalog properly.  This was close but it can't find it's base ...
     """
@@ -33,6 +39,25 @@ class EntityBlueprint(Blueprint):
         self.catalog = Catalog.instance
         self.configure(self.config)
     """
+    @reconstructor
+    def reconstruct(self):
+        self._thumbnail = None
+
+    @property
+    def thumbnail(self):
+        if not self._thumbnail:
+            root = resolve_resource_path(':deeper:catalog/thumbnails')
+            path = root / f'{self.name}.png'
+            if Path.exists(path):
+                self._thumbnail = Image.open(path)
+            else:
+                img_path = resolve_resource_path(self.image)
+                with Image.open(img_path) as image:
+                    image.thumbnail((64, 64))
+                    image.save(path)
+                    self._thumbnail = image
+
+        return self._thumbnail
 
     def configure(self, config):
         #logger.debug(f"config: {config}")

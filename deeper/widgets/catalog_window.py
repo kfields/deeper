@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from PIL import Image
 import imgui
 from arcade.resources import resolve_resource_path
@@ -14,9 +16,14 @@ class BlueprintWidget(Widget):
 
     def create(self, gui):
         super().create(gui)
-        with Image.open(resolve_resource_path(self.blueprint.image)) as image:
+        """
+        path = resolve_resource_path(self.blueprint.image)
+        with Image.open(path) as image:
             image.thumbnail((64, 64))
             self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
+        """
+        image = self.blueprint.thumbnail
+        self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
         return self
 
     def draw(self):

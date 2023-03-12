@@ -27,7 +27,7 @@ class Blueprint(Model):
     derivatives = relationship('Blueprint', backref=backref('base', remote_side=[id]), foreign_keys=[base_id])
 
     config: Mapped[dict] = mapped_column(JSON)
-    xconfig: Mapped[dict] = mapped_column(JSON)
+    #xconfig: Mapped[dict] = mapped_column(JSON)
 
     _abstract = False
     settings = None
@@ -99,8 +99,6 @@ class Blueprint(Model):
         #print(obj)
         settings = self.settings_class.parse_obj(obj)
         settings.subscribe(self.on_setting)
-        #for setting in settings.value:
-        #    setting.subscribe(self.on_setting)
         return settings
 
     def apply_settings(self):
@@ -108,13 +106,8 @@ class Blueprint(Model):
         #logger.debug(self.config)
         self.update()
 
-    def apply_setting(self, setting):
-        setattr(self, setting.name, setting.value)
-        #logger.debug(setting)
-
     def on_setting(self, setting):
         #logger.debug(setting)
-        #self.apply_setting(setting)
         self.apply_settings()
 
 class BlueprintBuilder(Builder):

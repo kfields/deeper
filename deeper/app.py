@@ -8,6 +8,7 @@ from .window import Window
 from .constants import *
 #from .world import World
 from .levels.test_level import TestLevel
+from .level import Level
 
 from .state import WorldEditState
 from .views import LevelEditor
@@ -20,6 +21,7 @@ class Deeper(Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, 'Deeper', resizable=True)
         #self.world = World()
         self.world = TestLevel()
+        #self.world = Level.load(resolve_resource_path(":deeper:levels/test.json"))
     
     def create(self):
         self.load_settings()
