@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0] - 2023-03-12
 ### Added
-- Heirachical entities
+- Hierarchical entities
 - Basic level load and save
 
 ## [0.1.9] - 2023-02-28
