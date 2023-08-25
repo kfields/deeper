@@ -1,4 +1,5 @@
 from .metrics_window import MetricsWindow
+from .style_window import StyleWindow
 from .camera_window import CameraWindow
 from .layers_window import LayersWindow
 from .catalog_window import CatalogWindow

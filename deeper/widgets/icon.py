@@ -2,7 +2,6 @@ import imgui
 
 from deeper.dimgui import Widget
 
-from deeper.font import render_text_to_image
 
 class Icon(Widget):
     def __init__(self, text, font):
@@ -12,13 +11,10 @@ class Icon(Widget):
 
     def create(self, gui):
         super().create(gui)
-        #image = self.font.render_to_image(self.text, 32, 32)
-        #self.texture = image.get_texture()
-        self.texture = render_text_to_image(self.text)
         return self
 
     def draw(self):
-        imgui.image(self.texture.id, self.texture.width, self.texture.height, (0,1), (1,0))
+        imgui.text(self.text)
 
 class IconButton(Widget):
     def __init__(self, text, font, callback = lambda : None):
@@ -29,13 +25,10 @@ class IconButton(Widget):
 
     def create(self, gui):
         super().create(gui)
-        #image = self.font.render_to_image(self.text, 32, 32)
-        #self.texture = image.get_texture()
-        self.texture = render_text_to_image(self.text)
         return self
 
     def draw(self):
-        if imgui.image_button(self.texture.id, self.texture.width, self.texture.height, (0,1), (1,0)):
+        if imgui.button(self.text):
             self.callback()
             return True
 
@@ -50,18 +43,11 @@ class IconToggleButton(Widget):
 
     def create(self, gui):
         super().create(gui)
-        #image = self.font.render_to_image(self.on_text, 32, 32)
-        #self.on_texture = image.get_texture()
-        self.on_texture = render_text_to_image(self.on_text)
-        #image = self.font.render_to_image(self.off_text, 32, 32)
-        #self.off_texture = image.get_texture()
-        self.off_texture = render_text_to_image(self.off_text)
-        
         return self
 
     def draw(self):
-        texture = self.on_texture if self.on else self.off_texture
-        if imgui.image_button(texture.id, texture.width, texture.height, (0,1), (1,0)):
+        text = self.on_text if self.on else self.off_text
+        if imgui.button(text):
             self.on = not self.on
             self.callback(self.on)
             return True

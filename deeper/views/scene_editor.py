@@ -3,12 +3,14 @@ import webbrowser
 from loguru import logger
 from pyglet import clock
 from arcade.resources import resolve_resource_path
+import imgui
 
 from deeper.constants import *
+from deeper.resources.icons import IconsMaterialDesign
 
 from .scene_view import SceneView
 from ..level import Level
-from ..widgets import MetricsWindow, CameraWindow, MainMenubar, Menu, MenuItem
+from ..widgets import MetricsWindow, StyleWindow, CameraWindow, MainMenubar, Menu, MenuItem
 
 
 doc_url = "https://kfields.github.io/deeper/index.html"
@@ -19,8 +21,13 @@ class SceneEditor(SceneView):
         super().__init__(window, world, title)
         self.windows = {}
 
-        self.gui.default_font = self.gui.load_font(
+        self.gui.load_default_font(
             resolve_resource_path(":deeper:fonts/Roboto-Regular.ttf"), 16
+        )
+
+        glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
+        self.gui.load_icon_font(
+            resolve_resource_path(f':deeper:icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'), 16, glyph_ranges
         )
 
     def new(self):
@@ -78,6 +85,7 @@ class SceneEditor(SceneView):
             "View",
             [
                 MenuItem("Metrics", lambda: self.open_window("Metrics")),
+                MenuItem("Style", lambda: self.open_window("Style")),
                 MenuItem("Camera", lambda: self.open_window("Camera")),
                 *children,
             ],
@@ -98,6 +106,8 @@ class SceneEditor(SceneView):
         window = None
         if title == "Metrics":
             window = MetricsWindow(on_close=on_close)
+        elif title == "Style":
+            window = StyleWindow(on_close=on_close)
         elif title == "Camera":
             window = CameraWindow(self.camera, on_close=on_close)
         self.windows[title] = window

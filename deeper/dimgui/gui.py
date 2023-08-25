@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import imgui
 
 from pyglet import clock
@@ -178,10 +180,20 @@ class Gui(GuiBase):
         child.create(self)
         return child
 
-    def load_font(self, font_path, font_pixel_size):
+    def load_font(self, font_path: Path, font_pixel_size, font_config=None, glyph_ranges=None):
         io = imgui.get_io()
-        font = io.fonts.add_font_from_file_ttf(str(font_path), font_pixel_size)
+        font = io.fonts.add_font_from_file_ttf(str(font_path), font_pixel_size, font_config, glyph_ranges)
         self.renderer.refresh_font_texture()
+        return font
+
+    def load_default_font(self, font_path: Path, font_pixel_size):
+        font = self.load_font(font_path, font_pixel_size)
+        self.default_font = font
+        return font
+
+    def load_icon_font(self, font_path: Path, font_pixel_size, glyph_ranges=None):
+        font_config = imgui.FontConfig(merge_mode=True)
+        font = self.load_font(font_path, font_pixel_size, font_config, glyph_ranges)
         return font
 
     def start_render(self):
