@@ -1,0 +1,7 @@
+deeper.entities.node\_builder module
+====================================
+
+.. automodule:: deeper.entities.node_builder
+   :members:
+   :undoc-members:
+   :show-inheritance:

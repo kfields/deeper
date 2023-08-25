@@ -1,0 +1,7 @@
+deeper.widgets.style\_window module
+===================================
+
+.. automodule:: deeper.widgets.style_window
+   :members:
+   :undoc-members:
+   :show-inheritance:

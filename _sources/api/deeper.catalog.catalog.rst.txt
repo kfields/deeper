@@ -1,0 +1,7 @@
+deeper.catalog.catalog module
+=============================
+
+.. automodule:: deeper.catalog.catalog
+   :members:
+   :undoc-members:
+   :show-inheritance:

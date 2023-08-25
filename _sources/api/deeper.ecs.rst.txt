@@ -1,0 +1,19 @@
+deeper.ecs package
+==================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   deeper.ecs.component
+   deeper.ecs.entity
+
+Module contents
+---------------
+
+.. automodule:: deeper.ecs
+   :members:
+   :undoc-members:
+   :show-inheritance:

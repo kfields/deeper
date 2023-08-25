@@ -1,0 +1,7 @@
+deeper.widgets.metrics\_window module
+=====================================
+
+.. automodule:: deeper.widgets.metrics_window
+   :members:
+   :undoc-members:
+   :show-inheritance:

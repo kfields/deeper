@@ -1,0 +1,7 @@
+deeper.settings.component.node\_settings module
+===============================================
+
+.. automodule:: deeper.settings.component.node_settings
+   :members:
+   :undoc-members:
+   :show-inheritance:

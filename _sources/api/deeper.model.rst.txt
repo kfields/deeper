@@ -1,0 +1,7 @@
+deeper.model module
+===================
+
+.. automodule:: deeper.model
+   :members:
+   :undoc-members:
+   :show-inheritance:

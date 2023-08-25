@@ -1,0 +1,7 @@
+deeper.views.scene\_editor module
+=================================
+
+.. automodule:: deeper.views.scene_editor
+   :members:
+   :undoc-members:
+   :show-inheritance:

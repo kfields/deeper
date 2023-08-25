@@ -1,0 +1,20 @@
+deeper.entities package
+=======================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   deeper.entities.block_builder
+   deeper.entities.entity_builder
+   deeper.entities.node_builder
+
+Module contents
+---------------
+
+.. automodule:: deeper.entities
+   :members:
+   :undoc-members:
+   :show-inheritance:

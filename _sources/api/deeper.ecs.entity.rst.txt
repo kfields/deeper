@@ -1,0 +1,7 @@
+deeper.ecs.entity module
+========================
+
+.. automodule:: deeper.ecs.entity
+   :members:
+   :undoc-members:
+   :show-inheritance:

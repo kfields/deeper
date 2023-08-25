@@ -1,0 +1,7 @@
+deeper.tools.stamp.stamp\_tool module
+=====================================
+
+.. automodule:: deeper.tools.stamp.stamp_tool
+   :members:
+   :undoc-members:
+   :show-inheritance:
