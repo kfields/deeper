@@ -19,7 +19,7 @@ class WidgetGroup(Widget):
                 hovered_index = i
 
         if hovered_index > -1:
-            if self.dragging and imgui.is_mouse_dragging():
+            if self.dragging and imgui.is_mouse_dragging(0):
                 if hovered_index != self.drag_index:
                     self.swap(self.drag_index, hovered_index)
                     callback(self.drag_index, hovered_index)

@@ -1,6 +1,10 @@
 Node: !import
   - node.yaml
   - Node
+#TODO: Why am I required to import Floor?
+Floor: !import
+  - floor.yaml
+  - Floor
 Floor3c: !import
   - floor.yaml
   - Floor3c

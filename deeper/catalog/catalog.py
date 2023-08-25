@@ -70,6 +70,7 @@ class Catalog(Kit):
         return builder.build(self, name, config, entity, parent)
 
     def find(self, name):
+        #logger.debug(self.blueprints)
         return self.blueprints[name]
 
     def load(self):
@@ -106,7 +107,7 @@ class Catalog(Kit):
     def load_yaml(self, root):
         paths = glob.glob(f'{root}/*.yaml')
         for path in paths:
-            # print(path)
+            logger.debug(f'loading {path}')
             with open(path, 'r') as file:
                 cat = load_yaml(file)
                 # print(cat)
