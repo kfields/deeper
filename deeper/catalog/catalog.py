@@ -30,9 +30,8 @@ class Category:
 
 
 class Catalog(Kit):
-    builders_path = deeper.blueprints
-
     _instance = None
+    builders_path = deeper.blueprints
 
     """
     def __new__(cls):

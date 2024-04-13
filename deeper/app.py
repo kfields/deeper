@@ -6,9 +6,7 @@ from arcade.resources import resolve_resource_path
 
 from .window import Window
 from .constants import *
-#from .world import World
 from .levels.basic_level import BasicLevel
-from .level import Level
 
 from .state import WorldEditState
 from .views import LevelEditor
