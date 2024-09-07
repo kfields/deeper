@@ -7,11 +7,12 @@ from ..scene import Scene
 class SceneView(View):
     scene: Scene = None
 
-    def __init__(self, window, world, title=''):
+    def __init__(self, window, scene, title=''):
         super().__init__(window, title)
-        self.camera = None
-        self.world = world
-        self.create_scene()
+        #self.camera = None
+        self.camera = scene.camera
+        self.scene = scene
+        #self.create_scene()
 
     def create_scene(self):
         pass

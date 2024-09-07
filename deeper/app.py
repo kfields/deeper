@@ -16,13 +16,11 @@ from .database import Database
 class Deeper(Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, 'Deeper', resizable=True)
-        #self.world = World()
-        self.world = BasicLevel()
-        #self.world = Level.load(resolve_resource_path(":deeper:levels/test.json"))
+        self.scene = BasicLevel()
     
     def create(self):
         self.load_settings()
-        view = LevelEditor(self, WorldEditState(self.world))
+        view = LevelEditor(self, WorldEditState(self.scene))
         self.show_view(view)
 
     def destroy(self):

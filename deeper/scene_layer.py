@@ -3,35 +3,31 @@ from loguru import logger
 import arcade
 
 from deeper.constants import *
-from deeper.event import Event, LayerDirtyEvent
+from deeper.event import Event, EventSource, LayerDirtyEvent
 
+from .ecs.entity_group import EntityGroup
 
-class Layer:
-    def __init__(self, scene, name, group):
+class SceneLayer(EntityGroup):
+    def __init__(self, scene, name):
+        super().__init__(name)
         self.scene = scene
         self.name = name
-        self.group = group
-        self.group_subscription = None
         self.sprites = arcade.SpriteList()
         self.visible = True
         self.locked = False
         self.dirty = True
+        self.events = EventSource()
 
     def enable(self):
-        self.group_subscription = self.group.events.subscribe(self.on_group_event)
+        pass
 
     def disable(self):
-        self.group.events.unsubscribe(self.group_subscription)
-
-    def on_group_event(self, event: Event):
-        logger.debug(event)
-        match type(event):
-            case LayerDirtyEvent:
-                self.mark()
+        pass
 
     def mark(self):
         logger.debug('dirty')
         self.dirty = True
+        self.events.publish(LayerDirtyEvent())
 
     def unmark(self):
         self.dirty = False

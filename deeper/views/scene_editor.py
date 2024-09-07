@@ -17,8 +17,8 @@ doc_url = "https://kfields.github.io/deeper/index.html"
 
 
 class SceneEditor(SceneView):
-    def __init__(self, window, world, title=""):
-        super().__init__(window, world, title)
+    def __init__(self, window, scene, title=""):
+        super().__init__(window, scene, title)
         self.windows = {}
 
         self.gui.load_default_font(

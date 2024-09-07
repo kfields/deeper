@@ -16,12 +16,11 @@ class RenderingProcessor(SceneProcessor):
         if not layer.dirty:
             return
         logger.debug(f'processing {layer.name}')
-        layer_group = layer.group
         vu_list = []
 
         layer.clear()
 
-        for ent, (_, block, vu) in self.world.get_components(layer_group.__class__, Block, SpriteVu):
+        for ent, (_, block, vu) in self.world.get_components(layer.__class__, Block, SpriteVu):
             position = self.scene.camera.project(block.position)
             vu.position = position
             #print("position: ", position)

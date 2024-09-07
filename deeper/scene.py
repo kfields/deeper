@@ -1,88 +1,110 @@
+from uuid import uuid4
+
 import glm
 import arcade
 
+from .ecs import World
+from .ecs.component import Component
+from .processors import Processor
+
 from . import Block
-from .layer import Layer
+from .scene_layer import SceneLayer
+from .camera import WorldCamera
 
+from .event import EventSource, LayerDeletedEvent
 
-class Scene:
-    def __init__(self, world, camera):
-        self.world = world
-        self.camera = camera
-        self.processors = []
-        self.layers = []
+class Scene(World):
+    def __init__(self, timed:bool=False):
+        super().__init__(timed)
+        self.camera = WorldCamera(self)
+        self.events = EventSource()
+        self.layers: list[SceneLayer] = []
 
-        for group in world.layers:
-            self.create_layer(group)
+    def create_entity(self, *components: object) -> int:
+        layer = components[0]
+        entity = super().create_entity(*components)
+        for component_instance in components:
+            if not isinstance(component_instance, Component):
+                continue
+            component_instance.create(self, entity, layer)
+        return entity
 
-    def add_processors(self, processors):
+    def delete_entity(self, entity: int, immediate: bool = False) -> None:
+        block = self.component_for_entity(entity, Block)
+        block.layer.mark()
+        super().delete_entity(entity, immediate)
+
+    def add_processor(self, processor: Processor, priority=0) -> None:
+        processor.priority = priority
+        self._processors.append(processor)
+        self._processors.sort(key=lambda proc: proc.priority, reverse=True)
+
+    def remove_processor(self, processor: Processor) -> None:
+        self._processors.remove(processor)
+
+    def add_processors(self, processors: list[Processor]):
         for processor in processors:
             self.add_processor(processor)
 
-    def remove_processors(self, processors):
+    def remove_processors(self, processors: list[Processor]):
         for processor in processors:
             self.remove_processor(processor)
 
-    def add_processor(self, processor):
-        self.processors.append(processor)
-
-    def remove_processor(self, processor):
-        self.processors.remove(processor)
-
-    def new_layer(self):
-        group = self.world.create_layer('Unnamed')
-        layer = self.create_layer(group)
+    def new_layer(self) -> SceneLayer:
+        layer = self.create_layer("Unnamed")
         layer.enable()
         return layer
 
-    def create_layer(self, group):
-        layer = Layer(self, group.name, group)
+    def create_layer(self, name) -> SceneLayer:
+        uid = uuid4()
+        cls_name = f"Layer#{uid}"
+        cls = type(cls_name, (SceneLayer,), {})
+        layer = cls(self, name)
         self.add_layer(layer)
         return layer
 
-    def add_layer(self, layer):
+    def add_layer(self, layer) -> None:
         self.layers.append(layer)
 
-    def remove_layer(self, layer):
+    def remove_layer(self, layer) -> None:
+        self.events.publish(LayerDeletedEvent(layer))
         self.layers.remove(layer)
-        self.world.remove_layer(layer.group)
 
-    def swap_layers(self, i, j):
+    def swap_layers(self, i, j) -> None:
         self.layers[i].mark()
         self.layers[j].mark()
         self.layers[i], self.layers[j] = self.layers[j], self.layers[i]
-        self.world.swap_layers(i, j)
 
-    def mark(self):
+    def mark(self) -> None:
         for layer in self.layers:
             layer.mark()
 
-    def enable(self):
+    def enable(self) -> None:
         self.mark()
-        for processor in self.processors:
+        for processor in self._processors:
             processor.enable()
         for layer in self.layers:
             layer.enable()
 
-    def disable(self):
-        for processor in self.processors:
+    def disable(self) -> None:
+        for processor in self._processors:
             processor.disable()
         for layer in self.layers:
             layer.disable()
 
-    def resize(self, width: int, height: int):
+    def resize(self, width: int, height: int) -> None:
         self.camera.resize(width, height)
 
-    def update(self, delta_time: float):
-        self.world.process(delta_time)
+    def update(self, delta_time: float) -> None:
+        self.process(delta_time)
         self.camera.update()
 
-    def cast_ray(self, ray):
+    def cast_ray(self, ray) -> tuple:
         results = []
         for layer in self.layers:
             if not layer.visible:
                 continue
-            for entity, (_, block) in self.world.get_components(layer.group.__class__, Block):
+            for entity, (_, block) in self.get_components(layer.__class__, Block):
                 result = block.cast_ray(ray)
                 if result:
                     results.append(result)
@@ -97,7 +119,7 @@ class Scene:
         )
         return sorted_results[0]
 
-    def draw(self):
+    def draw(self) -> None:
         self.camera.use()
         for layer in self.layers:
             layer.draw()

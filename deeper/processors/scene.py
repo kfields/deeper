@@ -4,5 +4,5 @@ from . import Processor
 
 class SceneProcessor(Processor):
     def __init__(self, scene) -> None:
-        super().__init__(scene.world)
+        super().__init__(scene)
         self.scene = scene

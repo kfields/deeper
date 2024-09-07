@@ -7,7 +7,9 @@ class Processor(ecs.Processor):
         self.world = world
 
     def enable(self):
-        self.world.add_processor(self)
+        #self.world.add_processor(self)
+        pass
 
     def disable(self):
-        self.world.remove_processor(self)
+        #self.world.remove_processor(self)
+        pass

@@ -25,14 +25,14 @@ class EntityEditorScene(Scene):
 
 class EntityEditor(SceneEditor):
     def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.world, 'Entity Editor')
+        super().__init__(window, edit_state.scene, 'Entity Editor')
         self.edit_state = edit_state
 
-        self.gui.add_child(EntityWindow(self.world, edit_state.entity))
+        self.gui.add_child(EntityWindow(self.scene, edit_state.entity))
 
-        self.block = self.world.component_for_entity(edit_state.entity, Block)
+        self.block = self.scene.component_for_entity(edit_state.entity, Block)
 
-        self.blueprint = self.world.component_for_entity(edit_state.entity, EntityBlueprint)
+        self.blueprint = self.scene.component_for_entity(edit_state.entity, EntityBlueprint)
         self.gui.add_child(ComponentWindow(self.blueprint))
 
         pos = self.block.position

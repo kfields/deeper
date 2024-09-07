@@ -91,7 +91,7 @@ class StampTool(SceneEditTool):
             target = self.hovered.block
             if blueprint:
                 position = self.compute_stamp_position(
-                    blueprint, self.world, target, contact
+                    blueprint, self.scene, target, contact
                 )
                 size = glm.vec3(blueprint.size)
                 self.stamp = Stamp(position, size)
@@ -186,7 +186,7 @@ class StampTool(SceneEditTool):
         #print("stamp")
         if button == mouse.LEFT and self.stamp:
             EntityKit.instance.build(
-                self.edit_state.current_blueprint, self.world, self.edit_state.current_layer, self.stamp.position
+                self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
             )
 
     def draw(self):

@@ -4,7 +4,7 @@ class SceneTool(Tool):
     def __init__(self, view, title='') -> None:
         super().__init__(view, title)
         self.scene = view.scene
-        self.world = view.world
+        #self.world = view.world
         self.camera = view.camera
 
 class SceneEditTool(SceneTool):

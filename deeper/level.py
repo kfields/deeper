@@ -3,12 +3,13 @@ import json
 
 import glm
 
-from .world import World
+#from .world import World
+from .scene import Scene
 from .blueprints import EntityBlueprint
 from .kits.entity_kit import EntityKit
 from .catalog import Catalog
 
-class Level(World):
+class Level(Scene):
     def __init__(self, name: str, timed:bool=False):
         super().__init__(timed)
         self.name: str = name

@@ -20,13 +20,13 @@ from ...scene import Scene
 from ..scene_editor import SceneEditor
 
 class LevelEditorScene(Scene):
-    def __init__(self, world, camera):
-        super().__init__(world, camera)
+    def __init__(self, camera):
+        super().__init__(camera)
         self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
     
 class LevelEditor(SceneEditor):
     def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.world, 'Level Editor')
+        super().__init__(window, edit_state.scene, 'Level Editor')
         self.edit_state = edit_state
 
         self.open_window('Layers')
@@ -56,12 +56,14 @@ class LevelEditor(SceneEditor):
         )
 
     def create_scene(self):
-        self.camera = WorldCamera(self.window)
-        self.scene = LevelEditorScene(self.world, self.camera)
+        exit()
+        #self.camera = WorldCamera(self.window)
+        #self.scene = LevelEditorScene(self.camera)
+        self.scene.camera = WorldCamera(self.window)
 
     def select_layer(self, layer):
-        logger.debug(layer.group)
-        self.edit_state.current_layer = layer.group
+        logger.debug(layer)
+        self.edit_state.current_layer = layer
 
     def use_pick(self):
         self.use_tool(self.pick_tool)

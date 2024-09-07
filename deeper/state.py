@@ -10,17 +10,17 @@ class SnapOption(Enum):
     QUARTER_CELL = 5
 
 class EditState:
-    def __init__(self, world) -> None:
-        self.world = world
+    def __init__(self, scene) -> None:
+        self.scene = scene
         self.current_blueprint = None
 
 class WorldEditState(EditState):
-    def __init__(self, world) -> None:
-        super().__init__(world)
+    def __init__(self, scene) -> None:
+        super().__init__(scene)
         self.snap_option = SnapOption.CENTER
         self.current_layer = None
 
 class EntityEditState(EditState):
-    def __init__(self, world, entity) -> None:
-        super().__init__(world)
+    def __init__(self, scene, entity) -> None:
+        super().__init__(scene)
         self.entity = entity

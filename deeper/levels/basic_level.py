@@ -6,6 +6,8 @@ from deeper import Block
 from deeper.components.sprite_vu import SpriteVu
 from deeper.catalog import Catalog
 
+from deeper.processors import RenderingProcessor, AnimationProcessor
+
 class BasicLevel(Level):
     def __init__(self, rows=32, cols=32, timed=False):
         super().__init__('test', timed)
@@ -14,6 +16,7 @@ class BasicLevel(Level):
         self.create_grid()
         self.create_layer('Floor')
         self.create_layer('Default')
+        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
 
     def create_grid(self):
         catalog = Catalog.instance

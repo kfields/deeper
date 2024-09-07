@@ -51,7 +51,7 @@ class PickTool(SceneEditTool):
     def push_entity_editor(self):
         from deeper.state import EntityEditState
         from deeper.views.entity_editor import EntityEditor
-        self.window.push_view(EntityEditor(self.window, EntityEditState(self.world, self.selected.block)))
+        self.window.push_view(EntityEditor(self.window, EntityEditState(self.scene, self.selected.block)))
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.DELETE and self.selected:

@@ -5,7 +5,7 @@ from .. import Isometry, Cuboid
 from ..ecs.entity import Entity
 
 from .component_builder import ComponentBuilder
-
+from ..scene_layer import SceneLayer
 class Node(Entity):
     def __init__(
         self,
@@ -20,7 +20,7 @@ class Node(Entity):
         self.isometry = Isometry(*position, *self.rotation)
         self.shape = None
         self.size = size
-        self.layer = None
+        self.layer: SceneLayer = None
 
     def create(self, world, entity, layer):
         self.layer = layer
@@ -50,7 +50,7 @@ class Node(Entity):
     def aabb(self):
         return self.shape.aabb(self.isometry)
 
-    def cast_ray(self, ray):
+    def cast_ray(self, ray) -> tuple:
         if self.shape:
             contact = self.shape.cast_ray(self.isometry, ray)
             if contact:

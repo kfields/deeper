@@ -1,11 +1,11 @@
 import glm
 import imgui
 
-from deeper.components.entity_group import EntityLayer
+from deeper.scene_layer import SceneLayer
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
 
 
-class EntityLayerWidget(ComponentWidget):
+class SceneLayerWidget(ComponentWidget):
     def __init__(self, group):
         super().__init__(group)
         self.group = group
@@ -13,6 +13,6 @@ class EntityLayerWidget(ComponentWidget):
     def draw(self):
         super().draw()
 
-class EntityLayerWidgetBuilder(ComponentWidgetBuilder):
-    key = EntityLayer
-    cls = EntityLayerWidget
+class SceneLayerWidgetBuilder(ComponentWidgetBuilder):
+    key = SceneLayer
+    cls = SceneLayerWidget
