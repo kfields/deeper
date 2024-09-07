@@ -8,10 +8,10 @@ from deeper.resources.icons import IconsMaterialDesign
 from .icon import IconToggleButton, Icon, IconButton
 from .menu import Menubar, Menu, MenuItem
 from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, EditableSelectable
-
+from ..scene_layer import SceneLayer
 
 class LayerWidget(SelectableBase):
-    def __init__(self, layer, callback):
+    def __init__(self, layer: SceneLayer, callback):
         self.layer = layer
         self.selectable = EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child), width=128)
         font = pyglet.font.load('Material Icons')
@@ -47,8 +47,18 @@ class LayerWidget(SelectableBase):
         self.selectable.selected = value
 
     def set_visible(self, value):
-        logger.debug(value)
+        logger.debug(f"set_visible: layer={self.layer}, value={value}")
         self.layer.visible = value
+
+    '''
+    @property
+    def visible(self):
+        return self.layer.visible
+    
+    @visible.setter
+    def visible(self, value):
+        self.layer.visible = value
+    '''
 
     def draw(self):
         imgui.begin_group()

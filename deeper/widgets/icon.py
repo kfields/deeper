@@ -1,3 +1,5 @@
+from loguru import logger
+
 import imgui
 
 from deeper.dimgui import Widget
@@ -9,10 +11,6 @@ class Icon(Widget):
         self.text = text
         self.font = font
 
-    def create(self, gui):
-        super().create(gui)
-        return self
-
     def draw(self):
         imgui.text(self.text)
 
@@ -22,10 +20,6 @@ class IconButton(Widget):
         self.text = text
         self.font = font
         self.callback = callback
-
-    def create(self, gui):
-        super().create(gui)
-        return self
 
     def draw(self):
         if imgui.button(self.text):
@@ -41,13 +35,17 @@ class IconToggleButton(Widget):
         self.on = on
         self.callback = callback
 
-    def create(self, gui):
-        super().create(gui)
-        return self
-
+    def __str__(self) -> str:
+        return f"IconToggleButton: on={self.on}"
+    
+    def __repr__(self) -> str:
+        return self.__repr__()
+    
     def draw(self):
         text = self.on_text if self.on else self.off_text
+        text += f"##{str(self.id)}" # Can't have buttons with the same text
         if imgui.button(text):
+            logger.debug(self)
             self.on = not self.on
             self.callback(self.on)
             return True

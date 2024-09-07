@@ -18,6 +18,12 @@ class SceneLayer(EntityGroup):
         self.dirty = True
         self.events = EventSource()
 
+    def __str__(self) -> str:
+        return f"Layer({self.name})"
+    
+    def __repr__(self) -> str:
+        return self.__str__()
+    
     def enable(self):
         pass
 

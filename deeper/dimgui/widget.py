@@ -1,6 +1,9 @@
+from uuid import uuid4
+
 class Widget:
     _parent: None
     def __init__(self, children=[]):
+        self.id = uuid4()
         self.children = []
         self.add_children(children)
         self.gui = None
