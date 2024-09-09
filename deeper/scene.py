@@ -1,7 +1,10 @@
 from uuid import uuid4
 
 import glm
-import arcade
+
+from loguru import logger
+
+from crunge.engine import Renderer
 
 from .ecs import World
 from .ecs.component import Component
@@ -16,7 +19,8 @@ from .event import EventSource, LayerDeletedEvent
 class Scene(World):
     def __init__(self, timed:bool=False):
         super().__init__(timed)
-        self.camera = WorldCamera(self)
+        #self.camera = WorldCamera()
+        self.camera: WorldCamera = None
         self.events = EventSource()
         self.layers: list[SceneLayer] = []
 
@@ -92,12 +96,12 @@ class Scene(World):
         for layer in self.layers:
             layer.disable()
 
-    def resize(self, width: int, height: int) -> None:
-        self.camera.resize(width, height)
+    def resize(self, size: glm.ivec2) -> None:
+        self.camera.resize(size)
 
     def update(self, delta_time: float) -> None:
         self.process(delta_time)
-        self.camera.update()
+        self.camera.update(delta_time)
 
     def cast_ray(self, ray) -> tuple:
         results = []
@@ -119,10 +123,9 @@ class Scene(World):
         )
         return sorted_results[0]
 
-    def draw(self) -> None:
-        self.camera.use()
+    def draw(self, renderer: Renderer) -> None:
         for layer in self.layers:
-            layer.draw()
+            layer.draw(renderer)
 
         """
         pos = self.camera.project(self.camera.target).xy
@@ -132,6 +135,7 @@ class Scene(World):
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
         """
 
+    '''
     def draw_aabb(self, aabb, color=arcade.color.YELLOW):
         bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
         bbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz))
@@ -158,3 +162,4 @@ class Scene(World):
         arcade.draw_line(fbl.x, fbl.y, ftl.x, ftl.y, color)
         arcade.draw_line(bbr.x, bbr.y, btr.x, btr.y, color)
         arcade.draw_line(fbr.x, fbr.y, ftr.x, ftr.y, color)
+    '''

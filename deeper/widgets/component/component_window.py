@@ -1,4 +1,5 @@
-from deeper.dimgui import Window
+from crunge.engine.imgui.widget import Window
+
 from deeper.kits.component_widget_kit import ComponentWidgetKit
 
 class ComponentWindow(Window):

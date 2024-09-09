@@ -1,4 +1,7 @@
-import arcade
+#import arcade
+
+from crunge.engine.loader.texture_loader import TextureLoader
+from crunge.engine.d2.sprite import Sprite
 
 from ..constants import *
 from ..level import Level
@@ -7,6 +10,7 @@ from deeper.components.sprite_vu import SpriteVu
 from deeper.catalog import Catalog
 
 from deeper.processors import RenderingProcessor, AnimationProcessor
+
 
 class BasicLevel(Level):
     def __init__(self, rows=32, cols=32, timed=False):
@@ -30,8 +34,8 @@ class BasicLevel(Level):
                 # print("position: ", position)
                 block = Block(position, size)
                 vu = SpriteVu(
-                    arcade.Sprite(
-                        ':deeper:tiles/_Grid/GRID.png',
+                    Sprite(
+                        TextureLoader().load('{deeper}/tiles/_Grid/GRID.png'),
                     )
                 )
                 self.create_entity(layer, blueprint, block, vu)

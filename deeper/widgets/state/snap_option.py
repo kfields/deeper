@@ -1,6 +1,8 @@
-import imgui
+from crunge import imgui
+from crunge.engine.imgui.widget import Widget
+from crunge.engine import Renderer
+
 from deeper.state import SnapOption
-from deeper.dimgui import Widget
 from deeper.widgets.button import RadioButton, RadioButtonGroup
 
 class SnapOptionWidget(Widget):
@@ -22,8 +24,8 @@ class SnapOptionWidget(Widget):
     def set_snap(self, value):
         self.edit_state.snap_option = value
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         imgui.text('SnapOption')
         imgui.begin_child('SnapOption', 0, 0, border=True)
-        super().draw()
+        super().draw(renderer)
         imgui.end_child()

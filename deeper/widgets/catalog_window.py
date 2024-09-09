@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from PIL import Image
-import imgui
-from arcade.resources import resolve_resource_path
+from crunge import imgui
 
-from deeper.dimgui import Widget, Window
+from crunge.engine.resource.resource_manager import ResourceManager
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Widget, Window
+
 from .menu import Menubar, Menu, MenuItem
 
 class BlueprintWidget(Widget):
@@ -14,8 +16,8 @@ class BlueprintWidget(Widget):
         self.selected = False
         self.texture = None
 
-    def create(self, gui):
-        super().create(gui)
+    def _create(self):
+        super()._create()
         """
         path = resolve_resource_path(self.blueprint.image)
         with Image.open(path) as image:
@@ -23,13 +25,14 @@ class BlueprintWidget(Widget):
             self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
         """
         image = self.blueprint.thumbnail
-        self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
+        self.texture = self.gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
         return self
 
-    def draw(self):
-        clicked, selected = imgui.selectable(self.blueprint.name, self.selected, width=128)
+    def draw(self, renderer: Renderer):
+        #clicked, selected = imgui.selectable(self.blueprint.name, self.selected, width=128)
+        clicked, selected = imgui.selectable(self.blueprint.name, self.selected, size=(-1, 128))
         imgui.same_line()
-        imgui.image(self.texture.glo, *self.texture.size)
+        #imgui.image(self.texture.glo, *self.texture.size)
         return clicked
 
 class CategoryWidget(Widget):
@@ -50,10 +53,11 @@ class CategoryWidget(Widget):
             self.selection.selected = False
         self.selection = None
 
-    def draw(self):
-        imgui.begin_child('entities', -1, -1, border=True)
+    def draw(self, renderer: Renderer):
+        #imgui.begin_child('entities', -1, -1, border=True)
+        imgui.begin_child('entities', (-1, -1), border=True)
         for widget in self.children:
-            clicked = widget.draw()
+            clicked = widget.draw(renderer)
             if clicked:
                 if self.selection:
                     self.selection.selected = False
@@ -77,13 +81,13 @@ class CatalogPanel(Widget):
                 self.category_names.append(category.name)
                 self.category_widgets.append(CategoryWidget(category, callback))
 
-    def create(self, gui):
-        super().create(gui)
+    def _create(self):
+        super()._create()
         for widget in self.category_widgets:
-            widget.create(gui)
+            widget.create(self.gui)
         return self
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         clicked, self.current_index = imgui.combo(
             'Category', self.current_index, self.category_names
         )
@@ -93,7 +97,7 @@ class CatalogPanel(Widget):
                 self.current.hide()
             current.show()
         self.current = current
-        self.current.draw()
+        self.current.draw(renderer)
 
 class CatalogWindow(Window):
 
@@ -102,9 +106,9 @@ class CatalogWindow(Window):
         children = [
             Menubar([
                 Menu('File', [
-                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(resolve_resource_path(':deeper:catalog')))
+                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(ResourceManager.resolve_path('{deeper}/catalog')))
                 ])
             ]),
             CatalogPanel(catalog, callback)
         ]
-        super().__init__('Catalog', children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)
+        super().__init__('Catalog', children, on_close=on_close, flags=imgui.WINDOW_FLAGS_MENU_BAR)

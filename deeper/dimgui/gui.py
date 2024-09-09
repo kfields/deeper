@@ -2,9 +2,9 @@ from pathlib import Path
 
 import imgui
 
-from pyglet import clock
-from pyglet import event
-from pyglet.window import key, mouse
+#from pyglet import clock
+#from pyglet import event
+#from pyglet.window import key, mouse
 
 from .renderer import GuiRenderer
 from .widget import Widget
@@ -202,7 +202,7 @@ class Gui(GuiBase):
             imgui.push_font(self.default_font)
 
     def finish_render(self):
-        self.draw()
+        self.draw(renderer)
         if self.default_font:
             imgui.pop_font()
         imgui.end_frame()

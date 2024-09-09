@@ -38,11 +38,11 @@ class Node(Entity):
             child.position = position + child.transform
 
     @property
-    def size(self):
+    def size(self) -> glm.vec3:
         return self._size
 
     @size.setter
-    def size(self, size):
+    def size(self, size: glm.vec3):
         self._size = size
         self.shape = Cuboid(size.x, size.y, size.z)
 

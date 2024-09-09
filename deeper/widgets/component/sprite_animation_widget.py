@@ -1,4 +1,5 @@
-import imgui
+from crunge import imgui
+from crunge.engine import Renderer
 
 from deeper.setting import AttrSetting, Vec2SettingVType
 from deeper.widgets.setting import DragWrapper
@@ -15,7 +16,7 @@ class SpriteAnimationWidget(ComponentWidget):
         super().__init__(animation)
         self.animation = animation
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         changed, rate = imgui.drag_float(
             'Rate',
             self.animation.rate,

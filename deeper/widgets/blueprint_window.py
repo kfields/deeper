@@ -8,7 +8,7 @@ class BlueprintPanel(Widget):
         super().__init__()
         self.blueprint = blueprint
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         pass
 
 class BlueprintWindow(Window):

@@ -10,113 +10,113 @@ Object:
 Barrel:
   extends: Object
   size: [0.4300000071525574, 0.75, 0.5]
-  image: :deeper:tiles/Objects/Barrel.png
+  image: {deeper}/tiles/Objects/Barrel.png
   offset: [0.10999999940395355, 0.0]
 Barrel2:
   extends: Object
   size: [0.8600000143051147, 0.75, 1.0]
-  image: :deeper:tiles/Objects/Barrel2.png
+  image: {deeper}/tiles/Objects/Barrel2.png
   offset: [0.07000000029802322, -0.07000000029802322]
 BarrelOpen:
   extends: Object
   size: [0.8600000143051147, 0.75, 1.0]
-  image: :deeper:tiles/Objects/BarrelOpen.png
+  image: {deeper}/tiles/Objects/BarrelOpen.png
   offset: [0.07000000029802322, 0.0]
 BlueCrystal:
   extends: Object
   size: [0.8600000143051147, 0.75, 1.0]
-  image: :deeper:tiles/Objects/BlueCrystal.png
+  image: {deeper}/tiles/Objects/BlueCrystal.png
 BlueCrystal2:
   extends: Object
   size: [0.8600000143051147, 0.75, 1.0]
-  image: :deeper:tiles/Objects/BlueCrystal2.png
+  image: {deeper}/tiles/Objects/BlueCrystal2.png
 BlueCrystal3:
   extends: Object
   size: [0.6449999809265137, 0.75, 0.75]
-  image: :deeper:tiles/Objects/BlueCrystal3.png
+  image: {deeper}/tiles/Objects/BlueCrystal3.png
   offset: [0.009999999776482582, -0.14000000059604645]
 Box1:
   extends: Object
   size: [0.6449999809265137, 0.5, 0.75]
-  image: :deeper:tiles/Objects/Box1.png
+  image: {deeper}/tiles/Objects/Box1.png
   offset: [0.10999999940395355, 0.0]
 Box1b:
   extends: Object
   size: [0.6449999809265137, 0.5, 0.75]
-  image: :deeper:tiles/Objects/Box1b.png
+  image: {deeper}/tiles/Objects/Box1b.png
 Box1fun:
   extends: Object
   size: [0.6449999809265137, 0.75, 0.75]
-  image: :deeper:tiles/Objects/Box1fun.png
+  image: {deeper}/tiles/Objects/Box1fun.png
   offset: [0.10000000149011612, -0.07000000029802322]
 Box2:
   extends: Object
   size: [0.6449999809265137, 0.6000000238418579, 0.75]
-  image: :deeper:tiles/Objects/Box2.png
+  image: {deeper}/tiles/Objects/Box2.png
   offset: [0.07999999821186066, 0.0]
 Box2b:
   extends: Object
   size: [0.8600000143051147, 1.25, 1.0]
-  image: :deeper:tiles/Objects/Box2b.png
+  image: {deeper}/tiles/Objects/Box2b.png
   offset: [0.05000000074505806, -0.11999999731779099]
 Chest:
   extends: Object
   size: [0.6449999809265137, 0.5, 0.5]
-  image: :deeper:tiles/Objects/Chest.png
+  image: {deeper}/tiles/Objects/Chest.png
   offset: [0.09000000357627869, -0.029999999329447746]
 ChestOpen:
   extends: Object
   size: [0.6449999809265137, 0.5, 0.5]
-  image: :deeper:tiles/Objects/ChestOpen.png
+  image: {deeper}/tiles/Objects/ChestOpen.png
   offset: [0.03999999910593033, -0.029999999329447746]
 GreenCrystal:
   extends: Object
   size: [0.8600000143051147, 0.5, 1.0]
-  image: :deeper:tiles/Objects/GreenCrystal.png
+  image: {deeper}/tiles/Objects/GreenCrystal.png
 GreenCrystal2:
   extends: Object
   size: [0.8600000143051147, 0.5, 1.0]
-  image: :deeper:tiles/Objects/GreenCrystal2.png
+  image: {deeper}/tiles/Objects/GreenCrystal2.png
 Halo:
   extends: Object
   size: [0.86, 0.01, 1]
-  image: :deeper:tiles/Objects/Halo.png
+  image: {deeper}/tiles/Objects/Halo.png
 HaloCyan:
   extends: Object
   size: [0.86, 0.01, 1]
-  image: :deeper:tiles/Objects/HaloCyan.png
+  image: {deeper}/tiles/Objects/HaloCyan.png
 Light1:
   extends: Object
   size: [0.8600000143051147, 0.25, 1.0]
-  image: :deeper:tiles/Objects/Light1.png
+  image: {deeper}/tiles/Objects/Light1.png
   offset: [0.0, -0.12999999523162842]
 Light2:
   extends: Object
   size: [0.43, 0.5, 0.5]
-  image: :deeper:tiles/Objects/Light2.png
+  image: {deeper}/tiles/Objects/Light2.png
 LightMushroom1:
   extends: Object
   size: [0.4300000071525574, 0.5, 0.5]
-  image: :deeper:tiles/Objects/LightMushroom1.png
+  image: {deeper}/tiles/Objects/LightMushroom1.png
   offset: [0.0, -0.14000000059604645]
 LightMushroom2:
   extends: Object
   size: [0.43, 0.5, 0.5]
-  image: :deeper:tiles/Objects/LightMushroom2.png
+  image: {deeper}/tiles/Objects/LightMushroom2.png
 LightMushroom3:
   extends: Object
   size: [0.4300000071525574, 0.5, 0.5]
-  image: :deeper:tiles/Objects/LightMushroom3.png
+  image: {deeper}/tiles/Objects/LightMushroom3.png
   offset: [-0.03999999910593033, -0.11999999731779099]
 RedCrystal:
   extends: Object
   size: [0.43, 0.75, 0.5]
-  image: :deeper:tiles/Objects/RedCrystal.png
+  image: {deeper}/tiles/Objects/RedCrystal.png
 RedCrystal2:
   extends: Object
   size: [0.43, 0.75, 0.5]
-  image: :deeper:tiles/Objects/RedCrystal2.png
+  image: {deeper}/tiles/Objects/RedCrystal2.png
 RedCrystal4:
   extends: Object
   size: [0.43, 0.75, 0.5]
-  image: :deeper:tiles/Objects/RedCrystal4.png
+  image: {deeper}/tiles/Objects/RedCrystal4.png

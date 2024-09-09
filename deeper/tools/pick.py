@@ -1,9 +1,11 @@
 from loguru import logger
 
-from pyglet import clock
-import pyglet.window.mouse as mouse
-import arcade
-from arcade import key
+#from pyglet import clock
+#import pyglet.window.mouse as mouse
+#import arcade
+#from arcade import key
+
+from crunge.engine import Renderer
 
 from .scene_tool import SceneEditTool
 
@@ -51,6 +53,7 @@ class PickTool(SceneEditTool):
     def push_entity_editor(self):
         from deeper.state import EntityEditState
         from deeper.views.entity_editor import EntityEditor
+        #self.window.push_view(EntityEditor(self.window, EntityEditState(self.scene, self.selected.block)))
         self.window.push_view(EntityEditor(self.window, EntityEditState(self.scene, self.selected.block)))
 
     def on_key_press(self, symbol: int, modifiers: int):
@@ -62,7 +65,7 @@ class PickTool(SceneEditTool):
         elif symbol == key.ESCAPE:
             self.selected = None
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if self.hovered:
             pos = self.camera.project(self.hovered.position)
             #print("self.hovered.position: ", self.hovered.position)

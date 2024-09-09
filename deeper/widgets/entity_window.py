@@ -1,18 +1,20 @@
-import pyglet
-import imgui
+#import pyglet
+from crunge import imgui
+from crunge.engine import Renderer
 
-from deeper.dimgui import Widget, Window
+from crunge.engine.imgui.widget import Widget, Window
+
 from deeper.kits.component_widget_kit import ComponentWidgetKit
 
 class EntityPanel(Widget):
     def __init__(self, children=...):
         super().__init__(children)
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         for child in self.children:
             expanded, child.visible = imgui.collapsing_header(child.name, child.visible)
             if expanded:
-                child.draw()
+                child.draw(renderer)
         return True
 
 class EntityWindow(Window):

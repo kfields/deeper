@@ -1,10 +1,10 @@
 from pathlib import Path
 import shutil
+import glm
 
-import arcade
-from arcade.resources import resolve_resource_path
+from crunge.engine.resource.resource_manager import ResourceManager
 
-from .window import Window
+from crunge.engine.app import App
 from .constants import *
 from .levels.basic_level import BasicLevel
 
@@ -13,14 +13,15 @@ from .views import LevelEditor
 from .database import Database
 
 
-class Deeper(Window):
+class Deeper(App):
     def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, 'Deeper', resizable=True)
+        super().__init__(glm.ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), 'Deeper', resizable=True)
         self.scene = BasicLevel()
     
-    def create(self):
+    def _create(self):
+        super()._create()
         self.load_settings()
-        view = LevelEditor(self, WorldEditState(self.scene))
+        view = LevelEditor(WorldEditState(self.scene)).create(self)
         self.show_view(view)
 
     def destroy(self):
@@ -29,12 +30,12 @@ class Deeper(Window):
     def load_settings(self):
         dst = Path('imgui.ini')
         if not dst.exists():
-            src = resolve_resource_path(':deeper:settings/imgui.ini')
+            src = ResourceManager().resolve_path('{deeper}/settings/imgui.ini')
             shutil.copyfile(src, dst)
 
     def save_settings(self):
         src = Path('imgui.ini')
-        dst = resolve_resource_path(':deeper:settings/imgui.ini')
+        dst = ResourceManager().resolve_path('{deeper}/settings/imgui.ini')
         shutil.copyfile(src, dst)
 
 def main():
@@ -44,10 +45,7 @@ def main():
     with db.Session() as session:
         with session.begin():
             db.session = session
-            app = Deeper()
-            app.create()
-            arcade.run()
-            app.destroy()
+            Deeper().create().run().destroy()
     db.end()
 
 

@@ -1,5 +1,7 @@
 import glm
-import imgui
+
+from crunge import imgui
+from crunge.engine import Renderer
 
 from deeper.components.block import Block
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
@@ -10,7 +12,7 @@ class BlockWidget(ComponentWidget):
         super().__init__(block)
         self.block = block
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         changed, position = imgui.drag_float3(
             'Position', *self.block.position, change_speed=0.1
         )

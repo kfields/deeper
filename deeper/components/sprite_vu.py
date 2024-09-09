@@ -1,14 +1,14 @@
 from loguru import logger
 
-import arcade
+from crunge.engine.d2.sprite import Sprite
 
 from deeper.constants import *
 from .vu import Vu
 from .component_builder import ComponentBuilder
 
 class SpriteVu(Vu):
-    sprite: arcade.Sprite = None
-    def __init__(self, sprite: arcade.Sprite, offset=DEFAULT_VEC2) -> None:
+    sprite: Sprite = None
+    def __init__(self, sprite: Sprite, offset=DEFAULT_VEC2) -> None:
         super().__init__()
         self.sprite = sprite
         self._offset = offset
@@ -32,6 +32,5 @@ class SpriteVuBuilder(ComponentBuilder):
 
     def build(self, blueprint, world):
         offset = glm.vec2(blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
-        sprite = arcade.Sprite()
-        sprite.texture = blueprint.texture
+        sprite = Sprite(blueprint.texture)
         return SpriteVu(sprite, offset)

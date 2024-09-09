@@ -1,9 +1,10 @@
 from loguru import logger
 
-import imgui
-import pyglet
+from crunge import imgui
 
-from deeper.dimgui import Widget, Window
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Widget, Window
+
 from deeper.resources.icons import IconsMaterialDesign
 from .icon import IconToggleButton, Icon, IconButton
 from .menu import Menubar, Menu, MenuItem
@@ -14,7 +15,8 @@ class LayerWidget(SelectableBase):
     def __init__(self, layer: SceneLayer, callback):
         self.layer = layer
         self.selectable = EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child), width=128)
-        font = pyglet.font.load('Material Icons')
+        #font = pyglet.font.load('Material Icons')
+        font = None
         super().__init__(
             layer.name,
             callback,
@@ -60,13 +62,13 @@ class LayerWidget(SelectableBase):
         self.layer.visible = value
     '''
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         imgui.begin_group()
-        super().draw()
+        super().draw(renderer)
         imgui.end_group()
 
-    def draw_child(self, child):
-        super().draw_child(child)
+    def draw_child(self, renderer: Renderer, child):
+        super().draw_child(renderer, child)
         if child != self.children[-1]:
             imgui.same_line()
 
@@ -85,16 +87,19 @@ class LayersPanel(ExclusiveSelectableGroup):
     def on_swap(self, i, j):
         self.scene.swap_layers(i, j)
 
-    def draw(self):
-        imgui.begin_child('layers', -1, -1)
-        imgui.push_style_color(imgui.COLOR_BUTTON, 0.0, 0.0, 0.0)
-        #super().draw()
+    def draw(self, renderer: Renderer):
+        #imgui.begin_child('layers', -1, -1)
+        #imgui.begin_child('layers', border=True)
+        imgui.begin_child('layers', (-1, -1))
+        #imgui.push_style_color(imgui.Col.COL_BUTTON, 0.0, 0.0, 0.0)
+        #imgui.push_style_color(imgui.Col.COL_BUTTON.value, imgui.Vec4(0.0, 0.0, 0.0, 0.0))
+        #super().draw(renderer)
         self.draw_sortable(self.on_swap)
-        imgui.pop_style_color(1)
+        #imgui.pop_style_color(1)
         imgui.end_child()
 
-    def draw_child(self, child):
-        super().draw_child(child)
+    def draw_child(self, renderer: Renderer, child):
+        super().draw_child(renderer, child)
         self.draw_child_context_popup(child)
 
     def draw_child_context_popup(self, child):
@@ -119,7 +124,7 @@ class LayersWindow(Window):
             self.panel
         ]
 
-        super().__init__('Layers', children, on_close=on_close, flags=imgui.WINDOW_MENU_BAR)
+        super().__init__('Layers', children, on_close=on_close, flags=imgui.WINDOW_FLAGS_MENU_BAR)
         self.scene = scene
 
     def new_layer(self):

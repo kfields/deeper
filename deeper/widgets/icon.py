@@ -1,8 +1,9 @@
 from loguru import logger
 
-import imgui
+from crunge import imgui
 
-from deeper.dimgui import Widget
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Widget
 
 
 class Icon(Widget):
@@ -11,7 +12,7 @@ class Icon(Widget):
         self.text = text
         self.font = font
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         imgui.text(self.text)
 
 class IconButton(Widget):
@@ -21,7 +22,7 @@ class IconButton(Widget):
         self.font = font
         self.callback = callback
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if imgui.button(self.text):
             self.callback()
             return True
@@ -41,7 +42,7 @@ class IconToggleButton(Widget):
     def __repr__(self) -> str:
         return self.__repr__()
     
-    def draw(self):
+    def draw(self, renderer: Renderer):
         text = self.on_text if self.on else self.off_text
         text += f"##{str(self.id)}" # Can't have buttons with the same text
         if imgui.button(text):

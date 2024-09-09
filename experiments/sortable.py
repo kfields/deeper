@@ -10,7 +10,7 @@ class Sortable(SelectableGroup):
         self.drag_index = -1
         self.dragging = None
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         hovered_index = -1
         for i, child in enumerate(self.children):
             self.draw_child(child)            

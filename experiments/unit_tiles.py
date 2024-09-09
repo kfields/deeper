@@ -142,7 +142,7 @@ class Deeper(arcade.Window):
         sorted_spaces = sorted(self.block.children, key=lambda block: block.position.z)
         for block in sorted_spaces:
             sprite = arcade.Sprite(
-                ":deeper:tiles/FloorD3.png"
+                "{deeper}/tiles/FloorD3.png"
             )
             position = self.camera.project(block.position).xy
             print("position: ", position)
@@ -152,7 +152,7 @@ class Deeper(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.camera.use()
-        self.tiles.draw()
+        self.tiles.draw(renderer)
 
         #self.draw_aabbs()
 

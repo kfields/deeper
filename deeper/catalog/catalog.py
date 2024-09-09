@@ -2,7 +2,8 @@ import glob
 import re
 
 from loguru import logger
-from arcade.resources import resolve_resource_path
+
+from crunge.engine.resource.resource_manager import ResourceManager
 
 from deeper.database import Database
 import deeper.blueprints
@@ -73,7 +74,7 @@ class Catalog(Kit):
         return self.blueprints[name]
 
     def load(self):
-        root = resolve_resource_path(':deeper:catalog')
+        root = ResourceManager().resolve_path('{deeper}/catalog')
         db = Database.instance
         session = db.session
         first = session.query(EntityBlueprint).first()

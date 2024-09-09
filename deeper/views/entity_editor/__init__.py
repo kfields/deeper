@@ -1,5 +1,7 @@
-import pyglet
-from pyglet import clock
+#import pyglet
+#from pyglet import clock
+
+from crunge.engine import Renderer
 
 from deeper import Block
 from deeper.blueprints import EntityBlueprint
@@ -17,11 +19,6 @@ from deeper.widgets.component.component_window import ComponentWindow
 from ...scene import Scene
 from ..scene_editor import SceneEditor
 
-
-class EntityEditorScene(Scene):
-    def __init__(self, world, camera):
-        super().__init__(world, camera)
-        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
 
 class EntityEditor(SceneEditor):
     def __init__(self, window, edit_state):
@@ -55,10 +52,6 @@ class EntityEditor(SceneEditor):
             )
         )
 
-    def create_scene(self):
-        self.camera = WorldCamera(self.window)
-        self.scene = EntityEditorScene(self.world, self.camera)
-
     def close(self):
         #self.window.pop_view()
         clock.schedule_once(lambda dt, *args, **kwargs : self.window.pop_view(), 0)
@@ -66,6 +59,6 @@ class EntityEditor(SceneEditor):
     def use_pick(self):
         self.use_tool(self.pick_tool)
 
-    def draw(self):
-        super().draw()
+    def draw(self, renderer: Renderer):
+        super().draw(renderer)
         self.scene.draw_aabb(self.block.aabb)

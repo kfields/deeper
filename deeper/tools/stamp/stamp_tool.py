@@ -1,15 +1,17 @@
 import glm
 
-import pyglet.window.mouse as mouse
-import arcade
-from arcade import key
+#import pyglet.window.mouse as mouse
+#import arcade
+#from arcade import key
+from crunge.engine.imgui.widget import Window
+from crunge.engine import Renderer
+
 
 from deeper import Isometry, Cuboid, Block
 from deeper.constants import *
 from deeper.kits import EntityKit
 from ..scene_tool import SceneEditTool
 
-from deeper.dimgui import Window
 from .stamp_widget import StampToolWidget
 from deeper.state import SnapOption
 
@@ -189,7 +191,7 @@ class StampTool(SceneEditTool):
                 self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
             )
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if self.hovered:
             pos = self.camera.project(self.hovered.position).xy
             #arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)

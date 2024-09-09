@@ -8,8 +8,8 @@ class Dragger(Widget):
         #self.button = button
         self.callback = callback
 
-    def draw(self):
-        super().draw()
+    def draw(self, renderer: Renderer):
+        super().draw(renderer)
         if imgui.begin_drag_drop_source():
             self.callback()
             imgui.end_drag_drop_source()

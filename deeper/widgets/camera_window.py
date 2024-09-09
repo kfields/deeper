@@ -1,14 +1,14 @@
-import glm
-import imgui
+from crunge import imgui
 
-from deeper.dimgui import Widget, Window
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Widget, Window
 
 class CameraPanel(Widget):
     def __init__(self, camera):
         super().__init__()
         self.camera = camera
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         imgui.input_float3(
             'Position', *self.camera.position, flags=imgui.INPUT_TEXT_READ_ONLY
         )

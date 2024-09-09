@@ -1,6 +1,8 @@
-import imgui
+from crunge import imgui
 
-from deeper.dimgui import Widget
+from crunge.engine import Renderer
+
+from crunge.engine.imgui.widget import Widget
 
 class Button(Widget):
     def __init__(self, label, callback, small=False):
@@ -9,7 +11,7 @@ class Button(Widget):
         self.callback = callback
         self.small = small
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         clicked = imgui.small_button(self.label) if self.small else imgui.button(self.label)
         if clicked:
             self.callback()
@@ -21,7 +23,7 @@ class RadioButton(Widget):
         self.callback = callback
         self.active = active
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         changed = imgui.radio_button(self.label, self.active)
         if changed:
             self.active = not self.active

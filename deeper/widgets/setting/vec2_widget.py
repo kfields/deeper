@@ -1,5 +1,7 @@
 import glm
-import imgui
+
+from crunge import imgui
+from crunge.engine import Renderer
 
 from deeper.setting import Vec2Setting, Vec2SettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
@@ -10,7 +12,7 @@ class Vec2Widget(SettingWidget):
         super().__init__(setting)
         self.change_speed = change_speed
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         changed, value = imgui.drag_float2(self.name, *self.value, change_speed=self.change_speed)
         if changed:
             self.value = glm.vec2(*value)

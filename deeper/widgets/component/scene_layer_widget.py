@@ -1,5 +1,5 @@
-import glm
-import imgui
+from crunge import imgui
+from crunge.engine import Renderer
 
 from deeper.scene_layer import SceneLayer
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
@@ -10,8 +10,6 @@ class SceneLayerWidget(ComponentWidget):
         super().__init__(group)
         self.group = group
 
-    def draw(self):
-        super().draw()
 
 class SceneLayerWidgetBuilder(ComponentWidgetBuilder):
     key = SceneLayer

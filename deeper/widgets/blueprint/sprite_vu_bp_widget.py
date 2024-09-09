@@ -1,5 +1,7 @@
 import glm
-import imgui
+
+from crunge import imgui
+from crunge.engine import Renderer
 
 from deeper.blueprints.component.sprite_vu_blueprint import SpriteVuBlueprint
 from .blueprint_widget import BlueprintWidget, BlueprintWidgetBuilder
@@ -9,7 +11,7 @@ class SpriteVuBpWidget(BlueprintWidget):
         super().__init__(blueprint)
         self.blueprint = blueprint
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         changed, offset = imgui.drag_float2(
             'Offset', *self.blueprint.offset, change_speed=0.1
         )

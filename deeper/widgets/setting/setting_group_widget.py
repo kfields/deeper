@@ -1,8 +1,9 @@
 from loguru import logger
 
-import imgui
+from crunge import imgui
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Window
 
-from deeper.dimgui import Window
 from deeper.widgets import Selectable, SelectableGroup
 
 from deeper.setting import SettingGroup, SettingGroupVType
@@ -24,10 +25,10 @@ class SettingGroupWidget(SettingWidget):
                 )
         super().__init__(setting, children)
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if imgui.tree_node(self.name):
             self.draw_context_popup()
-            super().draw()
+            super().draw(renderer)
             imgui.tree_pop()
 
     def draw_context_popup(self):

@@ -1,6 +1,7 @@
-import imgui
+from crunge import imgui
 
-from deeper.dimgui import Widget
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Widget
 
 class MenuItem(Widget):
     def __init__(self, label, callback, shortcut=None, selected=False, enabled=True ):
@@ -11,7 +12,7 @@ class MenuItem(Widget):
         self.selected = selected
         self.enabled = enabled
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         clicked, selected = imgui.menu_item(
             self.label, self.shortcut, self.selected, self.enabled
         )
@@ -24,9 +25,9 @@ class Menu(Widget):
         self.label = label
         self.enabled = enabled
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if imgui.begin_menu(self.label, self.enabled):
-            super().draw()
+            super().draw(renderer)
             imgui.end_menu()
 
 
@@ -34,16 +35,16 @@ class Menubar(Widget):
     def __init__(self, children=[]):
         super().__init__(children=children)
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if imgui.begin_menu_bar():
-            super().draw()
+            super().draw(renderer)
             imgui.end_menu_bar()
 
 class MainMenubar(Widget):
     def __init__(self, children=[]):
         super().__init__(children=children)
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if imgui.begin_main_menu_bar():
-            super().draw()
+            super().draw(renderer)
             imgui.end_main_menu_bar()

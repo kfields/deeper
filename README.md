@@ -2,7 +2,7 @@
 
 [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
 
-Dungeon RPG using [The Python Arcade Library](https://arcade.academy/)
+Dungeon RPG using [Crunge](https://github.com/crungelab/crunge)
 
 Tiles courtesy of [Dragosha](https://dragosha.com/free/dungeon-part-1-tiles.html)
 

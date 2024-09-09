@@ -1,4 +1,4 @@
-import arcade
+#import arcade
 
 from deeper.constants import *
 from .animation import Animation, AnimationDirection
@@ -25,7 +25,7 @@ class SpriteAnimation(Animation):
         for i in range(frames):
             texture_coords.append((i * image_width, 0, image_width, image_height))
 
-        self.textures = arcade.load_textures(filename, texture_coords)
+        #self.textures = arcade.load_textures(filename, texture_coords)
         self.cur_texture_index = 0
         self.texture = self.textures[self.cur_texture_index]
         self.sprite = None

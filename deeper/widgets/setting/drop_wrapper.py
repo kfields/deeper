@@ -1,7 +1,7 @@
-import pyglet
-import imgui
+from crunge import imgui
 
-from deeper.dimgui import Widget
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Widget
 
 from .. import IconButton
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
@@ -13,16 +13,17 @@ class DropWrapper(Widget):
         super().__init__([wrapped])
         self.wrapped = wrapped
 
-    def create(self, gui):
-        super().create(gui)
+    def _create(self, gui):
+        super()._create(gui)
         if not DropWrapper.drag_icon:
-            font = pyglet.font.load('Material Icons')
+            #font = pyglet.font.load('Material Icons')
+            font = None
             DropWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR, font)
-            self.drag_icon.create(gui)
+            self.drag_icon.create(self.gui)
         return self
 
-    def draw(self):
-        super().draw()
+    def draw(self, renderer: Renderer):
+        super().draw(renderer)
         if imgui.begin_drag_drop_target():
             payload = imgui.accept_drag_drop_payload('itemtype')
             if payload is not None:

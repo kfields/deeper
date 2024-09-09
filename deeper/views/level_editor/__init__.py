@@ -1,8 +1,6 @@
 from loguru import logger
 
-import glm
-import pyglet
-
+from crunge.engine import Renderer
 
 from deeper.constants import *
 from deeper.camera import WorldCamera
@@ -19,25 +17,24 @@ from deeper.widgets.toolbar import Toolbar, ToolButton
 from ...scene import Scene
 from ..scene_editor import SceneEditor
 
-class LevelEditorScene(Scene):
-    def __init__(self, camera):
-        super().__init__(camera)
-        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
-    
+
 class LevelEditor(SceneEditor):
-    def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.scene, 'Level Editor')
+    def __init__(self, edit_state):
+        super().__init__(edit_state.scene, 'Level Editor')
         self.edit_state = edit_state
 
+    def _create(self, window):
+        super()._create(window)
         self.open_window('Layers')
 
         self.catalog = Catalog.instance
         self.open_window('Catalog')
 
-        self.current_tool = self.pick_tool = PickTool(self, edit_state)
-        self.stamp_tool = StampTool(self, edit_state)
+        self.current_tool = self.pick_tool = PickTool(self, self.edit_state)
+        self.stamp_tool = StampTool(self, self.edit_state)
 
-        font = pyglet.font.load('Material Icons')
+        #font = pyglet.font.load('Material Icons')
+        font = None
         self.gui.add_child(
             self.create_menubar(
                 children=[
@@ -54,12 +51,7 @@ class LevelEditor(SceneEditor):
                 ]
             )
         )
-
-    def create_scene(self):
-        exit()
-        #self.camera = WorldCamera(self.window)
-        #self.scene = LevelEditorScene(self.camera)
-        self.scene.camera = WorldCamera(self.window)
+        return self
 
     def select_layer(self, layer):
         logger.debug(layer)
@@ -74,9 +66,6 @@ class LevelEditor(SceneEditor):
     def on_catalog(self, blueprint):
         # exit()
         self.edit_state.current_blueprint = blueprint
-
-    def draw(self):
-        super().draw()
 
     def create_view_menu(self, children=[]):
         menu = super().create_view_menu(

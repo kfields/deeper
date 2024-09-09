@@ -1,5 +1,5 @@
-import glm
-import imgui
+from crunge import imgui
+from crunge.engine import Renderer
 
 from deeper.blueprints.component.sprite_animation_blueprint import SpriteAnimationBlueprint
 from .blueprint_widget import BlueprintWidget, BlueprintWidgetBuilder
@@ -10,7 +10,7 @@ class SpriteAnimationBpWidget(BlueprintWidget):
         super().__init__(blueprint)
         self.blueprint = blueprint
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         changed, rate = imgui.drag_float(
             'Rate', self.blueprint.rate, change_speed=0.1
         )

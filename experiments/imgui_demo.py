@@ -16,7 +16,7 @@ class BasicExample(arcade.Window):
 
         imgui.show_demo_window(False)
 
-        self.gui.draw()
+        self.gui.draw(renderer)
 
 if __name__ == '__main__':
     window = BasicExample()

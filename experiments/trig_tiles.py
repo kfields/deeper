@@ -26,7 +26,7 @@ class Deeper(arcade.Window):
             x1 = offset_x + (y_distance*(math.cos(y_angle)))
             y1 = offset_y + (y_distance*(math.sin(y_angle)))
             for tx in range(0, 8):
-                sprite = arcade.Sprite(":deeper:tiles/Floor8a.png", SCALE)
+                sprite = arcade.Sprite("{deeper}/tiles/Floor8a.png", SCALE)
                 x_distance = 200 * tx
                 x = x1 + (x_distance*(math.cos(x_angle)))
                 y = y1 + (x_distance*(math.sin(x_angle)))
@@ -37,7 +37,7 @@ class Deeper(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.camera.use()
-        self.tiles.draw()
+        self.tiles.draw(renderer)
 
 
 def main():

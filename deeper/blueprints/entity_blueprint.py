@@ -5,7 +5,7 @@ from loguru import logger
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, reconstructor
 
-from arcade.resources import resolve_resource_path
+from crunge.engine.resource.resource_manager import ResourceManager
 from PIL import Image
 
 from ..constants import *
@@ -46,12 +46,12 @@ class EntityBlueprint(Blueprint):
     @property
     def thumbnail(self):
         if not self._thumbnail:
-            root = resolve_resource_path(':deeper:catalog/thumbnails')
+            root = ResourceManager().resolve_path('{deeper}/catalog/thumbnails')
             path = root / f'{self.name}.png'
             if Path.exists(path):
                 self._thumbnail = Image.open(path)
             else:
-                img_path = resolve_resource_path(self.image)
+                img_path = ResourceManager().resolve_path(self.image)
                 with Image.open(img_path) as image:
                     image.thumbnail((64, 64))
                     image.save(path)

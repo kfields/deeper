@@ -12,39 +12,39 @@ Fence:
 TileFence1:
   extends: Fence
   size: [0.86, 1, .25]
-  image: ":deeper:tiles/TileFence1.png"
+  image: "{deeper}/tiles/TileFence1.png"
 
 TileFence2:
   extends: Fence
   size: [0.215, 1, 1]
-  image: ":deeper:tiles/TileFence2.png"
+  image: "{deeper}/tiles/TileFence2.png"
 
 TileFence3:
   extends: Fence
   size: [0.86, 1, .25]
-  image: ":deeper:tiles/TileFence3.png"
+  image: "{deeper}/tiles/TileFence3.png"
 
 TileFence3b:
   extends: Fence
   size: [0.86, 1, .25]
-  image: ":deeper:tiles/TileFence3b.png"
+  image: "{deeper}/tiles/TileFence3b.png"
 
 TileFence4:
   extends: Fence
   size: [0.215, 1, 1]
-  image: ":deeper:tiles/TileFence4.png"
+  image: "{deeper}/tiles/TileFence4.png"
 
 TileFence4b:
   extends: Fence
   size: [0.215, 1, 1]
-  image: ":deeper:tiles/TileFence4b.png"
+  image: "{deeper}/tiles/TileFence4b.png"
 
 TileFenceCorner:
   extends: Fence
   size: [0.86, 1.25, 1]
-  image: ":deeper:tiles/TileFenceCorner.png"
+  image: "{deeper}/tiles/TileFenceCorner.png"
 
 TileFenceCorner2:
   extends: Fence
   size: [0.86, 1.25, 1]
-  image: ":deeper:tiles/TileFenceCorner2.png"
+  image: "{deeper}/tiles/TileFenceCorner2.png"

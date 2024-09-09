@@ -1,4 +1,5 @@
-from deeper.dimgui import Widget
+from crunge.engine.imgui.widget import Widget
+
 from deeper.builder import Builder
 
 class SettingWidget(Widget):

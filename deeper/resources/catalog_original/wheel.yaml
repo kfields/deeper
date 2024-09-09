@@ -12,10 +12,10 @@ Wheel:
 Wheel1:
   extends: Wheel
   size: [0.86, 1.25, 1]
-  image: ":deeper:tiles/wheel.png"
+  image: "{deeper}/tiles/wheel.png"
 
 Wheels:
   extends: Wheel
   size: [1.5, .75, 1.5]
-  image: ":deeper:tiles/wheels.png"
+  image: "{deeper}/tiles/wheels.png"
 

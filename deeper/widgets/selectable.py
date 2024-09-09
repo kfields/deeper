@@ -1,9 +1,10 @@
 from enum import Enum
 
 from loguru import logger
-import imgui
+from crunge import imgui
 
-from deeper.dimgui import Widget, WidgetGroup
+from crunge.engine import Renderer
+from crunge.engine.imgui.widget import Widget, WidgetGroup
 
 
 class SelectableMode(Enum):
@@ -30,7 +31,7 @@ class SelectableBase(Widget):
 
 
 class Selectable(SelectableBase):
-    def draw(self):
+    def draw(self, renderer: Renderer):
         clicked, selected = imgui.selectable(
             self.label, self.selected, width=self.width, height=self.height
         )
@@ -55,16 +56,16 @@ class EditableSelectable(SelectableBase):
         if not selected:
             self.mode = SelectableMode.SELECT
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if self.mode == SelectableMode.SELECT:
             clicked, selected = imgui.selectable(
                 self.label,
                 self.selected,
-                flags=imgui.SELECTABLE_ALLOW_DOUBLE_CLICK,
-                width=self.width,
-                height=self.height,
+                flags=imgui.SelectableFlags.SELECTABLE_FLAGS_ALLOW_DOUBLE_CLICK,
+                size=(self.width, self.height),
             )
-            if imgui.is_item_hovered() and imgui.is_mouse_double_clicked():
+            #if imgui.is_item_hovered() and imgui.is_mouse_double_clicked():
+            if imgui.is_item_hovered() and imgui.is_mouse_double_clicked(0):
                 self.mode = SelectableMode.EDIT
             elif clicked:
                 self.select(selected)

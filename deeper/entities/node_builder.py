@@ -1,5 +1,4 @@
 from deeper.constants import *
-from deeper import Block
 
 from .entity_builder import EntityBuilder
 

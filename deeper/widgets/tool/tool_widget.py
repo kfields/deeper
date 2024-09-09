@@ -1,4 +1,4 @@
-from deeper.dimgui import Widget
+from crunge.engine.imgui.widget import Widget
 
 class ToolWidget(Widget):
     def __init__(self, tool, children=...):

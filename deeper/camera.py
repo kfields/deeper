@@ -1,14 +1,14 @@
 from loguru import logger
-import arcade
 import glm
+
+from crunge.engine.d2.camera_2d import Camera2D
 
 from .constants import *
 from . import Ray
 
 
 class WorldCamera:
-    def __init__(self, window:arcade.Window, target:glm.vec3=glm.vec3(), zoom=1.0):
-        self.window = window
+    def __init__(self, camera: Camera2D, target:glm.vec3=glm.vec3(), zoom=1.0):
         self.target = target
         self.distance = zoom * 10
         self._zoom = zoom
@@ -16,7 +16,10 @@ class WorldCamera:
         self.world_matrix = glm.scale(glm.mat4(1), glm.vec3(WORLD_SCALE, WORLD_SCALE, WORLD_SCALE))
         self.inv_world_matrix = glm.inverse(self.world_matrix)
         
-        self.camera = arcade.Camera(zoom=zoom)
+        #self.camera = Camera2D(zoom=zoom)
+        #self.camera = Camera2D()
+        #self.camera = Camera2D(glm.vec3(0,0,0), glm.vec2(1024, 768))
+        self.camera = camera
 
         self.update_matrices()
         self.look_at(target)
@@ -53,15 +56,11 @@ class WorldCamera:
         self.direction = glm.normalize(self.inv_view * glm.vec3(0.0, 0.0, -1.0))
         self.orientation = glm.quatLookAt(self.direction, WORLD_UP)
 
-    def use(self):
-        self.camera.use()
+    def update(self, delta_time: float):
+        self.camera.update(delta_time)
 
-    def update(self):
-        self.camera.update()
-
-    def resize(self, viewport_width: int, viewport_height: int, *,
-               resize_projection: bool = True) -> None:
-        self.camera.resize(viewport_width, viewport_height, resize_projection=resize_projection)
+    def resize(self, size: glm.ivec2) -> None:
+        self.camera.resize(size)
         self.look_at(self.target)
 
     def project(self, point):
@@ -85,7 +84,7 @@ class WorldCamera:
         #focal_point = self.project(target).xy * 1/self.zoom
         focal_point = self.project(target).xy
         #print("focal_point: ", focal_point)
-        self.camera.center(focal_point)
+        self.camera.position = focal_point
 
     def mouse_to_ray(self, mx, my):
         viewport = self.camera.viewport

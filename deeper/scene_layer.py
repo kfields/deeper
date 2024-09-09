@@ -1,6 +1,7 @@
 from loguru import logger
 
-import arcade
+from crunge.engine import Renderer
+from crunge.engine.d2 import Sprite, SpriteList
 
 from deeper.constants import *
 from deeper.event import Event, EventSource, LayerDirtyEvent
@@ -12,7 +13,7 @@ class SceneLayer(EntityGroup):
         super().__init__(name)
         self.scene = scene
         self.name = name
-        self.sprites = arcade.SpriteList()
+        self.sprites = SpriteList()
         self.visible = True
         self.locked = False
         self.dirty = True
@@ -41,18 +42,21 @@ class SceneLayer(EntityGroup):
     def clear(self):
         self.sprites.clear()
         
-    def add_sprite(self, sprite: arcade.Sprite):
+    def add_sprite(self, sprite: Sprite):
         self.sprites.append(sprite)
         return sprite
 
     def update(self, delta_time: float):
         #self.effects.update(delta_time)
-        self.sprites.on_update(delta_time)
+        self.sprites.update(delta_time)
 
     def update_animation(self, delta_time: float):
         self.sprites.update_animation(delta_time)
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         if not self.visible:
             return
-        self.sprites.draw()
+        #logger.debug(len(self.sprites.sprites))
+        #logger.debug(renderer.camera.position)
+        #logger.debug(renderer.camera.size)
+        self.sprites.draw(renderer)

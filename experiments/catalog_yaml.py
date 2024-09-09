@@ -39,7 +39,7 @@ class Item(Definition):
             image.thumbnail((64, 64))
             self.texture = catalog.window.ctx.texture(image.size, components=3, data=image.convert("RGB").tobytes())
 
-    def draw(self):
+    def draw(self, renderer: Renderer):
         imgui.same_line()
         imgui.image(self.texture.glo, *self.texture.size)
 
@@ -63,7 +63,7 @@ class Catalog:
         self.build()
 
     def build(self):
-        root = resolve_resource_path(":deeper:catalog")
+        root = resolve_resource_path("{deeper}/catalog")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
             print(path)
@@ -114,7 +114,7 @@ class BasicExample(arcade.Window):
 
         imgui.new_frame()
         self.draw_catalog()
-        self.gui.draw()
+        self.gui.draw(renderer)
 
     def draw_catalog(self):
         imgui.begin(self.title)
@@ -128,7 +128,7 @@ class BasicExample(arcade.Window):
                     self.selection.selected = False
                 self.selection = item
                 item.selected = selected
-            item.draw()
+            item.draw(renderer)
         imgui.end()
 
 if __name__ == '__main__':

@@ -1,7 +1,9 @@
+from crunge.engine.view import View
+
 from ..tool import Tool
 
 class SceneTool(Tool):
-    def __init__(self, view, title='') -> None:
+    def __init__(self, view: View, title='') -> None:
         super().__init__(view, title)
         self.scene = view.scene
         #self.world = view.world

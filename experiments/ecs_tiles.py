@@ -151,7 +151,7 @@ class Scene(arcade.View, esper.World):
                 block = Block(position, rotation, shape)
                 self.block.add_child(block)
                 vu = SpriteVu(arcade.Sprite(
-                    ":deeper:tiles/FloorD3.png", scale=1 / self.camera.zoom
+                    "{deeper}/tiles/FloorD3.png", scale=1 / self.camera.zoom
                 ))
                 self.create_entity(block, vu)
 
@@ -162,7 +162,7 @@ class Scene(arcade.View, esper.World):
     def on_draw(self):
         arcade.start_render()
         self.camera.use()
-        self.tile_list.draw()
+        self.tile_list.draw(renderer)
 
         #self.draw_aabbs()
 

@@ -12,4 +12,4 @@ Grid:
 Cell:
   extends: Grid
   size: [0.86, .01, 1]
-  image: ":deeper:tiles/_Grid/GRID.png"
+  image: "{deeper}/tiles/_Grid/GRID.png"

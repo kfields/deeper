@@ -1,21 +1,20 @@
-import pyglet.window.mouse as mouse
-import arcade
-from arcade import key
-from arcade.gui import UIManager
+from loguru import logger
 
-from .dimgui import ViewGui
+#from crunge.engine.imgui import ImGuiView
+from crunge.engine import Renderer
+from crunge.engine.d2.view_2d import View2D
+
 from .tool import Tool
 
-class View(arcade.View):
+#class View(ImGuiView):
+class View(View2D):
     current_tool: Tool = None
     title: str = None
 
-    def __init__(self, window, title=''):
-        super().__init__(window)
+    def __init__(self, title=''):
+        super().__init__()
         self.title = title
-        #self.ui_manager = UIManager(window)
-        self.gui = ViewGui(self, auto_enable=False)
-        
+    
     def use_tool(self, tool: Tool):
         if tool == self.current_tool:
             return
@@ -23,41 +22,26 @@ class View(arcade.View):
             self.current_tool.disable()
                         
         self.current_tool = tool
-        self.gui.disable()
+        #self.gui.disable()
         tool.enable()
-        self.gui.enable()
+        #self.gui.enable()
 
-    def draw(self):
-        pass
-
-    def on_draw(self):
-        super().on_draw()
-        arcade.start_render()
-        self.gui.start_render()
-
-        #self.ui_manager.draw()
-
-        self.draw()
-
+    def draw(self, renderer: Renderer):
+        #logger.debug('View.draw')
         if self.current_tool:
-            self.current_tool.draw()
+            self.current_tool.draw(renderer)
+        super().draw(renderer)
 
-        self.gui.finish_render()
-        arcade.finish_render()
-
-
-    def on_show_view(self):
-        super().on_show_view()
-        #self.ui_manager.enable()
-        self.gui.show()
+    def on_show(self):
+        super().on_show()
+        #self.gui.show()
         if self.current_tool:
             self.current_tool.enable()
-        self.gui.enable()
+        #self.gui.enable()
 
     def on_hide_view(self):
-        super().on_hide_view()
-        #self.ui_manager.disable()
+        super().on_hide()
         if self.current_tool:
             self.current_tool.disable()
-        self.gui.disable()
-        self.gui.hide()
+        #self.gui.disable()
+        #self.gui.hide()
