@@ -12,7 +12,7 @@ Prefab: {_abstract: true, extends: Node, category: Prefab}
 TwoBlocks:
   extends: Prefab
   size: [0.86, 1.2, 1]
-  image: {deeper}/tiles/Floor3c.png
+  image: :deeper:/tiles/Floor3c.png
   children:
     Block1:
       extends: Floor3c

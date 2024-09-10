@@ -63,7 +63,7 @@ class Catalog:
         self.build()
 
     def build(self):
-        root = resolve_resource_path("{deeper}/catalog")
+        root = resolve_resource_path(":deeper:/catalog")
         paths = glob.glob(f"{root}/*.yaml")
         for path in paths:
             print(path)

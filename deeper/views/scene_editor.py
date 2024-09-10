@@ -22,17 +22,18 @@ class SceneEditor(SceneView):
         super().__init__(scene, title)
         self.windows = {}
 
-        '''
+    def _create(self, window):
+        super()._create(window)
         self.gui.load_default_font(
-            ResourceManager().resolve_path("{deeper}/fonts/Roboto-Regular.ttf"), 16
+            ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
         )
 
-        glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
+        #glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
         
         self.gui.load_icon_font(
-            ResourceManager().resolve_path('{deeper}/icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}'), 16, glyph_ranges
+            #ResourceManager().resolve_path(':deeper:/icons/IconsMaterialDesign.FONT_ICON_FILE_NAME_MD'), 16, glyph_ranges
+            ResourceManager().resolve_path(':deeper:/icons/MaterialIcons-Regular.ttf'), 16, None
         )
-        '''
 
     def new(self):
         clock.schedule_once(lambda dt, *args, **kwargs : self._new(), 0)
@@ -51,12 +52,12 @@ class SceneEditor(SceneView):
     def _load(self):
         from .level_editor import LevelEditor
         from ..state import WorldEditState
-        level = Level.load(ResourceManager().resolve_path("{deeper}/levels/test.json"))
+        level = Level.load(ResourceManager().resolve_path(":deeper:/levels/test.json"))
         view = LevelEditor(self.window, WorldEditState(level))
         self.window.show_view(view)
 
     def save(self):
-        self.world.save(ResourceManager().resolve_path("{deeper}/levels/"))
+        self.world.save(ResourceManager().resolve_path(":deeper:/levels/"))
 
     def create_menubar(self, children):
         children = [

@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from loguru import logger
 from PIL import Image
 from crunge import imgui
 
@@ -7,32 +7,31 @@ from crunge.engine.resource.resource_manager import ResourceManager
 from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Widget, Window
 
+from ..blueprint import Blueprint
 from .menu import Menubar, Menu, MenuItem
 
 class BlueprintWidget(Widget):
-    def __init__(self, blueprint):
+    def __init__(self, blueprint: Blueprint):
         super().__init__()
         self.blueprint = blueprint
         self.selected = False
         self.texture = None
 
-    def _create(self):
-        super()._create()
-        """
-        path = resolve_resource_path(self.blueprint.image)
-        with Image.open(path) as image:
-            image.thumbnail((64, 64))
-            self.texture = gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
-        """
+    def _create(self, gui):
+        super()._create(gui)
+        """            
         image = self.blueprint.thumbnail
         self.texture = self.gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
+        """
+        self.texture = self.blueprint.thumbnail
         return self
 
     def draw(self, renderer: Renderer):
         #clicked, selected = imgui.selectable(self.blueprint.name, self.selected, width=128)
         clicked, selected = imgui.selectable(self.blueprint.name, self.selected, size=(-1, 128))
         imgui.same_line()
-        #imgui.image(self.texture.glo, *self.texture.size)
+        size = self.texture.width, self.texture.height
+        imgui.image(self.texture.id, size)
         return clicked
 
 class CategoryWidget(Widget):
@@ -41,9 +40,17 @@ class CategoryWidget(Widget):
         self.category = category
         self.callback = callback
         self.selection = None
+        '''
         for blueprint in category.blueprints:
             if not blueprint._abstract:
                 self.add_child(BlueprintWidget(blueprint))
+        '''
+    def _create(self, gui):
+        super()._create(gui)
+        for blueprint in self.category.blueprints:
+            if not blueprint._abstract:
+                self.add_child(BlueprintWidget(blueprint).create(self.gui))
+        return self
 
     def show(self):
         pass
@@ -76,15 +83,22 @@ class CatalogPanel(Widget):
         self.current_index = 0
         self.current = None
 
+        '''
         for category in sorted(catalog.categories.values(), key=lambda category: category.name):
             if not category._abstract:
                 self.category_names.append(category.name)
                 self.category_widgets.append(CategoryWidget(category, callback))
-
-    def _create(self):
-        super()._create()
+        '''
+    def _create(self, gui):
+        super()._create(gui)
+        for category in sorted(self.catalog.categories.values(), key=lambda category: category.name):
+            if not category._abstract:
+                self.category_names.append(category.name)
+                self.category_widgets.append(CategoryWidget(category, self.callback).create(self.gui))
+        '''
         for widget in self.category_widgets:
             widget.create(self.gui)
+        '''
         return self
 
     def draw(self, renderer: Renderer):
@@ -106,7 +120,7 @@ class CatalogWindow(Window):
         children = [
             Menubar([
                 Menu('File', [
-                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(ResourceManager.resolve_path('{deeper}/catalog')))
+                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(ResourceManager.resolve_path(':deeper:/catalog')))
                 ])
             ]),
             CatalogPanel(catalog, callback)

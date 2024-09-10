@@ -74,7 +74,7 @@ class Catalog(Kit):
         return self.blueprints[name]
 
     def load(self):
-        root = ResourceManager().resolve_path('{deeper}/catalog')
+        root = ResourceManager().resolve_path(':deeper:/catalog')
         db = Database.instance
         session = db.session
         first = session.query(EntityBlueprint).first()

@@ -30,12 +30,12 @@ class Deeper(App):
     def load_settings(self):
         dst = Path('imgui.ini')
         if not dst.exists():
-            src = ResourceManager().resolve_path('{deeper}/settings/imgui.ini')
+            src = ResourceManager().resolve_path(':deeper:/settings/imgui.ini')
             shutil.copyfile(src, dst)
 
     def save_settings(self):
         src = Path('imgui.ini')
-        dst = ResourceManager().resolve_path('{deeper}/settings/imgui.ini')
+        dst = ResourceManager().resolve_path(':deeper:/settings/imgui.ini')
         shutil.copyfile(src, dst)
 
 def main():

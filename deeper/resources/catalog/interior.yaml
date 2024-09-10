@@ -10,96 +10,96 @@ Interior:
 Flag1:
   extends: Interior
   size: [0.2150000035762787, 0.75, 1.0]
-  image: {deeper}/tiles/Interior/Flag1.png
+  image: :deeper:/tiles/Interior/Flag1.png
 Flag2c:
   extends: Interior
   size: [0.4300000071525574, 1.5, 0.25]
-  image: {deeper}/tiles/Interior/Flag2c.png
+  image: :deeper:/tiles/Interior/Flag2c.png
 Flag3:
   extends: Interior
   size: [0.4300000071525574, 0.75, 0.25]
-  image: {deeper}/tiles/Interior/Flag3.png
+  image: :deeper:/tiles/Interior/Flag3.png
 Flag3b:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/Flag3b.png
+  image: :deeper:/tiles/Interior/Flag3b.png
 Interior1:
   extends: Interior
   size: [0.8600000143051147, 1.100000023841858, 0.25]
-  image: {deeper}/tiles/Interior/Interior1.png
+  image: :deeper:/tiles/Interior/Interior1.png
 Interior2:
   extends: Interior
   size: [0.8600000143051147, 1.5, 1.0]
-  image: {deeper}/tiles/Interior/Interior2.png
+  image: :deeper:/tiles/Interior/Interior2.png
 Interior3:
   extends: Interior
   size: [0.8600000143051147, 0.5, 1.0]
-  image: {deeper}/tiles/Interior/Interior3.png
+  image: :deeper:/tiles/Interior/Interior3.png
 Interior4:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/Interior4.png
+  image: :deeper:/tiles/Interior/Interior4.png
 Interior5:
   extends: Interior
   size: [0.4300000071525574, 0.5, 0.5]
-  image: {deeper}/tiles/Interior/Interior5.png
+  image: :deeper:/tiles/Interior/Interior5.png
 Interior6:
   extends: Interior
   size: [0.4300000071525574, 0.5, 0.5]
-  image: {deeper}/tiles/Interior/Interior6.png
+  image: :deeper:/tiles/Interior/Interior6.png
   offset: [0.09000000357627869, 0.0]
 Interior7:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/Interior7.png
+  image: :deeper:/tiles/Interior/Interior7.png
 Interior8:
   extends: Interior
   size: [0.4300000071525574, 1.100000023841858, 0.25]
-  image: {deeper}/tiles/Interior/Interior8.png
+  image: :deeper:/tiles/Interior/Interior8.png
 Interior9:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/Interior9.png
+  image: :deeper:/tiles/Interior/Interior9.png
 Interior10:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/Interior10.png
+  image: :deeper:/tiles/Interior/Interior10.png
 Interior11:
   extends: Interior
   size: [0.2150000035762787, 1.100000023841858, 1.0]
-  image: {deeper}/tiles/Interior/Interior11.png
+  image: :deeper:/tiles/Interior/Interior11.png
   offset: [0.14000000059604645, 0.0]
 Interior12:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/Interior12.png
+  image: :deeper:/tiles/Interior/Interior12.png
 Interior13:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/Interior13.png
+  image: :deeper:/tiles/Interior/Interior13.png
 Interior14:
   extends: Interior
   size: [0.4300000071525574, 0.75, 0.5]
-  image: {deeper}/tiles/Interior/Interior14.png
+  image: :deeper:/tiles/Interior/Interior14.png
   offset: [0.0, 0.10000000149011612]
 Interior15:
   extends: Interior
   size: [0.2150000035762787, 0.75, 0.25]
-  image: {deeper}/tiles/Interior/Interior15.png
+  image: :deeper:/tiles/Interior/Interior15.png
   offset: [0.009999999776482582, -0.10000000149011612]
 WallC_Tile23flag:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/WallC_Tile23flag.png
+  image: :deeper:/tiles/Interior/WallC_Tile23flag.png
 WallC_Tile31flag:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/WallC_Tile31flag.png
+  image: :deeper:/tiles/Interior/WallC_Tile31flag.png
 WallH_Tile22flag:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/WallH_Tile22flag.png
+  image: :deeper:/tiles/Interior/WallH_Tile22flag.png
 WallV_Tile32flag:
   extends: Interior
   size: [0.86, 0.75, 1]
-  image: {deeper}/tiles/Interior/WallV_Tile32flag.png
+  image: :deeper:/tiles/Interior/WallV_Tile32flag.png

@@ -30,7 +30,7 @@ class Deeper(arcade.Window):
         for ty in range(0, 8):
             y_distance = 170 * ty
             for tx in range(0, 8):
-                sprite = arcade.Sprite("{deeper}/tiles/Floor8a.png", SCALE)
+                sprite = arcade.Sprite(":deeper:/tiles/Floor8a.png", SCALE)
                 x_distance = 200 * tx
 
                 model = glm.mat4(1)

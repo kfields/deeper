@@ -83,7 +83,7 @@ class LevelEditor(SceneEditor):
         on_close = lambda: self.close_window(title)
         window = None
         if title == 'Catalog':
-            window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close)
+            window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close).create(self.gui)
         elif title == 'Layers':
             window = LayersWindow(self.scene, lambda layer: self.select_layer(layer), on_close=on_close)
         else:

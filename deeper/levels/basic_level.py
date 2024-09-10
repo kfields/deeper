@@ -35,7 +35,7 @@ class BasicLevel(Level):
                 block = Block(position, size)
                 vu = SpriteVu(
                     Sprite(
-                        TextureLoader().load('{deeper}/tiles/_Grid/GRID.png'),
+                        TextureLoader().load(':deeper:/tiles/_Grid/GRID.png'),
                     )
                 )
                 self.create_entity(layer, blueprint, block, vu)

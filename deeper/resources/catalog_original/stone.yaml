@@ -11,41 +11,41 @@ Stone:
 
 TileStone0:
   extends: Stone
-  image: "{deeper}/tiles/TileStone0.png"
+  image: ":deeper:/tiles/TileStone0.png"
       
 TileStone1:
   extends: Stone
   size: [0.43, .75, .5]
-  image: "{deeper}/tiles/TileStone1.png"
+  image: ":deeper:/tiles/TileStone1.png"
 
 TileStone2:
   extends: Stone
-  image: "{deeper}/tiles/TileStone2.png"
+  image: ":deeper:/tiles/TileStone2.png"
 
 TileStone3:
   extends: Stone
   size: [0.43, .5, .5]
-  image: "{deeper}/tiles/TileStone3.png"
+  image: ":deeper:/tiles/TileStone3.png"
 
 TileStone4:
   extends: Stone
   size: [0.86, 2, 1]
-  image: "{deeper}/tiles/TileStone4.png"
+  image: ":deeper:/tiles/TileStone4.png"
 
 TileStone5:
   extends: Stone
   size: [0.86, .5, 1]
-  image: "{deeper}/tiles/TileStone5.png"
+  image: ":deeper:/tiles/TileStone5.png"
 
 TileStone6:
   extends: Stone
   size: [0.86, .5, 1]
-  image: "{deeper}/tiles/TileStone6.png"
+  image: ":deeper:/tiles/TileStone6.png"
 
 Wagon:
   extends: Stone
   size: [0.86, 1.25, 2]
-  image: "{deeper}/tiles/TileStone7.png"
+  image: ":deeper:/tiles/TileStone7.png"
   components:
     SpriteVu:
       offset: [0, 0]
