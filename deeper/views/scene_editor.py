@@ -1,8 +1,9 @@
 import webbrowser
 
 from loguru import logger
-#from pyglet import clock
-#from arcade.resources import resolve_resource_path
+
+# from pyglet import clock
+# from arcade.resources import resolve_resource_path
 from crunge import imgui
 from crunge.engine.resource.resource_manager import ResourceManager
 
@@ -11,7 +12,14 @@ from deeper.resources.icons import IconsMaterialDesign
 
 from .scene_view import SceneView
 from ..level import Level
-from ..widgets import MetricsWindow, StyleWindow, CameraWindow, MainMenubar, Menu, MenuItem
+from ..widgets import (
+    MetricsWindow,
+    StyleWindow,
+    CameraWindow,
+    MainMenubar,
+    Menu,
+    MenuItem,
+)
 
 
 doc_url = "https://kfields.github.io/deeper/index.html"
@@ -28,30 +36,35 @@ class SceneEditor(SceneView):
             ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
         )
 
-        #glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
-        
+        glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
+
         self.gui.load_icon_font(
-            #ResourceManager().resolve_path(':deeper:/icons/IconsMaterialDesign.FONT_ICON_FILE_NAME_MD'), 16, glyph_ranges
-            ResourceManager().resolve_path(':deeper:/icons/MaterialIcons-Regular.ttf'), 16, None
+            ResourceManager().resolve_path(
+                f":deeper:/icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"
+            ),
+            16,
+            glyph_ranges,
         )
 
     def new(self):
-        clock.schedule_once(lambda dt, *args, **kwargs : self._new(), 0)
+        clock.schedule_once(lambda dt, *args, **kwargs: self._new(), 0)
 
     def _new(self):
         from .level_editor import LevelEditor
         from ..state import WorldEditState
         from ..levels.basic_level import BasicLevel
+
         level = BasicLevel()
         view = LevelEditor(self.window, WorldEditState(level))
         self.window.show_view(view)
 
     def load(self):
-        clock.schedule_once(lambda dt, *args, **kwargs : self._load(), 0)
+        clock.schedule_once(lambda dt, *args, **kwargs: self._load(), 0)
 
     def _load(self):
         from .level_editor import LevelEditor
         from ..state import WorldEditState
+
         level = Level.load(ResourceManager().resolve_path(":deeper:/levels/test.json"))
         view = LevelEditor(self.window, WorldEditState(level))
         self.window.show_view(view)
