@@ -32,12 +32,14 @@ class SceneEditor(SceneView):
 
     def _create(self, window):
         super()._create(window)
+        
         self.gui.load_default_font(
             ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
         )
 
         glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
 
+        
         self.gui.load_icon_font(
             ResourceManager().resolve_path(
                 f":deeper:/icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"

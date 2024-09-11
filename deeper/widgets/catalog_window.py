@@ -19,16 +19,11 @@ class BlueprintWidget(Widget):
 
     def _create(self, gui):
         super()._create(gui)
-        """            
-        image = self.blueprint.thumbnail
-        self.texture = self.gui.window.ctx.texture(image.size, components=3, data=image.convert('RGB').tobytes())
-        """
         self.texture = self.blueprint.thumbnail
         return self
 
     def draw(self, renderer: Renderer):
-        #clicked, selected = imgui.selectable(self.blueprint.name, self.selected, width=128)
-        clicked, selected = imgui.selectable(self.blueprint.name, self.selected, size=(-1, 128))
+        clicked, selected = imgui.selectable(self.blueprint.name, self.selected, size=(128, 32))
         imgui.same_line()
         size = self.texture.width, self.texture.height
         imgui.image(self.texture.id, size)

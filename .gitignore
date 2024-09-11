@@ -73,5 +73,6 @@ docs/api/
 .python-version
 
 # Deeper Stuff
+.env
 .envrc
 deeper.db

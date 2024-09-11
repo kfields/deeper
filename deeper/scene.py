@@ -85,14 +85,18 @@ class Scene(World):
 
     def enable(self) -> None:
         self.mark()
+        '''
         for processor in self._processors:
             processor.enable()
+        '''
         for layer in self.layers:
             layer.enable()
 
     def disable(self) -> None:
+        '''
         for processor in self._processors:
             processor.disable()
+        '''
         for layer in self.layers:
             layer.disable()
 
