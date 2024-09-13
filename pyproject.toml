@@ -58,7 +58,7 @@ changelog = "https://github.com/kfields/deeper/blob/main/CHANGELOG.md"
 path = "deeper/__about__.py"
 
 [tool.hatch.envs.default]
-dependencies = ["maturin", "pytest", "pytest-cov"]
+dependencies = ["maturin", "pytest", "pytest-cov", "snakeviz"]
 
 [tool.hatch.envs.default.scripts]
 develop = "maturin develop"

@@ -31,3 +31,5 @@ def profile(ctx):
     profiler.disable()
     stats = pstats.Stats(profiler)
     stats.sort_stats('time').print_stats(10)
+
+    profiler.dump_stats('deeper.prof')
