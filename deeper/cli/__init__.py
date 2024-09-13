@@ -1,6 +1,9 @@
 import os
 import click
 
+import cProfile
+import pstats
+
 from ..app import main
 
 
@@ -19,5 +22,12 @@ def run(ctx):
 
 @cli.command()
 @click.pass_context
-def hi(ctx):
-    print('hello')
+def profile(ctx):
+    profiler = cProfile.Profile()
+    profiler.enable()
+
+    main()
+
+    profiler.disable()
+    stats = pstats.Stats(profiler)
+    stats.sort_stats('time').print_stats(10)

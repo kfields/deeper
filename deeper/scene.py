@@ -19,7 +19,6 @@ from .event import EventSource, LayerDeletedEvent
 class Scene(World):
     def __init__(self, timed:bool=False):
         super().__init__(timed)
-        #self.camera = WorldCamera()
         self.camera: WorldCamera = None
         self.events = EventSource()
         self.layers: list[SceneLayer] = []

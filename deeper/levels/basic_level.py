@@ -30,8 +30,7 @@ class BasicLevel(Level):
         for ty in range(0, self.rows):
             for tx in range(0, self.cols):
                 position = glm.vec3(tx * CELL_WIDTH, 0, ty)
-                # position = glm.vec3(tx * CELL_WIDTH - CELL_HALF_WIDTH, 0, ty - CELL_HALF_DEPTH)
-                # print("position: ", position)
+                # logger.debug(f"position: {position}")
                 block = Block(position, size)
                 vu = SpriteVu(
                     Sprite(
