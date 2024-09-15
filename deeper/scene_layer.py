@@ -2,11 +2,14 @@ from loguru import logger
 
 from crunge.engine import Renderer
 from crunge.engine.d2 import Sprite, SpriteList
+from crunge.engine.math.rect import RectF
 
 from deeper.constants import *
-from deeper.event import Event, EventSource, LayerDirtyEvent
+from deeper.event import EventSource, LayerDirtyEvent
 
 from .ecs.entity_group import EntityGroup
+from .quad_tree import Quadtree
+
 
 class SceneLayer(EntityGroup):
     def __init__(self, scene, name):
@@ -18,6 +21,7 @@ class SceneLayer(EntityGroup):
         self.locked = False
         self.dirty = True
         self.events = EventSource()
+        self.quad_tree = Quadtree(RectF(-1000, -1000, 2000, 2000))
 
     def __str__(self) -> str:
         return f"Layer({self.name})"
@@ -44,6 +48,7 @@ class SceneLayer(EntityGroup):
         
     def add_sprite(self, sprite: Sprite):
         self.sprites.append(sprite)
+        self.quad_tree.insert(sprite)
         return sprite
 
     def update(self, delta_time: float):
@@ -59,4 +64,29 @@ class SceneLayer(EntityGroup):
         #logger.debug(len(self.sprites.sprites))
         #logger.debug(renderer.camera.position)
         #logger.debug(renderer.camera.size)
-        self.sprites.draw(renderer)
+        #self.sprites.draw(renderer)
+        frustrum = renderer.camera.frustrum
+        #logger.debug(f'frustrum: {frustrum}')
+        visible_objects = []
+        self.quad_tree.query(frustrum, visible_objects)
+        #logger.debug(f'visible_objects: {len(visible_objects)}')
+
+        for obj in visible_objects:
+            obj.draw(renderer)
+
+    '''
+    def draw(self, renderer: Renderer):
+        if not self.visible:
+            return
+        #logger.debug(len(self.sprites.sprites))
+        #logger.debug(renderer.camera.position)
+        #logger.debug(renderer.camera.size)
+        #self.sprites.draw(renderer)
+        frustrum = renderer.camera.frustrum
+        #logger.debug(f'frustrum: {frustrum}')
+        visible_objects = self.quad_tree.retrieve(frustrum)
+        logger.debug(f'visible_objects: {len(visible_objects)}')
+
+        for obj in visible_objects:
+            obj.draw(renderer)
+    '''

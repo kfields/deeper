@@ -1,4 +1,7 @@
 from loguru import logger
+import glm
+
+from crunge.engine.math.rect import RectF
 
 from ..constants import *
 from deeper import Block
@@ -33,7 +36,7 @@ class RenderingProcessor(SceneProcessor):
         vu_list = sorted(vu_list, key=lambda vu: vu.position.z)
 
         for vu in vu_list:
-            layer.sprites.append(vu.sprite)
+            layer.add_sprite(vu.sprite)
 
         layer.unmark()
 
@@ -56,3 +59,12 @@ class RenderingProcessor(SceneProcessor):
         )
         '''
         sprite.transform = model
+
+            
+        sprite.aabb = RectF(
+            x - size.x / 2,
+            y - size.y / 2,
+            size.x,
+            size.y,
+        )
+        logger.debug(f'sprite.aabb: {sprite.aabb}')

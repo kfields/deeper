@@ -26,7 +26,7 @@ class PickTool(SceneEditTool):
         self.selected = None
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
-        #print("mouse: ", x, y)
+        print("mouse: ", x, y)
         ray = self.camera.mouse_to_ray(x, y)
         result = self.scene.cast_ray(ray)
         #print(result)
