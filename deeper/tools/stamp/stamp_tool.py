@@ -82,7 +82,7 @@ class StampTool(SceneEditTool):
     def on_mouse_motion(self, event: sdl.MouseMotionEvent):
         x, y = event.x, event.y
         self.last_mouse = glm.vec2(x, y)
-        logger.debug(f"mouse: x={x}, y={y}")
+        #logger.debug(f"mouse: x={x}, y={y}")
 
         ray = self.camera.mouse_to_ray(x, y)
         result = self.scene.cast_ray(ray)
@@ -194,13 +194,6 @@ class StampTool(SceneEditTool):
             EntityKit.instance.build(
                 self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
             )
-
-        '''
-        if button == mouse.LEFT and self.stamp:
-            EntityKit.instance.build(
-                self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
-            )
-        '''
 
     def draw(self, renderer: Renderer):
         if self.hovered:

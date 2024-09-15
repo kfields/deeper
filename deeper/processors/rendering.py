@@ -23,10 +23,10 @@ class RenderingProcessor(SceneProcessor):
 
         for ent, (_, block, vu) in self.world.get_components(layer.__class__, Block, SpriteVu):
             position = self.scene.camera.project(block.position)
-            logger.debug(f'position: {position}')
-            #vu.position = position
+            #logger.debug(f'position: {position}')
+            vu.position = position
             sprite_position = position.xy + (vu.offset * WORLD_SCALE)
-            logger.debug(f'sprite_position: {sprite_position}')
+            #logger.debug(f'sprite_position: {sprite_position}')
             #vu.sprite.position = sprite_position.xy
             sprite = vu.sprite
             size = sprite.texture.size
@@ -34,6 +34,7 @@ class RenderingProcessor(SceneProcessor):
             vu_list.append(vu)
 
         vu_list = sorted(vu_list, key=lambda vu: vu.position.z)
+        #logger.debug(f'vu_list: {vu_list}')
 
         for vu in vu_list:
             layer.add_sprite(vu.sprite)
@@ -67,4 +68,4 @@ class RenderingProcessor(SceneProcessor):
             size.x,
             size.y,
         )
-        logger.debug(f'sprite.aabb: {sprite.aabb}')
+        #logger.debug(f'sprite.aabb: {sprite.aabb}')

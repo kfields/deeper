@@ -72,8 +72,8 @@ class EditableSelectable(SelectableBase):
         else:
             changed, value = imgui.input_text(f'##{id(self)}', self.label, 32)
             if changed:
-                logger.debug(changed)
-                logger.debug(value)
+                #logger.debug(changed)
+                #logger.debug(value)
                 self.label = value
 
             # TODO: need to detect escape key and other loss of focus ...
@@ -92,7 +92,7 @@ class SelectableGroup(WidgetGroup):
         child.callback = lambda child: self.on_child_select(child, child_callback)
 
     def on_child_select(self, child, child_callback):
-        logger.debug(child)
+        #logger.debug(child)
         child_callback()
         self.callback()
 

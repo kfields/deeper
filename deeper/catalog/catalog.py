@@ -65,8 +65,8 @@ class Catalog(Kit):
     def build(self, name, config, entity, parent=None):
         builder = self.find_builder(name)
         if not builder:
-            print(name)
-            #exit()
+            raise ValueError(f'No builder found for {name}')
+
         return builder.build(self, name, config, entity, parent)
 
     def find(self, name):

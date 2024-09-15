@@ -26,7 +26,7 @@ class PickTool(SceneEditTool):
     def on_mouse_motion(self, event: sdl.MouseMotionEvent):
         x, y = event.x, event.y
         self.last_mouse = glm.vec2(x, y)
-        logger.debug(f"mouse: x={x}, y={y}")
+        #logger.debug(f"mouse: x={x}, y={y}")
 
         ray = self.camera.mouse_to_ray(x, y)
         result = self.scene.cast_ray(ray)

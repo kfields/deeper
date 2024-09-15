@@ -64,7 +64,6 @@ class LevelEditor(SceneEditor):
         self.use_tool(self.stamp_tool)
 
     def on_catalog(self, blueprint):
-        # exit()
         self.edit_state.current_blueprint = blueprint
 
     def create_view_menu(self, children=[]):

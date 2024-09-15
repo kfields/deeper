@@ -2,8 +2,9 @@ from loguru import logger
 import glm
 
 from crunge.engine.d2.camera_2d import Camera2D
+from crunge.engine.math.rect import RectF
 
-from .constants import *
+from .constants import WORLD_SCALE, WORLD_TILT, WORLD_ROTATION, WORLD_AXIS_X, WORLD_AXIS_Y, WORLD_UP
 from . import Ray
 
 
@@ -87,38 +88,40 @@ class WorldCamera:
         self.camera.position = focal_point
 
     def mouse_to_ray(self, mx, my):
-        viewport = self.camera.frustrum
-        #print("viewport: ", viewport)
+        # Get viewport dimensions
+        viewport = self.camera.viewport
         viewportWidth = viewport.width
         viewPortHeight = viewport.height
 
-        projection = self.camera.frustrum
-        #print("projection: ", projection)
+        # Get projection and inverse view matrix
+        projection = self.camera.projection
+
+        # Adjust projection width/height by the zoom factor
+        zoom = self.camera.zoom  # Assuming there's a zoom attribute
+        glOrthoWidth = projection.width / zoom
+        glOrthoHeight = projection.height / zoom
+
+        # Convert mouse coordinates to NDC
+        x_ndc = (2.0 * mx / viewportWidth) - 1.0
+        y_ndc = (2.0 * my / viewPortHeight) - 1.0
+        y_ndc = -y_ndc  # Flip Y for WebGPU's coordinate system
+
+        # Convert NDC to world coordinates using the adjusted projection size
+        x_world = x_ndc * (glOrthoWidth / 2.0) * zoom
+        y_world = y_ndc * (glOrthoHeight / 2.0) * zoom
+
+        # Transform mouse vector to world space
         inv_view = glm.inverse(glm.mat4(*self.camera.view_matrix))
-
-        glOrthoWidth = projection.width
-        glOrthoHeight = projection.height
-
-        #x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
-        #y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
-        x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
-        y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
-        y = -y
-        logger.debug(f"mouse: x={x}, y={y}")
-
-        mouse_vec = glm.vec3(x, y, 0)
+        mouse_vec = glm.vec3(x_world, y_world, 0)
         mouse_vec = self.inv_world_matrix * inv_view * mouse_vec
-        #x, y = mouse_vec.xy * self.zoom
         x, y = mouse_vec.xy
 
+        # Compute ray origin and direction
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
         ray_origin = self.position + (camera_right * x) + (camera_up * y)
         ray_direction = self.direction
 
-        #print("viewport: ", self.camera.viewport)
-        #print("camera position: ", self.position)
-        #print("ray origin: ", ray_origin)
-        #print("ray direction: ", ray_direction)
+        # Return the ray
         ray = Ray(*ray_origin, *ray_direction)
         return ray

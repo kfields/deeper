@@ -58,6 +58,7 @@ class SceneLayer(EntityGroup):
     def update_animation(self, delta_time: float):
         self.sprites.update_animation(delta_time)
 
+    '''
     def draw(self, renderer: Renderer):
         if not self.visible:
             return
@@ -73,7 +74,6 @@ class SceneLayer(EntityGroup):
 
         for obj in visible_objects:
             obj.draw(renderer)
-
     '''
     def draw(self, renderer: Renderer):
         if not self.visible:
@@ -81,12 +81,5 @@ class SceneLayer(EntityGroup):
         #logger.debug(len(self.sprites.sprites))
         #logger.debug(renderer.camera.position)
         #logger.debug(renderer.camera.size)
-        #self.sprites.draw(renderer)
-        frustrum = renderer.camera.frustrum
-        #logger.debug(f'frustrum: {frustrum}')
-        visible_objects = self.quad_tree.retrieve(frustrum)
-        logger.debug(f'visible_objects: {len(visible_objects)}')
-
-        for obj in visible_objects:
-            obj.draw(renderer)
-    '''
+        self.sprites.draw(renderer)
+        #logger.debug(f'visible_objects: {len(visible_objects)}')

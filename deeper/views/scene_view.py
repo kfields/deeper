@@ -2,6 +2,7 @@
 #from self.scratch import key
 import glm
 
+from crunge import sdl
 from crunge.engine import Renderer
 from crunge.engine.d2.renderer_2d import Renderer2D
 from crunge.engine.colors import Colors
@@ -49,8 +50,12 @@ class SceneView(View):
         if buttons == mouse.RIGHT:
             self.camera.pan(-dx, -dy)
 
+    '''
     def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
         self.camera.zoom_pct = self.camera.zoom_pct + scroll_y * 10
+    '''
+    def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
+        self.scene.camera.zoom_pct = self.scene.camera.zoom_pct + event.y * 10
 
     def draw(self, renderer: Renderer2D):
         # logger.debug("DemoView.draw()")
