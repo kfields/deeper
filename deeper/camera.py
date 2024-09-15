@@ -87,21 +87,25 @@ class WorldCamera:
         self.camera.position = focal_point
 
     def mouse_to_ray(self, mx, my):
-        viewport = self.camera.viewport
+        viewport = self.camera.frustrum
         #print("viewport: ", viewport)
-        viewportWidth = viewport[2]
-        viewPortHeight = viewport[3]
+        viewportWidth = viewport.width
+        viewPortHeight = viewport.height
 
-        projection = self.camera.projection
+        projection = self.camera.frustrum
         #print("projection: ", projection)
+        inv_view = glm.inverse(glm.mat4(*self.camera.view_matrix))
 
-        glOrthoWidth = projection[1]
-        glOrthoHeight = projection[3]
+        glOrthoWidth = projection.width
+        glOrthoHeight = projection.height
 
+        #x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
+        #y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
         x = (2.0 * mx / viewportWidth  - 1) * (glOrthoWidth  / 2)
         y = (2.0 * my / viewPortHeight - 1) * (glOrthoHeight / 2)
+        y = -y
+        logger.debug(f"mouse: x={x}, y={y}")
 
-        inv_view = glm.inverse(glm.mat4(*self.camera._view_matrix))
         mouse_vec = glm.vec3(x, y, 0)
         mouse_vec = self.inv_world_matrix * inv_view * mouse_vec
         #x, y = mouse_vec.xy * self.zoom

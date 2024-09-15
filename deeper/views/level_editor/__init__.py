@@ -30,7 +30,7 @@ class LevelEditor(SceneEditor):
         self.catalog = Catalog.instance
         self.open_window('Catalog')
 
-        self.current_tool = self.pick_tool = PickTool(self, self.edit_state)
+        self.tool = self.pick_tool = PickTool(self, self.edit_state)
         self.stamp_tool = StampTool(self, self.edit_state)
 
         #font = pyglet.font.load('Material Icons')

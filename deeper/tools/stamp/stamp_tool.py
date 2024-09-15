@@ -1,11 +1,11 @@
+from loguru import logger
 import glm
 
-#import pyglet.window.mouse as mouse
-#import arcade
-#from arcade import key
+from crunge import sdl
+
 from crunge.engine.imgui.widget import Window
 from crunge.engine import Renderer
-
+from crunge.engine.colors import Colors
 
 from deeper import Isometry, Cuboid, Block
 from deeper.constants import *
@@ -79,8 +79,11 @@ class StampTool(SceneEditTool):
         #self.view.close_window('Catalog')
         self.gui.remove_child(self.widget)
 
-    def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
-        # print("mouse: ", x, y)
+    def on_mouse_motion(self, event: sdl.MouseMotionEvent):
+        x, y = event.x, event.y
+        self.last_mouse = glm.vec2(x, y)
+        logger.debug(f"mouse: x={x}, y={y}")
+
         ray = self.camera.mouse_to_ray(x, y)
         result = self.scene.cast_ray(ray)
         # print(result)
@@ -183,13 +186,21 @@ class StampTool(SceneEditTool):
 
         return glm.vec3(cx, target_aabb.maxy + size[1] / 2, cz)
 
-    def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
-        super().on_mouse_press(x, y, button, modifiers)
-        #print("stamp")
+    def on_mouse_button(self, event: sdl.MouseButtonEvent):
+        super().on_mouse_button(event)
+        button = event.button
+        action = event.state == 1
+        if button == 1 and action and self.stamp:
+            EntityKit.instance.build(
+                self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
+            )
+
+        '''
         if button == mouse.LEFT and self.stamp:
             EntityKit.instance.build(
                 self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
             )
+        '''
 
     def draw(self, renderer: Renderer):
         if self.hovered:
@@ -199,7 +210,7 @@ class StampTool(SceneEditTool):
 
         if self.stamp:
             pos = self.camera.project(self.stamp.position).xy
-            self.scene.draw_aabb(self.stamp.aabb)
+            self.view.draw_aabb(self.stamp.aabb)
 
         if self.selected:
-            self.scene.draw_aabb(self.selected.block.aabb, color=arcade.color.RED)
+            self.view.draw_aabb(self.selected.block.aabb, color=Colors.RED)

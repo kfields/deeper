@@ -1,10 +1,8 @@
 from loguru import logger
 
-#from pyglet import clock
-#import pyglet.window.mouse as mouse
-#import arcade
-#from arcade import key
+import glm
 
+from crunge import sdl
 from crunge.engine import Renderer
 
 from .scene_tool import SceneEditTool
@@ -25,8 +23,11 @@ class PickTool(SceneEditTool):
         self.hovered = None
         self.selected = None
 
-    def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
-        print("mouse: ", x, y)
+    def on_mouse_motion(self, event: sdl.MouseMotionEvent):
+        x, y = event.x, event.y
+        self.last_mouse = glm.vec2(x, y)
+        logger.debug(f"mouse: x={x}, y={y}")
+
         ray = self.camera.mouse_to_ray(x, y)
         result = self.scene.cast_ray(ray)
         #print(result)
@@ -71,7 +72,7 @@ class PickTool(SceneEditTool):
             #print("self.hovered.position: ", self.hovered.position)
             #print("pos: ", pos)
             #arcade.draw_circle_outline(*pos.xy, 18, arcade.color.RED, 3)
-            self.scene.draw_aabb(self.hovered.block.aabb)
+            self.view.draw_aabb(self.hovered.block.aabb)
 
         if self.selected:
             self.scene.draw_aabb(self.selected.block.aabb, color=arcade.color.RED)

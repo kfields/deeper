@@ -1,10 +1,11 @@
 import time
 
 from crunge.engine.view import View
-from crunge.engine.dispatcher import Dispatcher
+from crunge.engine.controller import Controller
 
-class Tool(Dispatcher):
+class Tool(Controller):
     def __init__(self, view: View, title='') -> None:
+        super().__init__()
         self.view = view
         self.gui = view.gui
         self.window = view.window

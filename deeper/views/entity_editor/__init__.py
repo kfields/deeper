@@ -36,7 +36,7 @@ class EntityEditor(SceneEditor):
         #self.camera = WorldCamera(self.window, pos, 1)
         self.camera.look_at(pos)
 
-        self.current_tool = self.pick_tool = PickTool(self, edit_state)
+        self.tool = self.pick_tool = PickTool(self, edit_state)
 
         font = pyglet.font.load('Material Icons')
         self.gui.add_child(

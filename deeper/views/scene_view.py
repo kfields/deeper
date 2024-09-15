@@ -1,9 +1,10 @@
 #import pyglet.window.mouse as mouse
-#from arcade import key
+#from self.scratch import key
 import glm
 
 from crunge.engine import Renderer
 from crunge.engine.d2.renderer_2d import Renderer2D
+from crunge.engine.colors import Colors
 
 from ..view import View
 from ..scene import Scene
@@ -59,3 +60,30 @@ class SceneView(View):
             self.scene.draw(self.renderer)
 
         super().draw(renderer)
+
+    def draw_aabb(self, aabb, color=Colors.YELLOW):
+        bbl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy
+        bbr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz)).xy
+        fbl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz)).xy
+        fbr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz)).xy
+
+        btl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz)).xy
+        btr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz)).xy
+        ftl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz)).xy
+        ftr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz)).xy
+
+        #Bottom
+        self.scratch.draw_line(bbl, bbr, color)
+        self.scratch.draw_line(fbl, fbr, color)
+        self.scratch.draw_line(bbl, fbl, color)
+        self.scratch.draw_line(bbr, fbr, color)
+        #Top
+        self.scratch.draw_line(btl, btr, color)
+        self.scratch.draw_line(ftl, ftr, color)
+        self.scratch.draw_line(btl, ftl, color)
+        self.scratch.draw_line(btr, ftr, color)
+        #Sides
+        self.scratch.draw_line(bbl, btl, color)
+        self.scratch.draw_line(fbl, ftl, color)
+        self.scratch.draw_line(bbr, btr, color)
+        self.scratch.draw_line(fbr, ftr, color)
