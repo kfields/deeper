@@ -27,12 +27,12 @@ class EntityEditor(SceneEditor):
 
     def _create(self, window):
         super()._create(window)
-        self.gui.add_child(EntityWindow(self.scene, self.edit_state.entity))
+        self.gui.add_child(EntityWindow(self.scene, self.edit_state.entity).create(self.gui))
 
         self.block = self.scene.component_for_entity(self.edit_state.entity, Block)
 
         self.blueprint = self.scene.component_for_entity(self.edit_state.entity, EntityBlueprint)
-        self.gui.add_child(ComponentWindow(self.blueprint))
+        self.gui.add_child(ComponentWindow(self.blueprint).create(self.gui))
 
         pos = self.block.position
         self.scene.camera.look_at(pos)
@@ -56,7 +56,8 @@ class EntityEditor(SceneEditor):
         Scheduler().schedule_once(lambda dt : self.window.pop_view(), 0)
     
     def use_pick(self):
-        self.use_tool(self.pick_tool)
+        #self.use_tool(self.pick_tool)
+        self.tool = self.pick_tool
 
     def draw(self, renderer: Renderer):
         super().draw(renderer)

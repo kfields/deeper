@@ -68,7 +68,7 @@ class StampTool(SceneEditTool):
         self.stamp = None
         self.widget = Window('Stamp Tool', [StampToolWidget(self)])
         self.widget.create(self.gui)
-
+    
     def enable(self):
         super().enable()
         #self.view.open_window('Catalog')

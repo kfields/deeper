@@ -9,6 +9,7 @@ from deeper.resources.icons import IconsMaterialDesign
 from .icon import IconToggleButton, Icon, IconButton
 from .menu import Menubar, Menu, MenuItem
 from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, EditableSelectable
+from ..scene import Scene
 from ..scene_layer import SceneLayer
 
 class LayerWidget(SelectableBase):
@@ -30,7 +31,7 @@ class LayerWidget(SelectableBase):
                 self.selectable
             ]
         )
-
+    
     def on_child_selected(self, child):
         self.callback(self)
 
@@ -70,7 +71,7 @@ class LayerWidget(SelectableBase):
             imgui.same_line()
 
 class LayersPanel(ExclusiveSelectableGroup):
-    def __init__(self, scene, callback):
+    def __init__(self, scene: Scene, callback):
         self.scene = scene
         children = []
         for layer in scene.layers:

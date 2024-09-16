@@ -76,8 +76,8 @@ class EditableSelectable(SelectableBase):
                 #logger.debug(value)
                 self.label = value
 
-            # TODO: need to detect escape key and other loss of focus ...
-            if self.gui.is_key_down(imgui.KEY_ESCAPE):
+            # TODO: need to detect other loss of focus?
+            if imgui.is_key_down(imgui.KEY_ESCAPE):
                 self.mode = SelectableMode.SELECT
 
 

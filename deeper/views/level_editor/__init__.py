@@ -56,10 +56,12 @@ class LevelEditor(SceneEditor):
         self.edit_state.current_layer = layer
 
     def use_pick(self):
-        self.use_tool(self.pick_tool)
+        #self.use_tool(self.pick_tool)
+        self.tool = self.pick_tool
 
     def use_stamp(self):
-        self.use_tool(self.stamp_tool)
+        #self.use_tool(self.stamp_tool)
+        self.tool = self.stamp_tool
 
     def on_catalog(self, blueprint):
         self.edit_state.current_blueprint = blueprint
@@ -82,7 +84,7 @@ class LevelEditor(SceneEditor):
         if title == 'Catalog':
             window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close).create(self.gui)
         elif title == 'Layers':
-            window = LayersWindow(self.scene, lambda layer: self.select_layer(layer), on_close=on_close)
+            window = LayersWindow(self.scene, lambda layer: self.select_layer(layer), on_close=on_close).create(self.gui)
         else:
             return super().open_window(title)
 
