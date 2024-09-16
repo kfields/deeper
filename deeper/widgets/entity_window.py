@@ -7,9 +7,11 @@ from crunge.engine.imgui.widget import Widget, Window
 from deeper.kits.component_widget_kit import ComponentWidgetKit
 
 class EntityPanel(Widget):
+    '''
     def __init__(self, children=...):
         super().__init__(children)
-
+    '''
+    
     def draw(self, renderer: Renderer):
         for child in self.children:
             expanded, child.visible = imgui.collapsing_header(child.name, child.visible)

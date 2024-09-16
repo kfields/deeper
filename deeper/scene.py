@@ -129,32 +129,3 @@ class Scene(World):
         pos = self.camera.project(self.camera.position).xy
         arcade.draw_circle_outline(*pos, 18, arcade.color.WISTERIA, 3)
         """
-
-    '''
-    def draw_aabb(self, aabb, color=arcade.color.YELLOW):
-        bbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz))
-        bbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz))
-        fbl = self.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz))
-        fbr = self.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz))
-
-        btl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz))
-        btr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz))
-        ftl = self.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz))
-        ftr = self.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz))
-
-        #Bottom
-        arcade.draw_line(bbl.x, bbl.y, bbr.x, bbr.y, color)
-        arcade.draw_line(fbl.x, fbl.y, fbr.x, fbr.y, color)
-        arcade.draw_line(bbl.x, bbl.y, fbl.x, fbl.y, color)
-        arcade.draw_line(bbr.x, bbr.y, fbr.x, fbr.y, color)
-        #Top
-        arcade.draw_line(btl.x, btl.y, btr.x, btr.y, color)
-        arcade.draw_line(ftl.x, ftl.y, ftr.x, ftr.y, color)
-        arcade.draw_line(btl.x, btl.y, ftl.x, ftl.y, color)
-        arcade.draw_line(btr.x, btr.y, ftr.x, ftr.y, color)
-        #Sides
-        arcade.draw_line(bbl.x, bbl.y, btl.x, btl.y, color)
-        arcade.draw_line(fbl.x, fbl.y, ftl.x, ftl.y, color)
-        arcade.draw_line(bbr.x, bbr.y, btr.x, btr.y, color)
-        arcade.draw_line(fbr.x, fbr.y, ftr.x, ftr.y, color)
-    '''

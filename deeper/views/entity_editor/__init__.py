@@ -1,7 +1,7 @@
 #import pyglet
 #from pyglet import clock
 
-from crunge.engine import Renderer
+from crunge.engine import Renderer, Scheduler
 
 from deeper import Block
 from deeper.blueprints import EntityBlueprint
@@ -10,7 +10,7 @@ from deeper.camera import WorldCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.resources.icons import IconsMaterialDesign
 
-from deeper.tools.pick import PickTool
+from deeper.tools.pick_tool import PickTool
 
 from deeper.widgets.toolbar import Toolbar, ToolButton
 from deeper.widgets.entity_window import EntityWindow
@@ -21,22 +21,23 @@ from ..scene_editor import SceneEditor
 
 
 class EntityEditor(SceneEditor):
-    def __init__(self, window, edit_state):
-        super().__init__(window, edit_state.scene, 'Entity Editor')
+    def __init__(self, edit_state):
+        super().__init__(edit_state.scene, 'Entity Editor')
         self.edit_state = edit_state
 
-        self.gui.add_child(EntityWindow(self.scene, edit_state.entity))
+    def _create(self, window):
+        super()._create(window)
+        self.gui.add_child(EntityWindow(self.scene, self.edit_state.entity))
 
-        self.block = self.scene.component_for_entity(edit_state.entity, Block)
+        self.block = self.scene.component_for_entity(self.edit_state.entity, Block)
 
-        self.blueprint = self.scene.component_for_entity(edit_state.entity, EntityBlueprint)
+        self.blueprint = self.scene.component_for_entity(self.edit_state.entity, EntityBlueprint)
         self.gui.add_child(ComponentWindow(self.blueprint))
 
         pos = self.block.position
-        #self.camera = WorldCamera(self.window, pos, 1)
-        self.camera.look_at(pos)
+        self.scene.camera.look_at(pos)
 
-        self.tool = self.pick_tool = PickTool(self, edit_state)
+        self.tool = self.pick_tool = PickTool(self, self.edit_state)
 
         self.gui.add_child(
             self.create_menubar(
@@ -52,12 +53,11 @@ class EntityEditor(SceneEditor):
         )
 
     def close(self):
-        #self.window.pop_view()
-        clock.schedule_once(lambda dt, *args, **kwargs : self.window.pop_view(), 0)
+        Scheduler().schedule_once(lambda dt : self.window.pop_view(), 0)
     
     def use_pick(self):
         self.use_tool(self.pick_tool)
 
     def draw(self, renderer: Renderer):
         super().draw(renderer)
-        self.scene.draw_aabb(self.block.aabb)
+        self.draw_aabb(self.block.aabb)

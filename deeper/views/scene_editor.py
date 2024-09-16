@@ -2,9 +2,8 @@ import webbrowser
 
 from loguru import logger
 
-# from pyglet import clock
-# from arcade.resources import resolve_resource_path
 from crunge import imgui
+from crunge.engine import Scheduler
 from crunge.engine.resource.resource_manager import ResourceManager
 
 from deeper.constants import *
@@ -24,6 +23,8 @@ from ..widgets import (
 
 doc_url = "https://kfields.github.io/deeper/index.html"
 
+# Need to protect glyph_ranges from garbage collection
+glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
 
 class SceneEditor(SceneView):
     def __init__(self, scene, title=""):
@@ -37,9 +38,6 @@ class SceneEditor(SceneView):
             ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
         )
 
-        glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
-
-        
         self.gui.load_icon_font(
             ResourceManager().resolve_path(
                 f":deeper:/icons/{IconsMaterialDesign.FONT_ICON_FILE_NAME_MD}"
@@ -49,7 +47,7 @@ class SceneEditor(SceneView):
         )
 
     def new(self):
-        clock.schedule_once(lambda dt, *args, **kwargs: self._new(), 0)
+        Scheduler().schedule_once(lambda dt : self._new(), 0)
 
     def _new(self):
         from .level_editor import LevelEditor
@@ -61,7 +59,7 @@ class SceneEditor(SceneView):
         self.window.show_view(view)
 
     def load(self):
-        clock.schedule_once(lambda dt, *args, **kwargs: self._load(), 0)
+        Scheduler().schedule_once(lambda dt: self._load(), 0)
 
     def _load(self):
         from .level_editor import LevelEditor

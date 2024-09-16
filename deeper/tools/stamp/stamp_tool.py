@@ -5,7 +5,7 @@ from crunge import sdl
 
 from crunge.engine.imgui.widget import Window
 from crunge.engine import Renderer
-from crunge.engine.colors import Colors
+from crunge.engine.color import Color
 
 from deeper import Isometry, Cuboid, Block
 from deeper.constants import *
@@ -206,4 +206,4 @@ class StampTool(SceneEditTool):
             self.view.draw_aabb(self.stamp.aabb)
 
         if self.selected:
-            self.view.draw_aabb(self.selected.block.aabb, color=Colors.RED)
+            self.view.draw_aabb(self.selected.block.aabb, color=Color.RED)

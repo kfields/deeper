@@ -9,7 +9,7 @@ from deeper.catalog import Catalog
 from deeper.widgets import CatalogWindow, LayersWindow, MenuItem
 from deeper.resources.icons import IconsMaterialDesign
 
-from deeper.tools.pick import PickTool
+from deeper.tools.pick_tool import PickTool
 from deeper.tools.stamp import StampTool
 
 from deeper.widgets.toolbar import Toolbar, ToolButton
