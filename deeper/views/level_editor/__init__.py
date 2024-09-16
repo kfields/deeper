@@ -33,18 +33,16 @@ class LevelEditor(SceneEditor):
         self.tool = self.pick_tool = PickTool(self, self.edit_state)
         self.stamp_tool = StampTool(self, self.edit_state)
 
-        #font = pyglet.font.load('Material Icons')
-        font = None
         self.gui.add_child(
             self.create_menubar(
                 children=[
                     Toolbar(
                         [
                             ToolButton(
-                                IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick
+                                IconsMaterialDesign.ICON_NAVIGATION, self.use_pick
                             ),
                             ToolButton(
-                                IconsMaterialDesign.ICON_APPROVAL, font, self.use_stamp
+                                IconsMaterialDesign.ICON_APPROVAL, self.use_stamp
                             ),
                         ]
                     )

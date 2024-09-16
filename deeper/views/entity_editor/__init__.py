@@ -38,14 +38,13 @@ class EntityEditor(SceneEditor):
 
         self.tool = self.pick_tool = PickTool(self, edit_state)
 
-        font = pyglet.font.load('Material Icons')
         self.gui.add_child(
             self.create_menubar(
                 children=[
                     Toolbar(
                         [
-                            ToolButton(IconsMaterialDesign.ICON_NAVIGATION, font, self.use_pick),
-                            ToolButton(IconsMaterialDesign.ICON_CLOSE, font, self.close),
+                            ToolButton(IconsMaterialDesign.ICON_NAVIGATION, self.use_pick),
+                            ToolButton(IconsMaterialDesign.ICON_CLOSE, self.close),
                         ]
                     )
                 ]

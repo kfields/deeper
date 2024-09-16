@@ -7,19 +7,19 @@ from crunge.engine.imgui.widget import Widget
 
 
 class Icon(Widget):
-    def __init__(self, text, font):
+    def __init__(self, text):
         super().__init__()
+        text += f"##{str(self.id)}" # Can't have buttons with the same text
         self.text = text
-        self.font = font
 
     def draw(self, renderer: Renderer):
         imgui.text(self.text)
 
 class IconButton(Widget):
-    def __init__(self, text, font, callback = lambda : None):
+    def __init__(self, text, callback = lambda : None):
         super().__init__()
+        text += f"##{str(self.id)}" # Can't have buttons with the same text
         self.text = text
-        self.font = font
         self.callback = callback
 
     def draw(self, renderer: Renderer):
@@ -28,11 +28,10 @@ class IconButton(Widget):
             return True
 
 class IconToggleButton(Widget):
-    def __init__(self, on_text, off_text, font, on=False, callback = lambda on: None):
+    def __init__(self, on_text, off_text, on=False, callback = lambda on: None):
         super().__init__()
         self.on_text = on_text
         self.off_text = off_text
-        self.font = font
         self.on = on
         self.callback = callback
 

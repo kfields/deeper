@@ -15,22 +15,19 @@ class LayerWidget(SelectableBase):
     def __init__(self, layer: SceneLayer, callback):
         self.layer = layer
         self.selectable = EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child), width=128)
-        #font = pyglet.font.load('Material Icons')
-        font = None
         super().__init__(
             layer.name,
             callback,
             selected=False,
             children=[
-                IconButton(IconsMaterialDesign.ICON_GRID_ON, font),
-                self.selectable,
+                IconButton(IconsMaterialDesign.ICON_GRID_ON),
                 IconToggleButton(
                     IconsMaterialDesign.ICON_VISIBILITY,
                     IconsMaterialDesign.ICON_VISIBILITY_OFF,
-                    font,
                     layer.visible,
                     lambda on: self.set_visible(on)
-                )
+                ),
+                self.selectable
             ]
         )
 
@@ -91,12 +88,14 @@ class LayersPanel(ExclusiveSelectableGroup):
         #imgui.begin_child('layers', -1, -1)
         #imgui.begin_child('layers', border=True)
         imgui.begin_child('layers', (-1, -1))
+        #imgui.begin_child('layers')
         #imgui.push_style_color(imgui.Col.COL_BUTTON, 0.0, 0.0, 0.0)
         #imgui.push_style_color(imgui.Col.COL_BUTTON.value, imgui.Vec4(0.0, 0.0, 0.0, 0.0))
         #super().draw(renderer)
-        self.draw_sortable(self.on_swap)
+        self.draw_sortable(renderer, self.on_swap)
         #imgui.pop_style_color(1)
         imgui.end_child()
+        #super().draw(renderer)
 
     def draw_child(self, renderer: Renderer, child):
         super().draw_child(renderer, child)
@@ -104,7 +103,8 @@ class LayersPanel(ExclusiveSelectableGroup):
 
     def draw_child_context_popup(self, child):
         if imgui.begin_popup_context_item(str(id(child))):
-            clicked, selected = imgui.selectable('Delete')
+            selected = False
+            clicked, selected = imgui.selectable('Delete', selected)
             if clicked:
                 self.scene.remove_layer(child.layer)
                 self.remove_child(child)

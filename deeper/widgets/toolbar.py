@@ -6,8 +6,8 @@ from crunge.engine.imgui.widget import Widget
 from .icon import IconButton
 
 class ToolButton(IconButton):
-    def __init__(self, text, font, callback):
-        super().__init__(text, font, callback)
+    def __init__(self, text, callback):
+        super().__init__(text, callback)
         self.selected = False
 
     def select(self):

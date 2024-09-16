@@ -10,6 +10,7 @@ from crunge.engine.imgui.widget import Widget, Window
 from ..blueprint import Blueprint
 from .menu import Menubar, Menu, MenuItem
 
+
 class BlueprintWidget(Widget):
     def __init__(self, blueprint: Blueprint):
         super().__init__()
@@ -23,11 +24,14 @@ class BlueprintWidget(Widget):
         return self
 
     def draw(self, renderer: Renderer):
-        clicked, selected = imgui.selectable(self.blueprint.name, self.selected, size=(128, 32))
+        clicked, selected = imgui.selectable(
+            self.blueprint.name, self.selected, size=(128, 32)
+        )
         imgui.same_line()
         size = self.texture.width, self.texture.height
         imgui.image(self.texture.id, size)
         return clicked
+
 
 class CategoryWidget(Widget):
     def __init__(self, category, callback):
@@ -35,11 +39,12 @@ class CategoryWidget(Widget):
         self.category = category
         self.callback = callback
         self.selection = None
-        '''
+        """
         for blueprint in category.blueprints:
             if not blueprint._abstract:
                 self.add_child(BlueprintWidget(blueprint))
-        '''
+        """
+
     def _create(self, gui):
         super()._create(gui)
         for blueprint in self.category.blueprints:
@@ -56,8 +61,8 @@ class CategoryWidget(Widget):
         self.selection = None
 
     def draw(self, renderer: Renderer):
-        #imgui.begin_child('entities', -1, -1, border=True)
-        imgui.begin_child('entities', (-1, -1), border=True)
+        # imgui.begin_child('entities', -1, -1, border=True)
+        imgui.begin_child("entities", (-1, -1), border=True)
         for widget in self.children:
             clicked = widget.draw(renderer)
             if clicked:
@@ -67,6 +72,7 @@ class CategoryWidget(Widget):
                 widget.selected = True
                 self.callback(widget.blueprint)
         imgui.end_child()
+
 
 class CatalogPanel(Widget):
     def __init__(self, catalog, callback):
@@ -78,27 +84,32 @@ class CatalogPanel(Widget):
         self.current_index = 0
         self.current = None
 
-        '''
+        """
         for category in sorted(catalog.categories.values(), key=lambda category: category.name):
             if not category._abstract:
                 self.category_names.append(category.name)
                 self.category_widgets.append(CategoryWidget(category, callback))
-        '''
+        """
+
     def _create(self, gui):
         super()._create(gui)
-        for category in sorted(self.catalog.categories.values(), key=lambda category: category.name):
+        for category in sorted(
+            self.catalog.categories.values(), key=lambda category: category.name
+        ):
             if not category._abstract:
                 self.category_names.append(category.name)
-                self.category_widgets.append(CategoryWidget(category, self.callback).create(self.gui))
-        '''
+                self.category_widgets.append(
+                    CategoryWidget(category, self.callback).create(self.gui)
+                )
+        """
         for widget in self.category_widgets:
             widget.create(self.gui)
-        '''
+        """
         return self
 
     def draw(self, renderer: Renderer):
         clicked, self.current_index = imgui.combo(
-            'Category', self.current_index, self.category_names
+            "Category", self.current_index, self.category_names
         )
         current = self.category_widgets[self.current_index]
         if current != self.current:
@@ -108,16 +119,29 @@ class CatalogPanel(Widget):
         self.current = current
         self.current.draw(renderer)
 
+
 class CatalogWindow(Window):
 
-    def __init__(self, catalog, callback, on_close:callable=None):
+    def __init__(self, catalog, callback, on_close: callable = None):
         self.catalog = catalog
         children = [
-            Menubar([
-                Menu('File', [
-                    MenuItem('Export Yaml', lambda: self.catalog.save_yaml(ResourceManager.resolve_path(':deeper:/catalog')))
-                ])
-            ]),
-            CatalogPanel(catalog, callback)
+            Menubar(
+                [
+                    Menu(
+                        "File",
+                        [
+                            MenuItem(
+                                "Export Yaml",
+                                lambda: self.catalog.save_yaml(
+                                    ResourceManager.resolve_path(":deeper:/catalog")
+                                ),
+                            )
+                        ],
+                    )
+                ]
+            ),
+            CatalogPanel(catalog, callback),
         ]
-        super().__init__('Catalog', children, on_close=on_close, flags=imgui.WINDOW_FLAGS_MENU_BAR)
+        super().__init__(
+            "Catalog", children, on_close=on_close, flags=imgui.WINDOW_FLAGS_MENU_BAR
+        )
