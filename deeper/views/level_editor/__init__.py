@@ -3,7 +3,7 @@ from loguru import logger
 from crunge.engine import Renderer
 
 from deeper.constants import *
-from deeper.camera import WorldCamera
+from deeper.camera import SceneCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.catalog import Catalog
 from deeper.widgets import CatalogWindow, LayersWindow, MenuItem

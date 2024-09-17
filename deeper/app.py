@@ -22,7 +22,8 @@ class Deeper(App):
         super()._create()
         self.load_settings()
         view = LevelEditor(WorldEditState(self.scene)).create(self)
-        self.show_view(view)
+        #self.show_view(view)
+        self.view = view
 
     def destroy(self):
         self.save_settings()

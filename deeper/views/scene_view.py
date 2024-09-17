@@ -1,5 +1,4 @@
-#import pyglet.window.mouse as mouse
-#from self.scratch import key
+from loguru import logger
 import glm
 
 from crunge import sdl
@@ -10,7 +9,7 @@ from crunge.engine.color import Color
 from ..view import View
 from ..scene import Scene
 
-from ..camera import WorldCamera
+from ..camera import SceneCamera
 
 class SceneView(View):
     scene: Scene = None
@@ -18,18 +17,21 @@ class SceneView(View):
     def __init__(self, scene, title=''):
         super().__init__(title)
         self.scene = scene
+        self.scene_camera: SceneCamera = None
         self.dragging = False
 
     def _create(self, window):
         super()._create(window)
-        self.scene.camera = WorldCamera(self.camera)
+        self.scene_camera = SceneCamera(self.camera)
+        self.scene.camera = self.scene_camera
 
-    def on_show(self):
-        super().on_show()
+    def enable(self):
+        super().enable()
+        self.scene.camera = self.scene_camera
         self.scene.enable()
 
-    def on_hide(self):
-        super().on_hide()
+    def disable(self):
+        super().disable()
         self.scene.disable()
 
     def resize(self, size: glm.ivec2):
@@ -73,6 +75,7 @@ class SceneView(View):
         self.scene.camera.pan(dx, dy)
 
     def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
+        #logger.debug(f"{self.title}:on_mouse_wheel")
         self.scene.camera.zoom_pct = self.scene.camera.zoom_pct + event.y * 10
 
     def draw(self, renderer: Renderer2D):

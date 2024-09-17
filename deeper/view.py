@@ -11,8 +11,17 @@ class View(View2D):
     def __init__(self, title=""):
         super().__init__()
         self.title = title
-        self._tool: Tool = None
+        #self._tool: Tool = None
 
+    @property
+    def tool(self) -> Tool:
+        return self.controller
+
+    @tool.setter
+    def tool(self, tool: Tool):
+        self.controller = tool
+
+    '''
     @property
     def tool(self) -> Tool:
         return self._tool
@@ -26,6 +35,7 @@ class View(View2D):
         self._tool = tool
         self.controller = tool
         tool.enable()
+    '''
 
     '''
     @tool.setter
@@ -49,6 +59,8 @@ class View(View2D):
             self.tool.draw(renderer)
         super().draw(renderer)
 
+
+    '''
     def on_show(self):
         super().on_show()
         if self.tool:
@@ -58,3 +70,4 @@ class View(View2D):
         super().on_hide()
         if self.tool:
             self.tool.disable()
+    '''

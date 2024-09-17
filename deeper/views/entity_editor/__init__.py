@@ -6,7 +6,7 @@ from crunge.engine import Renderer, Scheduler
 from deeper import Block
 from deeper.blueprints import EntityBlueprint
 from deeper.constants import *
-from deeper.camera import WorldCamera
+from deeper.camera import SceneCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.resources.icons import IconsMaterialDesign
 

@@ -8,7 +8,7 @@ from .constants import WORLD_SCALE, WORLD_TILT, WORLD_ROTATION, WORLD_AXIS_X, WO
 from . import Ray
 
 
-class WorldCamera:
+class SceneCamera:
     def __init__(self, camera: Camera2D, target:glm.vec3=glm.vec3(), zoom=1.0):
         self.target = target
         self.distance = zoom * 10

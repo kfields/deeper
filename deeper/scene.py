@@ -12,14 +12,14 @@ from .processors import Processor
 
 from . import Block
 from .scene_layer import SceneLayer
-from .camera import WorldCamera
+from .camera import SceneCamera
 
 from .event import EventSource, LayerDeletedEvent
 
 class Scene(World):
     def __init__(self, timed:bool=False):
         super().__init__(timed)
-        self.camera: WorldCamera = None
+        self.camera: SceneCamera = None
         self.events = EventSource()
         self.layers: list[SceneLayer] = []
 
