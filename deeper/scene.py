@@ -8,11 +8,11 @@ from crunge.engine import Renderer
 
 from .ecs import World
 from .ecs.component import Component
-from .processors import Processor
+from .processor import Processor
 
 from . import Block
 from .scene_layer import SceneLayer
-from .camera import SceneCamera
+from .scene_camera import SceneCamera
 
 from .event import EventSource, LayerDeletedEvent
 

@@ -11,9 +11,3 @@ class Tool(Controller):
         self.gui = view.gui
         self.window = view.window
         self.title = title
-
-    def enable(self):
-        pass
-
-    def disable(self):
-        pass

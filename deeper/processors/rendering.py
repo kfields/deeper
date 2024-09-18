@@ -3,7 +3,9 @@ import glm
 
 from crunge.engine.math.rect import RectF
 
-from ..constants import *
+from ..constants import WORLD_SCALE
+from ..scene_layer import SceneLayer
+
 from deeper import Block
 from deeper.components.sprite_vu import SpriteVu
 from . import SceneProcessor
@@ -13,7 +15,7 @@ class RenderingProcessor(SceneProcessor):
         for layer in self.scene.layers:
             self.process_layer(layer, delta_time)
 
-    def process_layer(self, layer, delta_time: float):
+    def process_layer(self, layer: SceneLayer, delta_time: float):
         if not layer.dirty:
             return
         logger.debug(f'processing {layer.name}')

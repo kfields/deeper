@@ -3,7 +3,7 @@ from loguru import logger
 from crunge.engine import Renderer
 
 from deeper.constants import *
-from deeper.camera import SceneCamera
+from deeper.scene_camera import SceneCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.catalog import Catalog
 from deeper.widgets import CatalogWindow, LayersWindow, MenuItem
@@ -30,7 +30,8 @@ class LevelEditor(SceneEditor):
         self.catalog = Catalog.instance
         self.open_window('Catalog')
 
-        self.tool = self.pick_tool = PickTool(self, self.edit_state)
+        #self.tool = self.pick_tool = PickTool(self, self.edit_state)
+        self.pick_tool = PickTool(self, self.edit_state)
         self.stamp_tool = StampTool(self, self.edit_state)
 
         self.gui.add_child(
@@ -50,6 +51,10 @@ class LevelEditor(SceneEditor):
             )
         )
         return self
+
+    def enable(self):
+        super().enable()
+        self.tool = self.pick_tool
 
     def select_layer(self, layer):
         logger.debug(layer)

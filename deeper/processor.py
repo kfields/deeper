@@ -1,4 +1,4 @@
-from .. import ecs
+from . import ecs
 
 
 class Processor(ecs.Processor):

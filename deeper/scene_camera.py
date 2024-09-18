@@ -10,6 +10,7 @@ from . import Ray
 
 class SceneCamera:
     def __init__(self, camera: Camera2D, target:glm.vec3=glm.vec3(), zoom=1.0):
+        self.camera = camera
         self.target = target
         self.distance = zoom * 10
         self._zoom = zoom
@@ -17,11 +18,6 @@ class SceneCamera:
         self.world_matrix = glm.scale(glm.mat4(1), glm.vec3(WORLD_SCALE, WORLD_SCALE, WORLD_SCALE))
         self.inv_world_matrix = glm.inverse(self.world_matrix)
         
-        #self.camera = Camera2D(zoom=zoom)
-        #self.camera = Camera2D()
-        #self.camera = Camera2D(glm.vec3(0,0,0), glm.vec2(1024, 768))
-        self.camera = camera
-
         self.update_matrices()
         self.look_at(target)
 
@@ -73,7 +69,6 @@ class SceneCamera:
     def pan(self, dx, dy):
         camera_right = glm.normalize(glm.cross(self.direction, WORLD_UP))
         camera_up = glm.normalize(glm.cross(camera_right, self.direction))
-        #vector = (camera_right * dx) + (camera_up * dy) * self.zoom
         vector = (camera_right * dx) + (camera_up * dy)
         target = self.target + vector / self.distance
         self.look_at(target)
@@ -82,9 +77,8 @@ class SceneCamera:
         self.target = target
         self.position = target + (self.direction * -self.distance)
         self.update_matrices()
-        #focal_point = self.project(target).xy * 1/self.zoom
         focal_point = self.project(target).xy
-        #print("focal_point: ", focal_point)
+        #logger.debug("focal_point: {focal_point}")
         self.camera.position = focal_point
 
     def mouse_to_ray(self, mx, my):

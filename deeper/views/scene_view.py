@@ -9,7 +9,7 @@ from crunge.engine.color import Color
 from ..view import View
 from ..scene import Scene
 
-from ..camera import SceneCamera
+from ..scene_camera import SceneCamera
 
 class SceneView(View):
     scene: Scene = None
@@ -29,6 +29,7 @@ class SceneView(View):
         super().enable()
         self.scene.camera = self.scene_camera
         self.scene.enable()
+        #super().enable()
 
     def disable(self):
         super().disable()
