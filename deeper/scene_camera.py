@@ -9,7 +9,7 @@ from . import Ray
 
 
 class SceneCamera:
-    def __init__(self, camera: Camera2D, target:glm.vec3=glm.vec3(), zoom=1.0):
+    def __init__(self, camera: Camera2D = None, target:glm.vec3=glm.vec3(), zoom=1.0):
         self.camera = camera
         self.target = target
         self.distance = zoom * 10
@@ -57,7 +57,7 @@ class SceneCamera:
         self.camera.update(delta_time)
 
     def resize(self, size: glm.ivec2) -> None:
-        self.camera.resize(size)
+        #self.camera.resize(size) # Resized by the view
         self.look_at(self.target)
 
     def project(self, point):
@@ -77,6 +77,8 @@ class SceneCamera:
         self.target = target
         self.position = target + (self.direction * -self.distance)
         self.update_matrices()
+        if self.camera is None:
+            return
         focal_point = self.project(target).xy
         #logger.debug("focal_point: {focal_point}")
         self.camera.position = focal_point

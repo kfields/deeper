@@ -23,11 +23,11 @@ class SceneView(View):
     def _create(self, window):
         super()._create(window)
         self.scene_camera = SceneCamera(self.camera)
-        self.scene.camera = self.scene_camera
+        self.scene_camera = self.scene_camera
 
     def enable(self):
         super().enable()
-        self.scene.camera = self.scene_camera
+        #self.scene_camera = self.scene_camera
         self.scene.enable()
         #super().enable()
 
@@ -37,7 +37,8 @@ class SceneView(View):
 
     def resize(self, size: glm.ivec2):
         super().resize(size)
-        self.scene.resize(size)
+        #self.scene.resize(size)
+        self.scene_camera.resize(size)
 
     def update(self, delta_time: float):
         self.scene.update(delta_time)
@@ -69,15 +70,15 @@ class SceneView(View):
         super().on_mouse_motion(event)
         if not self.dragging:
             return
-        zoom = self.scene.camera.zoom
+        zoom = self.scene_camera.zoom
         sensitivity = 0.1
         dx = -event.xrel * zoom * sensitivity
         dy = event.yrel * zoom * sensitivity
-        self.scene.camera.pan(dx, dy)
+        self.scene_camera.pan(dx, dy)
 
     def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
         #logger.debug(f"{self.title}:on_mouse_wheel")
-        self.scene.camera.zoom_pct = self.scene.camera.zoom_pct + event.y * 10
+        self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
 
     def draw(self, renderer: Renderer2D):
         # logger.debug("DemoView.draw()")
@@ -89,15 +90,15 @@ class SceneView(View):
         super().draw(renderer)
 
     def draw_aabb(self, aabb, color=Color.YELLOW):
-        bbl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy
-        bbr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz)).xy
-        fbl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz)).xy
-        fbr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz)).xy
+        bbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy
+        bbr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz)).xy
+        fbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz)).xy
+        fbr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz)).xy
 
-        btl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz)).xy
-        btr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz)).xy
-        ftl = self.scene.camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz)).xy
-        ftr = self.scene.camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz)).xy
+        btl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz)).xy
+        btr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz)).xy
+        ftl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz)).xy
+        ftr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz)).xy
 
         #Bottom
         self.scratch.draw_line(bbl, bbr, color)

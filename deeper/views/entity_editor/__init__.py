@@ -35,7 +35,7 @@ class EntityEditor(SceneEditor):
         self.gui.add_child(ComponentWindow(self.blueprint).create(self.gui))
 
         pos = self.block.position
-        self.scene.camera.look_at(pos)
+        self.scene_camera.look_at(pos)
 
         self.tool = self.pick_tool = PickTool(self, self.edit_state)
 

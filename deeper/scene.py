@@ -12,14 +12,14 @@ from .processor import Processor
 
 from . import Block
 from .scene_layer import SceneLayer
-from .scene_camera import SceneCamera
+#from .scene_camera import SceneCamera
 
 from .event import EventSource, LayerDeletedEvent
 
 class Scene(World):
     def __init__(self, timed:bool=False):
         super().__init__(timed)
-        self.camera: SceneCamera = None
+        #self.camera: SceneCamera = None
         self.events = EventSource()
         self.layers: list[SceneLayer] = []
 
@@ -91,12 +91,14 @@ class Scene(World):
         for layer in self.layers:
             layer.disable()
 
+    '''
     def resize(self, size: glm.ivec2) -> None:
         self.camera.resize(size)
-
+    '''
+    
     def update(self, delta_time: float) -> None:
         self.process(delta_time)
-        self.camera.update(delta_time)
+        #self.camera.update(delta_time)
 
     def cast_ray(self, ray) -> tuple:
         results = []

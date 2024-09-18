@@ -1,4 +1,5 @@
-from crunge.engine.view import View
+#from crunge.engine.view import View
+from ..view import View
 
 from ..tool import Tool
 from ..state import EditState
@@ -6,7 +7,8 @@ class SceneTool(Tool):
     def __init__(self, view: View, title='') -> None:
         super().__init__(view, title)
         self.scene = view.scene
-        self.camera = self.scene.camera
+        #self.camera = self.scene.camera
+        self.camera = view.scene_camera
 
 class SceneEditTool(SceneTool):
     def __init__(self, view, edit_state: EditState, title='') -> None:

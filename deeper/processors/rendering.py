@@ -2,15 +2,23 @@ from loguru import logger
 import glm
 
 from crunge.engine.math.rect import RectF
+from crunge.engine.d2.sprite import Sprite
 
 from ..constants import WORLD_SCALE
+from ..scene import Scene
 from ..scene_layer import SceneLayer
+from ..scene_camera import SceneCamera
 
 from deeper import Block
 from deeper.components.sprite_vu import SpriteVu
 from . import SceneProcessor
 
 class RenderingProcessor(SceneProcessor):
+    def __init__(self, scene: Scene) -> None:
+        super().__init__(scene)
+        self.scene = scene
+        self.scene_camera = SceneCamera()
+
     def process(self, delta_time: float):
         for layer in self.scene.layers:
             self.process_layer(layer, delta_time)
@@ -24,7 +32,8 @@ class RenderingProcessor(SceneProcessor):
         layer.clear()
 
         for ent, (_, block, vu) in self.world.get_components(layer.__class__, Block, SpriteVu):
-            position = self.scene.camera.project(block.position)
+            #position = self.scene.camera.project(block.position)
+            position = self.scene_camera.project(block.position)
             #logger.debug(f'position: {position}')
             vu.position = position
             sprite_position = position.xy + (vu.offset * WORLD_SCALE)
@@ -43,7 +52,7 @@ class RenderingProcessor(SceneProcessor):
 
         layer.unmark()
 
-    def update_sprite_transform(self, sprite, position, size, rotation=0.0, scale=glm.vec3(1,1,1), depth=0.0):
+    def update_sprite_transform(self, sprite: Sprite, position: glm.vec3, size: glm.vec2, rotation=0.0, scale=glm.vec3(1,1,1), depth=0.0):
         x = position.x
         y = position.y
         z = depth

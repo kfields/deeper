@@ -127,6 +127,6 @@ class SceneEditor(SceneView):
         elif title == "Style":
             window = StyleWindow(on_close=on_close)
         elif title == "Camera":
-            window = CameraWindow(self.camera, on_close=on_close)
+            window = CameraWindow(self.scene_camera, on_close=on_close)
         self.windows[title] = window
         self.gui.add_child(window)

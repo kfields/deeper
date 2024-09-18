@@ -3,17 +3,19 @@ from crunge import imgui
 from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Widget, Window
 
+from ..scene_camera import SceneCamera
+
 class CameraPanel(Widget):
-    def __init__(self, camera):
+    def __init__(self, camera: SceneCamera):
         super().__init__()
         self.camera = camera
 
     def draw(self, renderer: Renderer):
         imgui.input_float3(
-            'Position', *self.camera.position, flags=imgui.INPUT_TEXT_READ_ONLY
+            'Position', tuple(self.camera.position), flags=imgui.INPUT_TEXT_FLAGS_READ_ONLY
         )
         changed, pct = imgui.drag_float(
-            'Zoom', self.camera.zoom_pct, change_speed=10
+            'Zoom', self.camera.zoom_pct, v_speed=10
         )
         if changed:
             self.camera.zoom_pct = pct
