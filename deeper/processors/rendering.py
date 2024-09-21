@@ -41,6 +41,7 @@ class RenderingProcessor(SceneProcessor):
             #vu.sprite.position = sprite_position.xy
             sprite = vu.sprite
             size = sprite.texture.size
+            #size = block.size
             self.update_sprite_transform(vu.sprite, sprite_position, size)
             vu_list.append(vu)
 

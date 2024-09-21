@@ -20,9 +20,9 @@ class SpriteAnimationWidget(ComponentWidget):
         changed, rate = imgui.drag_float(
             'Rate',
             self.animation.rate,
-            change_speed=0.01,
-            min_value=0.01,
-            max_value=1.0,
+            v_speed=0.01,
+            v_min=0.01,
+            v_max=1.0,
         )
         if changed:
             self.animation.rate = rate

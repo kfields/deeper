@@ -1,6 +1,8 @@
-#import arcade
+import glm
 
-from deeper.constants import *
+from crunge.engine.loader.texture_strip_loader import TextureStripLoader
+
+#from deeper.constants import *
 from .animation import Animation, AnimationDirection
 from .component_builder import ComponentBuilder
 from .sprite_vu import SpriteVu
@@ -21,13 +23,11 @@ class SpriteAnimation(Animation):
         self.update_time = 0
 
         # Load Textures
-        texture_coords = []
-        for i in range(frames):
-            texture_coords.append((i * image_width, 0, image_width, image_height))
-
-        #self.textures = arcade.load_textures(filename, texture_coords)
+        #self.textures = TextureStripLoader().load(filename, glm.ivec2(image_width, image_height))
+        self.textures = TextureStripLoader().load(filename, glm.ivec2(image_width, image_height), frames)
         self.cur_texture_index = 0
-        self.texture = self.textures[self.cur_texture_index]
+        #self.texture = self.textures[self.cur_texture_index]
+        self.texture = self.textures.get(self.cur_texture_index)
         self.sprite = None
 
     @property
@@ -69,7 +69,8 @@ class SpriteAnimation(Animation):
                 else:
                     self.cur_texture_index = 0
 
-        self.texture = self.textures[self.cur_texture_index]
+        #self.texture = self.textures[self.cur_texture_index]
+        self.texture = self.textures.get(self.cur_texture_index)
         self.sprite.texture = self.texture
 
 

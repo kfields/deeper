@@ -21,8 +21,8 @@ class BasicLevel(Level):
         self.create_grid()
         self.create_layer('Floor')
         self.create_layer('Default')
-        #self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
-        self.add_processors([RenderingProcessor(self)])
+        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
+        #self.add_processors([RenderingProcessor(self)])
 
     def create_grid(self):
         catalog = Catalog.instance
