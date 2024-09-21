@@ -14,7 +14,7 @@ class EditState:
         self.scene = scene
         self.current_blueprint = None
 
-class WorldEditState(EditState):
+class LevelEditState(EditState):
     def __init__(self, scene) -> None:
         super().__init__(scene)
         self.snap_option = SnapOption.CENTER

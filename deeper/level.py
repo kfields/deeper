@@ -8,11 +8,13 @@ from .scene import Scene
 from .blueprints import EntityBlueprint
 from .kits.entity_kit import EntityKit
 from .catalog import Catalog
+from .processors import RenderingProcessor, AnimationProcessor
 
 class Level(Scene):
     def __init__(self, name: str, timed:bool=False):
         super().__init__(timed)
         self.name: str = name
+        self.add_processors([RenderingProcessor(self), AnimationProcessor(self)])
 
     def save(self, path: Path):
         layers = []
@@ -45,7 +47,7 @@ class Level(Scene):
         return data
 
     @classmethod
-    def load(cls, path: Path):
+    def load(cls, path: Path) -> 'Level':
         with open(path, "r") as in_file:
             data = json.load(in_file)
 

@@ -47,27 +47,27 @@ class SceneEditor(SceneView):
         )
 
     def new(self):
-        Scheduler().schedule_once(lambda dt : self._new(), 0)
+        Scheduler().schedule_once(lambda dt : self._new())
 
     def _new(self):
         from .level_editor import LevelEditor
-        from ..state import WorldEditState
+        from ..state import LevelEditState
         from ..levels.basic_level import BasicLevel
 
         level = BasicLevel()
-        view = LevelEditor(self.window, WorldEditState(level))
-        self.window.show_view(view)
+        view = LevelEditor(LevelEditState(level)).create(self.window)
+        self.window.view = view
 
     def load(self):
-        Scheduler().schedule_once(lambda dt: self._load(), 0)
+        Scheduler().schedule_once(lambda dt: self._load())
 
     def _load(self):
         from .level_editor import LevelEditor
-        from ..state import WorldEditState
+        from ..state import LevelEditState
 
         level = Level.load(ResourceManager().resolve_path(":deeper:/levels/test.json"))
-        view = LevelEditor(self.window, WorldEditState(level))
-        self.window.show_view(view)
+        view = LevelEditor(LevelEditState(level)).create(self.window)
+        self.window.view = view
 
     def save(self):
         self.world.save(ResourceManager().resolve_path(":deeper:/levels/"))
