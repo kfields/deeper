@@ -61,7 +61,7 @@ class EditableSelectable(SelectableBase):
             clicked, selected = imgui.selectable(
                 self.label,
                 self.selected,
-                flags=imgui.SelectableFlags.SELECTABLE_FLAGS_ALLOW_DOUBLE_CLICK,
+                flags=imgui.SelectableFlags.ALLOW_DOUBLE_CLICK,
                 size=(self.width, self.height),
             )
             #if imgui.is_item_hovered() and imgui.is_mouse_double_clicked():

@@ -12,7 +12,7 @@ class CameraPanel(Widget):
 
     def draw(self, renderer: Renderer):
         imgui.input_float3(
-            'Position', tuple(self.camera.position), flags=imgui.INPUT_TEXT_FLAGS_READ_ONLY
+            'Position', tuple(self.camera.position), flags=imgui.InputTextFlags.READ_ONLY
         )
         changed, pct = imgui.drag_float(
             'Zoom', self.camera.zoom_pct, v_speed=10

@@ -23,7 +23,7 @@ class ToolButton(IconButton):
         else:
             alpha = 0.5
 
-        imgui.push_style_var(imgui.StyleVar.STYLE_VAR_ALPHA, alpha)
+        imgui.push_style_var(imgui.StyleVar.ALPHA, alpha)
         if imgui.button(self.text):
             self.select()
         imgui.pop_style_var(1)
@@ -38,7 +38,7 @@ class Toolbar(Widget):
 
     def draw(self, renderer: Renderer):
         imgui.separator()
-        imgui.push_style_color(imgui.Col.COL_BUTTON, imgui.color_convert_float4_to_u32((0.15, 0.15, 0.15, 0.15)))
+        imgui.push_style_color(imgui.Col.BUTTON, imgui.color_convert_float4_to_u32((0.15, 0.15, 0.15, 0.15)))
         for child in self.children:
             if child.draw(renderer):
                 if self.selection and self.selection != child:

@@ -143,5 +143,5 @@ class CatalogWindow(Window):
             CatalogPanel(catalog, callback),
         ]
         super().__init__(
-            "Catalog", children, on_close=on_close, flags=imgui.WINDOW_FLAGS_MENU_BAR
+            "Catalog", children, on_close=on_close, flags=imgui.WindowFlags.MENU_BAR
         )

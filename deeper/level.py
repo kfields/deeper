@@ -74,10 +74,3 @@ class Level(Scene):
         EntityKit.instance.build(
             blueprint, self, layer, position
         )
-
-"""
-            EntityKit.instance.build(
-                self.edit_state.current_blueprint, self.world, self.edit_state.current_layer, self.stamp.position
-            )
-
-"""

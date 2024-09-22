@@ -86,13 +86,9 @@ class LayersPanel(ExclusiveSelectableGroup):
         self.scene.swap_layers(i, j)
 
     def draw(self, renderer: Renderer):
-        #imgui.begin_child('layers', -1, -1)
-        #imgui.begin_child('layers', border=True)
         imgui.begin_child('layers', (-1, -1))
-        #imgui.begin_child('layers')
         #imgui.push_style_color(imgui.Col.COL_BUTTON, 0.0, 0.0, 0.0)
         #imgui.push_style_color(imgui.Col.COL_BUTTON.value, imgui.Vec4(0.0, 0.0, 0.0, 0.0))
-        #super().draw(renderer)
         self.draw_sortable(renderer, self.on_swap)
         #imgui.pop_style_color(1)
         imgui.end_child()
@@ -125,7 +121,7 @@ class LayersWindow(Window):
             self.panel
         ]
 
-        super().__init__('Layers', children, on_close=on_close, flags=imgui.WINDOW_FLAGS_MENU_BAR)
+        super().__init__('Layers', children, on_close=on_close, flags=imgui.WindowFlags.MENU_BAR)
         self.scene = scene
 
     def new_layer(self):
