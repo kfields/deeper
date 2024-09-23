@@ -43,7 +43,6 @@ class PickTool(SceneEditTool):
         super().on_mouse_button(event)
         #logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
         button = event.button
-        action = event.state == 1
 
         if button != 1 or not self.hovered:
             return

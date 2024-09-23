@@ -189,8 +189,7 @@ class StampTool(SceneEditTool):
     def on_mouse_button(self, event: sdl.MouseButtonEvent):
         super().on_mouse_button(event)
         button = event.button
-        action = event.state == 1
-        if button == 1 and action and self.stamp:
+        if button == 1 and event.down and self.stamp:
             EntityKit.instance.build(
                 self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
             )

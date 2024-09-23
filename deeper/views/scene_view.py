@@ -57,11 +57,10 @@ class SceneView(View):
         super().on_mouse_button(event)
         #logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
         button = event.button
-        action = event.state == 1
 
         if button != 3:
             return
-        if action:
+        if event.down:
             self.dragging = True
         else:
             self.dragging = False

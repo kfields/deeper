@@ -61,8 +61,7 @@ class CategoryWidget(Widget):
         self.selection = None
 
     def draw(self, renderer: Renderer):
-        # imgui.begin_child('entities', -1, -1, border=True)
-        imgui.begin_child("entities", (-1, -1), border=True)
+        imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
         for widget in self.children:
             clicked = widget.draw(renderer)
             if clicked:

@@ -26,6 +26,6 @@ class SnapOptionWidget(Widget):
 
     def draw(self, renderer: Renderer):
         imgui.text('SnapOption')
-        imgui.begin_child('SnapOption', (0, 0), border=True)
+        imgui.begin_child('SnapOption', (0, 0), imgui.ChildFlags.BORDERS)
         super().draw(renderer)
         imgui.end_child()
