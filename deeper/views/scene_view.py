@@ -89,7 +89,8 @@ class SceneView(View):
 
     def draw(self, renderer: Renderer2D):
         # logger.debug("DemoView.draw()")
-        self.renderer.texture_view = renderer.texture_view
+        #self.renderer.texture_view = renderer.texture_view
+        self.renderer.viewport = renderer.viewport
         
         with self.renderer:
             self.scene.draw(self.renderer)
