@@ -35,10 +35,18 @@ class SceneView(View):
         super().disable()
         self.scene.disable()
 
+    def on_size(self):
+        super().on_size()
+        size = self.size
+        if self.scene_camera is not None:
+            self.scene_camera.resize(size)
+
+    '''
     def resize(self, size: glm.ivec2):
         super().resize(size)
         #self.scene.resize(size)
         self.scene_camera.resize(size)
+    '''
 
     def update(self, delta_time: float):
         self.scene.update(delta_time)
@@ -46,12 +54,12 @@ class SceneView(View):
 
     def on_key(self, event: sdl.KeyboardEvent):
         key = event.key
-        state = event.state
+        down = event.down
 
         if key == sdl.SDLK_KP_PLUS:
-            self.camera.zoom = self.camera.zoom + .1
-        elif key == sdl.SDLK_KP_MINUS:
             self.camera.zoom = self.camera.zoom - .1
+        elif key == sdl.SDLK_KP_MINUS:
+            self.camera.zoom = self.camera.zoom + .1
 
     def on_mouse_button(self, event: sdl.MouseButtonEvent):
         super().on_mouse_button(event)

@@ -61,7 +61,7 @@ class PickTool(SceneEditTool):
 
     def on_key(self, event: sdl.KeyboardEvent):
         key = event.key
-        state = event.state
+        down = event.down
 
         if key == sdl.SDLK_DELETE and self.selected:
             self.scene.delete_entity(self.selected.block)

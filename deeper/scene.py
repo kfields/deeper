@@ -90,15 +90,9 @@ class Scene(World):
     def disable(self) -> None:
         for layer in self.layers:
             layer.disable()
-
-    '''
-    def resize(self, size: glm.ivec2) -> None:
-        self.camera.resize(size)
-    '''
     
     def update(self, delta_time: float) -> None:
         self.process(delta_time)
-        #self.camera.update(delta_time)
 
     def cast_ray(self, ray) -> tuple:
         results = []
