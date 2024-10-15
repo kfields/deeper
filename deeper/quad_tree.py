@@ -1,8 +1,8 @@
-from crunge.engine.math.rect import RectF
+from crunge.engine.math import Rect2
 
 
 class Quadtree:
-    def __init__(self, boundary: RectF, capacity: int = 4):
+    def __init__(self, boundary: Rect2, capacity: int = 4):
         self.boundary = boundary  # The boundary of this node
         self.capacity = capacity  # Maximum objects before subdivision
         self.objects = []         # Objects stored in this node
@@ -18,10 +18,10 @@ class Quadtree:
         x, y = self.boundary.x, self.boundary.y
         w, h = self.boundary.width / 2, self.boundary.height / 2
 
-        ne = RectF(x + w, y, w, h)
-        nw = RectF(x, y, w, h)
-        se = RectF(x + w, y + h, w, h)
-        sw = RectF(x, y + h, w, h)
+        ne = Rect2(x + w, y, w, h)
+        nw = Rect2(x, y, w, h)
+        se = Rect2(x + w, y + h, w, h)
+        sw = Rect2(x, y + h, w, h)
 
         self.northeast = Quadtree(ne, self.capacity)
         self.northwest = Quadtree(nw, self.capacity)
@@ -73,7 +73,7 @@ class Quadtree:
                         i += 1
             return True
 
-    def query(self, range_rect: RectF, found):
+    def query(self, range_rect: Rect2, found):
         """Find all objects that intersect with a given range."""
         if not self.boundary.intersects(range_rect):
             return  # Empty: no intersection

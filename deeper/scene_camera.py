@@ -2,7 +2,7 @@ from loguru import logger
 import glm
 
 from crunge.engine.d2.camera_2d import Camera2D
-from crunge.engine.math.rect import RectF
+from crunge.engine.math.rect import Rect2
 
 from .constants import WORLD_SCALE, WORLD_TILT, WORLD_ROTATION, WORLD_AXIS_X, WORLD_AXIS_Y, WORLD_UP
 from . import Ray

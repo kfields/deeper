@@ -88,8 +88,6 @@ class SceneView(View):
         self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
 
     def draw(self, renderer: Renderer2D):
-        # logger.debug("DemoView.draw()")
-        #self.renderer.texture_view = renderer.texture_view
         self.renderer.viewport = renderer.viewport
         
         with self.renderer:

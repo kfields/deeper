@@ -1,7 +1,7 @@
 from loguru import logger
 import glm
 
-from crunge.engine.math.rect import RectF
+from crunge.engine.math.rect import Rect2
 from crunge.engine.d2.sprite import Sprite
 
 from ..constants import WORLD_SCALE
@@ -74,7 +74,7 @@ class RenderingProcessor(SceneProcessor):
         sprite.transform = model
 
             
-        sprite.aabb = RectF(
+        sprite.aabb = Rect2(
             x - size.x / 2,
             y - size.y / 2,
             size.x,

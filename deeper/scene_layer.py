@@ -2,7 +2,7 @@ from loguru import logger
 
 from crunge.engine import Renderer
 from crunge.engine.d2 import Sprite, SpriteList
-from crunge.engine.math.rect import RectF
+from crunge.engine.math import Rect2
 
 from deeper.constants import *
 from deeper.event import EventSource, LayerDirtyEvent
@@ -21,7 +21,7 @@ class SceneLayer(EntityGroup):
         self.locked = False
         self.dirty = True
         self.events = EventSource()
-        self.quad_tree = Quadtree(RectF(-1000, -1000, 2000, 2000))
+        self.quad_tree = Quadtree(Rect2(-1000, -1000, 2000, 2000))
 
     def __str__(self) -> str:
         return f"Layer({self.name})"
