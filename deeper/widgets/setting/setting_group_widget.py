@@ -40,7 +40,7 @@ class SettingGroupWidget(SettingWidget):
                         selectables.append(
                             Selectable(name, lambda name=name, cls=cls: self.add_setting(name, cls))
                         )
-                    win = self.gui.add_child(
+                    win = self.gui.attach(
                         Window(
                             'Settings',
                             [

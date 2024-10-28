@@ -4,7 +4,6 @@ from crunge.engine import Renderer
 from crunge.engine.d2 import Sprite, SpriteList
 from crunge.engine.math import Rect2
 
-from deeper.constants import *
 from deeper.event import EventSource, LayerDirtyEvent
 
 from .ecs.entity_group import EntityGroup

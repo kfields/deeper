@@ -2,7 +2,6 @@ from loguru import logger
 
 from crunge.engine import Renderer
 
-from deeper.constants import *
 from deeper.scene_camera import SceneCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.catalog import Catalog
@@ -34,7 +33,7 @@ class LevelEditor(SceneEditor):
         self.pick_tool = PickTool(self, self.edit_state)
         self.stamp_tool = StampTool(self, self.edit_state)
 
-        self.gui.add_child(
+        self.gui.attach(
             self.create_menubar(
                 children=[
                     Toolbar(
@@ -94,4 +93,4 @@ class LevelEditor(SceneEditor):
             return super().open_window(title)
 
         self.windows[title] = window
-        self.gui.add_child(window)
+        self.gui.attach(window)

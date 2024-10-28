@@ -86,8 +86,8 @@ class SelectableGroup(WidgetGroup):
         super().__init__(children)
         self.callback = callback
 
-    def add_child(self, child):
-        super().add_child(child)
+    def attach(self, child):
+        super().attach(child)
         child_callback = child.callback
         child.callback = lambda child: self.on_child_select(child, child_callback)
 

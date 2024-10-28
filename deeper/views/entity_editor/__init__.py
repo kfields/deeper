@@ -5,7 +5,6 @@ from crunge.engine import Renderer, Scheduler
 
 from deeper import Block
 from deeper.blueprints import EntityBlueprint
-from deeper.constants import *
 from deeper.scene_camera import SceneCamera
 from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.resources.icons import IconsMaterialDesign
@@ -27,19 +26,19 @@ class EntityEditor(SceneEditor):
 
     def _create(self, window):
         super()._create(window)
-        self.gui.add_child(EntityWindow(self.scene, self.edit_state.entity).create(self.gui))
+        self.gui.attach(EntityWindow(self.scene, self.edit_state.entity).create(self.gui))
 
         self.block = self.scene.component_for_entity(self.edit_state.entity, Block)
 
         self.blueprint = self.scene.component_for_entity(self.edit_state.entity, EntityBlueprint)
-        self.gui.add_child(ComponentWindow(self.blueprint).create(self.gui))
+        self.gui.attach(ComponentWindow(self.blueprint).create(self.gui))
 
         pos = self.block.position
         self.scene_camera.look_at(pos)
 
         self.tool = self.pick_tool = PickTool(self, self.edit_state)
 
-        self.gui.add_child(
+        self.gui.attach(
             self.create_menubar(
                 children=[
                     Toolbar(

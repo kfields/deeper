@@ -42,14 +42,14 @@ class CategoryWidget(Widget):
         """
         for blueprint in category.blueprints:
             if not blueprint._abstract:
-                self.add_child(BlueprintWidget(blueprint))
+                self.attach(BlueprintWidget(blueprint))
         """
 
     def _create(self, gui):
         super()._create(gui)
         for blueprint in self.category.blueprints:
             if not blueprint._abstract:
-                self.add_child(BlueprintWidget(blueprint).create(self.gui))
+                self.attach(BlueprintWidget(blueprint).create(self.gui))
         return self
 
     def show(self):

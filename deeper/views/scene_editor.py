@@ -6,7 +6,6 @@ from crunge import imgui
 from crunge.engine import Scheduler
 from crunge.engine.resource.resource_manager import ResourceManager
 
-from deeper.constants import *
 from deeper.resources.icons import IconsMaterialDesign
 
 from .scene_view import SceneView
@@ -129,4 +128,4 @@ class SceneEditor(SceneView):
         elif title == "Camera":
             window = CameraWindow(self.scene_camera, on_close=on_close)
         self.windows[title] = window
-        self.gui.add_child(window)
+        self.gui.attach(window)

@@ -1,4 +1,4 @@
-from deeper.constants import *
+from deeper.constants import DEFAULT_VEC3
 
 from .entity_builder import EntityBuilder
 

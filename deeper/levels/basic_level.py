@@ -1,7 +1,7 @@
 #import arcade
 
 from crunge.engine.loader.texture_loader import TextureLoader
-from crunge.engine.d2.sprite import Sprite
+from crunge.engine.d2.sprite import Sprite, SpriteMaterial
 
 from ..constants import *
 from ..level import Level
@@ -30,9 +30,9 @@ class BasicLevel(Level):
                 position = glm.vec3(tx * CELL_WIDTH, 0, ty)
                 # logger.debug(f"position: {position}")
                 block = Block(position, size)
+                texture = TextureLoader().load(':deeper:/tiles/_Grid/GRID.png')
+                material = SpriteMaterial(texture)
                 vu = SpriteVu(
-                    Sprite(
-                        TextureLoader().load(':deeper:/tiles/_Grid/GRID.png'),
-                    )
+                    Sprite(material)
                 )
                 self.create_entity(layer, blueprint, block, vu)

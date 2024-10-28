@@ -34,8 +34,8 @@ class RadioButtonGroup(Widget):
         super().__init__(children)
         #self.selected = children[0]
 
-    def add_child(self, child):
-        super().add_child(child)
+    def attach(self, child):
+        super().attach(child)
         if child.active:
             self.selected = child
         child_callback = child.callback

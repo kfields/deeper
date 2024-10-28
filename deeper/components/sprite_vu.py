@@ -1,8 +1,9 @@
 from loguru import logger
+import glm
 
-from crunge.engine.d2.sprite import Sprite
+from crunge.engine.d2.sprite import Sprite, SpriteMaterial
 
-from deeper.constants import *
+from deeper.constants import DEFAULT_VEC2
 from .vu import Vu
 from .component_builder import ComponentBuilder
 
@@ -32,5 +33,6 @@ class SpriteVuBuilder(ComponentBuilder):
 
     def build(self, blueprint, world):
         offset = glm.vec2(blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
-        sprite = Sprite(blueprint.texture)
+        material = SpriteMaterial(blueprint.texture)
+        sprite = Sprite(material)
         return SpriteVu(sprite, offset)

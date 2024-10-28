@@ -126,4 +126,4 @@ class LayersWindow(Window):
 
     def new_layer(self):
         layer = self.scene.new_layer()
-        self.panel.add_child(self.panel.create_child(layer, lambda child: self.callback(child.layer)))
+        self.panel.attach(self.panel.create_child(layer, lambda child: self.callback(child.layer)))

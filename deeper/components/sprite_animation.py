@@ -2,7 +2,6 @@ import glm
 
 from crunge.engine.loader.texture_strip_loader import TextureStripLoader
 
-#from deeper.constants import *
 from .animation import Animation, AnimationDirection
 from .component_builder import ComponentBuilder
 from .sprite_vu import SpriteVu
@@ -42,7 +41,8 @@ class SpriteAnimation(Animation):
     def create(self, world, entity, layer):
         vu = world.component_for_entity(entity, SpriteVu)
         self.sprite = vu.sprite
-        self.sprite.texture = self.texture
+        #self.sprite.texture = self.texture
+        self.sprite.material.texture = self.texture
 
     def update(self, delta_time: float = 1 / 60):
         self.time += delta_time
@@ -71,7 +71,8 @@ class SpriteAnimation(Animation):
 
         #self.texture = self.textures[self.cur_texture_index]
         self.texture = self.textures.get(self.cur_texture_index)
-        self.sprite.texture = self.texture
+        #self.sprite.texture = self.texture
+        self.sprite.material.texture = self.texture
 
 
 class SpriteAnimationBuilder(ComponentBuilder):
