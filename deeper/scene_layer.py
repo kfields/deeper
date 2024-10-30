@@ -1,7 +1,7 @@
 from loguru import logger
 
 from crunge.engine import Renderer
-from crunge.engine.d2 import Sprite, SpriteList
+from crunge.engine.d2 import Sprite, SpriteGroup
 from crunge.engine.math import Rect2
 
 from deeper.event import EventSource, LayerDirtyEvent
@@ -15,7 +15,7 @@ class SceneLayer(EntityGroup):
         super().__init__(name)
         self.scene = scene
         self.name = name
-        self.sprites = SpriteList()
+        self.sprites = SpriteGroup()
         self.visible = True
         self.locked = False
         self.dirty = True

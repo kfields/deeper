@@ -39,11 +39,6 @@ class CategoryWidget(Widget):
         self.category = category
         self.callback = callback
         self.selection = None
-        """
-        for blueprint in category.blueprints:
-            if not blueprint._abstract:
-                self.attach(BlueprintWidget(blueprint))
-        """
 
     def _create(self, gui):
         super()._create(gui)
@@ -83,13 +78,6 @@ class CatalogPanel(Widget):
         self.current_index = 0
         self.current = None
 
-        """
-        for category in sorted(catalog.categories.values(), key=lambda category: category.name):
-            if not category._abstract:
-                self.category_names.append(category.name)
-                self.category_widgets.append(CategoryWidget(category, callback))
-        """
-
     def _create(self, gui):
         super()._create(gui)
         for category in sorted(
@@ -100,10 +88,7 @@ class CatalogPanel(Widget):
                 self.category_widgets.append(
                     CategoryWidget(category, self.callback).create(self.gui)
                 )
-        """
-        for widget in self.category_widgets:
-            widget.create(self.gui)
-        """
+
         return self
 
     def draw(self, renderer: Renderer):

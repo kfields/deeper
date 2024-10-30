@@ -34,5 +34,5 @@ class SpriteVuBuilder(ComponentBuilder):
     def build(self, blueprint, world):
         offset = glm.vec2(blueprint.offset) if hasattr(blueprint, 'offset') else DEFAULT_VEC2
         material = SpriteMaterial(blueprint.texture)
-        sprite = Sprite(material)
+        sprite = Sprite(material).create()
         return SpriteVu(sprite, offset)
