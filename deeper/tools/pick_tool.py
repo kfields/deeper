@@ -57,7 +57,8 @@ class PickTool(SceneEditTool):
     def push_entity_editor(self):
         from deeper.state import EntityEditState
         from deeper.views.entity_editor import EntityEditor
-        self.window.push_view(EntityEditor(EntityEditState(self.scene, self.selected.block)).create(self.window))
+        #self.window.push_view(EntityEditor(EntityEditState(self.scene, self.selected.block)).create(self.window))
+        self.window.push_view(EntityEditor(EntityEditState(self.scene, self.selected.block)).config(window=self.window).create())
 
     def on_key(self, event: sdl.KeyboardEvent):
         key = event.key

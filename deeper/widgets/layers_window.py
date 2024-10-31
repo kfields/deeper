@@ -80,7 +80,8 @@ class LayersPanel(ExclusiveSelectableGroup):
         children[0].select()
     
     def create_child(self, layer, callback):
-        return LayerWidget(layer, callback).create(self.gui)
+        #return LayerWidget(layer, callback).create(self.gui)
+        return LayerWidget(layer, callback).config(gui=self.gui).create()
 
     def on_swap(self, i, j):
         self.scene.swap_layers(i, j)

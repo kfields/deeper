@@ -21,7 +21,8 @@ class Deeper(App):
     def _create(self):
         super()._create()
         self.load_settings()
-        view = LevelEditor(LevelEditState(self.scene)).create(self)
+        #view = LevelEditor(LevelEditState(self.scene)).create(self)
+        view = LevelEditor(LevelEditState(self.scene)).config(window=self).create()
         #self.show_view(view)
         self.view = view
 

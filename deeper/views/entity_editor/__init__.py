@@ -24,14 +24,18 @@ class EntityEditor(SceneEditor):
         super().__init__(edit_state.scene, 'Entity Editor')
         self.edit_state = edit_state
 
-    def _create(self, window):
-        super()._create(window)
-        self.gui.attach(EntityWindow(self.scene, self.edit_state.entity).create(self.gui))
+    #def _create(self, window):
+    def _create(self):
+        #super()._create(window)
+        super()._create()
+        #self.gui.attach(EntityWindow(self.scene, self.edit_state.entity).create(self.gui))
+        self.gui.attach(EntityWindow(self.scene, self.edit_state.entity).config(gui=self.gui).create())
 
         self.block = self.scene.component_for_entity(self.edit_state.entity, Block)
 
         self.blueprint = self.scene.component_for_entity(self.edit_state.entity, EntityBlueprint)
-        self.gui.attach(ComponentWindow(self.blueprint).create(self.gui))
+        #self.gui.attach(ComponentWindow(self.blueprint).create(self.gui))
+        self.gui.attach(ComponentWindow(self.blueprint).config(gui=self.gui).create())
 
         pos = self.block.position
         self.scene_camera.look_at(pos)

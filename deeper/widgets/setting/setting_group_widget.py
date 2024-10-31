@@ -58,11 +58,13 @@ class SettingGroupWidget(SettingWidget):
         self.setting.add_setting(setting)
         if isinstance(setting, SettingGroup):
             self.children.append(
-                SettingWidgetKit.instance.build(setting).create(self.gui)
+                #SettingWidgetKit.instance.build(setting).create(self.gui)
+                SettingWidgetKit.instance.build(setting).config(gui=self.gui).create()
             )
         else:
             self.children.append(
-                DropWrapper(SettingWidgetKit.instance.build(setting)).create(self.gui)
+                #DropWrapper(SettingWidgetKit.instance.build(setting)).create(self.gui)
+                DropWrapper(SettingWidgetKit.instance.build(setting)).config(gui=self.gui).create()
             )
 
 

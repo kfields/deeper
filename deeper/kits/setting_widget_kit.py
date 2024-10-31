@@ -22,7 +22,7 @@ class SettingWidgetKit(Kit):
             #print(base)
             return self.find(setting, base) #TODO: What if multiple bases?
 
-    def build(self, setting, **kwargs):
+    def build(self, setting, **kwargs) -> deeper.widgets.setting.SettingWidget:
         #print(setting.__dict__)
         builder = self.find(setting)
         return builder.build(setting, **kwargs)

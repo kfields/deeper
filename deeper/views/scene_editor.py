@@ -30,8 +30,10 @@ class SceneEditor(SceneView):
         super().__init__(scene, title)
         self.windows = {}
 
-    def _create(self, window):
-        super()._create(window)
+    #def _create(self, window):
+    def _create(self):
+        #super()._create(window)
+        super()._create()
         
         self.gui.load_default_font(
             ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
@@ -65,7 +67,8 @@ class SceneEditor(SceneView):
         from ..state import LevelEditState
 
         level = Level.load(ResourceManager().resolve_path(":deeper:/levels/test.json"))
-        view = LevelEditor(LevelEditState(level)).create(self.window)
+        #view = LevelEditor(LevelEditState(level)).create(self.window)
+        view = LevelEditor(LevelEditState(level)).config(window=self.window).create()
         self.window.view = view
 
     def save(self):

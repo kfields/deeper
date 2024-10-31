@@ -18,8 +18,10 @@ class BlueprintWidget(Widget):
         self.selected = False
         self.texture = None
 
-    def _create(self, gui):
-        super()._create(gui)
+    #def _create(self, gui):
+    def _create(self):
+        #super()._create(gui)
+        super()._create()
         self.texture = self.blueprint.thumbnail
         return self
 
@@ -40,11 +42,14 @@ class CategoryWidget(Widget):
         self.callback = callback
         self.selection = None
 
-    def _create(self, gui):
-        super()._create(gui)
+    #def _create(self, gui):
+    def _create(self):
+        #super()._create(gui)
+        super()._create()
         for blueprint in self.category.blueprints:
             if not blueprint._abstract:
-                self.attach(BlueprintWidget(blueprint).create(self.gui))
+                #self.attach(BlueprintWidget(blueprint).create(self.gui))
+                self.attach(BlueprintWidget(blueprint).config(gui=self.gui).create())
         return self
 
     def show(self):
@@ -78,15 +83,18 @@ class CatalogPanel(Widget):
         self.current_index = 0
         self.current = None
 
-    def _create(self, gui):
-        super()._create(gui)
+    #def _create(self, gui):
+    def _create(self):
+        #super()._create(gui)
+        super()._create()
         for category in sorted(
             self.catalog.categories.values(), key=lambda category: category.name
         ):
             if not category._abstract:
                 self.category_names.append(category.name)
                 self.category_widgets.append(
-                    CategoryWidget(category, self.callback).create(self.gui)
+                    #CategoryWidget(category, self.callback).create(self.gui)
+                    CategoryWidget(category, self.callback).config(gui=self.gui).create()
                 )
 
         return self

@@ -19,17 +19,19 @@ from ..scene_editor import SceneEditor
 
 class LevelEditor(SceneEditor):
     def __init__(self, edit_state):
-        super().__init__(edit_state.scene, 'Level Editor')
+        super().__init__(edit_state.scene, "Level Editor")
         self.edit_state = edit_state
 
-    def _create(self, window):
-        super()._create(window)
-        self.open_window('Layers')
+    # def _create(self, window):
+    def _create(self):
+        # super()._create(window)
+        super()._create()
+        self.open_window("Layers")
 
         self.catalog = Catalog.instance
-        self.open_window('Catalog')
+        self.open_window("Catalog")
 
-        #self.tool = self.pick_tool = PickTool(self, self.edit_state)
+        # self.tool = self.pick_tool = PickTool(self, self.edit_state)
         self.pick_tool = PickTool(self, self.edit_state)
         self.stamp_tool = StampTool(self, self.edit_state)
 
@@ -60,11 +62,11 @@ class LevelEditor(SceneEditor):
         self.edit_state.current_layer = layer
 
     def use_pick(self):
-        #self.use_tool(self.pick_tool)
+        # self.use_tool(self.pick_tool)
         self.tool = self.pick_tool
 
     def use_stamp(self):
-        #self.use_tool(self.stamp_tool)
+        # self.use_tool(self.stamp_tool)
         self.tool = self.stamp_tool
 
     def on_catalog(self, blueprint):
@@ -73,8 +75,8 @@ class LevelEditor(SceneEditor):
     def create_view_menu(self, children=[]):
         menu = super().create_view_menu(
             [
-                MenuItem('Catalog', lambda: self.open_window('Catalog')),
-                MenuItem('Layers', lambda: self.open_window('Layers')),
+                MenuItem("Catalog", lambda: self.open_window("Catalog")),
+                MenuItem("Layers", lambda: self.open_window("Layers")),
                 *children,
             ],
         )
@@ -85,10 +87,24 @@ class LevelEditor(SceneEditor):
             return
         on_close = lambda: self.close_window(title)
         window = None
-        if title == 'Catalog':
-            window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close).create(self.gui)
-        elif title == 'Layers':
-            window = LayersWindow(self.scene, lambda layer: self.select_layer(layer), on_close=on_close).create(self.gui)
+        if title == "Catalog":
+            # window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close).create(self.gui)
+            window = (
+                CatalogWindow(self.catalog, self.on_catalog, on_close=on_close)
+                .config(gui=self.gui)
+                .create()
+            )
+        elif title == "Layers":
+            # window = LayersWindow(self.scene, lambda layer: self.select_layer(layer), on_close=on_close).create(self.gui)
+            window = (
+                LayersWindow(
+                    self.scene,
+                    lambda layer: self.select_layer(layer),
+                    on_close=on_close,
+                )
+                .config(gui=self.gui)
+                .create()
+            )
         else:
             return super().open_window(title)
 

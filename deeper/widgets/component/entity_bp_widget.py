@@ -59,10 +59,13 @@ class EntityBpWidget(ComponentWidget):
 
         super().__init__(blueprint)
 
-    def _create(self, gui):
-        super()._create(gui)
+    #def _create(self, gui):
+    def _create(self):
+        #super()._create(gui)
+        super()._create()
         for panel in self.panels:
-            panel.create(self.gui)
+            #panel.create(self.gui)
+            panel.config(gui=self.gui).create()
         return self
 
     def draw(self, renderer: Renderer):
