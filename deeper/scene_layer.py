@@ -2,6 +2,7 @@ from loguru import logger
 
 from crunge.engine import Renderer
 from crunge.engine.d2 import Sprite, SpriteGroup
+from crunge.engine.d2.sprite.group.instanced_sprite_group import InstancedSpriteGroup
 from crunge.engine.math import Rect2
 
 from deeper.event import EventSource, LayerDirtyEvent
@@ -15,7 +16,8 @@ class SceneLayer(EntityGroup):
         super().__init__(name)
         self.scene = scene
         self.name = name
-        self.sprites = SpriteGroup()
+        #self.sprites = SpriteGroup()
+        self.sprites = InstancedSpriteGroup(1024)
         self.visible = True
         self.locked = False
         self.dirty = True
@@ -53,9 +55,6 @@ class SceneLayer(EntityGroup):
     def update(self, delta_time: float):
         #self.effects.update(delta_time)
         self.sprites.update(delta_time)
-
-    def update_animation(self, delta_time: float):
-        self.sprites.update_animation(delta_time)
 
     '''
     def draw(self, renderer: Renderer):

@@ -3,7 +3,6 @@ import glm
 
 from crunge import sdl
 from crunge.engine import Renderer
-from crunge.engine.d2.renderer_2d import Renderer2D
 from crunge.engine.color import Color
 
 from ..view import View
@@ -89,7 +88,7 @@ class SceneView(View):
         #logger.debug(f"{self.title}:on_mouse_wheel")
         self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
 
-    def draw(self, renderer: Renderer2D):
+    def draw(self, renderer: Renderer):
         self.renderer.viewport = renderer.viewport
         
         with self.renderer:

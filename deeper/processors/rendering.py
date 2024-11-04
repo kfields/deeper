@@ -29,8 +29,6 @@ class RenderingProcessor(SceneProcessor):
         logger.debug(f'processing {layer.name}')
         vu_list = []
 
-        layer.clear()
-
         for ent, (_, block, vu) in self.world.get_components(layer.__class__, Block, SpriteVu):
             #position = self.scene.camera.project(block.position)
             position = self.scene_camera.project(block.position)
@@ -47,6 +45,8 @@ class RenderingProcessor(SceneProcessor):
 
         vu_list = sorted(vu_list, key=lambda vu: vu.position.z)
         #logger.debug(f'vu_list: {vu_list}')
+
+        layer.clear()
 
         for vu in vu_list:
             layer.add_sprite(vu.sprite)
