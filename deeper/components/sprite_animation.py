@@ -1,10 +1,10 @@
 import glm
 
-from crunge.engine.loader.texture_strip_loader import TextureStripLoader
+from crunge.engine.loader.sprite_strip_loader import SpriteStripLoader
 
 from .animation import Animation, AnimationDirection
 from .component_builder import ComponentBuilder
-from .sprite_vu import SpriteVu
+from .sprite_vu import SpriteVuComponent
 
 
 class SpriteAnimation(Animation):
@@ -23,11 +23,11 @@ class SpriteAnimation(Animation):
 
         # Load Textures
         #self.textures = TextureStripLoader().load(filename, glm.ivec2(image_width, image_height))
-        self.textures = TextureStripLoader().load(filename, glm.ivec2(image_width, image_height), frames)
-        self.cur_texture_index = 0
+        self.sprites = SpriteStripLoader().load(filename, glm.ivec2(image_width, image_height), frames)
+        self.active_sprite_index = 0
         #self.texture = self.textures[self.cur_texture_index]
-        self.texture = self.textures.get(self.cur_texture_index)
-        self.sprite = None
+        self.sprite = self.sprites.get(self.active_sprite_index)
+        self.sprite_vu = None
 
     @property
     def rate(self):
@@ -39,10 +39,9 @@ class SpriteAnimation(Animation):
         self.interval = 1 / (60 * rate)
 
     def create(self, world, entity, layer):
-        vu = world.component_for_entity(entity, SpriteVu)
-        self.sprite = vu.sprite
-        #self.sprite.texture = self.texture
-        self.sprite.material.texture = self.texture
+        vu = world.component_for_entity(entity, SpriteVuComponent)
+        self.sprite_vu = vu.sprite_vu
+        self.sprite_vu.sprite = self.sprite
 
     def update(self, delta_time: float = 1 / 60):
         self.time += delta_time
@@ -53,26 +52,26 @@ class SpriteAnimation(Animation):
         self.update_time = self.time + self.interval
 
         if self.animation_direction == AnimationDirection.FORWARD:
-            self.cur_texture_index += 1
-            if self.cur_texture_index > self.frames - 1:
+            self.active_sprite_index += 1
+            if self.active_sprite_index > self.frames - 1:
                 if self.pingpong:
-                    self.cur_texture_index = self.frames - 1
+                    self.active_sprite_index = self.frames - 1
                     self.animation_direction = AnimationDirection.REVERSE
                 else:
-                    self.cur_texture_index = 0
+                    self.active_sprite_index = 0
         else:
-            self.cur_texture_index -= 1
-            if self.cur_texture_index < 0:
+            self.active_sprite_index -= 1
+            if self.active_sprite_index < 0:
                 if self.pingpong:
-                    self.cur_texture_index = 0
+                    self.active_sprite_index = 0
                     self.animation_direction = AnimationDirection.FORWARD
                 else:
-                    self.cur_texture_index = 0
+                    self.active_sprite_index = 0
 
         #self.texture = self.textures[self.cur_texture_index]
-        self.texture = self.textures.get(self.cur_texture_index)
+        self.sprite = self.sprites.get(self.active_sprite_index)
         #self.sprite.texture = self.texture
-        self.sprite.material.texture = self.texture
+        self.sprite_vu.sprite = self.sprite
 
 
 class SpriteAnimationBuilder(ComponentBuilder):

@@ -53,11 +53,20 @@ class View(View2D):
         tool.enable()
     '''
     
+    '''
     def draw(self, renderer: Renderer):
         # logger.debug('View.draw')
         if self.tool:
             self.tool.draw(renderer)
         super().draw(renderer)
+    '''
+    def draw(self, renderer: Renderer):
+        if self.tool:
+            self.tool.draw(renderer)
+
+        with self.renderer:
+            self.scene.draw(self.renderer)
+            super().draw(self.renderer)
 
 
     '''

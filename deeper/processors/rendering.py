@@ -10,7 +10,7 @@ from ..scene_layer import SceneLayer
 from ..scene_camera import SceneCamera
 
 from deeper import Block
-from deeper.components.sprite_vu import SpriteVu
+from deeper.components.sprite_vu import SpriteVuComponent
 from . import SceneProcessor
 
 class RenderingProcessor(SceneProcessor):
@@ -29,7 +29,7 @@ class RenderingProcessor(SceneProcessor):
         logger.debug(f'processing {layer.name}')
         vu_list = []
 
-        for ent, (_, block, vu) in self.world.get_components(layer.__class__, Block, SpriteVu):
+        for ent, (_, block, vu) in self.world.get_components(layer.__class__, Block, SpriteVuComponent):
             #position = self.scene.camera.project(block.position)
             position = self.scene_camera.project(block.position)
             #logger.debug(f'position: {position}')
@@ -37,10 +37,10 @@ class RenderingProcessor(SceneProcessor):
             sprite_position = position.xy + (vu.offset * WORLD_SCALE)
             #logger.debug(f'sprite_position: {sprite_position}')
             #vu.sprite.position = sprite_position.xy
-            sprite = vu.sprite
-            size = sprite.material.texture.size
+            sprite_vu = vu.sprite_vu
+            size = sprite_vu.sprite.size
             #size = block.size
-            self.update_sprite_transform(vu.sprite, sprite_position, size)
+            self.update_sprite_transform(vu.sprite_vu, sprite_position, size)
             vu_list.append(vu)
 
         vu_list = sorted(vu_list, key=lambda vu: vu.position.z)
@@ -49,7 +49,7 @@ class RenderingProcessor(SceneProcessor):
         layer.clear()
 
         for vu in vu_list:
-            layer.add_sprite(vu.sprite)
+            layer.add_sprite(vu.sprite_vu)
 
         layer.unmark()
 

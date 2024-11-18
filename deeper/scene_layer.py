@@ -1,8 +1,8 @@
 from loguru import logger
 
 from crunge.engine import Renderer
-from crunge.engine.d2 import Sprite, SpriteGroup
-from crunge.engine.d2.sprite.group.instanced_sprite_group import InstancedSpriteGroup
+from crunge.engine.d2 import SpriteVu, SpriteVuGroup
+from crunge.engine.d2.sprite.group.instanced_sprite_vu_group import InstancedSpriteVuGroup
 from crunge.engine.math import Rect2
 
 from deeper.event import EventSource, LayerDirtyEvent
@@ -16,8 +16,8 @@ class SceneLayer(EntityGroup):
         super().__init__(name)
         self.scene = scene
         self.name = name
-        #self.sprites = SpriteGroup()
-        self.sprites = InstancedSpriteGroup(1024)
+        #self.sprites = SpriteVuGroup()
+        self.sprites = InstancedSpriteVuGroup(1024)
         self.visible = True
         self.locked = False
         self.dirty = True
@@ -47,7 +47,7 @@ class SceneLayer(EntityGroup):
     def clear(self):
         self.sprites.clear()
         
-    def add_sprite(self, sprite: Sprite):
+    def add_sprite(self, sprite: SpriteVu):
         self.sprites.append(sprite)
         self.quad_tree.insert(sprite)
         return sprite

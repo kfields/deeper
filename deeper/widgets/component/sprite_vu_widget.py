@@ -2,7 +2,7 @@ from deeper.setting import AttrSetting, Vec2SettingVType
 from deeper.widgets.setting import DragWrapper
 from ...kits.setting_widget_kit import SettingWidgetKit
 
-from deeper.components.sprite_vu import SpriteVu
+from deeper.components.sprite_vu import SpriteVuComponent
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
 
 
@@ -21,5 +21,5 @@ class SpriteVuWidget(ComponentWidget):
 
 
 class SpriteVuWidgetBuilder(ComponentWidgetBuilder):
-    key = SpriteVu
+    key = SpriteVuComponent
     cls = SpriteVuWidget

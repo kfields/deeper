@@ -89,13 +89,20 @@ class SceneCamera:
         viewportWidth = viewport.width
         viewPortHeight = viewport.height
 
-        # Get projection and inverse view matrix
+        '''
+        # Get projection
         projection = self.camera.projection
 
         # Adjust projection width/height by the zoom factor
         zoom = self.camera.zoom  # Assuming there's a zoom attribute
         glOrthoWidth = projection.width / zoom
         glOrthoHeight = projection.height / zoom
+        '''
+        frustrum = self.camera.frustrum
+        glOrthoWidth = frustrum.width
+        glOrthoHeight = frustrum.height
+
+        zoom = self.camera.zoom
 
         # Convert mouse coordinates to NDC
         x_ndc = (2.0 * mx / viewportWidth) - 1.0
@@ -103,8 +110,10 @@ class SceneCamera:
         y_ndc = -y_ndc  # Flip Y for WebGPU's coordinate system
 
         # Convert NDC to world coordinates using the adjusted projection size
-        x_world = x_ndc * (glOrthoWidth / 2.0) * zoom
-        y_world = y_ndc * (glOrthoHeight / 2.0) * zoom
+        #x_world = x_ndc * (glOrthoWidth / 2.0) * zoom
+        x_world = x_ndc * (glOrthoWidth / 2.0)
+        #y_world = y_ndc * (glOrthoHeight / 2.0) * zoom
+        y_world = y_ndc * (glOrthoHeight / 2.0)
 
         # Transform mouse vector to world space
         inv_view = glm.inverse(glm.mat4(*self.camera.view_matrix))

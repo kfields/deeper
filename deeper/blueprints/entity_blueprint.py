@@ -6,7 +6,7 @@ from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, reconstructor
 
 from crunge.engine.resource.resource_manager import ResourceManager
-from crunge.engine.loader.texture_loader import TextureLoader
+from crunge.engine.loader.texture.image_texture_loader import ImageTextureLoader
 
 from PIL import Image
 
@@ -52,7 +52,7 @@ class EntityBlueprint(Blueprint):
             path = root / f'{self.name}.png'
             if Path.exists(path):
                 #self._thumbnail = Image.open(path)
-                self._thumbnail = TextureLoader().load(path)
+                self._thumbnail = ImageTextureLoader().load(path)
             else:
                 img_path = ResourceManager().resolve_path(self.image)
                 with Image.open(img_path) as image:
