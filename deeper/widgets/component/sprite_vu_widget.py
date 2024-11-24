@@ -7,17 +7,16 @@ from .component_widget import ComponentWidget, ComponentWidgetBuilder
 
 
 class SpriteVuWidget(ComponentWidget):
-    def __init__(self, vu):
-        self.vu = vu
+    def __init__(self, component):
         children = []
         children.append(
             DragWrapper(
                 SettingWidgetKit.instance.build(
-                    AttrSetting('offset', self.vu, Vec2SettingVType), change_speed=0.01
+                    AttrSetting('offset', component, Vec2SettingVType), change_speed=0.01
                 )
             )
         )
-        super().__init__(vu, children)
+        super().__init__(component, children)
 
 
 class SpriteVuWidgetBuilder(ComponentWidgetBuilder):

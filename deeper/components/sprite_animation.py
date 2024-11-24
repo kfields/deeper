@@ -1,6 +1,6 @@
 import glm
 
-from crunge.engine.loader.sprite_strip_loader import SpriteStripLoader
+from crunge.engine.loader.sprite.sprite_strip_loader import SpriteStripLoader
 
 from .animation import Animation, AnimationDirection
 from .component_builder import ComponentBuilder
