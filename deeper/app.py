@@ -18,13 +18,14 @@ class Deeper(App):
         super().__init__(glm.ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), 'Deeper', resizable=True)
         self.scene = BasicLevel()
     
-    def _create(self):
-        super()._create()
+    def create(self):
+        super().create()
         self.load_settings()
         #view = LevelEditor(LevelEditState(self.scene)).create(self)
         view = LevelEditor(LevelEditState(self.scene)).config(window=self).create()
         #self.show_view(view)
         self.view = view
+        return self
 
     def destroy(self):
         self.save_settings()

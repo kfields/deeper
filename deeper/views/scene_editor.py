@@ -30,10 +30,10 @@ class SceneEditor(SceneView):
         super().__init__(scene, title)
         self.windows = {}
 
-    #def _create(self, window):
-    def _create(self):
-        #super()._create(window)
-        super()._create()
+    #def create(self, window):
+    def create(self):
+        #super().create(window)
+        super().create()
         
         self.gui.load_default_font(
             ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
@@ -46,6 +46,7 @@ class SceneEditor(SceneView):
             16,
             glyph_ranges,
         )
+        return self
 
     def new(self):
         Scheduler().schedule_once(lambda dt : self._new())
@@ -117,7 +118,7 @@ class SceneEditor(SceneView):
             return
         window = self.windows[title]
         self.windows.pop(title, None)
-        self.gui.remove_child(window)
+        self.gui.detach(window)
 
     def open_window(self, title):
         if title in self.windows:

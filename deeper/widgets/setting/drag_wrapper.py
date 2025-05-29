@@ -13,10 +13,10 @@ class DragWrapper(Widget):
         super().__init__([wrapped])
         self.wrapped = wrapped
 
-    #def _create(self, gui):
-    def _create(self):
-        #super()._create(gui)
-        super()._create()
+    #def create(self, gui):
+    def create(self):
+        #super().create(gui)
+        super().create()
         if not DragWrapper.drag_icon:
             DragWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR)
             #self.drag_icon.create(self.gui)
