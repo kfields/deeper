@@ -29,9 +29,7 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-    #"arcade ==3.0.0.dev15",
     "PyGLM ~=2.7.0",
-    #"imgui ~=2.0.0",
     "PyYAML ~=6.0.1",
     "loguru ~=0.7.0",
     "pydantic ~=1.10.6",
