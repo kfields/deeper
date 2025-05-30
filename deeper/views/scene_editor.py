@@ -30,10 +30,8 @@ class SceneEditor(SceneView):
         super().__init__(scene, title)
         self.windows = {}
 
-    #def create(self, window):
-    def create(self):
-        #super().create(window)
-        super().create()
+    def _create(self):
+        super()._create()
         
         self.gui.load_default_font(
             ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
@@ -46,7 +44,6 @@ class SceneEditor(SceneView):
             16,
             glyph_ranges,
         )
-        return self
 
     def new(self):
         Scheduler().schedule_once(lambda dt : self._new())

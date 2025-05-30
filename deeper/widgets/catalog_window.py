@@ -18,12 +18,9 @@ class BlueprintWidget(Widget):
         self.selected = False
         self.texture = None
 
-    #def create(self, gui):
-    def create(self):
-        #super().create(gui)
-        super().create()
+    def _create(self):
+        super()._create()
         self.texture = self.blueprint.thumbnail
-        return self
 
     def draw(self, renderer: Renderer):
         clicked, selected = imgui.selectable(
@@ -42,15 +39,12 @@ class CategoryWidget(Widget):
         self.callback = callback
         self.selection = None
 
-    #def create(self, gui):
-    def create(self):
-        #super().create(gui)
-        super().create()
+    def _create(self):
+        super()._create()
         for blueprint in self.category.blueprints:
             if not blueprint._abstract:
                 #self.attach(BlueprintWidget(blueprint).create(self.gui))
                 self.attach(BlueprintWidget(blueprint).config(gui=self.gui).create())
-        return self
 
     def show(self):
         pass
@@ -83,10 +77,8 @@ class CatalogPanel(Widget):
         self.current_index = 0
         self.current = None
 
-    #def create(self, gui):
-    def create(self):
-        #super().create(gui)
-        super().create()
+    def _create(self):
+        super()._create()
         for category in sorted(
             self.catalog.categories.values(), key=lambda category: category.name
         ):

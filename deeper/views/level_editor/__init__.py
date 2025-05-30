@@ -22,10 +22,8 @@ class LevelEditor(SceneEditor):
         super().__init__(edit_state.scene, "Level Editor")
         self.edit_state = edit_state
 
-    # def create(self, window):
-    def create(self):
-        # super().create(window)
-        super().create()
+    def _create(self):
+        super()._create()
         self.open_window("Layers")
 
         self.catalog = Catalog.instance
@@ -51,7 +49,6 @@ class LevelEditor(SceneEditor):
                 ]
             )
         )
-        return self
 
     def enable(self):
         super().enable()

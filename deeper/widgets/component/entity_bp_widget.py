@@ -59,14 +59,11 @@ class EntityBpWidget(ComponentWidget):
 
         super().__init__(blueprint)
 
-    #def create(self, gui):
-    def create(self):
-        #super().create(gui)
-        super().create()
+    def _create(self):
+        super()._create()
         for panel in self.panels:
             #panel.create(self.gui)
             panel.config(gui=self.gui).create()
-        return self
 
     def draw(self, renderer: Renderer):
         changed, self.current_index = imgui.combo(

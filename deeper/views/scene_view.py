@@ -19,10 +19,8 @@ class SceneView(View):
         self.scene_camera: SceneCamera = None
         self.dragging = False
 
-    #def create(self, window):
-    def create(self):
-        #super().create(window)
-        super().create()
+    def _create(self):
+        super()._create()
         self.scene_camera = SceneCamera(self.camera)
         self.scene_camera = self.scene_camera
 

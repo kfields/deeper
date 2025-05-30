@@ -24,10 +24,8 @@ class EntityEditor(SceneEditor):
         super().__init__(edit_state.scene, 'Entity Editor')
         self.edit_state = edit_state
 
-    #def create(self, window):
-    def create(self):
-        #super().create(window)
-        super().create()
+    def _create(self):
+        super()._create()
         #self.gui.attach(EntityWindow(self.scene, self.edit_state.entity).create(self.gui))
         self.gui.attach(EntityWindow(self.scene, self.edit_state.entity).config(gui=self.gui).create())
 
@@ -54,7 +52,6 @@ class EntityEditor(SceneEditor):
                 ]
             )
         )
-        return self
 
     def close(self):
         Scheduler().schedule_once(lambda dt : self.window.pop_view(), 0)
