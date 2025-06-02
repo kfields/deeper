@@ -3,7 +3,7 @@ import glm
 
 from crunge import sdl
 from crunge.engine import Renderer
-from crunge.engine.color import Color
+from crunge.engine import colors
 
 from ..view import View
 from ..scene import Scene
@@ -94,7 +94,7 @@ class SceneView(View):
 
         super().draw(renderer)
 
-    def draw_aabb(self, aabb, color=Color.YELLOW):
+    def draw_aabb(self, aabb, color=colors.YELLOW):
         bbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy
         bbr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz)).xy
         fbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz)).xy

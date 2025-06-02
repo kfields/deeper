@@ -17,7 +17,6 @@ class DropWrapper(Widget):
         super()._create()
         if not DropWrapper.drag_icon:
             DropWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR)
-            #self.drag_icon.create(self.gui)
             self.drag_icon.config(gui=self.gui).create()
 
     def draw(self, renderer: Renderer):

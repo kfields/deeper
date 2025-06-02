@@ -17,16 +17,13 @@ class DragWrapper(Widget):
         super()._create()
         if not DragWrapper.drag_icon:
             DragWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR)
-            #self.drag_icon.create(self.gui)
             self.drag_icon.create()
 
     def draw(self, renderer: Renderer):
         self.drag_icon.draw(renderer)
         if imgui.begin_drag_drop_source():
-            #value = self.wrapped.value
             value = self.wrapped.setting
             self.gui.dropboard.value = value
-            #imgui.button(value.__repr__())
             imgui.button(f"{value.__repr__()}##{str(self.id)}")
             imgui.end_drag_drop_source()
         

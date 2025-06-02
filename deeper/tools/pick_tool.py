@@ -4,7 +4,7 @@ import glm
 
 from crunge import sdl
 from crunge.engine import Renderer, Scheduler
-from crunge.engine.color import Color
+from crunge.engine import colors
 from .scene_tool import SceneEditTool
 
 
@@ -81,4 +81,4 @@ class PickTool(SceneEditTool):
             self.view.draw_aabb(self.hovered.block.aabb)
 
         if self.selected:
-            self.view.draw_aabb(self.selected.block.aabb, color=Color.RED)
+            self.view.draw_aabb(self.selected.block.aabb, color=colors.RED)
