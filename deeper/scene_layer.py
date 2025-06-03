@@ -73,6 +73,9 @@ class SceneLayer(EntityGroup):
         for obj in visible_objects:
             obj.draw(renderer)
     '''
+    def pre_draw(self, renderer: Renderer):
+        pass
+
     def draw(self, renderer: Renderer):
         if not self.visible:
             return
@@ -81,3 +84,6 @@ class SceneLayer(EntityGroup):
         #logger.debug(renderer.camera.size)
         self.sprites.draw(renderer)
         #logger.debug(f'visible_objects: {len(visible_objects)}')
+
+    def post_draw(self, renderer: Renderer):
+        pass

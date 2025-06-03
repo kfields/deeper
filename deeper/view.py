@@ -60,6 +60,11 @@ class View(View2D):
             self.tool.draw(renderer)
         super().draw(renderer)
     '''
+
+    def pre_draw(self, renderer: Renderer):
+        self.scene.pre_draw(self.renderer)
+        super().pre_draw(self.renderer)
+
     def draw(self, renderer: Renderer):
         if self.tool:
             self.tool.draw(renderer)
@@ -68,6 +73,9 @@ class View(View2D):
             self.scene.draw(self.renderer)
             super().draw(self.renderer)
 
+    def post_draw(self, renderer: Renderer):
+        self.scene.post_draw(self.renderer)
+        super().post_draw(self.renderer)
 
     '''
     def on_show(self):

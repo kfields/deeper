@@ -114,9 +114,17 @@ class Scene(World):
         )
         return sorted_results[0]
 
+    def pre_draw(self, renderer: Renderer) -> None:
+        for layer in self.layers:
+            layer.pre_draw(renderer)
+
     def draw(self, renderer: Renderer) -> None:
         for layer in self.layers:
             layer.draw(renderer)
+
+    def post_draw(self, renderer: Renderer) -> None:
+        for layer in self.layers:
+            layer.post_draw(renderer)
 
         """
         pos = self.camera.project(self.camera.target).xy
