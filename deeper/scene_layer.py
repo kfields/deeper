@@ -37,7 +37,7 @@ class SceneLayer(EntityGroup):
         pass
 
     def mark(self):
-        logger.debug('dirty')
+        #logger.debug('dirty')
         self.dirty = True
         self.events.publish(LayerDirtyEvent())
 
@@ -56,26 +56,6 @@ class SceneLayer(EntityGroup):
         #self.effects.update(delta_time)
         self.sprites.update(delta_time)
 
-    '''
-    def draw(self, renderer: Renderer):
-        if not self.visible:
-            return
-        #logger.debug(len(self.sprites.sprites))
-        #logger.debug(renderer.camera.position)
-        #logger.debug(renderer.camera.size)
-        #self.sprites.draw(renderer)
-        frustrum = renderer.camera.frustrum
-        #logger.debug(f'frustrum: {frustrum}')
-        visible_objects = []
-        self.quad_tree.query(frustrum, visible_objects)
-        #logger.debug(f'visible_objects: {len(visible_objects)}')
-
-        for obj in visible_objects:
-            obj.draw(renderer)
-    '''
-    def pre_draw(self, renderer: Renderer):
-        pass
-
     def draw(self, renderer: Renderer):
         if not self.visible:
             return
@@ -84,6 +64,3 @@ class SceneLayer(EntityGroup):
         #logger.debug(renderer.camera.size)
         self.sprites.draw(renderer)
         #logger.debug(f'visible_objects: {len(visible_objects)}')
-
-    def post_draw(self, renderer: Renderer):
-        pass

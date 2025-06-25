@@ -68,9 +68,7 @@ class SpriteAnimation(Animation):
                 else:
                     self.active_sprite_index = 0
 
-        #self.texture = self.textures[self.cur_texture_index]
         self.sprite = self.sprites.get(self.active_sprite_index)
-        #self.sprite.texture = self.texture
         self.sprite_vu.sprite = self.sprite
 
 

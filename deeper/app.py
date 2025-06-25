@@ -15,39 +15,40 @@ from .database import Database
 
 class Deeper(App):
     def __init__(self):
-        super().__init__(glm.ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), 'Deeper', resizable=True)
+        super().__init__(title="Deeper", resizable=True)
         self.scene = BasicLevel()
-    
+
     def _create(self):
         super()._create()
         self.load_settings()
-        #view = LevelEditor(LevelEditState(self.scene)).create(self)
-        view = LevelEditor(LevelEditState(self.scene)).config(window=self).create()
-        #self.show_view(view)
-        self.view = view
+        self.view = LevelEditor(LevelEditState(self.scene)).config(window=self)
 
     def destroy(self):
         self.save_settings()
 
     def load_settings(self):
-        dst = Path('imgui.ini')
+        dst = Path("imgui.ini")
         if not dst.exists():
-            src = ResourceManager().resolve_path(':deeper:/settings/imgui.ini')
+            src = ResourceManager().resolve_path(":deeper:/settings/imgui.ini")
             shutil.copyfile(src, dst)
 
     def save_settings(self):
-        src = Path('imgui.ini')
-        dst = ResourceManager().resolve_path(':deeper:/settings/imgui.ini')
+        src = Path("imgui.ini")
+        dst = ResourceManager().resolve_path(":deeper:/settings/imgui.ini")
         shutil.copyfile(src, dst)
 
+
 def main():
+    import faulthandler
+    faulthandler.enable()
+
     db = Database.instance
-    dbpath = Path('./deeper.db')
+    dbpath = Path("./deeper.db")
     db.begin(dbpath)
     with db.Session() as session:
         with session.begin():
             db.session = session
-            Deeper().create().run().destroy()
+            Deeper().run().destroy()
     db.end()
 
 

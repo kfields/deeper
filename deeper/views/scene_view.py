@@ -40,13 +40,6 @@ class SceneView(View):
         if self.scene_camera is not None:
             self.scene_camera.resize(size)
 
-    '''
-    def resize(self, size: glm.ivec2):
-        super().resize(size)
-        #self.scene.resize(size)
-        self.scene_camera.resize(size)
-    '''
-
     def update(self, delta_time: float):
         self.scene.update(delta_time)
         return super().update(delta_time)

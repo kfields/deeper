@@ -61,5 +61,5 @@ class EntityEditor(SceneEditor):
         self.tool = self.pick_tool
 
     def draw(self, renderer: Renderer):
-        super().draw(renderer)
         self.draw_aabb(self.block.aabb)
+        super().draw(renderer)
