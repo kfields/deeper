@@ -8,7 +8,7 @@ from crunge.engine.resource.resource_manager import ResourceManager
 
 from deeper.resources.icons import IconsMaterialDesign
 
-from .scene_view import SceneView
+from ..scene_view import SceneView
 from ..level import Level
 from ..widgets import (
     MetricsWindow,

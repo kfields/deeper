@@ -4,17 +4,20 @@ import glm
 from crunge import sdl
 from crunge.engine import Renderer
 from crunge.engine import colors
+from crunge.engine.d2.view_2d import View2D
 
-from ..view import View
-from ..scene import Scene
+from .scene import Scene
 
-from ..scene_camera import SceneCamera
+from .scene_camera import SceneCamera
+from .tool import Tool
 
-class SceneView(View):
+
+class SceneView(View2D):
     scene: Scene = None
 
-    def __init__(self, scene, title=''):
-        super().__init__(title)
+    def __init__(self, scene, title=""):
+        super().__init__()
+        self.title = title
         self.scene = scene
         self.scene_camera: SceneCamera = None
         self.dragging = False
@@ -24,11 +27,19 @@ class SceneView(View):
         self.scene_camera = SceneCamera(self.camera)
         self.scene_camera = self.scene_camera
 
+    @property
+    def tool(self) -> Tool:
+        return self.controller
+
+    @tool.setter
+    def tool(self, tool: Tool):
+        self.controller = tool
+
     def enable(self):
         super().enable()
-        #self.scene_camera = self.scene_camera
+        # self.scene_camera = self.scene_camera
         self.scene.enable()
-        #super().enable()
+        # super().enable()
 
     def disable(self):
         super().disable()
@@ -49,13 +60,13 @@ class SceneView(View):
         down = event.down
 
         if key == sdl.SDLK_KP_PLUS:
-            self.camera.zoom = self.camera.zoom - .1
+            self.camera.zoom = self.camera.zoom - 0.1
         elif key == sdl.SDLK_KP_MINUS:
-            self.camera.zoom = self.camera.zoom + .1
+            self.camera.zoom = self.camera.zoom + 0.1
 
     def on_mouse_button(self, event: sdl.MouseButtonEvent):
         super().on_mouse_button(event)
-        #logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
+        # logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
         button = event.button
 
         if button != 3:
@@ -76,16 +87,17 @@ class SceneView(View):
         self.scene_camera.pan(dx, dy)
 
     def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
-        #logger.debug(f"{self.title}:on_mouse_wheel")
+        # logger.debug(f"{self.title}:on_mouse_wheel")
         self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
 
     def draw(self, renderer: Renderer):
-        self.renderer.viewport = renderer.viewport
-        
+        if self.tool:
+            self.tool.draw(renderer)
+
         with self.renderer:
             self.scene.draw(self.renderer)
 
-        super().draw(renderer)
+        super().draw(self.renderer)
 
     def draw_aabb(self, aabb, color=colors.YELLOW):
         bbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy
@@ -98,17 +110,17 @@ class SceneView(View):
         ftl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz)).xy
         ftr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz)).xy
 
-        #Bottom
+        # Bottom
         self.scratch.draw_line(bbl, bbr, color)
         self.scratch.draw_line(fbl, fbr, color)
         self.scratch.draw_line(bbl, fbl, color)
         self.scratch.draw_line(bbr, fbr, color)
-        #Top
+        # Top
         self.scratch.draw_line(btl, btr, color)
         self.scratch.draw_line(ftl, ftr, color)
         self.scratch.draw_line(btl, ftl, color)
         self.scratch.draw_line(btr, ftr, color)
-        #Sides
+        # Sides
         self.scratch.draw_line(bbl, btl, color)
         self.scratch.draw_line(fbl, ftl, color)
         self.scratch.draw_line(bbr, btr, color)
