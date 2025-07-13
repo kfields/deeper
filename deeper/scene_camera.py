@@ -89,9 +89,9 @@ class SceneCamera:
         viewportWidth = viewport.width
         viewPortHeight = viewport.height
 
-        frustrum = self.camera.frustrum
-        glOrthoWidth = frustrum.width
-        glOrthoHeight = frustrum.height
+        frustum = self.camera.frustum
+        glOrthoWidth = frustum.width
+        glOrthoHeight = frustum.height
 
         # Convert mouse coordinates to NDC
         x_ndc = (2.0 * mx / viewportWidth) - 1.0
