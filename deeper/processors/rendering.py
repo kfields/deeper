@@ -30,13 +30,11 @@ class RenderingProcessor(SceneProcessor):
         vu_list = []
 
         for ent, (_, block, vu) in self.world.get_components(layer.__class__, Block, SpriteVuComponent):
-            #position = self.scene.camera.project(block.position)
             position = self.scene_camera.project(block.position)
             #logger.debug(f'position: {position}')
             vu.position = position
             sprite_position = position.xy + (vu.offset * WORLD_SCALE)
             #logger.debug(f'sprite_position: {sprite_position}')
-            #vu.sprite.position = sprite_position.xy
             sprite_vu = vu.sprite_vu
             size = sprite_vu.sprite.size
             #size = block.size
@@ -64,13 +62,6 @@ class RenderingProcessor(SceneProcessor):
             model,
             glm.vec3(size.x * scale.x, size.y * scale.y, 1),
         )
-        '''
-        model = glm.rotate(model, rotation, glm.vec3(0, 0, 1))
-        model = glm.scale(
-            model,
-            glm.vec3(size.x * scale.x, size.y * scale.y, 1),
-        )
-        '''
         sprite.transform = model
 
             
@@ -80,4 +71,3 @@ class RenderingProcessor(SceneProcessor):
             size.x,
             size.y,
         )
-        #logger.debug(f'sprite.aabb: {sprite.aabb}')
