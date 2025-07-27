@@ -16,7 +16,7 @@ class SpriteVuComponent(Vu):
 
     def create(self, world, entity, layer):
         self.layer = layer
-        self.sprite_vu.config(group=layer.sprites).create()
+        self.sprite_vu.config(group=layer.sprite_vu_group).enable()
 
     @property
     def offset(self):

@@ -51,7 +51,6 @@ class EntityBlueprint(Blueprint):
             root = ResourceManager().resolve_path(':deeper:/catalog/thumbnails')
             path = root / f'{self.name}.png'
             if Path.exists(path):
-                #self._thumbnail = Image.open(path)
                 self._thumbnail = ImageTextureLoader().load(path)
             else:
                 img_path = ResourceManager().resolve_path(self.image)

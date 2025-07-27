@@ -1,10 +1,10 @@
-# import arcade
-
 from crunge.engine.loader.texture.image_texture_loader import ImageTextureLoader
+#from crunge.engine.loader.sprite.sprite_loader import SpriteLoader
 from crunge.engine.d2.sprite import Sprite, SpriteVu
 
 from ..constants import *
 from ..level import Level
+
 from deeper import Block
 from deeper.components.sprite_vu import SpriteVuComponent
 from deeper.catalog import Catalog
@@ -32,7 +32,6 @@ class BasicLevel(Level):
                 block = Block(position, size)
                 texture = ImageTextureLoader().load(":deeper:/tiles/_Grid/GRID.png")
                 sprite = Sprite(texture)
-                #vu = SpriteVu(Sprite(material).create())
-                #vu = SpriteVu(Sprite(material).config(group=layer.sprites).create())
+                #sprite = SpriteLoader().load(":deeper:/tiles/_Grid/GRID.png")
                 vu = SpriteVuComponent(SpriteVu(sprite))
                 self.create_entity(layer, blueprint, block, vu)

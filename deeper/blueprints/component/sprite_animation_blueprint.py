@@ -32,7 +32,6 @@ class SpriteAnimationBlueprint(ComponentBlueprint):
     @property
     def texture(self):
         if not self._texture:
-            #self._texture = arcade.load_texture(self.image)
             self._texture = ImageTextureLoader().load(self.image)
         return self._texture
 
