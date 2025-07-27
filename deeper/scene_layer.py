@@ -1,8 +1,9 @@
 from loguru import logger
 
 from crunge.engine import Renderer
-from crunge.engine.d2 import SpriteVu, SpriteVuGroup
-from crunge.engine.d2.sprite.group.instanced_sprite_vu_group import InstancedSpriteVuGroup
+from crunge.engine.d2.sprite import SpriteVu, SpriteVuGroup
+from crunge.engine.d2.sprite.dynamic import DynamicSpriteGroup
+from crunge.engine.d2.sprite.instanced.instanced_sprite_vu_group import InstancedSpriteVuGroup
 from crunge.engine.math import Rect2
 
 from deeper.event import EventSource, LayerDirtyEvent
@@ -16,8 +17,9 @@ class SceneLayer(EntityGroup):
         super().__init__(name)
         self.scene = scene
         self.name = name
-        #self.sprites = SpriteVuGroup()
-        self.sprites = InstancedSpriteVuGroup(1024)
+        #self.sprite_vu_group = SpriteVuGroup()
+        self.sprite_group = DynamicSpriteGroup(1024).enable()
+        self.sprite_vu_group = InstancedSpriteVuGroup(1024, self.sprite_group).enable()
         self.visible = True
         self.locked = False
         self.dirty = True
@@ -45,16 +47,17 @@ class SceneLayer(EntityGroup):
         self.dirty = False
 
     def clear(self):
-        self.sprites.clear()
+        self.sprite_vu_group.clear()
         
-    def add_sprite(self, sprite: SpriteVu):
-        self.sprites.append(sprite)
-        self.quad_tree.insert(sprite)
-        return sprite
+    def add_sprite(self, vu: SpriteVu):
+        self.sprite_group.append(vu.sprite)
+        self.sprite_vu_group.append(vu)
+        self.quad_tree.insert(vu)
+        return vu
 
     def update(self, delta_time: float):
         #self.effects.update(delta_time)
-        self.sprites.update(delta_time)
+        self.sprite_vu_group.update(delta_time)
 
     def draw(self, renderer: Renderer):
         if not self.visible:
@@ -62,5 +65,5 @@ class SceneLayer(EntityGroup):
         #logger.debug(len(self.sprites.sprites))
         #logger.debug(renderer.camera.position)
         #logger.debug(renderer.camera.size)
-        self.sprites.draw(renderer)
+        self.sprite_vu_group.draw(renderer)
         #logger.debug(f'visible_objects: {len(visible_objects)}')
