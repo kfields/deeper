@@ -22,10 +22,8 @@ class SpriteAnimation(Animation):
         self.update_time = 0
 
         # Load Textures
-        #self.textures = TextureStripLoader().load(filename, glm.ivec2(image_width, image_height))
         self.sprites = SpriteStripLoader().load(filename, glm.ivec2(image_width, image_height), frames)
         self.active_sprite_index = 0
-        #self.texture = self.textures[self.cur_texture_index]
         self.sprite = self.sprites.get(self.active_sprite_index)
         self.sprite_vu = None
 
