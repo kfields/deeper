@@ -25,10 +25,10 @@ class SettingGroupWidget(SettingWidget):
                 )
         super().__init__(setting, children)
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         if imgui.tree_node(self.name):
             self.draw_context_popup()
-            super().draw(renderer)
+            super()._draw()
             imgui.tree_pop()
 
     def draw_context_popup(self):

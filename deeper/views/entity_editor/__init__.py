@@ -60,6 +60,6 @@ class EntityEditor(SceneEditor):
         #self.use_tool(self.pick_tool)
         self.tool = self.pick_tool
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         self.draw_aabb(self.block.aabb)
-        super().draw(renderer)
+        super()._draw()

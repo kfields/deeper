@@ -72,7 +72,7 @@ class PickTool(SceneEditTool):
         elif key == sdl.SDLK_ESCAPE:
             self.selected = None
 
-    def draw(self, renderer: Renderer):
+    def draw(self):
         if self.hovered:
             pos = self.camera.project(self.hovered.position)
             #print("self.hovered.position: ", self.hovered.position)

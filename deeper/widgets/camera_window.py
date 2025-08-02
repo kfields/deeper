@@ -10,7 +10,7 @@ class CameraPanel(Widget):
         super().__init__()
         self.camera = camera
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         imgui.input_float3(
             'Position', tuple(self.camera.position), flags=imgui.InputTextFlags.READ_ONLY
         )

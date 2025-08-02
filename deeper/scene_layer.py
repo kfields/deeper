@@ -60,11 +60,11 @@ class SceneLayer(EntityGroup):
         #self.effects.update(delta_time)
         self.sprite_vu_group.update(delta_time)
 
-    def draw(self, renderer: Renderer):
+    def draw(self):
         if not self.visible:
             return
         #logger.debug(len(self.sprites.sprites))
         #logger.debug(renderer.camera.position)
         #logger.debug(renderer.camera.size)
-        self.sprite_vu_group.draw(renderer)
+        self.sprite_vu_group.draw()
         #logger.debug(f'visible_objects: {len(visible_objects)}')

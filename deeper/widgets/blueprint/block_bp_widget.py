@@ -12,7 +12,7 @@ class BlockBpWidget(BlueprintWidget):
         super().__init__(block)
         self.block = block
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, size = imgui.drag_float3(
             'Size', tuple(self.block.size), change_speed=0.1
         )

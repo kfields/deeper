@@ -19,8 +19,8 @@ class DropWrapper(Widget):
             DropWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR)
             self.drag_icon.config(gui=self.gui).create()
 
-    def draw(self, renderer: Renderer):
-        super().draw(renderer)
+    def _draw(self):
+        super()._draw()
         if imgui.begin_drag_drop_target():
             payload = imgui.accept_drag_drop_payload('itemtype')
             if payload is not None:

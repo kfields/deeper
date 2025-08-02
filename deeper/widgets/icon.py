@@ -12,7 +12,7 @@ class Icon(Widget):
         text += f"##{str(self.id)}" # Can't have buttons with the same text
         self.text = text
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         imgui.text(self.text)
 
 class IconButton(Widget):
@@ -22,7 +22,7 @@ class IconButton(Widget):
         self.text = text
         self.callback = callback
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         if imgui.button(self.text):
             self.callback()
             return True
@@ -41,7 +41,7 @@ class IconToggleButton(Widget):
     def __repr__(self) -> str:
         return self.__repr__()
     
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         text = self.on_text if self.on else self.off_text
         text += f"##{str(self.id)}" # Can't have buttons with the same text
         if imgui.button(text):

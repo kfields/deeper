@@ -17,7 +17,7 @@ class ToolButton(IconButton):
         self.callback()
         return True
 
-    def draw(self, renderer: Renderer):        
+    def _draw(self):        
         if self.selected:
             alpha = 1
         else:
@@ -27,7 +27,7 @@ class ToolButton(IconButton):
         if imgui.button(self.text):
             self.select()
         imgui.pop_style_var(1)
-        return self.selected
+        #return self.selected
 
 class Toolbar(Widget):
     def __init__(self, children=[]):
@@ -36,12 +36,25 @@ class Toolbar(Widget):
             children[0].select()
             self.selection = children[0]
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         imgui.separator()
         imgui.push_style_color(imgui.Col.BUTTON, imgui.color_convert_float4_to_u32((0.15, 0.15, 0.15, 0.15)))
         for child in self.children:
-            if child.draw(renderer):
+            child.draw()
+            if child.selected:
                 if self.selection and self.selection != child:
                     self.selection.selected = False
                 self.selection = child
         imgui.pop_style_color(1)
+
+    '''
+    def _draw(self):
+        imgui.separator()
+        imgui.push_style_color(imgui.Col.BUTTON, imgui.color_convert_float4_to_u32((0.15, 0.15, 0.15, 0.15)))
+        for child in self.children:
+            if child.draw():
+                if self.selection and self.selection != child:
+                    self.selection.selected = False
+                self.selection = child
+        imgui.pop_style_color(1)
+    '''

@@ -12,11 +12,11 @@ class EntityPanel(Widget):
         super().__init__(children)
     '''
     
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         for child in self.children:
             expanded, child.visible = imgui.collapsing_header(child.name, child.visible)
             if expanded:
-                child.draw(renderer)
+                child.draw()
         return True
 
 class EntityWindow(Window):

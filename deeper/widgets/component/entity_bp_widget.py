@@ -30,7 +30,7 @@ class BlueprintsPanel(Widget):
             children.append(BlueprintWidgetKit.instance.build(component))
         super().__init__(children)
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         imgui.text('name: ')
         imgui.same_line()
         imgui.text(self.blueprint.name)
@@ -46,7 +46,7 @@ class BlueprintsPanel(Widget):
         for child in self.children:
             expanded, child.visible = imgui.collapsing_header(child.blueprint.name, child.visible)
             if expanded:
-                child.draw(renderer)
+                child.draw()
 
 
 class EntityBpWidget(ComponentWidget):
@@ -65,13 +65,13 @@ class EntityBpWidget(ComponentWidget):
             #panel.create(self.gui)
             panel.config(gui=self.gui).create()
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, self.current_index = imgui.combo(
             'View', self.current_index, self.panel_names
         )
         current = self.panels[self.current_index]
         self.current = current
-        self.current.draw(renderer)
+        self.current.draw()
 
 class EntityBpWidgetBuilder(ComponentWidgetBuilder):
     key = EntityBlueprint

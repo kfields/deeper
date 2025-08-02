@@ -19,8 +19,8 @@ class DragWrapper(Widget):
             DragWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR)
             self.drag_icon.create()
 
-    def draw(self, renderer: Renderer):
-        self.drag_icon.draw(renderer)
+    def _draw(self):
+        self.drag_icon.draw()
         if imgui.begin_drag_drop_source():
             value = self.wrapped.setting
             self.gui.dropboard.value = value
@@ -29,4 +29,4 @@ class DragWrapper(Widget):
         
         imgui.same_line()
 
-        super().draw(renderer)
+        super()._draw()

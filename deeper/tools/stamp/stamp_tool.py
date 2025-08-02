@@ -194,7 +194,7 @@ class StampTool(SceneEditTool):
                 self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
             )
 
-    def draw(self, renderer: Renderer):
+    def draw(self):
         if self.hovered:
             pos = self.camera.project(self.hovered.position).xy
             #arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)

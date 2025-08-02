@@ -9,7 +9,7 @@ class FloatWidget(SettingWidget):
     def __init__(self, setting):
         super().__init__(setting)
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, self.value = imgui.drag_float(self.name, self.value)
         
 

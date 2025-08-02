@@ -60,13 +60,13 @@ class LayerWidget(SelectableBase):
         self.layer.visible = value
     '''
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         imgui.begin_group()
-        super().draw(renderer)
+        super()._draw()
         imgui.end_group()
 
-    def draw_child(self, renderer: Renderer, child):
-        super().draw_child(renderer, child)
+    def draw_child(self, child):
+        super().draw_child(child)
         if child != self.children[-1]:
             imgui.same_line()
 
@@ -86,17 +86,17 @@ class LayersPanel(ExclusiveSelectableGroup):
     def on_swap(self, i, j):
         self.scene.swap_layers(i, j)
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         imgui.begin_child('layers', (-1, -1))
         #imgui.push_style_color(imgui.Col.COL_BUTTON, 0.0, 0.0, 0.0)
         #imgui.push_style_color(imgui.Col.COL_BUTTON.value, imgui.Vec4(0.0, 0.0, 0.0, 0.0))
-        self.draw_sortable(renderer, self.on_swap)
+        self.draw_sortable(self.on_swap)
         #imgui.pop_style_color(1)
         imgui.end_child()
-        #super().draw(renderer)
+        #super()._draw()
 
-    def draw_child(self, renderer: Renderer, child):
-        super().draw_child(renderer, child)
+    def draw_child(self, child):
+        super().draw_child(child)
         self.draw_child_context_popup(child)
 
     def draw_child_context_popup(self, child):

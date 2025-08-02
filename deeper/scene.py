@@ -114,6 +114,6 @@ class Scene(World):
         )
         return sorted_results[0]
 
-    def draw(self, renderer: Renderer) -> None:
+    def draw(self) -> None:
         for layer in self.layers:
-            layer.draw(renderer)
+            layer.draw()

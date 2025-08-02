@@ -12,7 +12,7 @@ class Vec2Widget(SettingWidget):
         super().__init__(setting)
         self.change_speed = change_speed
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, value = imgui.drag_float2(self.name, tuple(self.value), v_speed=self.change_speed)
         if changed:
             self.value = glm.vec2(*value)

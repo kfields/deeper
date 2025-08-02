@@ -31,7 +31,7 @@ class SelectableBase(Widget):
 
 
 class Selectable(SelectableBase):
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         clicked, selected = imgui.selectable(
             self.label, self.selected, width=self.width, height=self.height
         )
@@ -56,7 +56,7 @@ class EditableSelectable(SelectableBase):
         if not selected:
             self.mode = SelectableMode.SELECT
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         if self.mode == SelectableMode.SELECT:
             clicked, selected = imgui.selectable(
                 self.label,

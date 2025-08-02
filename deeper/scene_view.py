@@ -90,14 +90,14 @@ class SceneView(View2D):
         # logger.debug(f"{self.title}:on_mouse_wheel")
         self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         if self.tool:
-            self.tool.draw(renderer)
+            self.tool.draw()
 
         with self.renderer:
-            self.scene.draw(self.renderer)
+            self.scene.draw()
 
-        super().draw(self.renderer)
+        super()._draw()
 
     def draw_aabb(self, aabb, color=colors.YELLOW):
         bbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy

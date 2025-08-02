@@ -22,7 +22,18 @@ class BlueprintWidget(Widget):
         super()._create()
         self.texture = self.blueprint.thumbnail
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
+        clicked, selected = imgui.selectable(
+            self.blueprint.name, self.selected, size=(128, 32)
+        )
+        if clicked:
+            self.selected = True
+        imgui.same_line()
+        size = self.texture.width, self.texture.height
+        imgui.image(self.texture.id, size)
+
+    '''
+    def _draw(self):
         clicked, selected = imgui.selectable(
             self.blueprint.name, self.selected, size=(128, 32)
         )
@@ -30,7 +41,7 @@ class BlueprintWidget(Widget):
         size = self.texture.width, self.texture.height
         imgui.image(self.texture.id, size)
         return clicked
-
+    '''
 
 class CategoryWidget(Widget):
     def __init__(self, category, callback):
@@ -54,11 +65,11 @@ class CategoryWidget(Widget):
             self.selection.selected = False
         self.selection = None
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
         for widget in self.children:
-            clicked = widget.draw(renderer)
-            if clicked:
+            widget.draw()
+            if widget.selected:
                 if self.selection:
                     self.selection.selected = False
                 self.selection = widget
@@ -66,6 +77,19 @@ class CategoryWidget(Widget):
                 self.callback(widget.blueprint)
         imgui.end_child()
 
+    '''
+    def _draw(self):
+        imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
+        for widget in self.children:
+            clicked = widget.draw()
+            if clicked:
+                if self.selection:
+                    self.selection.selected = False
+                self.selection = widget
+                widget.selected = True
+                self.callback(widget.blueprint)
+        imgui.end_child()
+    '''
 
 class CatalogPanel(Widget):
     def __init__(self, catalog, callback):
@@ -91,7 +115,7 @@ class CatalogPanel(Widget):
 
         return self
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         clicked, self.current_index = imgui.combo(
             "Category", self.current_index, self.category_names
         )
@@ -101,7 +125,7 @@ class CatalogPanel(Widget):
                 self.current.hide()
             current.show()
         self.current = current
-        self.current.draw(renderer)
+        self.current.draw()
 
 
 class CatalogWindow(Window):

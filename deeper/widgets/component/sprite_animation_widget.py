@@ -16,7 +16,7 @@ class SpriteAnimationWidget(ComponentWidget):
         super().__init__(animation)
         self.animation = animation
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, rate = imgui.drag_float(
             'Rate',
             self.animation.rate,

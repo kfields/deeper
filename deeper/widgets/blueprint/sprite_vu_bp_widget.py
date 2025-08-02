@@ -11,7 +11,7 @@ class SpriteVuBpWidget(BlueprintWidget):
         super().__init__(blueprint)
         self.blueprint = blueprint
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, offset = imgui.drag_float2(
             'Offset', *self.blueprint.offset, change_speed=0.1
         )

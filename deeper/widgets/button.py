@@ -11,7 +11,7 @@ class Button(Widget):
         self.callback = callback
         self.small = small
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         clicked = imgui.small_button(self.label) if self.small else imgui.button(self.label)
         if clicked:
             self.callback()
@@ -23,7 +23,7 @@ class RadioButton(Widget):
         self.callback = callback
         self.active = active
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed = imgui.radio_button(self.label, self.active)
         if changed:
             self.active = not self.active

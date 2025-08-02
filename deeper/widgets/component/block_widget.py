@@ -12,7 +12,7 @@ class BlockWidget(ComponentWidget):
         super().__init__(block)
         self.block = block
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, position = imgui.drag_float3(
             'Position', tuple(self.block.position), v_speed=0.1
         )

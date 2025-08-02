@@ -11,7 +11,7 @@ class Vec3Widget(SettingWidget):
     def __init__(self, setting):
         super().__init__(setting)
 
-    def draw(self, renderer: Renderer):
+    def _draw(self):
         changed, value = imgui.drag_float3(self.name, tuple(self.value))
         if changed:
             self.value = glm.vec3(*value)
