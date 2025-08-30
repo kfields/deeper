@@ -37,9 +37,7 @@ class SceneView(View2D):
 
     def enable(self):
         super().enable()
-        # self.scene_camera = self.scene_camera
         self.scene.enable()
-        # super().enable()
 
     def disable(self):
         super().disable()
@@ -94,10 +92,11 @@ class SceneView(View2D):
         if self.tool:
             self.tool.draw()
 
-        with self.renderer:
+        with self.renderer.render():
             self.scene.draw()
 
-        super()._draw()
+        with self.renderer.use():
+            super()._draw()
 
     def draw_aabb(self, aabb, color=colors.YELLOW):
         bbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy

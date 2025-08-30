@@ -50,8 +50,6 @@ class SceneLayer(EntityGroup):
         self.sprite_vu_group.clear()
         
     def add_sprite(self, vu: SpriteVu):
-        #exit()
-        #self.sprite_group.append(vu.sprite)
         self.sprite_vu_group.append(vu)
         self.quad_tree.insert(vu)
         return vu

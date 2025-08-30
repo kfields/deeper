@@ -1,4 +1,5 @@
-from crunge.engine.loader.texture.image_texture_loader import ImageTextureLoader
+#from crunge.engine.loader.texture.image_texture_loader import ImageTextureLoader
+from crunge.engine.loader.texture.sprite_texture_loader import SpriteTextureLoader
 #from crunge.engine.loader.sprite.sprite_loader import SpriteLoader
 from crunge.engine.d2.sprite import Sprite, SpriteVu
 
@@ -30,7 +31,7 @@ class BasicLevel(Level):
                 position = glm.vec3(tx * CELL_WIDTH, 0, ty)
                 # logger.debug(f"position: {position}")
                 block = Block(position, size)
-                texture = ImageTextureLoader().load(":deeper:/tiles/_Grid/GRID.png")
+                texture = SpriteTextureLoader().load(":deeper:/tiles/_Grid/GRID.png")
                 sprite = Sprite(texture)
                 #sprite = SpriteLoader().load(":deeper:/tiles/_Grid/GRID.png")
                 vu = SpriteVuComponent(SpriteVu(sprite))

@@ -1,7 +1,8 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, reconstructor
 
-from crunge.engine.loader.texture.image_texture_loader import ImageTextureLoader
+#from crunge.engine.loader.texture.image_texture_loader import ImageTextureLoader
+from crunge.engine.loader.texture.sprite_texture_loader import SpriteTextureLoader
 
 from ...constants import *
 from ...settings.component.sprite_vu_settings import SpriteVuSettings
@@ -31,7 +32,7 @@ class SpriteVuBlueprint(ComponentBlueprint):
     @property
     def texture(self):
         if not self._texture:
-            self._texture = ImageTextureLoader().load(self.image)
+            self._texture = SpriteTextureLoader().load(self.image)
         return self._texture
 
 class SpriteVuBlueprintBuilder(BlueprintBuilder):
