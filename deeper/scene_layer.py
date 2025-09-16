@@ -1,6 +1,5 @@
 from loguru import logger
 
-from crunge.engine import Renderer
 from crunge.engine.d2.sprite import SpriteVu, SpriteVuGroup
 from crunge.engine.d2.sprite.dynamic import DynamicSpriteGroup
 from crunge.engine.d2.sprite.instanced.instanced_sprite_vu_group import InstancedSpriteVuGroup

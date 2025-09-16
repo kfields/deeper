@@ -8,12 +8,12 @@ from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
 class Vec2Widget(SettingWidget):
-    def __init__(self, setting, change_speed=1):
+    def __init__(self, setting, v_speed=1):
         super().__init__(setting)
-        self.change_speed = change_speed
+        self.v_speed = v_speed
 
     def _draw(self):
-        changed, value = imgui.drag_float2(self.name, tuple(self.value), v_speed=self.change_speed)
+        changed, value = imgui.drag_float2(self.name, tuple(self.value), v_speed=self.v_speed)
         if changed:
             self.value = glm.vec2(*value)
         

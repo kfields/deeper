@@ -30,7 +30,7 @@ class BlueprintWidget(Widget):
             self.selected = True
         imgui.same_line()
         size = self.texture.width, self.texture.height
-        imgui.image(self.texture.id, size)
+        imgui.image(imgui.TextureRef(self.texture.id), size)
 
     '''
     def _draw(self):

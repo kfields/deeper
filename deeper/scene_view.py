@@ -2,7 +2,6 @@ from loguru import logger
 import glm
 
 from crunge import sdl
-from crunge.engine import Renderer
 from crunge.engine import colors
 from crunge.engine.d2.view_2d import View2D
 
