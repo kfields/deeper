@@ -1,8 +1,7 @@
 from crunge import imgui
 
-from crunge.engine import Renderer
-
 from crunge.engine.imgui.widget import Widget
+
 
 class Button(Widget):
     def __init__(self, label, callback, small=False):
@@ -12,9 +11,12 @@ class Button(Widget):
         self.small = small
 
     def _draw(self):
-        clicked = imgui.small_button(self.label) if self.small else imgui.button(self.label)
+        clicked = (
+            imgui.small_button(self.label) if self.small else imgui.button(self.label)
+        )
         if clicked:
             self.callback()
+
 
 class RadioButton(Widget):
     def __init__(self, label, callback, active=False):
@@ -29,13 +31,14 @@ class RadioButton(Widget):
             self.active = not self.active
             self.callback()
 
+
 class RadioButtonGroup(Widget):
     def __init__(self, children=...):
         super().__init__(children)
-        #self.selected = children[0]
+        # self.selected = children[0]
 
-    def attach(self, child):
-        super().attach(child)
+    def add_child(self, child):
+        super().add_child(child)
         if child.active:
             self.selected = child
         child_callback = child.callback

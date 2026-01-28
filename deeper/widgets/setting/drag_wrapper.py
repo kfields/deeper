@@ -1,10 +1,10 @@
 from crunge import imgui
 
-from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Widget
 
-from .. import Icon, IconButton
+from .. import IconButton
 from deeper.resources.icons import IconsMaterialDesign
+
 
 class DragWrapper(Widget):
     drag_icon = None
@@ -26,7 +26,7 @@ class DragWrapper(Widget):
             self.gui.dropboard.value = value
             imgui.button(f"{value.__repr__()}##{str(self.id)}")
             imgui.end_drag_drop_source()
-        
+
         imgui.same_line()
 
         super()._draw()

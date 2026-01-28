@@ -1,10 +1,7 @@
-from pathlib import Path
 from loguru import logger
-from PIL import Image
 from crunge import imgui
 
 from crunge.engine.resource.resource_manager import ResourceManager
-from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Widget, Window
 
 from ..blueprint import Blueprint
@@ -32,7 +29,7 @@ class BlueprintWidget(Widget):
         size = self.texture.width, self.texture.height
         imgui.image(imgui.TextureRef(self.texture.id), size)
 
-    '''
+    """
     def _draw(self):
         clicked, selected = imgui.selectable(
             self.blueprint.name, self.selected, size=(128, 32)
@@ -41,7 +38,8 @@ class BlueprintWidget(Widget):
         size = self.texture.width, self.texture.height
         imgui.image(self.texture.id, size)
         return clicked
-    '''
+    """
+
 
 class CategoryWidget(Widget):
     def __init__(self, category, callback):
@@ -54,8 +52,8 @@ class CategoryWidget(Widget):
         super()._create()
         for blueprint in self.category.blueprints:
             if not blueprint._abstract:
-                #self.attach(BlueprintWidget(blueprint).create(self.gui))
-                self.attach(BlueprintWidget(blueprint).config(gui=self.gui).create())
+                # self.add_child(BlueprintWidget(blueprint).create(self.gui))
+                self.add_child(BlueprintWidget(blueprint).config(gui=self.gui).create())
 
     def show(self):
         pass
@@ -77,7 +75,7 @@ class CategoryWidget(Widget):
                 self.callback(widget.blueprint)
         imgui.end_child()
 
-    '''
+    """
     def _draw(self):
         imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
         for widget in self.children:
@@ -89,7 +87,8 @@ class CategoryWidget(Widget):
                 widget.selected = True
                 self.callback(widget.blueprint)
         imgui.end_child()
-    '''
+    """
+
 
 class CatalogPanel(Widget):
     def __init__(self, catalog, callback):
@@ -109,8 +108,10 @@ class CatalogPanel(Widget):
             if not category._abstract:
                 self.category_names.append(category.name)
                 self.category_widgets.append(
-                    #CategoryWidget(category, self.callback).create(self.gui)
-                    CategoryWidget(category, self.callback).config(gui=self.gui).create()
+                    # CategoryWidget(category, self.callback).create(self.gui)
+                    CategoryWidget(category, self.callback)
+                    .config(gui=self.gui)
+                    .create()
                 )
 
         return self

@@ -114,7 +114,7 @@ class SceneEditor(SceneView):
             return
         window = self.windows[title]
         self.windows.pop(title, None)
-        self.gui.detach(window)
+        self.gui.remove_child(window)
 
     def open_window(self, title):
         if title in self.windows:
@@ -128,4 +128,4 @@ class SceneEditor(SceneView):
         elif title == "Camera":
             window = CameraWindow(self.scene_camera, on_close=on_close)
         self.windows[title] = window
-        self.gui.attach(window)
+        self.gui.add_child(window)

@@ -1,7 +1,6 @@
 from crunge import imgui
-from crunge.engine import Renderer
 
-from deeper.setting import IntSetting, IntSettingVType
+from deeper.setting import IntSettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
@@ -11,9 +10,9 @@ class IntWidget(SettingWidget):
 
     def _draw(self):
         changed, self.value = imgui.drag_int(self.name, self.value)
-        
+
 
 class IntWidgetBuilder(SettingWidgetBuilder):
-    #key = IntSetting
+    # key = IntSetting
     key = IntSettingVType
     cls = IntWidget

@@ -1,9 +1,5 @@
 from loguru import logger
 
-from crunge.engine import Renderer
-
-from deeper.scene_camera import SceneCamera
-from deeper.processors import RenderingProcessor, AnimationProcessor
 from deeper.catalog import Catalog
 from deeper.widgets import CatalogWindow, LayersWindow, MenuItem
 from deeper.resources.icons import IconsMaterialDesign
@@ -13,7 +9,6 @@ from deeper.tools.stamp import StampTool
 
 from deeper.widgets.toolbar import Toolbar, ToolButton
 
-from ...scene import Scene
 from ..scene_editor import SceneEditor
 
 
@@ -29,11 +24,10 @@ class LevelEditor(SceneEditor):
         self.catalog = Catalog.instance
         self.open_window("Catalog")
 
-        # self.tool = self.pick_tool = PickTool(self, self.edit_state)
         self.pick_tool = PickTool(self, self.edit_state)
         self.stamp_tool = StampTool(self, self.edit_state)
 
-        self.gui.attach(
+        self.gui.add_child(
             self.create_menubar(
                 children=[
                     Toolbar(
@@ -59,11 +53,9 @@ class LevelEditor(SceneEditor):
         self.edit_state.current_layer = layer
 
     def use_pick(self):
-        # self.use_tool(self.pick_tool)
         self.tool = self.pick_tool
 
     def use_stamp(self):
-        # self.use_tool(self.stamp_tool)
         self.tool = self.stamp_tool
 
     def on_catalog(self, blueprint):
@@ -106,4 +98,4 @@ class LevelEditor(SceneEditor):
             return super().open_window(title)
 
         self.windows[title] = window
-        self.gui.attach(window)
+        self.gui.add_child(window)

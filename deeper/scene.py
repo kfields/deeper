@@ -4,22 +4,19 @@ import glm
 
 from loguru import logger
 
-from crunge.engine import Renderer
-
 from .ecs import World
 from .ecs.component import Component
 from .processor import Processor
 
 from . import Block
 from .scene_layer import SceneLayer
-#from .scene_camera import SceneCamera
 
 from .event import EventSource, LayerDeletedEvent
 
+
 class Scene(World):
-    def __init__(self, timed:bool=False):
+    def __init__(self, timed: bool = False):
         super().__init__(timed)
-        #self.camera: SceneCamera = None
         self.events = EventSource()
         self.layers: list[SceneLayer] = []
 
@@ -90,7 +87,7 @@ class Scene(World):
     def disable(self) -> None:
         for layer in self.layers:
             layer.disable()
-    
+
     def update(self, delta_time: float) -> None:
         self.process(delta_time)
 

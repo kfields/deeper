@@ -1,7 +1,6 @@
 from crunge import imgui
-from crunge.engine import Renderer
 
-from deeper.setting import StringSetting, StringSettingVType
+from deeper.setting import StringSettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
@@ -10,16 +9,12 @@ class StringWidget(SettingWidget):
         super().__init__(setting)
 
     def _draw(self):
-        changed, value = imgui.input_text(
-            self.name,
-            self.value,
-            256
-        )
+        changed, value = imgui.input_text(self.name, self.value, 256)
         if changed:
             self.value = value
-        
+
 
 class StringWidgetBuilder(SettingWidgetBuilder):
-    #key = StringSetting
+    # key = StringSetting
     key = StringSettingVType
     cls = StringWidget

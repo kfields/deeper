@@ -1,6 +1,5 @@
 from crunge import imgui
 
-from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Widget
 
 from ...kits.setting_widget_kit import SettingWidgetKit
@@ -8,6 +7,7 @@ from ...kits.setting_widget_kit import SettingWidgetKit
 from ...kits.blueprint_widget_kit import BlueprintWidgetKit
 from ...blueprints import EntityBlueprint
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
+
 
 class SettingsPanel(Widget):
     def __init__(self, blueprint):
@@ -21,6 +21,7 @@ class SettingsPanel(Widget):
             bp = bp.base
         super().__init__(children)
 
+
 class BlueprintsPanel(Widget):
     def __init__(self, blueprint):
         self.blueprint = blueprint
@@ -31,20 +32,22 @@ class BlueprintsPanel(Widget):
         super().__init__(children)
 
     def _draw(self):
-        imgui.text('name: ')
+        imgui.text("name: ")
         imgui.same_line()
         imgui.text(self.blueprint.name)
 
-        imgui.text('extends: ')
+        imgui.text("extends: ")
         imgui.same_line()
         imgui.text(self.blueprint.extends)
 
-        imgui.text('category: ')
+        imgui.text("category: ")
         imgui.same_line()
         imgui.text(self.blueprint.category)
 
         for child in self.children:
-            expanded, child.visible = imgui.collapsing_header(child.blueprint.name, child.visible)
+            expanded, child.visible = imgui.collapsing_header(
+                child.blueprint.name, child.visible
+            )
             if expanded:
                 child.draw()
 
@@ -53,7 +56,7 @@ class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):
         self.blueprint = blueprint
         self.panels = [SettingsPanel(blueprint), BlueprintsPanel(blueprint)]
-        self.panel_names = ['Settings', 'Blueprints']
+        self.panel_names = ["Settings", "Blueprints"]
         self.current_index = 0
         self.current = None
 
@@ -62,16 +65,17 @@ class EntityBpWidget(ComponentWidget):
     def _create(self):
         super()._create()
         for panel in self.panels:
-            #panel.create(self.gui)
+            # panel.create(self.gui)
             panel.config(gui=self.gui).create()
 
     def _draw(self):
         changed, self.current_index = imgui.combo(
-            'View', self.current_index, self.panel_names
+            "View", self.current_index, self.panel_names
         )
         current = self.panels[self.current_index]
         self.current = current
         self.current.draw()
+
 
 class EntityBpWidgetBuilder(ComponentWidgetBuilder):
     key = EntityBlueprint

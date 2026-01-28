@@ -3,7 +3,6 @@ from enum import Enum
 from loguru import logger
 from crunge import imgui
 
-from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Widget, WidgetGroup
 
 
@@ -64,16 +63,16 @@ class EditableSelectable(SelectableBase):
                 flags=imgui.SelectableFlags.ALLOW_DOUBLE_CLICK,
                 size=(self.width, self.height),
             )
-            #if imgui.is_item_hovered() and imgui.is_mouse_double_clicked():
+            # if imgui.is_item_hovered() and imgui.is_mouse_double_clicked():
             if imgui.is_item_hovered() and imgui.is_mouse_double_clicked(0):
                 self.mode = SelectableMode.EDIT
             elif clicked:
                 self.select(selected)
         else:
-            changed, value = imgui.input_text(f'##{id(self)}', self.label, 32)
+            changed, value = imgui.input_text(f"##{id(self)}", self.label, 32)
             if changed:
-                #logger.debug(changed)
-                #logger.debug(value)
+                # logger.debug(changed)
+                # logger.debug(value)
                 self.label = value
 
             # TODO: need to detect other loss of focus?
@@ -86,13 +85,13 @@ class SelectableGroup(WidgetGroup):
         super().__init__(children)
         self.callback = callback
 
-    def attach(self, child):
-        super().attach(child)
+    def add_child(self, child):
+        super().add_child(child)
         child_callback = child.callback
         child.callback = lambda child: self.on_child_select(child, child_callback)
 
     def on_child_select(self, child, child_callback):
-        #logger.debug(child)
+        # logger.debug(child)
         child_callback()
         self.callback()
 

@@ -2,20 +2,22 @@ from loguru import logger
 
 from crunge import imgui
 
-from crunge.engine import Renderer
-from crunge.engine.imgui.widget import Widget, Window
+from crunge.engine.imgui.widget import Window
 
 from deeper.resources.icons import IconsMaterialDesign
-from .icon import IconToggleButton, Icon, IconButton
+from .icon import IconToggleButton, IconButton
 from .menu import Menubar, Menu, MenuItem
-from .selectable import SelectableBase, ExclusiveSelectableGroup, Selectable, EditableSelectable
+from .selectable import SelectableBase, ExclusiveSelectableGroup, EditableSelectable
 from ..scene import Scene
 from ..scene_layer import SceneLayer
+
 
 class LayerWidget(SelectableBase):
     def __init__(self, layer: SceneLayer, callback):
         self.layer = layer
-        self.selectable = EditableSelectable(self.layer.name, lambda child: self.on_child_selected(child), width=128)
+        self.selectable = EditableSelectable(
+            self.layer.name, lambda child: self.on_child_selected(child), width=128
+        )
         super().__init__(
             layer.name,
             callback,
@@ -26,12 +28,12 @@ class LayerWidget(SelectableBase):
                     IconsMaterialDesign.ICON_VISIBILITY,
                     IconsMaterialDesign.ICON_VISIBILITY_OFF,
                     layer.visible,
-                    lambda on: self.set_visible(on)
+                    lambda on: self.set_visible(on),
                 ),
-                self.selectable
-            ]
+                self.selectable,
+            ],
         )
-    
+
     def on_child_selected(self, child):
         self.callback(self)
 
@@ -50,7 +52,7 @@ class LayerWidget(SelectableBase):
         logger.debug(f"set_visible: layer={self.layer}, value={value}")
         self.layer.visible = value
 
-    '''
+    """
     @property
     def visible(self):
         return self.layer.visible
@@ -58,7 +60,7 @@ class LayerWidget(SelectableBase):
     @visible.setter
     def visible(self, value):
         self.layer.visible = value
-    '''
+    """
 
     def _draw(self):
         imgui.begin_group()
@@ -70,6 +72,7 @@ class LayerWidget(SelectableBase):
         if child != self.children[-1]:
             imgui.same_line()
 
+
 class LayersPanel(ExclusiveSelectableGroup):
     def __init__(self, scene: Scene, callback):
         self.scene = scene
@@ -78,22 +81,22 @@ class LayersPanel(ExclusiveSelectableGroup):
             children.append(LayerWidget(layer, callback))
         super().__init__(children, callback)
         children[0].select()
-    
+
     def create_child(self, layer, callback):
-        #return LayerWidget(layer, callback).create(self.gui)
+        # return LayerWidget(layer, callback).create(self.gui)
         return LayerWidget(layer, callback).config(gui=self.gui).create()
 
     def on_swap(self, i, j):
         self.scene.swap_layers(i, j)
 
     def _draw(self):
-        imgui.begin_child('layers', (-1, -1))
-        #imgui.push_style_color(imgui.Col.COL_BUTTON, 0.0, 0.0, 0.0)
-        #imgui.push_style_color(imgui.Col.COL_BUTTON.value, imgui.Vec4(0.0, 0.0, 0.0, 0.0))
+        imgui.begin_child("layers", (-1, -1))
+        # imgui.push_style_color(imgui.Col.COL_BUTTON, 0.0, 0.0, 0.0)
+        # imgui.push_style_color(imgui.Col.COL_BUTTON.value, imgui.Vec4(0.0, 0.0, 0.0, 0.0))
         self.draw_sortable(self.on_swap)
-        #imgui.pop_style_color(1)
+        # imgui.pop_style_color(1)
         imgui.end_child()
-        #super()._draw()
+        # super()._draw()
 
     def draw_child(self, child):
         super().draw_child(child)
@@ -102,29 +105,30 @@ class LayersPanel(ExclusiveSelectableGroup):
     def draw_child_context_popup(self, child):
         if imgui.begin_popup_context_item(str(id(child))):
             selected = False
-            clicked, selected = imgui.selectable('Delete', selected)
+            clicked, selected = imgui.selectable("Delete", selected)
             if clicked:
                 self.scene.remove_layer(child.layer)
                 self.remove_child(child)
             imgui.end_popup()
 
+
 class LayersWindow(Window):
-    def __init__(self, scene, callback, on_close:callable=None):
+    def __init__(self, scene, callback, on_close: callable = None):
         self.scene = scene
         self.callback = callback
         self.panel = LayersPanel(scene, lambda child: callback(child.layer))
         children = [
-            Menubar([
-                Menu('New', [
-                    MenuItem('Layer', lambda: self.new_layer())
-                ])
-            ]),
-            self.panel
+            Menubar([Menu("New", [MenuItem("Layer", lambda: self.new_layer())])]),
+            self.panel,
         ]
 
-        super().__init__('Layers', children, on_close=on_close, flags=imgui.WindowFlags.MENU_BAR)
+        super().__init__(
+            "Layers", children, on_close=on_close, flags=imgui.WindowFlags.MENU_BAR
+        )
         self.scene = scene
 
     def new_layer(self):
         layer = self.scene.new_layer()
-        self.panel.attach(self.panel.create_child(layer, lambda child: self.callback(child.layer)))
+        self.panel.add_child(
+            self.panel.create_child(layer, lambda child: self.callback(child.layer))
+        )

@@ -1,10 +1,10 @@
 from crunge import imgui
 
-from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Widget
 
 from .. import IconButton
 from deeper.resources.icons.icons_material_design import IconsMaterialDesign
+
 
 class DropWrapper(Widget):
     drag_icon = None
@@ -22,8 +22,8 @@ class DropWrapper(Widget):
     def _draw(self):
         super()._draw()
         if imgui.begin_drag_drop_target():
-            payload = imgui.accept_drag_drop_payload('itemtype')
+            payload = imgui.accept_drag_drop_payload("itemtype")
             if payload is not None:
-                #print('Received:', payload)
+                # print('Received:', payload)
                 self.wrapped.value = self.gui.dropboard.value.value
             imgui.end_drag_drop_target()

@@ -1,6 +1,3 @@
-import time
-
-from crunge import sdl
 from crunge.engine.view import View
 from crunge.engine.controller import Controller
 

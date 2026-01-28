@@ -1,7 +1,6 @@
 from crunge import imgui
-from crunge.engine import Renderer
 
-from deeper.setting import BoolSetting, BoolSettingVType
+from deeper.setting import BoolSettingVType
 from .setting_widget import SettingWidget, SettingWidgetBuilder
 
 
@@ -14,7 +13,8 @@ class BoolWidget(SettingWidget):
         if changed:
             self.value = value
 
+
 class BoolWidgetBuilder(SettingWidgetBuilder):
-    #key = BoolSetting
+    # key = BoolSetting
     key = BoolSettingVType
     cls = BoolWidget

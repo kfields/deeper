@@ -4,7 +4,6 @@ import glm
 from crunge import sdl
 
 from crunge.engine.imgui.widget import Window
-from crunge.engine import Renderer
 from crunge.engine.color import Color
 
 from deeper import Isometry, Cuboid, Block
@@ -14,6 +13,7 @@ from ..scene_tool import SceneEditTool
 
 from .stamp_widget import StampToolWidget
 from deeper.state import SnapOption
+
 
 class Hovered:
     def __init__(self, block, position):
@@ -66,23 +66,23 @@ class StampTool(SceneEditTool):
         self.hovered = None
         self.selected = None
         self.stamp = None
-        self.widget = Window('Stamp Tool', [StampToolWidget(self)])
-        #self.widget.create(self.gui)
+        self.widget = Window("Stamp Tool", [StampToolWidget(self)])
+        # self.widget.create(self.gui)
         self.widget.config(gui=self.gui).create()
-    
+
     def enable(self):
         super().enable()
-        self.gui.attach(self.widget)
+        self.gui.add_child(self.widget)
 
     def disable(self):
         super().disable()
-        #self.view.close_window('Catalog')
-        self.gui.detach(self.widget)
+        # self.view.close_window('Catalog')
+        self.gui.remove_child(self.widget)
 
     def on_mouse_motion(self, event: sdl.MouseMotionEvent):
         x, y = event.x, event.y
         self.last_mouse = glm.vec2(x, y)
-        #logger.debug(f"mouse: x={x}, y={y}")
+        # logger.debug(f"mouse: x={x}, y={y}")
 
         ray = self.camera.mouse_to_ray(x, y)
         result = self.scene.cast_ray(ray)
@@ -124,7 +124,7 @@ class StampTool(SceneEditTool):
         target_aabb = target_space.aabb
 
         size = blueprint.size
-        return glm.vec3(contact.x, target_aabb.maxy + size[1]/2, contact.z)
+        return glm.vec3(contact.x, target_aabb.maxy + size[1] / 2, contact.z)
 
     def snap_center(self, blueprint, world, target, contact):
         target_space = world.component_for_entity(target, Block)
@@ -132,8 +132,7 @@ class StampTool(SceneEditTool):
         target_aabb = target_space.aabb
 
         size = blueprint.size
-        return glm.vec3(target_pos.x, target_aabb.maxy + size[1]/2, target_pos.z)
-
+        return glm.vec3(target_pos.x, target_aabb.maxy + size[1] / 2, target_pos.z)
 
     def snap_size(self, blueprint, world, target, contact):
         target_space = world.component_for_entity(target, Block)
@@ -191,14 +190,17 @@ class StampTool(SceneEditTool):
         button = event.button
         if button == 1 and event.down and self.stamp:
             EntityKit.instance.build(
-                self.edit_state.current_blueprint, self.scene, self.edit_state.current_layer, self.stamp.position
+                self.edit_state.current_blueprint,
+                self.scene,
+                self.edit_state.current_layer,
+                self.stamp.position,
             )
 
     def draw(self):
         if self.hovered:
             pos = self.camera.project(self.hovered.position).xy
-            #arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
-            #self.view.draw_aabb(self.hovered.block.aabb)
+            # arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
+            # self.view.draw_aabb(self.hovered.block.aabb)
 
         if self.stamp:
             pos = self.camera.project(self.stamp.position).xy

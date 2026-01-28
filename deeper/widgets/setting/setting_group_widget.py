@@ -1,7 +1,6 @@
 from loguru import logger
 
 from crunge import imgui
-from crunge.engine import Renderer
 from crunge.engine.imgui.widget import Window
 
 from deeper.widgets import Selectable, SelectableGroup
@@ -32,39 +31,46 @@ class SettingGroupWidget(SettingWidget):
             imgui.tree_pop()
 
     def draw_context_popup(self):
-            if imgui.begin_popup_context_item(self.name):
-                clicked, selected = imgui.selectable('Add Setting')
-                if clicked:
-                    selectables = []
-                    for name, cls in self.setting.setting_map.items():
-                        selectables.append(
-                            Selectable(name, lambda name=name, cls=cls: self.add_setting(name, cls))
-                        )
-                    win = self.gui.attach(
-                        Window(
-                            'Settings',
-                            [
-                                SelectableGroup(
-                                    selectables, lambda: self.gui.remove_child(win)
-                                ).create(self.gui)
-                            ],
+        if imgui.begin_popup_context_item(self.name):
+            clicked, selected = imgui.selectable("Add Setting")
+            if clicked:
+                selectables = []
+                for name, cls in self.setting.setting_map.items():
+                    selectables.append(
+                        Selectable(
+                            name, lambda name=name, cls=cls: self.add_setting(name, cls)
                         )
                     )
-                imgui.end_popup()
+                win = self.gui.add_child(
+                    Window(
+                        "Settings",
+                        [
+                            SelectableGroup(
+                                selectables, lambda: self.gui.remove_child(win)
+                            ).create(self.gui)
+                        ],
+                    )
+                )
+            imgui.end_popup()
 
     def add_setting(self, name, cls):
         from ...kits.setting_widget_kit import SettingWidgetKit
+
         setting = cls(name)
         self.setting.add_setting(setting)
         if isinstance(setting, SettingGroup):
             self.children.append(
-                #SettingWidgetKit.instance.build(setting).create(self.gui)
-                SettingWidgetKit.instance.build(setting).config(gui=self.gui).create()
+                # SettingWidgetKit.instance.build(setting).create(self.gui)
+                SettingWidgetKit.instance.build(setting)
+                .config(gui=self.gui)
+                .create()
             )
         else:
             self.children.append(
-                #DropWrapper(SettingWidgetKit.instance.build(setting)).create(self.gui)
-                DropWrapper(SettingWidgetKit.instance.build(setting)).config(gui=self.gui).create()
+                # DropWrapper(SettingWidgetKit.instance.build(setting)).create(self.gui)
+                DropWrapper(SettingWidgetKit.instance.build(setting))
+                .config(gui=self.gui)
+                .create()
             )
 
 

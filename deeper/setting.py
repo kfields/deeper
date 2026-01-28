@@ -96,7 +96,7 @@ class SettingGroup(Setting):
     def default(self):
         return []
 
-    def add_setting(self, setting):
+    def add_setting(self, setting: Setting):
         value = self.value
         value.append(setting)
         self.value = value
@@ -108,7 +108,7 @@ class SettingGroup(Setting):
         for setting in self.value:
             setting.subscribe(callback)
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, object]:
         d = {}
         for setting in self.value:
             # d[setting.name] = setting.value

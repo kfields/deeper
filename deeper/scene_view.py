@@ -91,8 +91,9 @@ class SceneView(View2D):
         if self.tool:
             self.tool.draw()
 
-        with self.renderer.render():
-            self.scene.draw()
+        with self.renderer.frame():
+            with self.renderer.render_pass():
+                self.scene.draw()
 
         with self.renderer.use():
             super()._draw()
