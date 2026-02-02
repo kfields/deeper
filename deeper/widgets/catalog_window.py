@@ -29,17 +29,6 @@ class BlueprintWidget(Widget):
         size = self.texture.width, self.texture.height
         imgui.image(imgui.TextureRef(self.texture.id), size)
 
-    """
-    def _draw(self):
-        clicked, selected = imgui.selectable(
-            self.blueprint.name, self.selected, size=(128, 32)
-        )
-        imgui.same_line()
-        size = self.texture.width, self.texture.height
-        imgui.image(self.texture.id, size)
-        return clicked
-    """
-
 
 class CategoryWidget(Widget):
     def __init__(self, category, callback):
@@ -52,8 +41,7 @@ class CategoryWidget(Widget):
         super()._create()
         for blueprint in self.category.blueprints:
             if not blueprint._abstract:
-                # self.add_child(BlueprintWidget(blueprint).create(self.gui))
-                self.add_child(BlueprintWidget(blueprint).config(gui=self.gui).create())
+                self.add_child(BlueprintWidget(blueprint))
 
     def show(self):
         pass
@@ -75,20 +63,6 @@ class CategoryWidget(Widget):
                 self.callback(widget.blueprint)
         imgui.end_child()
 
-    """
-    def _draw(self):
-        imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
-        for widget in self.children:
-            clicked = widget.draw()
-            if clicked:
-                if self.selection:
-                    self.selection.selected = False
-                self.selection = widget
-                widget.selected = True
-                self.callback(widget.blueprint)
-        imgui.end_child()
-    """
-
 
 class CatalogPanel(Widget):
     def __init__(self, catalog, callback):
@@ -108,10 +82,8 @@ class CatalogPanel(Widget):
             if not category._abstract:
                 self.category_names.append(category.name)
                 self.category_widgets.append(
-                    # CategoryWidget(category, self.callback).create(self.gui)
                     CategoryWidget(category, self.callback)
-                    .config(gui=self.gui)
-                    .create()
+                    .create() #TODO: why is this needed?
                 )
 
         return self

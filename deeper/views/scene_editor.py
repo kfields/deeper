@@ -23,7 +23,10 @@ from ..widgets import (
 doc_url = "https://kfields.github.io/deeper/index.html"
 
 # Need to protect glyph_ranges from garbage collection
-glyph_ranges = imgui.GlyphRanges([IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0])
+glyph_ranges = imgui.GlyphRanges(
+    [IconsMaterialDesign.ICON_MIN, IconsMaterialDesign.ICON_MAX, 0]
+)
+
 
 class SceneEditor(SceneView):
     def __init__(self, scene, title=""):
@@ -32,7 +35,7 @@ class SceneEditor(SceneView):
 
     def _create(self):
         super()._create()
-        
+
         self.gui.load_default_font(
             ResourceManager().resolve_path(":deeper:/fonts/Roboto-Regular.ttf"), 16
         )
@@ -46,7 +49,7 @@ class SceneEditor(SceneView):
         )
 
     def new(self):
-        Scheduler().schedule_once(lambda dt : self._new())
+        Scheduler().schedule_once(lambda dt: self._new())
 
     def _new(self):
         from .level_editor import LevelEditor
@@ -54,7 +57,7 @@ class SceneEditor(SceneView):
         from ..levels.basic_level import BasicLevel
 
         level = BasicLevel()
-        view = LevelEditor(LevelEditState(level)).config(window=self.window).create()
+        view = LevelEditor(LevelEditState(level))
         self.window.view = view
 
     def load(self):
@@ -65,7 +68,7 @@ class SceneEditor(SceneView):
         from ..state import LevelEditState
 
         level = Level.load(ResourceManager().resolve_path(":deeper:/levels/test.json"))
-        view = LevelEditor(LevelEditState(level)).config(window=self.window).create()
+        view = LevelEditor(LevelEditState(level))
         self.window.view = view
 
     def save(self):

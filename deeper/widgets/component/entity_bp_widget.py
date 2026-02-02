@@ -65,8 +65,10 @@ class EntityBpWidget(ComponentWidget):
     def _create(self):
         super()._create()
         for panel in self.panels:
-            # panel.create(self.gui)
-            panel.config(gui=self.gui).create()
+            #pass
+            #panel.config(gui=self.gui).create()
+            # panel.config(gui=self.gui)  # TODO: this one works but the other doesn't?
+            panel.create()
 
     def _draw(self):
         changed, self.current_index = imgui.combo(

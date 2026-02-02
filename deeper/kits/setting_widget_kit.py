@@ -9,7 +9,7 @@ class SettingWidgetKit(Kit):
     builders_path = deeper.widgets.setting
     #builder_type = Builder
 
-    def find(self, setting, cls=None):
+    def find(self, setting, cls=None) -> Builder:
         if not cls:
             #cls = setting.__class__
             cls = setting.get_vtype()

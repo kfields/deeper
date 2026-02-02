@@ -29,6 +29,17 @@ class SelectableBase(Widget):
         pass
 
 
+#_imgui.def("selectable", [](const char * label, bool * p_selected, ImGuiSelectableFlags flags, const ImVec2 & size)
+
+class Selectable(SelectableBase):
+    def _draw(self):
+        clicked, selected = imgui.selectable(
+            self.label, self.selected, size=(self.width, self.height)
+        )
+        if clicked:
+            self.select(selected)
+
+"""
 class Selectable(SelectableBase):
     def _draw(self):
         clicked, selected = imgui.selectable(
@@ -36,7 +47,7 @@ class Selectable(SelectableBase):
         )
         if clicked:
             self.select(selected)
-
+"""
 
 class EditableSelectable(SelectableBase):
     def __init__(

@@ -63,7 +63,6 @@ class Setting:
         self.subscriptions.remove(subscription)
 
     def to_dict(self):
-        # return { self.name, self.value }
         return self.value
 
 

@@ -26,8 +26,6 @@ class EntityBlueprint(Blueprint):
 
     settings_class = EntitySettings
     size = [CELL_WIDTH, CELL_HEIGHT, CELL_DEPTH]
-    #image = ''
-    #offset = [0, 0]
 
     def __init__(self, catalog, name, config):
         super().__init__(catalog, name, config)

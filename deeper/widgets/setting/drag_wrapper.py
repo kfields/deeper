@@ -1,3 +1,5 @@
+from loguru import logger
+
 from crunge import imgui
 
 from crunge.engine.imgui.widget import Widget
@@ -13,11 +15,18 @@ class DragWrapper(Widget):
         super().__init__([wrapped])
         self.wrapped = wrapped
 
+    """
+    def _create(self):
+        super()._create()
+        self.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR)
+        self.drag_icon.create()
+    """
+
     def _create(self):
         super()._create()
         if not DragWrapper.drag_icon:
             DragWrapper.drag_icon = IconButton(IconsMaterialDesign.ICON_DRAG_INDICATOR)
-            self.drag_icon.create()
+            self.drag_icon.enable()
 
     def _draw(self):
         self.drag_icon.draw()

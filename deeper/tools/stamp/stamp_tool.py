@@ -67,8 +67,6 @@ class StampTool(SceneEditTool):
         self.selected = None
         self.stamp = None
         self.widget = Window("Stamp Tool", [StampToolWidget(self)])
-        # self.widget.create(self.gui)
-        self.widget.config(gui=self.gui).create()
 
     def enable(self):
         super().enable()
@@ -76,7 +74,6 @@ class StampTool(SceneEditTool):
 
     def disable(self):
         super().disable()
-        # self.view.close_window('Catalog')
         self.gui.remove_child(self.widget)
 
     def on_mouse_motion(self, event: sdl.MouseMotionEvent):

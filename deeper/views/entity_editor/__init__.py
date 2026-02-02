@@ -20,11 +20,8 @@ class EntityEditor(SceneEditor):
 
     def _create(self):
         super()._create()
-        # self.gui.add_child(EntityWindow(self.scene, self.edit_state.entity).create(self.gui))
         self.gui.add_child(
             EntityWindow(self.scene, self.edit_state.entity)
-            .config(gui=self.gui)
-            .create()
         )
 
         self.block = self.scene.component_for_entity(self.edit_state.entity, Block)
@@ -32,9 +29,8 @@ class EntityEditor(SceneEditor):
         self.blueprint = self.scene.component_for_entity(
             self.edit_state.entity, EntityBlueprint
         )
-        # self.gui.add_child(ComponentWindow(self.blueprint).create(self.gui))
         self.gui.add_child(
-            ComponentWindow(self.blueprint).config(gui=self.gui).create()
+            ComponentWindow(self.blueprint)
         )
 
         pos = self.block.position

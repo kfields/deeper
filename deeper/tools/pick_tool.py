@@ -33,10 +33,10 @@ class PickTool(SceneEditTool):
 
         ray = self.camera.mouse_to_ray(x, y)
         result = self.scene.cast_ray(ray)
-        # print(result)
+        # logger.debug(f"cast_ray result: {result}")
         if result:
             block, contact = result
-            # print("contact: ", contact)
+            # logger.debug(f"cast_ray contact: {contact}")
             self.hovered = Hovered(block, contact)
         else:
             self.hovered = None
@@ -59,11 +59,8 @@ class PickTool(SceneEditTool):
         from deeper.state import EntityEditState
         from deeper.views.entity_editor import EntityEditor
 
-        # self.window.push_view(EntityEditor(EntityEditState(self.scene, self.selected.block)).create(self.window))
         self.window.push_view(
             EntityEditor(EntityEditState(self.scene, self.selected.block))
-            .config(window=self.window)
-            .create()
         )
 
     def on_key(self, event: sdl.KeyboardEvent):
@@ -81,9 +78,8 @@ class PickTool(SceneEditTool):
     def draw(self):
         if self.hovered:
             pos = self.camera.project(self.hovered.position)
-            # print("self.hovered.position: ", self.hovered.position)
-            # print("pos: ", pos)
-            # arcade.draw_circle_outline(*pos.xy, 18, arcade.color.RED, 3)
+            # logger.debug(f"camera projected pos: {pos}")
+            # logger.debug(f"self.hovered.position: {self.hovered.position}")
             self.view.draw_aabb(self.hovered.block.aabb)
 
         if self.selected:

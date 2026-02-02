@@ -31,8 +31,9 @@ class SettingGroupWidget(SettingWidget):
             imgui.tree_pop()
 
     def draw_context_popup(self):
+        selected = False
         if imgui.begin_popup_context_item(self.name):
-            clicked, selected = imgui.selectable("Add Setting")
+            clicked, selected = imgui.selectable("Add Setting", selected)
             if clicked:
                 selectables = []
                 for name, cls in self.setting.setting_map.items():
@@ -47,8 +48,9 @@ class SettingGroupWidget(SettingWidget):
                         [
                             SelectableGroup(
                                 selectables, lambda: self.gui.remove_child(win)
-                            ).create(self.gui)
+                            )
                         ],
+                        on_close=lambda: self.gui.remove_child(win),
                     )
                 )
             imgui.end_popup()
@@ -59,19 +61,9 @@ class SettingGroupWidget(SettingWidget):
         setting = cls(name)
         self.setting.add_setting(setting)
         if isinstance(setting, SettingGroup):
-            self.children.append(
-                # SettingWidgetKit.instance.build(setting).create(self.gui)
-                SettingWidgetKit.instance.build(setting)
-                .config(gui=self.gui)
-                .create()
-            )
+            self.add_child(SettingWidgetKit.instance.build(setting))
         else:
-            self.children.append(
-                # DropWrapper(SettingWidgetKit.instance.build(setting)).create(self.gui)
-                DropWrapper(SettingWidgetKit.instance.build(setting))
-                .config(gui=self.gui)
-                .create()
-            )
+            self.add_child(DropWrapper(SettingWidgetKit.instance.build(setting)))
 
 
 class SettingGroupWidgetBuilder(SettingWidgetBuilder):
