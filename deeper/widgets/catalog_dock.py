@@ -2,7 +2,7 @@ from loguru import logger
 from crunge import imgui
 
 from crunge.engine.resource.resource_manager import ResourceManager
-from crunge.engine.imgui.widget import Widget, Window
+from crunge.engine.imgui.widget import Widget, Dock
 
 from ..blueprint import Blueprint
 from .menu import Menubar, Menu, MenuItem
@@ -101,7 +101,7 @@ class CatalogPanel(Widget):
         self.current.draw()
 
 
-class CatalogWindow(Window):
+class CatalogDock(Dock):
 
     def __init__(self, catalog, callback, on_close: callable = None):
         self.catalog = catalog

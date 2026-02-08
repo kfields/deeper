@@ -1,9 +1,9 @@
 from crunge import imgui
 
-from crunge.engine.imgui.widget import Window
+from crunge.engine.imgui.widget import Dock
 
 
-class MetricsWindow(Window):
+class MetricsDock(Dock):
     def __init__(self, on_close: callable = None):
         super().__init__("Metrics", on_close=on_close)
 

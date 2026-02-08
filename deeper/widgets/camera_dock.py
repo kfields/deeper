@@ -1,6 +1,6 @@
 from crunge import imgui
 
-from crunge.engine.imgui.widget import Widget, Window
+from crunge.engine.imgui.widget import Widget, Dock
 
 from ..scene_camera import SceneCamera
 
@@ -21,7 +21,7 @@ class CameraPanel(Widget):
             self.camera.zoom_pct = pct
 
 
-class CameraWindow(Window):
+class CameraDock(Dock):
     def __init__(self, camera, on_close: callable = None):
         super().__init__("Camera", [CameraPanel(camera)], on_close=on_close)
         self.camera = camera

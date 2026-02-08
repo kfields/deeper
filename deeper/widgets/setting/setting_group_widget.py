@@ -1,7 +1,7 @@
 from loguru import logger
 
 from crunge import imgui
-from crunge.engine.imgui.widget import Window
+from crunge.engine.imgui.widget import Dock
 
 from deeper.widgets import Selectable, SelectableGroup
 
@@ -43,7 +43,7 @@ class SettingGroupWidget(SettingWidget):
                         )
                     )
                 win = self.gui.add_child(
-                    Window(
+                    Dock(
                         "Settings",
                         [
                             SelectableGroup(

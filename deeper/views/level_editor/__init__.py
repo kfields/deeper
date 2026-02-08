@@ -1,7 +1,7 @@
 from loguru import logger
 
 from deeper.catalog import Catalog
-from deeper.widgets import CatalogWindow, LayersWindow, MenuItem
+from deeper.widgets import CatalogDock, LayersDock, MenuItem
 from deeper.resources.icons import IconsMaterialDesign
 
 from deeper.tools.pick_tool import PickTool
@@ -77,9 +77,9 @@ class LevelEditor(SceneEditor):
         on_close = lambda: self.close_window(title)
         window = None
         if title == "Catalog":
-            window = CatalogWindow(self.catalog, self.on_catalog, on_close=on_close)
+            window = CatalogDock(self.catalog, self.on_catalog, on_close=on_close)
         elif title == "Layers":
-            window = LayersWindow(
+            window = LayersDock(
                 self.scene,
                 lambda layer: self.select_layer(layer),
                 on_close=on_close,

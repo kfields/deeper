@@ -1,9 +1,9 @@
 from crunge import imgui
 
-from crunge.engine.imgui.widget import Window
+from crunge.engine.imgui.widget import Dock
 
 
-class StyleWindow(Window):
+class StyleDock(Dock):
     def __init__(self, on_close: callable = None):
         super().__init__("Style", on_close=on_close)
 

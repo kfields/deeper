@@ -7,8 +7,8 @@ from deeper.resources.icons import IconsMaterialDesign
 from deeper.tools.pick_tool import PickTool
 
 from deeper.widgets.toolbar import Toolbar, ToolButton
-from deeper.widgets.entity_window import EntityWindow
-from deeper.widgets.component.component_window import ComponentWindow
+from deeper.widgets.entity_dock import EntityDock
+from deeper.widgets.component.component_dock import ComponentDock
 
 from ..scene_editor import SceneEditor
 
@@ -21,7 +21,7 @@ class EntityEditor(SceneEditor):
     def _create(self):
         super()._create()
         self.gui.add_child(
-            EntityWindow(self.scene, self.edit_state.entity)
+            EntityDock(self.scene, self.edit_state.entity)
         )
 
         self.block = self.scene.component_for_entity(self.edit_state.entity, Block)
@@ -30,7 +30,7 @@ class EntityEditor(SceneEditor):
             self.edit_state.entity, EntityBlueprint
         )
         self.gui.add_child(
-            ComponentWindow(self.blueprint)
+            ComponentDock(self.blueprint)
         )
 
         pos = self.block.position

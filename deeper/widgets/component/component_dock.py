@@ -1,8 +1,8 @@
-from crunge.engine.imgui.widget import Window
+from crunge.engine.imgui.widget import Dock
 
 from deeper.kits.component_widget_kit import ComponentWidgetKit
 
-class ComponentWindow(Window):
+class ComponentDock(Dock):
     def __init__(self, component):
         self.component = component
         children = []

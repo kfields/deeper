@@ -11,9 +11,9 @@ from deeper.resources.icons import IconsMaterialDesign
 from ..scene_view import SceneView
 from ..level import Level
 from ..widgets import (
-    MetricsWindow,
-    StyleWindow,
-    CameraWindow,
+    MetricsDock,
+    StyleDock,
+    CameraDock,
     MainMenubar,
     Menu,
     MenuItem,
@@ -125,10 +125,10 @@ class SceneEditor(SceneView):
         on_close = lambda: self.close_window(title)
         window = None
         if title == "Metrics":
-            window = MetricsWindow(on_close=on_close)
+            window = MetricsDock(on_close=on_close)
         elif title == "Style":
-            window = StyleWindow(on_close=on_close)
+            window = StyleDock(on_close=on_close)
         elif title == "Camera":
-            window = CameraWindow(self.scene_camera, on_close=on_close)
+            window = CameraDock(self.scene_camera, on_close=on_close)
         self.windows[title] = window
         self.gui.add_child(window)

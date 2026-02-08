@@ -3,7 +3,7 @@ import glm
 
 from crunge import sdl
 
-from crunge.engine.imgui.widget import Window
+from crunge.engine.imgui.widget import Dock
 from crunge.engine.color import Color
 
 from deeper import Isometry, Cuboid, Block
@@ -66,7 +66,7 @@ class StampTool(SceneEditTool):
         self.hovered = None
         self.selected = None
         self.stamp = None
-        self.widget = Window("Stamp Tool", [StampToolWidget(self)])
+        self.widget = Dock("Stamp Tool", [StampToolWidget(self)])
 
     def enable(self):
         super().enable()

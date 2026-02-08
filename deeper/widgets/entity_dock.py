@@ -1,6 +1,6 @@
 from crunge import imgui
 
-from crunge.engine.imgui.widget import Widget, Window
+from crunge.engine.imgui.widget import Widget, Dock
 
 from deeper.kits.component_widget_kit import ComponentWidgetKit
 
@@ -14,7 +14,7 @@ class EntityPanel(Widget):
         return True
 
 
-class EntityWindow(Window):
+class EntityDock(Dock):
     def __init__(self, world, entity):
         self.world = world
         self.entity = entity
