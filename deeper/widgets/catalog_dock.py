@@ -114,7 +114,7 @@ class CatalogDock(Dock):
                             MenuItem(
                                 "Export Yaml",
                                 lambda: self.catalog.save_yaml(
-                                    ResourceManager.resolve_path(":deeper:/catalog")
+                                    ResourceManager.resolve_path("${deeper}/catalog")
                                 ),
                             )
                         ],
