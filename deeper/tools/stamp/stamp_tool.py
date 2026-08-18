@@ -4,7 +4,7 @@ import glm
 from crunge import sdl
 
 from crunge.engine.imgui.widget import Dock
-from crunge.engine.color import Color
+from crunge.engine.colors import Color
 
 from deeper import Isometry, Cuboid, Block
 from deeper.constants import *

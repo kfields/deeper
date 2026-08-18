@@ -3,6 +3,7 @@ import shutil
 import glm
 
 from crunge.engine.resource.resource_manager import ResourceManager
+from crunge.engine.d2.settings_2d import Settings2D
 
 from crunge.engine.app import App
 from .constants import *
@@ -48,6 +49,7 @@ def main():
     with db.Session() as session:
         with session.begin():
             db.session = session
+            Settings2D().ppu = 1.0 # Set pixels per unit for 2D rendering
             Deeper().run().destroy()
     db.end()
 

@@ -3,7 +3,7 @@ import glm
 
 from crunge import sdl
 from crunge.engine import colors
-from crunge.engine.d2.view_2d import View2D
+from crunge.engine.d2.view import View2D
 
 from .scene import Scene
 
@@ -24,7 +24,6 @@ class SceneView(View2D):
     def _create(self):
         super()._create()
         self.scene_camera = SceneCamera(self.camera)
-        self.scene_camera = self.scene_camera
 
     @property
     def tool(self) -> Tool:
@@ -110,17 +109,17 @@ class SceneView(View2D):
         ftr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz)).xy
 
         # Bottom
-        self.scratch.draw_line(bbl, bbr, color)
-        self.scratch.draw_line(fbl, fbr, color)
-        self.scratch.draw_line(bbl, fbl, color)
-        self.scratch.draw_line(bbr, fbr, color)
+        self.scratch.draw_segment(bbl, bbr, color)
+        self.scratch.draw_segment(fbl, fbr, color)
+        self.scratch.draw_segment(bbl, fbl, color)
+        self.scratch.draw_segment(bbr, fbr, color)
         # Top
-        self.scratch.draw_line(btl, btr, color)
-        self.scratch.draw_line(ftl, ftr, color)
-        self.scratch.draw_line(btl, ftl, color)
-        self.scratch.draw_line(btr, ftr, color)
+        self.scratch.draw_segment(btl, btr, color)
+        self.scratch.draw_segment(ftl, ftr, color)
+        self.scratch.draw_segment(btl, ftl, color)
+        self.scratch.draw_segment(btr, ftr, color)
         # Sides
-        self.scratch.draw_line(bbl, btl, color)
-        self.scratch.draw_line(fbl, ftl, color)
-        self.scratch.draw_line(bbr, btr, color)
-        self.scratch.draw_line(fbr, ftr, color)
+        self.scratch.draw_segment(bbl, btl, color)
+        self.scratch.draw_segment(fbl, ftl, color)
+        self.scratch.draw_segment(bbr, btr, color)
+        self.scratch.draw_segment(fbr, ftr, color)
