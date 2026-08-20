@@ -3,7 +3,6 @@ from crunge import imgui
 from crunge.engine.imgui.widget import Widget
 
 from ...kits.setting_widget_kit import SettingWidgetKit
-
 from ...kits.blueprint_widget_kit import BlueprintWidgetKit
 from ...blueprints import EntityBlueprint
 from .component_widget import ComponentWidget, ComponentWidgetBuilder
@@ -45,59 +44,34 @@ class BlueprintsPanel(Widget):
         imgui.text(self.blueprint.category)
 
     def draw_children(self):
-        for child in self.children:
-            expanded, child.visible = imgui.collapsing_header(
-                child.blueprint.name, child.visible
-            )
-            if expanded:
-                child.draw()
+        for i, child in enumerate(self.children):
+            imgui.push_id(i)
+            try:
+                expanded, child.visible = imgui.collapsing_header(
+                    child.blueprint.name, child.visible
+                )
+                if expanded:
+                    child.draw()
+            finally:
+                imgui.pop_id()
 
-    """
-    def _draw(self):
-        imgui.text("name: ")
-        imgui.same_line()
-        imgui.text(self.blueprint.name)
-
-        imgui.text("extends: ")
-        imgui.same_line()
-        imgui.text(self.blueprint.extends)
-
-        imgui.text("category: ")
-        imgui.same_line()
-        imgui.text(self.blueprint.category)
-
-        for child in self.children:
-            expanded, child.visible = imgui.collapsing_header(
-                child.blueprint.name, child.visible
-            )
-            if expanded:
-                child.draw()
-    """
 
 class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):
         self.blueprint = blueprint
-        self.panels = [SettingsPanel(blueprint), BlueprintsPanel(blueprint)]
         self.panel_names = ["Settings", "Blueprints"]
         self.current_index = 0
-        self.current = None
+        super().__init__(blueprint, children=[SettingsPanel(blueprint),
+                                              BlueprintsPanel(blueprint)])
 
-        super().__init__(blueprint)
-
-    def _create(self):
-        super()._create()
-        for panel in self.panels:
-            #pass
-            #panel.config(gui=self.gui).create()
-            # panel.config(gui=self.gui)  # TODO: this one works but the other doesn't?
-            panel.create()
+    @property
+    def current(self):
+        return self.children[self.current_index]
 
     def _draw(self):
-        changed, self.current_index = imgui.combo(
-            "View", self.current_index, self.panel_names
-        )
-        current = self.panels[self.current_index]
-        self.current = current
+        changed, self.current_index = imgui.combo("View", self.current_index, self.panel_names)
+
+    def draw_children(self):
         self.current.draw()
 
 
