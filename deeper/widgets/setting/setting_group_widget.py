@@ -11,7 +11,7 @@ from .drop_wrapper import DropWrapper
 
 
 class SettingGroupWidget(SettingWidget):
-    def __init__(self, setting, children=[]):
+    def __init__(self, setting):
         from ...kits.setting_widget_kit import SettingWidgetKit
 
         children = []
@@ -24,10 +24,10 @@ class SettingGroupWidget(SettingWidget):
                 )
         super().__init__(setting, children)
 
-    def _draw(self):
+    def draw_children(self):
         if imgui.tree_node(self.name):
             self.draw_context_popup()
-            super()._draw()
+            super().draw_children()
             imgui.tree_pop()
 
     def draw_context_popup(self):

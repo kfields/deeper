@@ -97,19 +97,6 @@ class SceneView(View2D):
         with self.renderer.use():
             super().draw()
 
-    """
-    def _draw(self):
-        if self.tool:
-            self.tool.draw()
-
-        with self.renderer.frame():
-            with self.renderer.render_pass():
-                self.scene.draw()
-
-        with self.renderer.use():
-            super()._draw()
-    """
-
     def draw_aabb(self, aabb, color=colors.YELLOW):
         bbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy
         bbr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz)).xy

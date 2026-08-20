@@ -21,32 +21,26 @@ class MenuItem(Widget):
 
 
 class Menu(Widget):
-    def __init__(self, label, children=[], enabled=True):
-        super().__init__(children)
+    def __init__(self, label, children=None, enabled=True):
+        super().__init__(children or [])
         self.label = label
         self.enabled = enabled
 
-    def draw(self):
+    def draw_children(self):
         if imgui.begin_menu(self.label, self.enabled):
-            super().draw()
+            super().draw_children()
             imgui.end_menu()
 
 
 class Menubar(Widget):
-    def __init__(self, children=[]):
-        super().__init__(children=children)
-
-    def draw(self):
+    def draw_children(self):
         if imgui.begin_menu_bar():
-            super().draw()
+            super().draw_children()
             imgui.end_menu_bar()
 
 
 class MainMenubar(Widget):
-    def __init__(self, children=[]):
-        super().__init__(children=children)
-
-    def draw(self):
+    def draw_children(self):
         if imgui.begin_main_menu_bar():
-            super().draw()
+            super().draw_children()
             imgui.end_main_menu_bar()
