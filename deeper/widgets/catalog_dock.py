@@ -51,18 +51,31 @@ class CategoryWidget(Widget):
             self.selection.selected = False
         self.selection = None
 
-    def _draw(self):
+    def draw_children(self):
         imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
-        for widget in self.children:
-            widget.draw()
-            if widget.selected:
+        for child in self.children:
+            child.draw()
+            if child.selected:
                 if self.selection:
                     self.selection.selected = False
-                self.selection = widget
-                widget.selected = True
-                self.callback(widget.blueprint)
+                self.selection = child
+                child.selected = True
+                self.callback(child.blueprint)
         imgui.end_child()
 
+    """
+    def _draw(self):
+        imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
+        for child in self.children:
+            child.draw()
+            if child.selected:
+                if self.selection:
+                    self.selection.selected = False
+                self.selection = child
+                child.selected = True
+                self.callback(child.blueprint)
+        imgui.end_child()
+    """
 
 class CatalogPanel(Widget):
     def __init__(self, catalog, callback):

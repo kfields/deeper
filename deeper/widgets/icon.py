@@ -25,7 +25,6 @@ class IconButton(Widget):
     def _draw(self):
         if imgui.button(self.text):
             self.callback()
-            return True
 
 
 class IconToggleButton(Widget):
@@ -40,7 +39,7 @@ class IconToggleButton(Widget):
         return f"IconToggleButton: on={self.on}"
 
     def __repr__(self) -> str:
-        return self.__repr__()
+        return self.__str__()
 
     def _draw(self):
         text = self.on_text if self.on else self.off_text
@@ -49,4 +48,3 @@ class IconToggleButton(Widget):
             logger.debug(self)
             self.on = not self.on
             self.callback(self.on)
-            return True

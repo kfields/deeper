@@ -44,6 +44,7 @@ class BlueprintsPanel(Widget):
         imgui.same_line()
         imgui.text(self.blueprint.category)
 
+    def draw_children(self):
         for child in self.children:
             expanded, child.visible = imgui.collapsing_header(
                 child.blueprint.name, child.visible
@@ -51,6 +52,27 @@ class BlueprintsPanel(Widget):
             if expanded:
                 child.draw()
 
+    """
+    def _draw(self):
+        imgui.text("name: ")
+        imgui.same_line()
+        imgui.text(self.blueprint.name)
+
+        imgui.text("extends: ")
+        imgui.same_line()
+        imgui.text(self.blueprint.extends)
+
+        imgui.text("category: ")
+        imgui.same_line()
+        imgui.text(self.blueprint.category)
+
+        for child in self.children:
+            expanded, child.visible = imgui.collapsing_header(
+                child.blueprint.name, child.visible
+            )
+            if expanded:
+                child.draw()
+    """
 
 class EntityBpWidget(ComponentWidget):
     def __init__(self, blueprint):

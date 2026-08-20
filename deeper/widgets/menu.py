@@ -26,9 +26,9 @@ class Menu(Widget):
         self.label = label
         self.enabled = enabled
 
-    def _draw(self):
+    def draw(self):
         if imgui.begin_menu(self.label, self.enabled):
-            super()._draw()
+            super().draw()
             imgui.end_menu()
 
 
@@ -36,9 +36,9 @@ class Menubar(Widget):
     def __init__(self, children=[]):
         super().__init__(children=children)
 
-    def _draw(self):
+    def draw(self):
         if imgui.begin_menu_bar():
-            super()._draw()
+            super().draw()
             imgui.end_menu_bar()
 
 
@@ -46,7 +46,7 @@ class MainMenubar(Widget):
     def __init__(self, children=[]):
         super().__init__(children=children)
 
-    def _draw(self):
+    def draw(self):
         if imgui.begin_main_menu_bar():
-            super()._draw()
+            super().draw()
             imgui.end_main_menu_bar()

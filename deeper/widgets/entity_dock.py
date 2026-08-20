@@ -6,12 +6,19 @@ from deeper.kits.component_widget_kit import ComponentWidgetKit
 
 
 class EntityPanel(Widget):
+    def draw_children(self):
+        for child in self.children:
+            expanded, child.visible = imgui.collapsing_header(child.name, child.visible)
+            if expanded:
+                child.draw()
+
+    """
     def _draw(self):
         for child in self.children:
             expanded, child.visible = imgui.collapsing_header(child.name, child.visible)
             if expanded:
                 child.draw()
-        return True
+    """
 
 
 class EntityDock(Dock):
