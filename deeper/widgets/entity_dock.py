@@ -12,14 +12,6 @@ class EntityPanel(Widget):
             if expanded:
                 child.draw()
 
-    """
-    def _draw(self):
-        for child in self.children:
-            expanded, child.visible = imgui.collapsing_header(child.name, child.visible)
-            if expanded:
-                child.draw()
-    """
-
 
 class EntityDock(Dock):
     def __init__(self, world, entity):

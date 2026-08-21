@@ -63,19 +63,6 @@ class CategoryWidget(Widget):
                 self.callback(child.blueprint)
         imgui.end_child()
 
-    """
-    def _draw(self):
-        imgui.begin_child("entities", (-1, -1), imgui.ChildFlags.BORDERS)
-        for child in self.children:
-            child.draw()
-            if child.selected:
-                if self.selection:
-                    self.selection.selected = False
-                self.selection = child
-                child.selected = True
-                self.callback(child.blueprint)
-        imgui.end_child()
-    """
 
 class CatalogPanel(Widget):
     def __init__(self, catalog, callback):
@@ -95,8 +82,9 @@ class CatalogPanel(Widget):
             if not category._abstract:
                 self.category_names.append(category.name)
                 self.category_widgets.append(
-                    CategoryWidget(category, self.callback)
-                    .create() #TODO: why is this needed?
+                    CategoryWidget(
+                        category, self.callback
+                    ).create()  # TODO: why is this needed?
                 )
 
         return self

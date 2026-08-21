@@ -49,19 +49,3 @@ class Toolbar(Widget):
                     self.selection.selected = False
                 self.selection = child
         imgui.pop_style_color(1)
-
-    """
-    def _draw(self) -> None:
-        imgui.separator()
-        imgui.push_style_color(
-            imgui.Col.BUTTON,
-            imgui.color_convert_float4_to_u32((0.15, 0.15, 0.15, 0.15)),
-        )
-        for child in self.children:
-            child.draw()
-            if child.selected:
-                if self.selection and self.selection != child:
-                    self.selection.selected = False
-                self.selection = child
-        imgui.pop_style_color(1)
-    """

@@ -30,8 +30,8 @@ class SnapOptionWidget(Widget):
     def set_snap(self, value):
         self.edit_state.snap_option = value
 
-    def _draw(self):
+    def draw_children(self):
         imgui.text("SnapOption")
         imgui.begin_child("SnapOption", (0, 0), imgui.ChildFlags.BORDERS)
-        super()._draw()
+        super().draw_children()
         imgui.end_child()

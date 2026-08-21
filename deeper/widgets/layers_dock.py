@@ -62,9 +62,9 @@ class LayerWidget(SelectableBase):
         self.layer.visible = value
     """
 
-    def _draw(self):
+    def draw_children(self):
         imgui.begin_group()
-        super()._draw()
+        super().draw_children()
         imgui.end_group()
 
     def draw_child(self, child):
@@ -88,7 +88,7 @@ class LayersPanel(ExclusiveSelectableGroup):
     def on_swap(self, i, j):
         self.scene.swap_layers(i, j)
 
-    def _draw(self):
+    def draw_children(self):
         imgui.begin_child("layers", (-1, -1))
         # imgui.push_style_color(imgui.Col.COL_BUTTON, 0.0, 0.0, 0.0)
         # imgui.push_style_color(imgui.Col.COL_BUTTON.value, imgui.Vec4(0.0, 0.0, 0.0, 0.0))
