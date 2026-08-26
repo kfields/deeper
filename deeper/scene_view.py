@@ -21,6 +21,11 @@ class SceneView(View2D):
         self.scene_camera: SceneCamera = None
         self.dragging = False
 
+    def _reset(self):
+        super()._reset()
+        scratch = self.scratch  # initialize the Scratch overlay
+
+
     def _created(self):
         super()._created()
         self.scene_camera = SceneCamera(self.camera)
@@ -86,13 +91,13 @@ class SceneView(View2D):
         # logger.debug(f"{self.title}:on_mouse_wheel")
         self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
 
-    def draw(self):
+    def _draw(self):
+        super()._draw()
+        if self.tool is not None:
+            self.tool.draw()
+
         with self.renderer.render_pass():
             self.scene.draw()
-
-            if self.tool:
-                self.tool.draw()
-
 
     """
     def draw(self):

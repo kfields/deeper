@@ -51,7 +51,7 @@ class LevelEditor(SceneEditor):
 
     def enable(self):
         super().enable()
-        scratch = self.primary_view.scratch # initialize the scratch overlay
+        #scratch = self.scratch # initialize the scratch overlay
 
         self.tool = self.pick_tool
 

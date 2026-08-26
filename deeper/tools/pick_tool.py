@@ -59,7 +59,7 @@ class PickTool(SceneEditTool):
         from deeper.state import EntityEditState
         from deeper.views.entity_editor import EntityEditor
 
-        self.window.push_view(
+        self.window.push_display(
             EntityEditor(EntityEditState(self.scene, self.selected.block))
         )
 

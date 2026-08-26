@@ -8,7 +8,6 @@ from crunge.engine.resource.resource_manager import ResourceManager
 
 from deeper.resources.icons import IconsMaterialDesign
 
-from ..scene_screen import SceneScreen
 from ..scene_view import SceneView
 
 from ..level import Level
@@ -30,7 +29,7 @@ glyph_ranges = imgui.GlyphRanges(
 )
 
 
-class SceneEditor(SceneScreen):
+class SceneEditor(SceneView):
     def __init__(self, scene, title=""):
         super().__init__(scene, title)
         self.windows = {}

@@ -1,12 +1,10 @@
-from crunge.engine.screen import Screen
+from crunge.engine.view import View
 from crunge.engine.controller import Controller
 
-
 class Tool(Controller):
-    def __init__(self, screen: Screen, title="") -> None:
+    def __init__(self, view: View, title='') -> None:
         super().__init__()
-        self.screen = screen
-        self.view = screen.view
-        self.gui = screen.gui
-        self.window = screen.window
+        self.view = view
+        self.gui = view.gui
+        self.window = view.window
         self.title = title

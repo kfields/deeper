@@ -24,6 +24,12 @@ class SceneScreen(Screen2D):
         # self.scene_camera: SceneCamera = None
         self.dragging = False
 
+    """
+    def reset(self):
+        super().reset()
+        gui = self.gui  # initialize the GUI overlay
+    """
+    
     @property
     def ppu(self) -> float:
         return self.camera.ppu
@@ -40,12 +46,6 @@ class SceneScreen(Screen2D):
         logger.debug("Creating screen views")
         self.view = SceneView(self.scene)
         self.add_child(self.view)
-
-    """
-    def _created(self):
-        super()._created()
-        self.scene_camera = SceneCamera(self.camera)
-    """
 
     @property
     def tool(self) -> Tool:
@@ -64,19 +64,12 @@ class SceneScreen(Screen2D):
         self.scene.disable()
 
     """
-    def on_size(self):
-        super().on_size()
-        size = self.size
-        if self.scene_camera is not None:
-            self.scene_camera.resize(size)
-    """
-
-    """
     def update(self, delta_time: float):
         self.scene.update(delta_time)
         return super().update(delta_time)
     """
 
+    """
     def on_key(self, event: sdl.KeyboardEvent):
         key = event.key
         down = event.down
@@ -111,3 +104,4 @@ class SceneScreen(Screen2D):
     def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
         # logger.debug(f"{self.title}:on_mouse_wheel")
         self.camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
+    """

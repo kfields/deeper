@@ -19,8 +19,10 @@ class Deeper(App):
         super().__init__(title="Deeper", resizable=True)
         self.scene = BasicLevel()
 
+    """
     def reset(self):
         gui = self.display.gui  # initialize the GUI overlay
+    """
 
     def _create(self):
         super()._create()

@@ -54,7 +54,7 @@ class EntityEditor(SceneEditor):
         )
 
     def close(self):
-        Scheduler().schedule_once(lambda dt: self.window.pop_view(), 0)
+        Scheduler().schedule_once(lambda dt: self.window.pop_display(), 0)
 
     def use_pick(self):
         self.tool = self.pick_tool
