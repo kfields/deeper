@@ -18,8 +18,8 @@ class EntityEditor(SceneEditor):
         super().__init__(edit_state.scene, "Entity Editor")
         self.edit_state = edit_state
 
-    def _create(self):
-        super()._create()
+    def _created(self):
+        super()._created()
         self.gui.add_child(
             EntityDock(self.scene, self.edit_state.entity)
         )

@@ -8,7 +8,9 @@ from crunge.engine.resource.resource_manager import ResourceManager
 
 from deeper.resources.icons import IconsMaterialDesign
 
+from ..scene_screen import SceneScreen
 from ..scene_view import SceneView
+
 from ..level import Level
 from ..widgets import (
     MetricsDock,
@@ -28,10 +30,11 @@ glyph_ranges = imgui.GlyphRanges(
 )
 
 
-class SceneEditor(SceneView):
+class SceneEditor(SceneScreen):
     def __init__(self, scene, title=""):
         super().__init__(scene, title)
         self.windows = {}
+
 
     def _create(self):
         super()._create()
@@ -58,7 +61,7 @@ class SceneEditor(SceneView):
 
         level = BasicLevel()
         view = LevelEditor(LevelEditState(level))
-        self.window.view = view
+        self.window.display = view
 
     def load(self):
         Scheduler().schedule_once(lambda dt: self._load())
@@ -68,8 +71,8 @@ class SceneEditor(SceneView):
         from ..state import LevelEditState
 
         level = Level.load(ResourceManager().resolve_path("${deeper}/levels/test.json"))
-        view = LevelEditor(LevelEditState(level))
-        self.window.view = view
+        display = LevelEditor(LevelEditState(level))
+        self.window.display = display
 
     def save(self):
         self.world.save(ResourceManager().resolve_path("${deeper}/levels/"))

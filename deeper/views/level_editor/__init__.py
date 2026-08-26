@@ -17,8 +17,8 @@ class LevelEditor(SceneEditor):
         super().__init__(edit_state.scene, "Level Editor")
         self.edit_state = edit_state
 
-    def _create(self):
-        super()._create()
+    def _created(self):
+        super()._created()
         self.open_window("Layers")
 
         self.catalog = Catalog.instance
@@ -44,8 +44,15 @@ class LevelEditor(SceneEditor):
             )
         )
 
+    def draw(self):
+        if self.tool:
+            self.tool.draw()
+        super().draw()
+
     def enable(self):
         super().enable()
+        scratch = self.primary_view.scratch # initialize the scratch overlay
+
         self.tool = self.pick_tool
 
     def select_layer(self, layer):

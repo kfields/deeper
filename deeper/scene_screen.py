@@ -3,27 +3,49 @@ import glm
 
 from crunge import sdl
 from crunge.engine import colors
-from crunge.engine.d2.view import View2D
+from crunge.engine.d2.screen import Screen2D
+from crunge.engine.d2.camera_2d import Camera2D
 
 from .scene import Scene
 
 from .scene_camera import SceneCamera
 from .tool import Tool
 
+from .scene_view import SceneView
 
-class SceneView(View2D):
+
+class SceneScreen(Screen2D):
     scene: Scene = None
 
     def __init__(self, scene, title=""):
         super().__init__()
         self.title = title
         self.scene = scene
-        self.scene_camera: SceneCamera = None
+        # self.scene_camera: SceneCamera = None
         self.dragging = False
 
+    @property
+    def ppu(self) -> float:
+        return self.camera.ppu
+
+    @property
+    def camera(self) -> Camera2D:
+        return self.view.camera
+
+    @property
+    def scene_camera(self) -> SceneCamera:
+        return self.view.scene_camera
+
+    def create_views(self):
+        logger.debug("Creating screen views")
+        self.view = SceneView(self.scene)
+        self.add_child(self.view)
+
+    """
     def _created(self):
         super()._created()
         self.scene_camera = SceneCamera(self.camera)
+    """
 
     @property
     def tool(self) -> Tool:
@@ -41,15 +63,19 @@ class SceneView(View2D):
         super().disable()
         self.scene.disable()
 
+    """
     def on_size(self):
         super().on_size()
         size = self.size
         if self.scene_camera is not None:
             self.scene_camera.resize(size)
+    """
 
+    """
     def update(self, delta_time: float):
         self.scene.update(delta_time)
         return super().update(delta_time)
+    """
 
     def on_key(self, event: sdl.KeyboardEvent):
         key = event.key
@@ -84,52 +110,4 @@ class SceneView(View2D):
 
     def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
         # logger.debug(f"{self.title}:on_mouse_wheel")
-        self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
-
-    def draw(self):
-        with self.renderer.render_pass():
-            self.scene.draw()
-
-            if self.tool:
-                self.tool.draw()
-
-
-    """
-    def draw(self):
-        if self.tool:
-            self.tool.draw()
-
-        with self.renderer.frame():
-            with self.renderer.render_pass():
-                self.scene.draw()
-
-        with self.renderer.use():
-            super().draw()
-    """
-
-    def draw_aabb(self, aabb, color=colors.YELLOW):
-        bbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.minz)).xy
-        bbr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.minz)).xy
-        fbl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.miny, aabb.maxz)).xy
-        fbr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.miny, aabb.maxz)).xy
-
-        btl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.minz)).xy
-        btr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.minz)).xy
-        ftl = self.scene_camera.project(glm.vec3(aabb.minx, aabb.maxy, aabb.maxz)).xy
-        ftr = self.scene_camera.project(glm.vec3(aabb.maxx, aabb.maxy, aabb.maxz)).xy
-
-        # Bottom
-        self.scratch.draw_segment(bbl, bbr, color)
-        self.scratch.draw_segment(fbl, fbr, color)
-        self.scratch.draw_segment(bbl, fbl, color)
-        self.scratch.draw_segment(bbr, fbr, color)
-        # Top
-        self.scratch.draw_segment(btl, btr, color)
-        self.scratch.draw_segment(ftl, ftr, color)
-        self.scratch.draw_segment(btl, ftl, color)
-        self.scratch.draw_segment(btr, ftr, color)
-        # Sides
-        self.scratch.draw_segment(bbl, btl, color)
-        self.scratch.draw_segment(fbl, ftl, color)
-        self.scratch.draw_segment(bbr, btr, color)
-        self.scratch.draw_segment(fbr, ftr, color)
+        self.camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
