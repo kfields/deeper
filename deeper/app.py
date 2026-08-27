@@ -19,20 +19,14 @@ class Deeper(App):
         super().__init__(title="Deeper", resizable=True)
         self.scene = BasicLevel()
 
-    """
-    def reset(self):
-        gui = self.display.gui  # initialize the GUI overlay
-    """
-
     def _create(self):
         super()._create()
         self.load_settings()
         self.display = LevelEditor(LevelEditState(self.scene))
 
-    """
     def on_display(self):
+        super().on_display()
         gui = self.display.gui  # initialize the GUI overlay
-    """
 
     def destroy(self):
         self.save_settings()
