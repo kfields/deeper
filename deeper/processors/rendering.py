@@ -20,8 +20,16 @@ class RenderingProcessor(SceneProcessor):
         self.scene_camera = SceneCamera()
 
     def process(self, delta_time: float):
+        for ent, (vu,) in self.world.get_components(SpriteVuComponent):
+            vu.sprite_vu.update(delta_time)
         for layer in self.scene.layers:
             self.process_layer(layer, delta_time)
+
+    """
+    def process(self, delta_time: float):
+        for layer in self.scene.layers:
+            self.process_layer(layer, delta_time)
+    """
 
     def process_layer(self, layer: SceneLayer, delta_time: float):
         if not layer.dirty:
