@@ -1,8 +1,8 @@
-from importlib import resources
+from importlib.resources import files
 
 from crunge.engine.resource.resource_manager import ResourceManager
 
-root = resources.path('deeper', 'resources')
+root = files('deeper.resources')
 
 ResourceManager().add_path_variable('deeper', root)
 
