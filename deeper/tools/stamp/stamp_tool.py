@@ -194,11 +194,6 @@ class StampTool(SceneEditTool):
             )
 
     def draw(self):
-        if self.hovered:
-            pos = self.camera.project(self.hovered.position).xy
-            # arcade.draw_circle_outline(*pos, 18, arcade.color.RED, 3)
-            # self.view.draw_aabb(self.hovered.block.aabb)
-
         if self.stamp:
             pos = self.camera.project(self.stamp.position).xy
             self.view.draw_aabb(self.stamp.aabb)
