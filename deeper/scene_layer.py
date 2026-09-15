@@ -1,6 +1,6 @@
 from loguru import logger
 
-from crunge.engine.d2.sprite import SpriteVu, SpriteVuGroup
+from crunge.engine.d2.sprite import SpriteVu
 from crunge.engine.d2.sprite.dynamic import DynamicSpriteGroup
 from crunge.engine.d2.sprite.instanced.instanced_sprite_vu_group import InstancedSpriteVuGroup
 from crunge.engine.math import Rect2
@@ -16,14 +16,13 @@ class SceneLayer(EntityGroup):
         super().__init__(name)
         self.scene = scene
         self.name = name
-        #self.sprite_vu_group = SpriteVuGroup()
         self.sprite_group = DynamicSpriteGroup(1024).enable()
         self.sprite_vu_group = InstancedSpriteVuGroup(1024, self.sprite_group).enable()
         self.visible = True
         self.locked = False
         self.dirty = True
         self.events = EventSource()
-        self.quad_tree = Quadtree(Rect2(-1000, -1000, 2000, 2000))
+        #self.quad_tree = Quadtree(Rect2(-1000, -1000, 2000, 2000))
 
     def __str__(self) -> str:
         return f"Layer({self.name})"
@@ -48,9 +47,9 @@ class SceneLayer(EntityGroup):
     def clear(self):
         self.sprite_vu_group.clear()
         
-    def add_sprite(self, vu: SpriteVu):
+    def add_sprite_vu(self, vu: SpriteVu):
         self.sprite_vu_group.append(vu)
-        self.quad_tree.insert(vu)
+        #self.quad_tree.insert(vu)
         return vu
 
     def update(self, delta_time: float):

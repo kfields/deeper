@@ -1,6 +1,4 @@
-#from crunge.engine.loader.texture.image_texture_loader import ImageTextureLoader
 from crunge.engine.loader.texture.sprite_texture_loader import SpriteTextureLoader
-#from crunge.engine.loader.sprite.sprite_loader import SpriteLoader
 from crunge.engine.d2.sprite import Sprite, SpriteVu
 
 from ..constants import *

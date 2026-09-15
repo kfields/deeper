@@ -2,7 +2,7 @@ from loguru import logger
 import glm
 
 from crunge.engine.math.rect import Rect2
-from crunge.engine.d2.sprite import Sprite
+from crunge.engine.d2.sprite import SpriteVu
 
 from ..constants import WORLD_SCALE
 from ..scene import Scene
@@ -55,11 +55,13 @@ class RenderingProcessor(SceneProcessor):
         layer.clear()
 
         for vu in vu_list:
-            layer.add_sprite(vu.sprite_vu)
+            layer.add_sprite_vu(vu.sprite_vu)
+
+        layer.update(delta_time)
 
         layer.unmark()
 
-    def update_sprite_transform(self, sprite: Sprite, position: glm.vec3, size: glm.vec2, rotation=0.0, scale=glm.vec3(1,1,1), depth=0.0):
+    def update_sprite_transform(self, sprite_vu: SpriteVu, position: glm.vec3, size: glm.vec2, rotation=0.0, scale=glm.vec3(1,1,1), depth=0.0):
         x = position.x
         y = position.y
         z = depth
@@ -70,12 +72,13 @@ class RenderingProcessor(SceneProcessor):
             model,
             glm.vec3(size.x * scale.x, size.y * scale.y, 1),
         )
-        sprite.transform = model
+        sprite_vu.transform = model
 
-            
-        sprite.aabb = Rect2(
+        '''
+        sprite_vu.aabb = Rect2(
             x - size.x / 2,
             y - size.y / 2,
             size.x,
             size.y,
         )
+        '''

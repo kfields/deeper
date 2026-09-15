@@ -68,13 +68,15 @@ class StampTool(SceneEditTool):
         self.stamp = None
         self.widget = Dock("Stamp Tool", [StampToolWidget(self)])
 
-    def enable(self):
-        super().enable()
+    def _enable(self):
+        super()._enable()
         self.gui.add_child(self.widget)
+        logger.debug(f"gui enable: {self.gui}")
 
-    def disable(self):
-        super().disable()
+    def _disable(self):
+        logger.debug(f"gui disable: {self.gui}")
         self.gui.remove_child(self.widget)
+        super()._disable()
 
     def on_mouse_motion(self, event: sdl.MouseMotionEvent):
         x, y = event.x, event.y
