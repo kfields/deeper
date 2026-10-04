@@ -11,6 +11,11 @@ from .scene_camera import SceneCamera
 from .tool import Tool
 
 
+# Each wheel notch / keypress multiplies or divides zoom by this.
+# Multiplicative steps feel the same at every zoom level and can't reach zero.
+ZOOM_STEP = 1.1
+
+
 class SceneView(View2D):
     scene: Scene = None
 
@@ -24,7 +29,6 @@ class SceneView(View2D):
     def _reset(self):
         super()._reset()
         scratch = self.scratch  # initialize the Scratch overlay
-
 
     def _created(self):
         super()._created()
@@ -56,40 +60,47 @@ class SceneView(View2D):
         self.scene.update(delta_time)
         return super().update(delta_time)
 
-    def on_key(self, event: sdl.KeyboardEvent):
-        key = event.key
-        down = event.down
+    # -- zoom --------------------------------------------------------------
 
+    def zoom_by(self, steps: float):
+        """Zoom in (steps > 0) or out (steps < 0). Always goes through
+        SceneCamera so its zoom and Camera2D's stay in sync."""
+        if self.scene_camera is None:
+            return
+        self.scene_camera.zoom = self.scene_camera.zoom * (ZOOM_STEP ** steps)
+
+    def on_key(self, event: sdl.KeyboardEvent):
+        if not event.down:
+            return  # otherwise key release zooms a second time
+
+        key = event.key
         if key == sdl.SDLK_KP_PLUS:
-            self.camera.zoom = self.camera.zoom - 0.1
+            self.zoom_by(1)
         elif key == sdl.SDLK_KP_MINUS:
-            self.camera.zoom = self.camera.zoom + 0.1
+            self.zoom_by(-1)
+
+    def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
+        self.zoom_by(event.y)
+
+    # -- pan ---------------------------------------------------------------
 
     def on_mouse_button(self, event: sdl.MouseButtonEvent):
         super().on_mouse_button(event)
-        # logger.debug(f"{self.view.title}:{self.title}:on_mouse_press")
-        button = event.button
-
-        if button != 3:
+        if event.button != 3:
             return
-        if event.down:
-            self.dragging = True
-        else:
-            self.dragging = False
+        self.dragging = event.down
 
     def on_mouse_motion(self, event: sdl.MouseMotionEvent):
         super().on_mouse_motion(event)
         if not self.dragging:
             return
-        zoom = self.scene_camera.zoom
-        sensitivity = 0.1
-        dx = -event.xrel * zoom * sensitivity
-        dy = event.yrel * zoom * sensitivity
-        self.scene_camera.pan(dx, dy)
+        # Raw pixel delta. SceneCamera.pan converts pixels to world units using
+        # the zoomed frustum, so the scene tracks the cursor 1:1 at any zoom.
+        # Negated X: dragging right moves the view left, so the scene follows the mouse.
+        # Y is not negated because screen Y points down and view Y points up.
+        self.scene_camera.pan(-event.xrel, event.yrel)
 
-    def on_mouse_wheel(self, event: sdl.MouseWheelEvent):
-        # logger.debug(f"{self.title}:on_mouse_wheel")
-        self.scene_camera.zoom_pct = self.scene_camera.zoom_pct + event.y * 10
+    # -- drawing -----------------------------------------------------------
 
     def _draw(self):
         super()._draw()

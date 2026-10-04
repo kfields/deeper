@@ -9,7 +9,7 @@ from crunge.engine.app import App
 from .constants import *
 from .levels.basic_level import BasicLevel
 
-from .state import LevelEditState
+from .state import SceneEditState
 from .views import LevelEditor
 from .database import Database
 
@@ -22,7 +22,7 @@ class Deeper(App):
     def _create(self):
         super()._create()
         self.load_settings()
-        self.display = LevelEditor(LevelEditState(self.scene))
+        self.display = LevelEditor(SceneEditState(self.scene))
 
     def on_display(self):
         super().on_display()

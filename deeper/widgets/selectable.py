@@ -17,8 +17,9 @@ class SelectableBase(Widget):
         self.label = label
         self.callback = callback
         self.selected = selected
-        self.width = width
-        self.height = height
+        self.layout.set_size(width, height)
+        #self.width = width
+        #self.height = height
 
     def select(self, selected=True):
         self.selected = selected

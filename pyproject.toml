@@ -28,10 +28,8 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-    #"PyGLM ~=2.7.0",
     "PyYAML ~=6.0.1",
     "loguru ~=0.7.0",
-    #"pydantic ~=1.10.6",
     "sqlalchemy ~=2.0.20",
     "click ~=8.1.7",
 ]
@@ -55,7 +53,19 @@ changelog = "https://github.com/kfields/deeper/blob/main/CHANGELOG.md"
 path = "deeper/__about__.py"
 
 [tool.hatch.envs.default]
-dependencies = ["maturin", "pytest", "pytest-cov", "snakeviz"]
+python = "3.12"
+installer = "uv"
+workspace.members = [
+  # Build toolchain
+  "../cxbuild",  "../cxbind",
+
+  # Crunge packages
+  "../crunge/pkg/core", "../crunge/pkg/imgui", "../crunge/pkg/wgpu", "../crunge/pkg/skia", "../crunge/pkg/yoga",
+  "../crunge/pkg/sdl", "../crunge/pkg/box2d", "../crunge/pkg/tmx",
+  "../crunge/pkg/engine"
+]
+dependencies = ["maturin", "uv", "pytest", "pytest-cov","mypy", "snakeviz"]
+
 
 [tool.hatch.envs.default.scripts]
 develop = "maturin develop"
@@ -83,3 +93,13 @@ omit = ["deeper/__about__.py"]
 
 [tool.coverage.report]
 exclude_lines = ["no cov", "if __name__ ~= .__main__.:", "if TYPE_CHECKING:"]
+
+[tool.uv]
+# The crunge packages can only be built from a crunge checkout with cxbuild, cxbind
+# and pybind11 already installed (they come in through the workspace members above).
+# Isolated builds would resolve cxbuild from PyPI instead and fail, so these build
+# inside the hatch environment; everything else builds in isolation as usual.
+no-build-isolation-package = [
+  "crunge-imgui", "crunge-wgpu", "crunge-skia", "crunge-yoga",
+  "crunge-sdl", "crunge-tmx", "crunge-box2d"
+]

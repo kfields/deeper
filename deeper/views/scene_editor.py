@@ -55,11 +55,11 @@ class SceneEditor(SceneView):
 
     def _new(self):
         from .level_editor import LevelEditor
-        from ..state import LevelEditState
+        from ..state import SceneEditState
         from ..levels.basic_level import BasicLevel
 
         level = BasicLevel()
-        view = LevelEditor(LevelEditState(level))
+        view = LevelEditor(SceneEditState(level))
         self.window.display = view
 
     def load(self):
@@ -67,10 +67,10 @@ class SceneEditor(SceneView):
 
     def _load(self):
         from .level_editor import LevelEditor
-        from ..state import LevelEditState
+        from ..state import SceneEditState
 
         level = Level.load(ResourceManager().resolve_path("${deeper}/levels/test.json"))
-        display = LevelEditor(LevelEditState(level))
+        display = LevelEditor(SceneEditState(level))
         self.window.display = display
 
     def save(self):

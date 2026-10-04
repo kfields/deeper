@@ -16,6 +16,7 @@ class Kit:
         self.create_builders()
 
     _instance = None
+
     @classmethod
     @property
     def instance(cls):
