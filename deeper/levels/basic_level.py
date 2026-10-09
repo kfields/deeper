@@ -8,9 +8,11 @@ from deeper import Block
 from deeper.components.sprite_vu import SpriteVuComponent
 from deeper.catalog import Catalog
 
+ROWS = 32
+COLS = 32
 
 class BasicLevel(Level):
-    def __init__(self, rows=32, cols=32, timed=False):
+    def __init__(self, rows=ROWS, cols=COLS, timed=False):
         # def __init__(self, rows=4, cols=4, timed=False):
         super().__init__("test", timed)
         self.rows = rows

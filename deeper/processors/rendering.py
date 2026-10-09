@@ -50,7 +50,6 @@ class RenderingProcessor(SceneProcessor):
             vu_list.append(vu)
 
         vu_list = sorted(vu_list, key=lambda vu: vu.position.z)
-        #logger.debug(f'vu_list: {vu_list}')
 
         layer.clear()
 
